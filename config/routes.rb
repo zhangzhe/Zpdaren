@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :recruiters do
-  get 'jobs/index'
+    resources :jobs do
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
