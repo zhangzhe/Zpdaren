@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'front_page#index'
   devise_for :recruiters, controllers: {
-    sessions: 'recruiters/sessions'
+    sessions: 'recruiters/sessions',
+    registrations: 'recruiters/registrations',
   }
 
 
