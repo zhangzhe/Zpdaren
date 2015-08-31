@@ -6,14 +6,14 @@ server '182.92.221.174', user: 'deploy', roles: %w{app web}, my_property: :my_va
 set :application, 'Epin'
 set :repo_url, 'git@github.com:SparkYacademy/Epin.git'
 set :recipient, "Ruby"
-set :branch, "master"
+set :branch, "feature/integrate_unicorn_and_capistrano"
 set :default_stage, "production"
 set :pty, true
 set :deploy_to, "/data/Epin"
 set :use_sudo, false
 set :tmp_dir, '/data/Epin/shared/tmp'
 set :rails_env, "production"
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/wechat.yml')
+set :linked_files, fetch(:linked_files, []).push('config/database.yml')
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps}
 
 after 'deploy:publishing', 'deploy:restart'
@@ -50,14 +50,14 @@ after 'deploy:publishing', 'deploy:restart'
 
 namespace :deploy do
 
-  %w[start stop restart].each do |command|
-    desc "#{command} unicorn server"
-    task command do
-      on roles(:app) do
-        execute "service raffler #{command}"
-      end
-    end
-  end
+  # %w[start stop restart].each do |command|
+  #   desc "#{command} unicorn server"
+  #   task command do
+  #     on roles(:app) do
+  #       execute "service raffler #{command}"
+  #     end
+  #   end
+  # end
 
   # after :restart, :clear_cache do
   #   on roles(:web), in: :groups, limit: 3, wait: 10 do
@@ -67,6 +67,6 @@ namespace :deploy do
   #     # end
   #   end
   # end
-  after "deploy", "deploy:migrate"
+  # after "deploy", "deploy:migrate"
 
 end
