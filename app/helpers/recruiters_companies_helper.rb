@@ -1,0 +1,2 @@
+module RecruitersCompaniesHelper
+end
