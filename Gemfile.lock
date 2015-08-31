@@ -1,3 +1,13 @@
+GIT
+  remote: git://github.com/carrierwaveuploader/carrierwave.git
+  revision: 7802f70fa581d1a7ca5728b5e5a75e8bd2720d9f
+  specs:
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
+
 GEM
   remote: https://ruby.taobao.org/
   specs:
@@ -188,6 +198,7 @@ DEPENDENCIES
   byebug
   capistrano (~> 3.4.0)
   capistrano-rails (~> 1.1)
+  carrierwave!
   coffee-rails (~> 4.1.0)
   devise
   jbuilder (~> 2.0)

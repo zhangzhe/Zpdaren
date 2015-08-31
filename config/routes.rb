@@ -3,12 +3,23 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+
   root 'front_page#index'
   devise_for :recruiters, controllers: {
     sessions: 'recruiters/sessions',
     registrations: 'recruiters/registrations',
   }
   resources :users, :only => ["index"]
+
+  resources :resumes do
+    collection do
+      get 'download'
+    end
+
+    member do
+      get 'download'
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
