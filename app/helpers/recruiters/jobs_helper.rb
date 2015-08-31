@@ -1,0 +1,2 @@
+module Recruiters::JobsHelper
+end
