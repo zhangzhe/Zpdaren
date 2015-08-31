@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     sessions: 'recruiters/sessions',
     registrations: 'recruiters/registrations',
   }
-
+  resources :users, :only => ["index"]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

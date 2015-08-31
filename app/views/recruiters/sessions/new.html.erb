@@ -1,42 +1,16 @@
-<br><br><br><br>
-
-<%= bootstrap_flash %>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-group">
-    <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder => "Email" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.password_field :password, autocomplete: "off", :class => "form-control", :placeholder => "Password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="form-group">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in", :class => "btn btn-default" %>
-  </div>
-<% end %>
-
-
 <div class="container">
-  <form class="form-signin">
-    <h2 class="form-signin-heading">Please sign in</h2>
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" value="remember-me"> Remember me
-      </label>
-    </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  </form>
+  <%= bootstrap_flash %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-signin"}) do |f| %>
+    <h2 class="form-signin-heading">请登录</h2>
+    <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder => "Email address" %><br>
+
+    <%= f.password_field :password, autocomplete: "off", :class => "form-control", :placeholder => "Password" %>
+
+    <% if devise_mapping.rememberable? -%>
+        <%= f.check_box :remember_me %>
+        <%= f.label "记住我" %>
+    <% end -%>
+    <%= f.submit "登录", :class => "btn btn-default" %>
+  <% end %>
 
 </div> <!-- /container -->
