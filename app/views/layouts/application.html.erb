@@ -76,4 +76,4 @@
   </body>
 </html>
 <!-- http://getbootstrap.com/getting-started/ -->
- <%= console %>
+<%= console unless Rails.env == "production" %>
