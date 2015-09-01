@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  get 'recruiters_companies/edit'
+
 
   namespace :recruiters do
     resources :jobs do
+    end
+
+    resources :companies do
     end
   end
 
