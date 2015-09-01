@@ -21,11 +21,11 @@
           <li><%= link_to current_recruiter.email, "" %></li>
         <% end %>
 
-        <% if recruiter_signed_in? %>
-          <li><%= link_to "Sign Out", destroy_recruiter_session_path, :method => "DELETE" %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to "Sign Out", destroy_user_session_path, :method => "DELETE" %></li>
         <% else %>
           <li><%= link_to 'Sign Up', new_recruiter_registration_path %></li>
-          <li><%= link_to 'Sign In', new_recruiter_session_path %></li>
+          <li><%= link_to 'Sign In', new_user_session_path %></li>
         <% end %>
       </ul>
     </div><!--/.nav-collapse -->

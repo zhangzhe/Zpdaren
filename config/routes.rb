@@ -19,6 +19,12 @@ Rails.application.routes.draw do
     sessions: 'recruiters_authentication/sessions',
     registrations: 'recruiters_authentication/registrations',
   }
+
+  devise_for :user, controllers: {
+    sessions: 'authentication/sessions',
+    registrations: 'authentication/registrations',
+  }
+
   resources :users, :only => ["index"]
 
   resources :resumes do

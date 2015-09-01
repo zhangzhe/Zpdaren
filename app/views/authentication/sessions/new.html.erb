@@ -1,0 +1,16 @@
+<div class="container">
+  <%= bootstrap_flash %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-signin"}) do |f| %>
+    <h2 class="form-signin-heading">请登录</h2>
+    <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder => "Email address" %><br>
+
+    <%= f.password_field :password, autocomplete: "off", :class => "form-control", :placeholder => "Password" %>
+
+    <% if devise_mapping.rememberable? -%>
+        <%= f.check_box :remember_me %>
+        <%= f.label "记住我" %>
+    <% end -%>
+    <%= f.submit "登录", :class => "btn btn-default" %>
+  <% end %>
+
+</div> <!-- /container -->

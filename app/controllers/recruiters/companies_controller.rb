@@ -1,7 +1,7 @@
 class Recruiters::CompaniesController < ApplicationController
   layout "recruiters"
   def edit
-    @company = current_recruiter.company
+    @company = current_user.company
   end
 
   def update

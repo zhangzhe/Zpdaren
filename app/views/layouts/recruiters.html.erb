@@ -13,7 +13,7 @@
 
             <li><a href="#">简历列表</a></li>
             <% active = controller.class == Recruiters::CompaniesController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to "公司信息", recruiters_company_path(current_recruiter.company) %></li>
+            <li class="<%= active %>"><%= link_to "公司信息", recruiters_company_path(current_user.company) %></li>
 
             <li><a href="#">统计信息</a></li>
           </ul>
