@@ -31,4 +31,12 @@ ActiveRecord::Schema.define(version: 20150831063043) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
+ActiveRecord::Schema.define(version: 20150831081143) do
+
+  create_table "resumes", force: :cascade do |t|
+    t.string   "name"
+    t.text     "attachment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 end

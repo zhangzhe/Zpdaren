@@ -1,0 +1,13 @@
+<%= form_for @resume, html: { multipart: true } do |f| %>
+  <%= flash[:error] %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.file_field :attachment %>
+  </p>
+  <p>
+    <%= f.submit '保存'%>
+  </p>
+<% end %>
