@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   namespace :recruiters do
     resources :jobs do
     end
@@ -19,6 +18,18 @@ Rails.application.routes.draw do
     sessions: 'recruiters_authentication/sessions',
     registrations: 'recruiters_authentication/registrations',
   }
+
+  devise_for :suppliers, controllers: {
+    sessions: 'suppliers_authentication/sessions',
+    registrations: 'suppliers_authentication/registrations',
+  }
+
+
+  devise_for :user, controllers: {
+    sessions: 'authentication/sessions',
+    registrations: 'authentication/registrations',
+  }
+
   resources :users, :only => ["index"]
 
   resources :resumes do

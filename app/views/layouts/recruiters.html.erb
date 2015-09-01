@@ -8,10 +8,14 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li><a href="#">工作</a></li>
-            <li><a href="#">简历</a></li>
-            <li class="active"><%= link_to "公司信息", recruiters_company_path(@company) %></li>
-            <li><a href="#">统计</a></li>
+            <% active = controller.class == Recruiters::JobsController ? "active" : "" %>
+            <li class="<%= active %>"><%= link_to "职位列表", recruiters_jobs_path %></li>
+
+            <li><a href="#">简历列表</a></li>
+            <% active = controller.class == Recruiters::CompaniesController ? "active" : "" %>
+            <li class="<%= active %>"><%= link_to "公司信息", recruiters_company_path(current_user.company) %></li>
+
+            <li><a href="#">统计信息</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
