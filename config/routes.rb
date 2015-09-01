@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   namespace :recruiters do
     resources :jobs do
     end
@@ -41,6 +40,10 @@ Rails.application.routes.draw do
     member do
       get 'download'
     end
+  end
+
+  namespace :admin do
+    resources :resumes, only: [:index]
   end
 
   # Example of regular route:

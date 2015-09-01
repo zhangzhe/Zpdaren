@@ -9,13 +9,23 @@ class ResumesController < ApplicationController
 
   def create
     begin
-      resume = Resume.create!(resume_params)
+      resume = Resume.create!(create_resume_params)
       redirect_to resumes_path
     rescue ActiveRecord::RecordInvalid => e
       flash[:error] = '不支持该格式的文件上传'
       redirect_to :back
     end
+  end
 
+  def edit
+    unless @resume = Resume.find_by_id(params[:id])
+      redirect_to '/404.html'
+    end
+  end
+
+  def update
+    resume = Resume.update(params[:id], update_resume_params)
+    redirect_to admin_resumes_path
   end
 
   def destroy
@@ -23,13 +33,18 @@ class ResumesController < ApplicationController
   end
 
   def download
-    if Resume.find(params[:id])
-      send_file Resume.find(params[:id]).attachment.file.file
+    if resume = Resume.find_by_id(params[:id])
+      send_file resume.attachment.file.file
     end
   end
 
   private
-  def resume_params
-      params.require(:resume).permit!()
+  def create_resume_params
+    params.require(:resume).permit(:name, :attachment, :tag_list)
+  end
+
+  def update_resume_params
+    params[:resume][:checked] = true
+    params.require(:resume).permit(:name, :mobile, :email, :description, :checked, :tag_list)
   end
 end
