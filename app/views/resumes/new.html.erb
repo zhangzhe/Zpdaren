@@ -1,8 +1,12 @@
 <%= form_for @resume, html: { multipart: true } do |f| %>
   <%= flash[:error] %>
   <p>
-    <%= f.label :name %><br />
+    <%= f.label '被推荐人姓名：' %><br />
     <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label '标签(*多个标签以","隔开)' %><br />
+    <%= f.text_field :tag_list %>
   </p>
   <p>
     <%= f.file_field :attachment %>

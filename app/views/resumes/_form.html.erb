@@ -1,0 +1,25 @@
+<%= form_for resume, url: resume_path, method: 'PUT' do |f| %>
+  <p>
+    <%= f.label '姓名' %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label '手机' %><br />
+    <%= f.text_field :mobile %>
+  </p>
+  <p>
+    <%= f.label '邮箱' %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label '标签(*多个标签以","隔开)' %><br />
+    <%= f.text_field :tag_list, value: resume.tag_list.to_s %>
+  </p>
+  <p>
+    <%= f.label '工作经历、教育背景等描述' %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.submit '保存' %>
+  </p>
+<% end %>
