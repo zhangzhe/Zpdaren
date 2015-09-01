@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%= render partial: "/shared/head" %>
+  <body>
+    <%= render partial: "/shared/navbar" %>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="#">工作</a></li>
+            <li><a href="#">简历</a></li>
+            <li class="active"><%= link_to "公司信息", recruiters_company_path(@company) %></li>
+            <li><a href="#">统计</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<!-- http://getbootstrap.com/getting-started/ -->
+<%= console unless Rails.env == "production" %>

@@ -1,0 +1,16 @@
+<h1 class="page-header">公司信息</h1>
+
+<div class="row placeholders">
+  <%= form_for @company, url: recruiters_company_path do |f| %>
+    <p>
+      <%= f.text_field :name, class: "form-control", placeholder: "公司名称" %>
+    </p>
+    <p>
+      <%= f.text_area :description, class: "form-control", placeholder: "公司描述", rows: 20 %>
+    </p>
+    <p>
+      <%= f.submit "Create", class: "btn btn-primary" %>
+    </p>
+  <% end %>
+</div>
+
