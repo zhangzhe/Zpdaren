@@ -20,6 +20,12 @@ Rails.application.routes.draw do
     registrations: 'recruiters_authentication/registrations',
   }
 
+  devise_for :suppliers, controllers: {
+    sessions: 'suppliers_authentication/sessions',
+    registrations: 'suppliers_authentication/registrations',
+  }
+
+
   devise_for :user, controllers: {
     sessions: 'authentication/sessions',
     registrations: 'authentication/registrations',

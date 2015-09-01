@@ -22,10 +22,11 @@
         <% end %>
 
         <% if user_signed_in? %>
-          <li><%= link_to "Sign Out", destroy_user_session_path, :method => "DELETE" %></li>
+          <li><%= link_to "退出", destroy_user_session_path, :method => "DELETE" %></li>
         <% else %>
-          <li><%= link_to 'Sign Up', new_recruiter_registration_path %></li>
-          <li><%= link_to 'Sign In', new_user_session_path %></li>
+          <li><%= link_to '招聘方注册', new_recruiter_registration_path %></li>
+          <li><%= link_to '简历提供方注册', new_supplier_registration_path %></li>
+          <li><%= link_to '登录', new_user_session_path %></li>
         <% end %>
       </ul>
     </div><!--/.nav-collapse -->
