@@ -31,6 +31,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    resources :resumes, only: [:index]
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
