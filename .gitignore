@@ -19,3 +19,5 @@
 
 config/database.yml
 uploads/
+
+.DS_Store

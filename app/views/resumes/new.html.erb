@@ -1,3 +1,4 @@
+<%= link_to '下载', new_resume_path(format: 'pdf') %>
 <%= form_for @resume, html: { multipart: true } do |f| %>
   <%= flash[:error] %>
   <p>
