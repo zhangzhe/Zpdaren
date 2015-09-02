@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :deliveries
   namespace :recruiters do
     resources :jobs do
     end
@@ -8,6 +9,13 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :suppliers do
+    resources :jobs do
+    end
+  end
+
+  resources :jobs do
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -37,6 +45,7 @@ Rails.application.routes.draw do
 
     member do
       get 'download'
+      post 'create_and_deliver'
     end
   end
 

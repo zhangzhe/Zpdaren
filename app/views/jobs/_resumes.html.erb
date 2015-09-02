@@ -1,0 +1,13 @@
+<div class="sidebar-module sidebar-module-inset">
+  <h4>已上传简历</h4>
+  <% @job.resumes.each do |resume| %>
+  <div class="resumeItem">
+    <span class="lead"><%= resume.candidate_name %></span>
+    <br>
+    <%= resume.tag_list %>
+    <br>
+    <%= resume.attachment.file.file.split('/')[-1]%>
+    <hr>
+  </div>
+  <% end %>
+</div>

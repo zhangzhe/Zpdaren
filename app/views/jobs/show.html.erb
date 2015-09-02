@@ -1,0 +1,34 @@
+<% content_for :job_info do %>
+
+    <h2 class="blog-post-title"><%= @job.title %></h2>
+    <p class="blog-post-meta"><%= @job.company_name %>提供<%= @job.bonus %>元招聘红包</p>
+
+    <p><%= simple_format @job.description %></p>
+    <hr>
+    <h2 class="blog-post-title">关于<%= @job.company_name %></h2>
+    <blockquote><%= @job.company_description %></blockquote>
+
+  </div><!-- /.blog-post -->
+<% end %>
+
+<% content_for :other_job_info do %>
+  <hr/>
+  <p>
+    <%= render "deliver_resume" %>
+  </p>
+
+  <p>
+    <%= render "resumes" %>
+  </p>
+
+  <p>
+    <h4>相关其他职位需求</h4>
+    <ol class="list-unstyled">
+      <li><a href="#"><%= @job.title %></a></li>
+      <li><a href="#"><%= @job.title %></a></li>
+      <li><a href="#"><%= @job.title %></a></li>
+      <li><a href="#"><%= @job.title %></a></li>
+      <li><a href="#"><%= @job.title %></a></li>
+    </ol>
+  </p>
+<% end %>

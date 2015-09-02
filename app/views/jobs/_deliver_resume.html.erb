@@ -1,0 +1,19 @@
+<div class="sidebar-module sidebar-module-inset">
+  <h4>为他上传简历</h4>
+  <%= form_for Resume.new, url: create_and_deliver_resume_path do |f| %>
+    <%= flash[:error] %>
+    <%= hidden_field_tag 'job_id', @job.id %>
+    <p>
+      <%= f.text_field 'candidate_name', class: "form-control", :placeholder => "候选人姓名" %>
+    </p>
+    <p>
+      <%= f.text_field 'tag_list', class: "form-control", :placeholder => "标签(*多个标签以','隔开)" %>
+    </p>
+    <p>
+      <%= f.file_field 'attachment' %>
+    </p>
+    <p>
+      <%= f.submit '推荐', class: "btn btn-primary active" %>
+    </p>
+  <% end %>
+</div>
