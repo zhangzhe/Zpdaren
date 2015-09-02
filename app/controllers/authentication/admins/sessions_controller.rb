@@ -1,5 +1,5 @@
-class SuppliersAuthentication::SessionsController < Devise::SessionsController
-# before_filter :configure_sign_in_params, only: [:create]
+class Authentication::Admins::SessionsController < Devise::SessionsController
+  # before_filter :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
   # def new
@@ -23,7 +23,6 @@ class SuppliersAuthentication::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.for(:sign_in) << :attribute
   # end
 
-  def after_sign_in_path_for(resource)
-    recruiters_jobs_path || root_path
-  end
+  # def after_sign_in_path_for(resource)
+#   end
 end

@@ -1,5 +1,5 @@
-class Authentication::SessionsController < Devise::SessionsController
-  # before_filter :configure_sign_in_params, only: [:create]
+class Authentication::Recruiters::SessionsController < Devise::SessionsController
+# before_filter :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
   # def new
@@ -24,11 +24,6 @@ class Authentication::SessionsController < Devise::SessionsController
   # end
 
   def after_sign_in_path_for(resource)
-    case current_user
-    when Admin
-      p ""
-    when Recruiter
-      recruiters_jobs_path || root_path
-    end
+    recruiters_jobs_path || root_path
   end
 end
