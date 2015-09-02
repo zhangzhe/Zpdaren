@@ -34,11 +34,11 @@ class ResumesController < ApplicationController
 
   def show
     @resume = Resume.find_by_id(params[:id])
-    dir = "/data/Epin/pdf"
-    unless File.exist?(dir)
-      Dir.mkdir(dir)
-    end
-    headers['PDFKit-save-pdf'] = "#{dir}/#{@resume.id}.pdf"
+    # dir = "/data/Epin/pdf"
+    # unless File.exist?(dir)
+    #   Dir.mkdir(dir)
+    # end
+    # headers['PDFKit-save-pdf'] = "#{dir}/#{@resume.id}.pdf"
   end
 
   def download
