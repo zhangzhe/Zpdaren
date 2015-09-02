@@ -11,20 +11,24 @@
   </div><!-- /.blog-post -->
 <% end %>
 
-
 <% content_for :other_job_info do %>
-
-
-  <%= link_to "为他推荐人才", "", class: "btn btn-primary btn-lg active", role: "button" %>
-
   <hr/>
+  <p>
+    <%= render "deliver_resume" %>
+  </p>
 
-  <h4>相关其他职位需求</h4>
-  <ol class="list-unstyled">
-    <li><a href="#"><%= @job.title %></a></li>
-    <li><a href="#"><%= @job.title %></a></li>
-    <li><a href="#"><%= @job.title %></a></li>
-    <li><a href="#"><%= @job.title %></a></li>
-    <li><a href="#"><%= @job.title %></a></li>
-  </ol>
+  <p>
+    <%= render "resumes" %>
+  </p>
+
+  <p>
+    <h4>相关其他职位需求</h4>
+    <ol class="list-unstyled">
+      <li><a href="#"><%= @job.title %></a></li>
+      <li><a href="#"><%= @job.title %></a></li>
+      <li><a href="#"><%= @job.title %></a></li>
+      <li><a href="#"><%= @job.title %></a></li>
+      <li><a href="#"><%= @job.title %></a></li>
+    </ol>
+  </p>
 <% end %>

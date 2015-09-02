@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :deliveries
   namespace :recruiters do
     resources :jobs do
     end
@@ -44,6 +45,7 @@ Rails.application.routes.draw do
 
     member do
       get 'download'
+      post 'create_and_deliver'
     end
   end
 

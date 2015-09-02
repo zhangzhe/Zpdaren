@@ -18,3 +18,4 @@
 /public/assets/*
 
 config/database.yml
+uploads/

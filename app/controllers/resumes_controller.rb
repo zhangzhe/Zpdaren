@@ -10,11 +10,19 @@ class ResumesController < ApplicationController
   def create
     begin
       resume = Resume.create!(create_resume_params)
-      redirect_to resumes_path
+      # redirect_to resumes_path
+      render json: {} and return
     rescue ActiveRecord::RecordInvalid => e
       flash[:error] = '不支持该格式的文件上传'
       redirect_to :back
     end
+  end
+
+  def create_and_deliver
+    job = Job.find(params[:job_id])
+    resume = Resume.create!(resume_params)
+    job.delivery!(resume)
+    redirect_to :back
   end
 
   def edit
@@ -46,5 +54,9 @@ class ResumesController < ApplicationController
   def update_resume_params
     params[:resume][:checked] = true
     params.require(:resume).permit(:name, :mobile, :email, :description, :checked, :tag_list)
+  end
+
+  def resume_params
+    params[:resume].permit(:candidate_name, :tag_list, :attachment)
   end
 end
