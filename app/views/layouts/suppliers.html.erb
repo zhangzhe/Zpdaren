@@ -8,13 +8,9 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <% active = controller.class == Recruiters::JobsController ? "active" : "" %>
+            <% active = controller.class == Suppliers::JobsController ? "active" : "" %>
             <li class="<%= active %>"><%= link_to "职位列表", recruiters_jobs_path %></li>
-
             <li><a href="#">我的简历列表</a></li>
-            <% active = controller.class == Recruiters::CompaniesController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to "公司信息", recruiters_company_path(current_recruiter.company) %></li>
-
             <li><a href="#">统计信息</a></li>
           </ul>
         </div>

@@ -23,6 +23,7 @@ class Authentication::Suppliers::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.for(:sign_in) << :attribute
   # end
   #
-  # def after_sign_in_path_for(resource)
-  # end
+  def after_sign_in_path_for(resource)
+    suppliers_jobs_path || root_path
+  end
 end
