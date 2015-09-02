@@ -1,6 +1,5 @@
 <% @resumes.each do |resume| %>
   <p>
-   <%= resume.name %>
-   <%= link_to '下载', download_resume_path(resume.id) %>
+   <%= link_to resume.name, resume_path(resume.id) %>
   </p>
 <% end %>

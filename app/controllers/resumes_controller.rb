@@ -32,6 +32,15 @@ class ResumesController < ApplicationController
 
   end
 
+  def show
+    @resume = Resume.find_by_id(params[:id])
+    # dir = "/data/Epin/pdf"
+    # unless File.exist?(dir)
+    #   Dir.mkdir(dir)
+    # end
+    # headers['PDFKit-save-pdf'] = "#{dir}/#{@resume.id}.pdf"
+  end
+
   def download
     if resume = Resume.find_by_id(params[:id])
       send_file resume.attachment.file.file

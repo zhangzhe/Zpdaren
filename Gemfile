@@ -34,6 +34,8 @@ gem 'capistrano', '~> 3.4.0'
 gem 'capistrano-rails', '~> 1.1'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'acts-as-taggable-on', '~> 3.4'
+gem 'wkhtmltopdf-binary-edge', '~> 0.12.2.1'
+gem 'pdfkit', '~> 0.8.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
