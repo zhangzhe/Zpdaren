@@ -15,23 +15,17 @@ Rails.application.routes.draw do
 
   root 'front_page#index'
   devise_for :recruiters, controllers: {
-    sessions: 'recruiters_authentication/sessions',
-    registrations: 'recruiters_authentication/registrations',
+    sessions: 'authentication/recruiters/sessions',
+    registrations: 'authentication/recruiters/registrations',
   }
 
   devise_for :suppliers, controllers: {
-    sessions: 'suppliers_authentication/sessions',
-    registrations: 'suppliers_authentication/registrations',
+    sessions: 'authentication/suppliers/sessions',
+    registrations: 'authentication/suppliers/registrations',
   }
 
   devise_for :admins, controllers: {
-    sessions: 'authentication/sessions',
-  }
-
-
-  devise_for :user, controllers: {
-    sessions: 'authentication/sessions',
-    registrations: 'authentication/registrations',
+    sessions: 'authentication/admins/sessions',
   }
 
   resources :users, :only => ["index"]

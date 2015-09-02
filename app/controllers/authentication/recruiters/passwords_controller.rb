@@ -1,4 +1,4 @@
-class RecruitersAuthentication::PasswordsController < Devise::PasswordsController
+class Authentication::Recruiters::PasswordsController < Devise::PasswordsController
   # GET /resource/password/new
   # def new
   #   super
