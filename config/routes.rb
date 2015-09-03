@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
 
-  root 'front_page#index'
+
   devise_for :recruiters, controllers: {
     sessions: 'authentication/recruiters/sessions',
     registrations: 'authentication/recruiters/registrations',
@@ -49,10 +49,15 @@ Rails.application.routes.draw do
     end
   end
 
+
+
   namespace :admin do
     resources :resumes, only: [:index]
   end
 
+  root :to => 'passthrough#index'
+
+  get 'front_page' => 'front_page#index'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
