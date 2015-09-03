@@ -1,3 +1,3 @@
 class Supplier < User
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :trackable, :validatable
 end

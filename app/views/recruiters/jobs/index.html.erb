@@ -12,9 +12,9 @@
       <% @jobs.each do |job| %>
         <tr>
           <td><%= job.title %></td>
-          <td>100</td>
+          <td><%= job.resumes.count %></td>
           <td><%= job.bonus %></td>
-          <td><%= job.created_at%></td>
+          <td><%= job.created_at.localtime.to_s(:db) %></td>
         </tr>
       <% end %>
     </tbody>
