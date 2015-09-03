@@ -56,6 +56,10 @@ Rails.application.routes.draw do
     end
 
     resources :users, only: [:index]
+
+    resources :companies, only: [:index, :show]
+
+    resources :jobs, only: [:index, :show]
   end
 
   root :to => 'passthrough#index'
