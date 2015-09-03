@@ -1,5 +1,5 @@
-class Admins::ResumesController < ApplicationController
-  layout "admins"
+class Admins::ResumesController < Admins::BaseController
+
   def index
     @resumes = Resume.where({checked: false})
   end
