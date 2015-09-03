@@ -1,9 +1,0 @@
-<p>
-  简历列表：
-</p>
-<% @resumes.each do |resume| %>
-  <p>
-    <%= resume.name %>
-    <%= link_to '审核', edit_resume_path(resume.id) %>
-  </p>
-<% end %>

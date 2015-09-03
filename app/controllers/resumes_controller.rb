@@ -3,10 +3,6 @@ class ResumesController < ApplicationController
     @resumes = Resume.all
   end
 
-  def new
-    @resume = Resume.new
-  end
-
   def create
     begin
       resume = Resume.create!(create_resume_params)
@@ -26,14 +22,12 @@ class ResumesController < ApplicationController
   end
 
   def edit
-    unless @resume = Resume.find_by_id(params[:id])
-      redirect_to '/404.html'
-    end
+    @resume = Resume.find(params[:id])
   end
 
   def update
     resume = Resume.update(params[:id], update_resume_params)
-    redirect_to admin_resumes_path
+    redirect_to admins_resumes_path
   end
 
   def destroy
@@ -50,9 +44,8 @@ class ResumesController < ApplicationController
   end
 
   def download
-    if resume = Resume.find_by_id(params[:id])
-      send_file resume.attachment.file.file
-    end
+    resume = Resume.find(params[:id])
+    send_file resume.attachment.file.file
   end
 
   private

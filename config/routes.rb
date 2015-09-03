@@ -36,8 +36,6 @@ Rails.application.routes.draw do
     sessions: 'authentication/admins/sessions',
   }
 
-  resources :users, :only => ["index"]
-
   resources :resumes do
     collection do
       get 'download'
@@ -49,8 +47,15 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :admin do
-    resources :resumes, only: [:index]
+  namespace :admins do
+    resources :resumes, only: [:index, :check_and_update, :edit, :original_resume_download] do
+      member do
+        put :check_and_update
+        get :original_resume_download
+      end
+    end
+
+    resources :users, only: [:index]
   end
 
   # Example of regular route:
