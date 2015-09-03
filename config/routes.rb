@@ -32,10 +32,12 @@ Rails.application.routes.draw do
   namespace :recruiters do
     resources :jobs
     resources :companies
+    resources :resumes, only: [:index]
   end
 
   namespace :suppliers do
     resources :jobs
+    resources :resumes, only: [:index]
   end
 
   resources :deliveries

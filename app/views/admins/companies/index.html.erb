@@ -12,7 +12,7 @@
         <tr>
           <td><%= link_to company.name, admins_company_path(company.id) %></td>
           <td><%= truncate(company.description, length: 30) %></td>
-          <td><%= company.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+          <td><%= company.created_at.localtime.to_s(:db) %></td>
         </tr>
       <% end %>
     </tbody>

@@ -15,8 +15,8 @@
           <td><%= link_to job.title, job, :target => "_blank" %></td>
           <td><%= job.company_name %></td>
           <td><%= job.bonus %></td>
-          <td><%= job.created_at %></td>
-          <td><%= link_to "为他推荐", job, class: "btn btn-primary active", role: "button" %></td>
+          <td><%= job.created_at.localtime.to_s(:db) %></td>
+          <td><%= link_to "为他推荐(#{job.resumes.where(:supplier_id => current_supplier.id).count})", job, class: "btn btn-primary active", role: "button", :target => "_blank" %></td>
         </tr>
       <% end %>
     </tbody>
