@@ -1,8 +1,7 @@
-class Admins::CompaniesController < ApplicationController
-  layout 'admins'
+class Admins::CompaniesController < Admins::BaseController
 
   def index
-    @companies = Company.all
+    @companies = Company.active
   end
 
   def show

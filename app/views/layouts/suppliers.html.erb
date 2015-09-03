@@ -9,8 +9,9 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <% active = controller.class == Suppliers::JobsController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to "职位列表", recruiters_jobs_path %></li>
-            <li><a href="#">我的简历列表</a></li>
+            <li class="<%= active %>"><%= link_to "职位列表", suppliers_jobs_path %></li>
+            <% active = controller.class == Suppliers::ResumesController ? "active" : "" %>
+            <li class="<%= active %>"><%= link_to "我的简历列表", suppliers_resumes_path %></li>
             <li><a href="#">统计信息</a></li>
           </ul>
         </div>

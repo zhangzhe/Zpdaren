@@ -1,7 +1,7 @@
-class Admins::ResumesController < ApplicationController
-  layout "admins"
+class Admins::ResumesController < Admins::BaseController
+
   def index
-    @resumes = Resume.where({checked: false})
+    @resumes = Resume.all
   end
 
   def edit

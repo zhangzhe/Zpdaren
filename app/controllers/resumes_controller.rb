@@ -17,6 +17,7 @@ class ResumesController < ApplicationController
   def create_and_deliver
     job = Job.find(params[:job_id])
     resume = Resume.create!(resume_params)
+    current_supplier.resumes << resume
     job.delivery!(resume)
     redirect_to :back
   end

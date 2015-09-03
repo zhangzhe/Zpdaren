@@ -1,0 +1,22 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>被推荐人</th>
+        <th>标签</th>
+        <th>简历原件</th>
+        <th>状态</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @resumes.each do |resume| %>
+        <tr>
+          <td><%= resume.candidate_name %></td>
+          <td><%= resume.tag_list %></td>
+          <td><%= link_to resume.attachment.file.file.split('/')[-1], original_resume_download_admins_resume_path(resume[:id]) %></td>
+          <td><%= resume.checked ? '已审核' : '未审核' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

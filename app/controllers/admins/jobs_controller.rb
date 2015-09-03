@@ -1,5 +1,4 @@
-class Admins::JobsController < ApplicationController
-  layout 'admins'
+class Admins::JobsController < Admins::BaseController
 
   def index
     @jobs = Job.all
