@@ -1,6 +1,10 @@
-<%= form_for resume, url: resume_path, method: 'PUT' do |f| %>
+<%= form_for resume, url: check_and_update_admins_resume_path, method: 'PUT' do |f| %>
   <p>
-    <%= f.label '姓名' %><br />
+    <%= f.label '姓名' %>
+    (
+      <%= link_to '简历原件', original_resume_download_admins_resume_path(resume[:id]) %>
+    )
+    <br />
     <%= f.text_field :candidate_name, class: 'form-control' %>
   </p>
   <p>
@@ -17,7 +21,7 @@
   </p>
   <p>
     <%= f.label '工作经历、教育背景等描述' %><br />
-    <%= f.text_area :description, class: 'form-control' %>
+    <%= f.text_area :description, class: 'form-control', rows: 20 %>
   </p>
   <p>
     <%= f.submit '保存', class: "btn btn-primary" %>

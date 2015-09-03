@@ -6,10 +6,10 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Email</th>
-            <th>Sign in count</th>
-            <th>Last sign in at</th>
-            <th>Last sign in ip</th>
+            <th>邮箱</th>
+            <th>登录数量</th>
+            <th>最近登录时间</th>
+            <th>最近登录ip</th>
             <th colspan="4"></th>
           </tr>
         </thead>
@@ -19,7 +19,7 @@
           <tr>
             <td><%= user.email %></td>
             <td><%= user.sign_in_count %></td>
-            <td><%= user.last_sign_in_at %></td>
+            <td><%= user.last_sign_in_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
             <td><%= user.last_sign_in_ip %></td>
           </tr>
           <% end %>
