@@ -11,4 +11,18 @@ class Resume < ActiveRecord::Base
   acts_as_taggable_on :skills, :interests
 
   mount_uploader :attachment, FileUploader
+
+  def resume_bonus
+    count = 0
+    self.deliveries.paid.each do |delivery|
+      count += delivery.job.bonus_for_each_resume
+    end
+    count
+  end
+
+
+  def resumes_from(supplier)
+    self.resumes.where(:supplier_id => supplier.id)
+  end
+
 end

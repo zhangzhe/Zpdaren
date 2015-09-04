@@ -20,6 +20,36 @@ class Job < ActiveRecord::Base
     end
   end
 
+  def deposit
+    (bonus * 0.2).to_i
+  end
+
+  def resumes_bonus_for(supplier)
+    count = 0
+    resumes_from(supplier).map(&:deliveries).flatten.each do |delivery|
+      if delivery.paid?
+        count += 1
+      end
+    end
+    return (count * bonus_for_each_resume)
+  end
+
+  def resumes_count_from(supplier)
+    resumes_from(supplier).count
+  end
+
+  def resumes_from(supplier)
+    self.resumes.where(:supplier_id => supplier.id)
+  end
+
+  def bonus_for_each_resume
+     (0.005 * deposit).to_i
+  end
+
+  def bonus_for_entry
+     (bonus * 0.8).to_i
+  end
+
   def company_name
     company.name
   end

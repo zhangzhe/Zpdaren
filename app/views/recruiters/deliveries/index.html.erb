@@ -2,8 +2,10 @@
   <table class="table table-striped">
     <thead>
       <tr>
+        <th>投递职位</th>
         <th>推荐人</th>
         <th>标签</th>
+        <th>状态</th>
         <th>操作</th>
       </tr>
     </thead>
@@ -11,8 +13,10 @@
       <% @deliveries.each do |delivery| %>
         <% if delivery.resume %>
           <tr>
+            <td><%= delivery.job.title %></td>
             <td><%= delivery.resume.candidate_name %></td>
             <td><%= delivery.resume.tag_list %></td>
+            <td><%= delivery.paid? ? "已付费" : "未付费" %></td>
             <td>
               <%= link_to '查看', recruiters_delivery_path(delivery), class: 'btn btn-primary active' %>
             </td>
