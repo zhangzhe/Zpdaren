@@ -1,7 +1,7 @@
 class Admins::JobsController < Admins::BaseController
 
   def index
-    @jobs = Job.submitted
+    @jobs = Job.pre_approved
   end
 
   def edit
