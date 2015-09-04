@@ -18,6 +18,7 @@
 /public/assets/*
 
 config/database.yml
-uploads/
+/uploads/*
+!/uploads/.keep
 
 .DS_Store
