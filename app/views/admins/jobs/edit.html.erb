@@ -1,0 +1,19 @@
+<div class="row">
+  <%= link_to "职位列表", admins_jobs_path %>/审核职位
+  <p>
+    <%= form_for @job, url: admins_job_path do |f| %>
+      <p>
+        <%= f.text_field :title, class: "form-control", placeholder: "职位名称" %>
+      </p>
+      <p>
+        <%= f.text_area :description, class: "form-control", placeholder: "职位描述", rows: 10 %>
+      </p>
+      <p>
+        红包：<%= @job.bonus %>
+      </p>
+      <p>
+        <%= f.submit "通过", class: "btn btn-primary" %>
+      </p>
+    <% end %>
+  </p>
+</div>

@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
     resources :users, only: [:index]
     resources :companies, only: [:index, :show]
-    resources :jobs, only: [:index, :show]
+    resources :jobs, only: [:index, :show, :edit, :update]
   end
 
   namespace :recruiters do

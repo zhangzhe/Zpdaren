@@ -3,6 +3,12 @@ lock '3.4.0'
 
 server '182.92.221.174', user: 'deploy', roles: %w{app web}, my_property: :my_value
 
+if Rails.env == 'production'
+  unless File.exists?(File.join("#{Rails.root}", 'uploads'))
+    Dir.mkdir(File.join("#{Rails.root}", 'uploads'))
+  end
+end
+
 set :application, 'Epin'
 set :repo_url, 'git@github.com:SparkYacademy/Epin.git'
 set :recipient, "Ruby"
@@ -14,7 +20,7 @@ set :use_sudo, false
 set :tmp_dir, '/data/Epin/shared/tmp'
 set :rails_env, "production"
 set :linked_files, fetch(:linked_files, []).push('config/database.yml')
-set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps uploads}
 
 after 'deploy:publishing', 'deploy:restart'
 

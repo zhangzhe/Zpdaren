@@ -19,7 +19,7 @@ class FileUploader < CarrierWave::Uploader::Base
   end
 
   # def cache_dir
-  #   Rails.root.join('tmp')
+  #   "/data/Epin/shared/uploads/" if Rails.env == 'production'
   # end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:

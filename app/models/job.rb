@@ -2,6 +2,8 @@ class Job < ActiveRecord::Base
   belongs_to :company
   has_many :deliveries
   has_many :resumes, through: :deliveries
+  scope :approved, -> { where('state' => 'approved')}
+  scope :submitted, -> { where('state' => 'submitted')}
 
   include AASM
   aasm.attribute_name :state
