@@ -1,0 +1,24 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>推荐人</th>
+        <th>标签</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @deliveries.each do |delivery| %>
+        <% if delivery.resume %>
+          <tr>
+            <td><%= delivery.resume.candidate_name %></td>
+            <td><%= delivery.resume.tag_list %></td>
+            <td>
+              <%= link_to '查看', recruiters_delivery_path(delivery), class: 'btn btn-primary active' %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

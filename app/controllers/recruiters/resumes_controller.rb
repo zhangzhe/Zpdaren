@@ -2,7 +2,7 @@ class Recruiters::ResumesController < Admins::BaseController
   layout "recruiters"
 
   def index
-    @resumes = Resume.joins(:deliveries).select(:candidate_name, 'deliveries.job_id').where("deliveries.job_id in (?)", current_recruiter.company.jobs.collect {|job| job.id }).active
+    @resumes = Resume.active
   end
 
   def show

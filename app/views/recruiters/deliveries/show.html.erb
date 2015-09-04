@@ -1,0 +1,18 @@
+<div>
+  <p class="lead"><%= @delivery.candidate_name %></p>
+
+
+  <p>
+    <% if @delivery.paid %>
+      <%= @delivery.resume.mobile %>
+      <%= @delivery.resume.email %>
+    <% else %>
+      候选人联系方式(付费<20>元后可看) <%= link_to "付费20元", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary active", role: "button" %>
+    <% end %>
+  </p>
+
+
+
+  <p><%= simple_format @delivery.description %></p>
+
+</div>

@@ -37,7 +37,7 @@ Rails.application.routes.draw do
       end
     end
     resources :companies
-    resources :resumes, only: [:index, :show, :pay] do
+    resources :deliveries, only: [:index, :show, :pay] do
       member do
         get :pay
       end
