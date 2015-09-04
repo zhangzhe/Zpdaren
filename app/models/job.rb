@@ -3,7 +3,8 @@ class Job < ActiveRecord::Base
   has_many :deliveries
   has_many :resumes, through: :deliveries
 
-  scope :pre_approved, -> { where("state = 'submitted' and deposit is not null")}
+  # scope :pre_approved, -> { where("state = 'submitted' and deposit is not null")}
+  scope :deposit_paid, -> { where('state' => 'deposit_paid')}
   scope :approved, -> { where('state' => 'approved')}
 
   include AASM

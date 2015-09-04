@@ -22,3 +22,5 @@ config/database.yml
 !/uploads/.keep
 
 .DS_Store
+
+public/uploads/

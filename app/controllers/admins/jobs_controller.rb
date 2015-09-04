@@ -1,7 +1,7 @@
 class Admins::JobsController < Admins::BaseController
 
   def index
-    @jobs = Job.all
+    @jobs = Job.deposit_paid
   end
 
   def edit
