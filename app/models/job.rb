@@ -20,6 +20,10 @@ class Job < ActiveRecord::Base
     end
   end
 
+  def deposit
+    (bonus * 0.2).to_i
+  end
+
   def company_name
     company.name
   end

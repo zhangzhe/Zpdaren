@@ -3,7 +3,12 @@ class Recruiters::DeliveriesController < ApplicationController
 
   def index
     @deliveries = []
-    current_recruiter.company.jobs.map do |job|
+    if params[:job_id]
+      jobs = [Job.find(params[:job_id])]
+    else
+      jobs = current_recruiter.company.jobs
+    end
+    jobs.map do |job|
       @deliveries << job.deliveries unless job.deliveries.blank?
     end
     @deliveries.flatten!

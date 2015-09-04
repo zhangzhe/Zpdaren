@@ -13,4 +13,5 @@ class Delivery < ActiveRecord::Base
   def pay!
     self.update_attributes!(paid: true)
   end
+
 end

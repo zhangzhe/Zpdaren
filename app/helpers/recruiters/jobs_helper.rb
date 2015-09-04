@@ -4,9 +4,9 @@ module Recruiters::JobsHelper
     when :submitted
       '未付订金'
     when :approved
-      '已付订金'
+      '招聘中'
     when :finished
-      '已完成'
+      '招聘完成'
     end
   end
 end
