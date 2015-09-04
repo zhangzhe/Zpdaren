@@ -2,7 +2,7 @@
   <p class="lead"><%= @resume.candidate_name %></p>
 
   <p>
-    候选人联系方式(付费<20>元后可看) <%= link_to "付费20元", "", class: "btn btn-primary active", role: "button" %>
+    候选人联系方式(付费<20>元后可看) <%= link_to "付费20元", pay_recruiters_resume_path(id: @resume.id, job_id: 1, pay: 20), class: "btn btn-primary active", role: "button" %>
   </p>
 
   <p><%= simple_format @resume.description %></p>

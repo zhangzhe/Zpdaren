@@ -11,6 +11,7 @@ GIT
 GEM
   remote: https://ruby.taobao.org/
   specs:
+    aasm (4.2.0)
     actionmailer (4.2.3)
       actionpack (= 4.2.3)
       actionview (= 4.2.3)
@@ -199,6 +200,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm (~> 4.2.0)
   acts-as-taggable-on (~> 3.4)
   byebug
   capistrano (~> 3.4.0)

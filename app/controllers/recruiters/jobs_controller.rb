@@ -14,12 +14,30 @@ class Recruiters::JobsController < ApplicationController
   end
 
   def create
-    current_recruiter.company.jobs.create!(job_params)
+    job = current_recruiter.company.jobs.create!(job_params)
+    redirect_to deposit_pay_new_recruiters_job_path(job)
+  end
+
+  def deposit_pay_new
+    @job = Job.find(params[:id])
+  end
+
+  def deposit_pay
+    job = Job.update(params[:job][:id], deposit_pay_params)
+    admin = Admin.first
+    admin.receive(job.deposit)
+    job.publish
+    job.save!
     redirect_to recruiters_jobs_path
   end
 
   private
   def job_params
-    params[:job].permit(:title, :description, :bonus)
+    params[:job][:state] = :offline
+    params[:job].permit(:title, :description, :bonus, :state)
+  end
+
+  def deposit_pay_params
+    params[:job].permit(:deposit)
   end
 end

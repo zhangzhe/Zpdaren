@@ -6,6 +6,7 @@
         <th>简历数量</th>
         <th>红包</th>
         <th>创建时间</th>
+        <th>状态</th>
       </tr>
     </thead>
     <tbody>
@@ -15,6 +16,12 @@
           <td><%= job.resumes.count %></td>
           <td><%= job.bonus %></td>
           <td><%= job.created_at.localtime.to_s(:db) %></td>
+          <td>
+            <%= Recruiters::JobsHelper::state_show(job) %>
+            <% if job.state.to_s == 'offline' %>
+              <%= link_to '支付', deposit_pay_new_recruiters_job_path(job) %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

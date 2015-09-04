@@ -30,9 +30,18 @@ Rails.application.routes.draw do
   end
 
   namespace :recruiters do
-    resources :jobs
+    resources :jobs do
+      member do
+        get :deposit_pay_new
+        put :deposit_pay
+      end
+    end
     resources :companies
-    resources :resumes, only: [:index, :show]
+    resources :resumes, only: [:index, :show, :pay] do
+      member do
+        get :pay
+      end
+    end
   end
 
   namespace :suppliers do
