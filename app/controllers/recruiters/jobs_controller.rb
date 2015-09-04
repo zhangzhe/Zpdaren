@@ -31,9 +31,14 @@ class Recruiters::JobsController < ApplicationController
     redirect_to recruiters_jobs_path
   end
 
+  def complete
+    @job = Job.find(params[:id])
+    @job.complete!
+    redirect_to :back
+  end
+
   private
   def job_params
-    params[:job][:state] = :offline
     params[:job].permit(:title, :description, :bonus, :state)
   end
 

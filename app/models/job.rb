@@ -4,20 +4,19 @@ class Job < ActiveRecord::Base
   has_many :resumes, through: :deliveries
 
   include AASM
-
   aasm.attribute_name :state
   aasm do
-    state :offline, :initial => true
-    state :online
-    state :finish
+    state :submitted, :initial => true
+    state :approved
+    state :finished
 
     event :publish do
       # debugger
-      transitions :from => :offline, :to => :online
+      transitions :from => :submitted, :to => :approved
     end
 
-    event :finish do
-      transitions :from => :online, :to => :finish
+    event :complete do
+      transitions :from => :approved, :to => :finished
     end
   end
 

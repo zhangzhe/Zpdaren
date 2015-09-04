@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       member do
         get :deposit_pay_new
         put :deposit_pay
+        put :complete
       end
     end
     resources :companies
