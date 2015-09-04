@@ -18,9 +18,8 @@
           <td><%= job.created_at.localtime.to_s(:db) %></td>
           <td>
             <%= Recruiters::JobsHelper::state_show(job) %>
-            <% if job.state.to_s == 'offline' %>
-              <%= link_to '支付', deposit_pay_new_recruiters_job_path(job) %>
-            <% end %>
+            <%= link_to '支付', deposit_pay_new_recruiters_job_path(job), class: "btn btn-primary" if job.submitted? %>
+            <%= link_to '完成', complete_recruiters_job_path(job), class: "btn btn-primary", method: :put if job.approved? %>
           </td>
         </tr>
       <% end %>
