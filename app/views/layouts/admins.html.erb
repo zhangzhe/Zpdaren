@@ -8,15 +8,14 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-
-            <% active = controller.class == Admins::ResumesController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to "简历库", admins_resumes_path %></li>
             <% active = controller.class == Admins::UsersController ? "active" : "" %>
             <li class="<%= active %>"><%= link_to '用户列表', admins_users_path %></li>
-            <% active = controller.class == Admins::CompaniesController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to "公司列表", admins_companies_path %></li>
+            <% active = controller.class == Admins::ResumesController ? "active" : "" %>
+            <li class="<%= active %>"><%= link_to "简历库", admins_resumes_path %></li>
             <% active = controller.class == Admins::JobsController ? "active" : "" %>
             <li class="<%= active %>"><%= link_to '职位', admins_jobs_path %></li>
+            <% active = controller.class == Admins::CompaniesController ? "active" : "" %>
+            <li class="<%= active %>"><%= link_to "公司列表", admins_companies_path %></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

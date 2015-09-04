@@ -1,7 +1,7 @@
 class Admins::ResumesController < Admins::BaseController
 
   def index
-    @resumes = Resume.unactive
+    @resumes = Resume.all
   end
 
   def edit

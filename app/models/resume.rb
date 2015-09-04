@@ -21,7 +21,6 @@ class Resume < ActiveRecord::Base
     count
   end
 
-
   def resumes_from(supplier)
     self.resumes.where(:supplier_id => supplier.id)
   end
