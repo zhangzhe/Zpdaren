@@ -1,7 +1,7 @@
 class Admins::JobsController < Admins::BaseController
 
   def index
-    @jobs = Job.approved
+    @jobs = Job.submitted
   end
 
   def edit
@@ -14,9 +14,8 @@ class Admins::JobsController < Admins::BaseController
 
   def update
     job = Job.update(params[:id], job_params)
-    job.publish
-    job.save
-    redircet_to admins_jobs_path
+    job.publish!
+    redirect_to admins_jobs_path
   end
 
   private

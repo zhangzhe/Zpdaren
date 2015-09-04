@@ -3,7 +3,7 @@ class Job < ActiveRecord::Base
   has_many :deliveries
   has_many :resumes, through: :deliveries
   scope :approved, -> { where('state' => 'approved')}
-  scope :approved, -> { where('state' => 'submitted')}
+  scope :submitted, -> { where('state' => 'submitted')}
 
   include AASM
   aasm.attribute_name :state
