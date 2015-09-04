@@ -2,6 +2,8 @@ class Delivery < ActiveRecord::Base
   belongs_to :job
   belongs_to :resume
 
+  scope :paid, -> { where(paid: true) }
+
   def candidate_name
     resume.candidate_name
   end
