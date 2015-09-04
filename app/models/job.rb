@@ -23,7 +23,7 @@ class Job < ActiveRecord::Base
     end
   end
 
-  def deposit
+  def original_deposit
     (bonus * 0.2).to_i
   end
 
