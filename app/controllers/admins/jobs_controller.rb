@@ -14,7 +14,7 @@ class Admins::JobsController < Admins::BaseController
 
   def update
     job = Job.update(params[:id], job_params)
-    job.publish!
+    job.approve!
     redirect_to admins_jobs_path
   end
 

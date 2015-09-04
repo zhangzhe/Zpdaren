@@ -10,12 +10,16 @@ class Job < ActiveRecord::Base
   aasm.attribute_name :state
   aasm do
     state :submitted, :initial => true
+    state :deposit_paid
     state :approved
     state :finished
 
-    event :publish do
-      # debugger
-      transitions :from => :submitted, :to => :approved
+    event :pay do
+      transitions :from => :submitted, :to => :deposit_paid
+    end
+
+    event :approve do
+      transitions :from => :deposit_paid, :to => :approved
     end
 
     event :complete do
@@ -72,5 +76,4 @@ class Job < ActiveRecord::Base
       return self.update_attribute(:deposit, self.deposit - pay)
     end
   end
-
 end

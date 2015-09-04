@@ -17,10 +17,10 @@
           <td><%= job.bonus %></td>
           <td><%= job.created_at.localtime.to_s(:db) %></td>
           <td>
-            <% if job.approved? %>
-              已通过审核
-            <% else %>
+            <% if job.deposit_paid? %>
               <%= link_to "审核", edit_admins_job_path(job.id), class: "btn btn-primary" %>
+            <% elsif  %>
+              <%= job.state %>
             <% end %>
           </td>
         </tr>
