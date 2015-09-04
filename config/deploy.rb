@@ -3,12 +3,6 @@ lock '3.4.0'
 
 server '182.92.221.174', user: 'deploy', roles: %w{app web}, my_property: :my_value
 
-if Rails.env == 'production'
-  unless File.exists?(File.join("#{Rails.root}", 'uploads'))
-    Dir.mkdir(File.join("#{Rails.root}", 'uploads'))
-  end
-end
-
 set :application, 'Epin'
 set :repo_url, 'git@github.com:SparkYacademy/Epin.git'
 set :recipient, "Ruby"
