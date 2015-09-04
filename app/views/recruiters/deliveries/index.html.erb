@@ -9,7 +9,7 @@
     </thead>
     <tbody>
       <% @deliveries.each do |delivery| %>
-        <% if delivery.resume %>
+        <% if delivery.resume && delivery.resume.checked %>
           <tr>
             <td><%= delivery.resume.candidate_name %></td>
             <td><%= delivery.resume.tag_list %></td>
