@@ -11,11 +11,11 @@
     </thead>
     <tbody>
       <% @deliveries.each do |delivery| %>
-        <% if delivery.resume && delivery.resume.checked %>
+        <% if delivery.resume && delivery.resume_checked %>
           <tr>
-            <td><%= delivery.job.title %></td>
-            <td><%= delivery.resume.candidate_name %></td>
-            <td><%= delivery.resume.tag_list %></td>
+            <td><%= delivery.job_title %></td>
+            <td><%= delivery.resume_candidate_name %></td>
+            <td><%= delivery.resume_tag_list %></td>
             <td><%= delivery.paid? ? "已付费" : "未付费" %></td>
             <td>
               <%= link_to '查看', recruiters_delivery_path(delivery), class: 'btn btn-primary active' %>
