@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-server '182.92.221.174', user: 'deploy', roles: %w{app web}, my_property: :my_value
+server '182.92.221.174', user: 'deploy', roles: %w{app web db}, my_property: :my_value
 
 set :application, 'Epin'
 set :repo_url, 'git@github.com:SparkYacademy/Epin.git'
@@ -47,8 +47,23 @@ after 'deploy:publishing', 'deploy:restart'
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+RAILS_ROOT = `pwd`.strip.sub(/releases\/\d+$/, 'current').to_s
 
 namespace :deploy do
+  desc "Start Application"
+  task :start, :roles => :app do
+    run "cd #{RAILS_ROOT}; RAILS_ENV=production bundle exec unicorn_rails -c config/unicorn.rb -D"
+  end
+
+  desc "Stop Application"
+  task :stop, :roles => :app do
+    run "kill -QUIT `cat #{RAILS_ROOT}/tmp/pids/unicorn.pid`"
+  end
+
+  desc "Restart Application"
+  task :restart, :roles => :app do
+    run "kill -USR2 `cat #{RAILS_ROOT}/tmp/pids/unicorn.pid`"
+  end
 
   # %w[start stop restart].each do |command|
   #   desc "#{command} unicorn server"
