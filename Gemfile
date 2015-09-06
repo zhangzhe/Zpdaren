@@ -43,6 +43,8 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'quiet_assets'
+  gem 'rails_best_practices', '~> 1.15.7'
+  gem 'rails-erd', '~> 1.4.2'
 end
 
 gem "twitter-bootstrap-rails"
@@ -53,5 +55,3 @@ gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'acts-as-taggable-on', '~> 3.4'
 gem 'wkhtmltopdf-binary-edge', '~> 0.12.2.1'
 gem 'pdfkit', '~> 0.8.2'
-gem 'rails_best_practices', '~> 1.15.7'
-
