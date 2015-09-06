@@ -71,7 +71,7 @@ namespace :deploy do
     end
   end
 
-  after :publishing, :start
+  after :publishing, :restart
 
   # %w[start stop restart].each do |command|
   #   desc "#{command} unicorn server"
