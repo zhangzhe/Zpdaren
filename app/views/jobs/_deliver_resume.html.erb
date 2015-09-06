@@ -2,7 +2,7 @@
   <h4>为他上传简历</h4>
   <%= form_for Resume.new, url: create_and_deliver_resume_path do |f| %>
     <%= flash[:error] %>
-    <%= hidden_field_tag 'job_id', @job.id %>
+    <%= hidden_field_tag 'job_id', job.id %>
     <p>
       <%= f.text_field 'candidate_name', class: "form-control", :placeholder => "候选人姓名" %>
     </p>

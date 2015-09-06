@@ -3,7 +3,6 @@ class Resume < ActiveRecord::Base
   has_many :jobs, through: :deliveries
   belongs_to :supplier
   scope :active, -> { where('checked' => true) }
-  scope :unactive, -> { where('checked' => false) }
 
   validates_presence_of :candidate_name, :attachment
 

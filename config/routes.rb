@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   }
 
   namespace :admins do
-    resources :resumes, only: [:index, :check_and_update, :edit, :original_resume_download] do
+    resources :resumes, only: [:index, :edit] do
       member do
         put :check_and_update
         get :original_resume_download
@@ -30,15 +30,15 @@ Rails.application.routes.draw do
   end
 
   namespace :recruiters do
-    resources :jobs do
+    resources :jobs, only: [:new, :create, :index] do
       member do
         get :deposit_pay_new
         put :deposit_pay
         put :complete
       end
     end
-    resources :companies
-    resources :deliveries, only: [:index, :show, :pay] do
+    resources :companies, only: [:show, :edit, :update]
+    resources :deliveries, only: [:index, :show] do
       member do
         get :pay
       end
@@ -46,14 +46,14 @@ Rails.application.routes.draw do
   end
 
   namespace :suppliers do
-    resources :jobs
+    resources :jobs, only: [:index]
     resources :resumes, only: [:index]
   end
 
-  resources :deliveries
-  resources :jobs
+  resources :deliveries, only: []
+  resources :jobs, only: [:show]
 
-  resources :resumes do
+  resources :resumes, except: [:new] do
     collection do
       get 'download'
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150903155032) do
+ActiveRecord::Schema.define(version: 20150905081334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20150903155032) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "companies", ["user_id"], name: "index_companies_on_user_id", using: :btree
+
   create_table "deliveries", force: :cascade do |t|
     t.integer  "resume_id"
     t.integer  "job_id"
@@ -31,6 +33,8 @@ ActiveRecord::Schema.define(version: 20150903155032) do
     t.datetime "updated_at",                 null: false
     t.boolean  "paid",       default: false
   end
+
+  add_index "deliveries", ["resume_id", "job_id"], name: "index_deliveries_on_resume_id_and_job_id", using: :btree
 
   create_table "jobs", force: :cascade do |t|
     t.string   "title"
@@ -102,5 +106,7 @@ ActiveRecord::Schema.define(version: 20150903155032) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "wallets", ["user_id"], name: "index_wallets_on_user_id", using: :btree
 
 end

@@ -14,11 +14,11 @@
 <% content_for :other_job_info do %>
   <hr/>
   <p>
-    <%= render "deliver_resume" %>
+    <%= render "deliver_resume", job: @job %>
   </p>
 
   <p>
-    <%= render "resumes" %>
+    <%= render "resumes", job: @job %>
   </p>
 
   <p>
