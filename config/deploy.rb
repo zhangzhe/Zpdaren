@@ -53,7 +53,10 @@ namespace :deploy do
   desc "Start Application"
   task :start do
     on roles(:app) do
-      execute "cd #{fetch(:deploy_to)}/current && bundle exec unicorn_rails -E production -c config/unicorn.rb  -D"
+      within release_path do
+        execute :bundle, :exec, "unicorn_rails -E production -c config/unicorn.rb  -D"
+      end
+      # execute "cd #{fetch(:deploy_to)}/current && bundle exec unicorn_rails -E production -c config/unicorn.rb  -D"
     end
   end
 
