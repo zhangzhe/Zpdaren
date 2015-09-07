@@ -28,6 +28,7 @@
           <ul class="dropdown-menu">
             <li><%= link_to '注册', new_recruiter_registration_path %></li>
             <li><%= link_to '登录', new_recruiter_session_path %></li>
+            <li><%= link_to '忘记密码', new_recruiter_password_path %></li>
           </ul>
         </li>
         <li class="dropdown">
@@ -35,6 +36,7 @@
           <ul class="dropdown-menu">
             <li><%= link_to '注册', new_supplier_registration_path %></li>
             <li><%= link_to '登录', new_supplier_session_path %></li>
+            <li><%= link_to '忘记密码', new_supplier_password_path %></li>
           </ul>
         </li>
          <li><%= link_to '管理员登录', new_admin_session_path unless Rails.env == "production" %></li>

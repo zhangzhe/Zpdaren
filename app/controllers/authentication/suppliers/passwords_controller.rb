@@ -1,4 +1,4 @@
-class Users::PasswordsController < Devise::PasswordsController
+class Authentication::Suppliers::PasswordsController < Devise::PasswordsController
   # GET /resource/password/new
   # def new
   #   super
@@ -26,7 +26,7 @@ class Users::PasswordsController < Devise::PasswordsController
   # end
 
   # The path used after sending reset password instructions
-  # def after_sending_reset_password_instructions_path_for(resource_name)
-  #   super(resource_name)
-  # end
+  def after_sending_reset_password_instructions_path_for(resource_name)
+    front_page_path
+  end
 end
