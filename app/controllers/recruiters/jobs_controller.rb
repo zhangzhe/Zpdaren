@@ -32,7 +32,19 @@ class Recruiters::JobsController < ApplicationController
 
   def complete
     @job = Job.find(params[:id])
-    @job.complete!
+    @job.complete! if job.approved? && job.may_complete?
+    redirect_to :back
+  end
+
+  def freeze
+    job = Job.find(params[:id])
+    job.freeze! if job.submitted? && job.may_freeze?
+    redirect_to :back
+  end
+
+  def active
+    job = Job.find(params[:id])
+    job.active! if job.freezing? && job.may_active?
     redirect_to :back
   end
 
