@@ -20,7 +20,7 @@
             <% if job.deposit_paid? %>
               <%= link_to "审核", edit_admins_job_path(job.id), class: "btn btn-primary" %>
             <% elsif  %>
-              <%= job.state %>
+              已审核
             <% end %>
           </td>
         </tr>

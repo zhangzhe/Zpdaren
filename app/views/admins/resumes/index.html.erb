@@ -5,7 +5,7 @@
         <th>推荐人</th>
         <th>标签</th>
         <th>简历原件</th>
-        <th>状态</th>
+        <th>状态/操作</th>
       </tr>
     </thead>
     <tbody>
@@ -18,7 +18,7 @@
             <% if resume.reviewed? %>
               已审核
             <% else %>
-              待审核  <%= link_to '审核', edit_admins_resume_path(resume.id), class: 'btn btn-primary active' %>
+              <%= link_to '审核', edit_admins_resume_path(resume.id), class: 'btn btn-primary active' %>
             <% end %>
           </td>
         </tr>
