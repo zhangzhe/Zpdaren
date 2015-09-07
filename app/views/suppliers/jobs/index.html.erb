@@ -15,12 +15,24 @@
         <tr>
           <td><%= link_to job.title, job, :target => "_blank" %></td>
           <td><%= job.bonus_for_entry %>元</td>
-          <td>简历被查看可获得红包<%= job.resumes_bonus_for(current_supplier) %>元</td>
+          <td>简历被查看可获得<%= job.resumes_bonus_for(current_supplier) %>元红包</td>
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
-          <td>已推荐简历<%= job.resumes_count_from(current_supplier) %>份</td>
+          <td>
+            <% if job.resumes_count_from(current_supplier) > 0 %>
+              <a id="resumesForJob" tabindex="0" data-placement="bottom" role="button" data-toggle="popover" data-trigger="focus" data-content="<%= render 'delivery_list', deliveries: job.deliveries_from(current_supplier) %>" title="已推荐简历列表">已推荐简历<%= job.resumes_count_from(current_supplier) %>份</a>
+            <% else %>
+              未推简历
+            <% end %>
+          </td>
           <td><%= link_to "为他推荐", job, class: "btn btn-primary active", role: "button", :target => "_blank" %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
+<style type="text/css">
+
+a{
+  cursor: pointer;
+}
+</style>

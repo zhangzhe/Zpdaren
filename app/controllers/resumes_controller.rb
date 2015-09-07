@@ -55,8 +55,8 @@ class ResumesController < ApplicationController
   end
 
   def update_resume_params
-    params[:resume][:checked] = true
-    params.require(:resume).permit(:name, :mobile, :email, :description, :checked, :tag_list)
+    params[:resume][:review] = true
+    params.require(:resume).permit(:name, :mobile, :email, :description, :review, :tag_list)
   end
 
   def resume_params

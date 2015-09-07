@@ -13,7 +13,7 @@ class Recruiters::ResumesController < Admins::BaseController
   def pay
     resume = Resume.find(params[:id])
     delivery = resume.deliveries.where("job_id=?", params[:job_id])
-    unless delivery.paid
+    unless delivery.paid?
       job = resume.jobs.find(params[:job_id])
       job.view_pay(params[:pay])
       resume.supplier.receive(params[:pay])

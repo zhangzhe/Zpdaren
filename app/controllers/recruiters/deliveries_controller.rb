@@ -16,11 +16,12 @@ class Recruiters::DeliveriesController < ApplicationController
 
   def show
     @delivery = Delivery.find(params[:id])
+    @delivery.view! if @delivery.recommended? && @delivery.may_view?
   end
 
   def pay
     @delivery = Delivery.find(params[:id])
-    @delivery.pay!
+    @delivery.pay! if @delivery.seen? && @delivery.may_pay?
     redirect_to :back
   end
 end
