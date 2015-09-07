@@ -55,7 +55,11 @@ class Job < ActiveRecord::Base
   end
 
   def bonus_for_each_resume
+    if deposit
      (0.005 * deposit).to_i
+   else
+     0
+   end
   end
 
   def bonus_for_entry
