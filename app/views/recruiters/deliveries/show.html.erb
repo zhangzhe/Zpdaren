@@ -3,7 +3,7 @@
 
 
   <p>
-    <% if @delivery.paid %>
+    <% if @delivery.paid? %>
       <%= @delivery.resume_mobile %>
       <%= @delivery.resume_email %>
     <% else %>

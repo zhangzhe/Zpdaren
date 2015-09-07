@@ -50,6 +50,10 @@ class Job < ActiveRecord::Base
     self.resumes.where(:supplier_id => supplier.id)
   end
 
+  def deliveries_from(supplier)
+    self.deliveries.where("resume_id in (?)", supplier.resumes.map {|resume| resume.id })
+  end
+
   def bonus_for_each_resume
      (0.005 * deposit).to_i
   end

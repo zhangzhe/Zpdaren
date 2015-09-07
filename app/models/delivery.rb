@@ -2,10 +2,26 @@ class Delivery < ActiveRecord::Base
   belongs_to :job
   belongs_to :resume
 
-  delegate :checked, :candidate_name, :tag_list, :mobile, :email, to: :resume, prefix: true
+  delegate :reviewed, :candidate_name, :tag_list, :mobile, :email, to: :resume, prefix: true
   delegate :title, to: :job, prefix: true
 
-  scope :paid, -> { where(paid: true) }
+  scope :paid, -> { where(state: 'paid') }
+
+  include AASM
+  aasm.attribute_name :state
+  aasm do
+    state :recommended, :initial => true
+    state :viewed
+    state :paid
+
+    event :view do
+      transitions :from => :recommended, :to => :viewed
+    end
+
+    event :pay do
+      transitions :from => :viewed, :to => :paid
+    end
+  end
 
   def candidate_name
     resume.candidate_name
@@ -14,9 +30,4 @@ class Delivery < ActiveRecord::Base
   def description
     resume.description
   end
-
-  def pay!
-    self.update_attributes!(paid: true)
-  end
-
 end
