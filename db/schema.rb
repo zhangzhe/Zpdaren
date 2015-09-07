@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20150907073510) do
     t.string   "mobile"
     t.string   "email"
     t.text     "description"
-    t.boolean  "review",         default: false
+    t.boolean  "reviewed",       default: false
     t.integer  "supplier_id"
   end
 

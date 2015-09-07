@@ -3,7 +3,7 @@ module Suppliers::DeliveriesHelper
     case delivery.state.to_sym
     when :recommended
       '已推荐'
-    when :seen
+    when :viewed
       '被查看'
     when :paid
       '已付费'

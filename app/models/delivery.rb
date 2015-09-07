@@ -2,7 +2,7 @@ class Delivery < ActiveRecord::Base
   belongs_to :job
   belongs_to :resume
 
-  delegate :review, :candidate_name, :tag_list, :mobile, :email, to: :resume, prefix: true
+  delegate :reviewed, :candidate_name, :tag_list, :mobile, :email, to: :resume, prefix: true
   delegate :title, to: :job, prefix: true
 
   scope :paid, -> { where(state: 'paid') }
@@ -11,15 +11,15 @@ class Delivery < ActiveRecord::Base
   aasm.attribute_name :state
   aasm do
     state :recommended, :initial => true
-    state :seen
+    state :viewed
     state :paid
 
     event :view do
-      transitions :from => :recommended, :to => :seen
+      transitions :from => :recommended, :to => :viewed
     end
 
     event :pay do
-      transitions :from => :seen, :to => :paid
+      transitions :from => :viewed, :to => :paid
     end
   end
 
