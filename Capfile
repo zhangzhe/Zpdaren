@@ -15,13 +15,14 @@ require 'capistrano/deploy'
 #   https://github.com/capistrano/rails
 #   https://github.com/capistrano/passenger
 #
-require 'capistrano/rails'
+# require 'capistrano/rails'
 # require 'capistrano/rvm'
 # require 'capistrano/rbenv'
 # require 'capistrano/chruby'
-# require 'capistrano/bundler'
-# require 'capistrano/rails/assets'
+require 'capistrano/bundler'
+require 'capistrano/rails/assets'
 require 'capistrano/rails/migrations'
+require 'capistrano3/unicorn'
 # require 'capistrano/passenger'
 
 Rake::Task[:production].invoke

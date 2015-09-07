@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-server '182.92.221.174', user: 'deploy', roles: %w{app web}, my_property: :my_value
+server '182.92.221.174', user: 'deploy', roles: %w{app web db}, my_property: :my_value
 
 set :application, 'Epin'
 set :repo_url, 'git@github.com:SparkYacademy/Epin.git'
@@ -16,7 +16,7 @@ set :rails_env, "production"
 set :linked_files, fetch(:linked_files, []).push('config/database.yml')
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps uploads}
 
-after 'deploy:publishing', 'deploy:restart'
+# after 'deploy:publishing', 'deploy:start'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -49,6 +49,31 @@ after 'deploy:publishing', 'deploy:restart'
 # set :keep_releases, 5
 
 namespace :deploy do
+  desc "Start Application"
+  task :start do
+    on roles(:app) do
+      within release_path do
+        execute :bundle, :exec, "unicorn_rails -E production -c config/unicorn.rb  -D"
+      end
+      # execute "cd #{fetch(:deploy_to)}/current && bundle exec unicorn_rails -E production -c config/unicorn.rb  -D"
+    end
+  end
+
+  desc "Stop Application"
+  task :stop do
+    on roles(:app) do
+      execute "kill -QUIT `cat #{fetch(:deploy_to)}/shared/pids/unicorn.pid`"
+    end
+  end
+
+  desc "Restart Application"
+  task :restart do
+    on roles(:app) do
+      execute "kill -USR2 `cat #{fetch(:deploy_to)}/shared/pids/unicorn.pid`"
+    end
+  end
+
+  after :publishing, :restart
 
   # %w[start stop restart].each do |command|
   #   desc "#{command} unicorn server"
