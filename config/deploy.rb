@@ -6,8 +6,7 @@ server '182.92.221.174', user: 'deploy', roles: %w{app web db}, my_property: :my
 set :application, 'Epin'
 set :repo_url, 'git@github.com:SparkYacademy/Epin.git'
 set :recipient, "Ruby"
-# set :branch, "develop"
-set :branch, 'feature/capistrano'
+set :branch, "develop"
 set :default_stage, "production"
 set :pty, true
 set :deploy_to, "/data/Epin"
