@@ -35,6 +35,8 @@ Rails.application.routes.draw do
         get :deposit_pay_new
         put :deposit_pay
         put :complete
+        put :freeze
+        put :active
       end
     end
     resources :companies, only: [:show, :edit, :update]

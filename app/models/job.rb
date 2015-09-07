@@ -14,9 +14,18 @@ class Job < ActiveRecord::Base
     state :deposit_paid
     state :approved
     state :finished
+    state :freezing
 
     event :pay do
       transitions :from => :submitted, :to => :deposit_paid
+    end
+
+    event :freeze do
+      transitions :from => :submitted, :to => :freezing
+    end
+
+    event :active do
+      transitions :from => :freezing, :to => :submitted
     end
 
     event :approve do

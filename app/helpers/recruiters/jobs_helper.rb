@@ -3,6 +3,8 @@ module Recruiters::JobsHelper
     case job.state.to_sym
     when :submitted
       '未付订金'
+    when :freezing
+      '已下架'
     when :deposit_paid
       '待审核'
     when :approved
