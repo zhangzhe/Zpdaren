@@ -1,5 +1,5 @@
 class Recruiter < User
-  devise :database_authenticatable, :registerable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :trackable, :validatable, :recoverable
 
   has_one :company, :foreign_key => :user_id
   before_create :init_blank_comapny
