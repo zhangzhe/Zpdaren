@@ -1,16 +1,11 @@
-<h2>Forgot your password?</h2>
+<div class="container">
+<h2>请输入邮箱地址，我们会发给您重置密码邮件</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+<%= form_for(resource, as: resource_name, url: "/recruiters/password", html: { method: :post, class: "form-signin" }) do |f| %>
   <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+  <div class="form-group">
+    <p class="form-control-static"><%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "Email" %></p>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
+  <%= f.submit "发送确认邮件", :class => "btn btn-default" %>
 <% end %>
-
-<%= render "recruiters/shared/links" %>
+</div>
