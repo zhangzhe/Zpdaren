@@ -52,7 +52,7 @@ Rails.application.routes.draw do
   namespace :suppliers do
     resources :jobs, only: [:index] do
       member do
-        put :attend
+        put :watch
       end
     end
     resources :resumes, only: [:index]

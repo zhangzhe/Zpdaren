@@ -5,9 +5,9 @@ class Suppliers::JobsController < ApplicationController
     @jobs = Job.approved
   end
 
-  def attend
+  def watch
     job = Job.find(params[:id])
-    current_supplier.attend(job)
+    current_supplier.watch!(job)
     redirect_to :back
   end
 end

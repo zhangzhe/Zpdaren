@@ -26,10 +26,10 @@
           </td>
           <td>
             <%= link_to "为他推荐", job, class: "btn btn-primary active", role: "button", :target => "_blank" %>
-            <% if job.attend?(current_supplier) %>
+            <% if job.watch_by?(current_supplier) %>
               <span class="glyphicon glyphicon-heart" id='attended'></span>
             <% else %>
-              <%= link_to '', attend_suppliers_job_path(job), class: 'glyphicon glyphicon-heart-empty', method: :put, id: 'unattend' %>
+              <%= link_to '', watch_suppliers_job_path(job), class: 'glyphicon glyphicon-heart-empty', method: :put, id: 'unattend' %>
             <% end %>
           </td>
         </tr>
