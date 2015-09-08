@@ -4,4 +4,10 @@ class Suppliers::JobsController < ApplicationController
   def index
     @jobs = Job.approved
   end
+
+  def watch
+    job = Job.find(params[:id])
+    current_supplier.watch!(job)
+    redirect_to :back
+  end
 end
