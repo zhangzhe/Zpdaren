@@ -2,6 +2,7 @@ class Job < ActiveRecord::Base
   belongs_to :company
   has_many :deliveries
   has_many :resumes, through: :deliveries
+  has_many :attentions
 
   # scope :pre_approved, -> { where("state = 'submitted' and deposit is not null")}
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
@@ -85,6 +86,10 @@ class Job < ActiveRecord::Base
 
   def delivery!(resume)
     Delivery.create(:resume_id => resume.id, :job_id => self.id)
+  end
+
+  def attend?(supplier)
+    self.attentions.where(:supplier_id => supplier.id).present?
   end
 
   def view_pay(pay)

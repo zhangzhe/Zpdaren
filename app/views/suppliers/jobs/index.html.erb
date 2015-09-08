@@ -24,15 +24,28 @@
               未推简历
             <% end %>
           </td>
-          <td><%= link_to "为他推荐", job, class: "btn btn-primary active", role: "button", :target => "_blank" %></td>
+          <td>
+            <%= link_to "为他推荐", job, class: "btn btn-primary active", role: "button", :target => "_blank" %>
+            <% if job.attend?(current_supplier) %>
+              <span class="glyphicon glyphicon-heart" id='attended'></span>
+            <% else %>
+              <%= link_to '', attend_suppliers_job_path(job), class: 'glyphicon glyphicon-heart-empty', method: :put, id: 'unattend' %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
 <style type="text/css">
-
-a{
-  cursor: pointer;
-}
+  a{
+    cursor: pointer;
+  }
+  #attended{
+    color: red;
+  }
+  #unattend{
+    text-decoration: none;
+    color: gray;
+  }
 </style>

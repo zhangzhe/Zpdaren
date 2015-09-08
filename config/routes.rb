@@ -50,7 +50,11 @@ Rails.application.routes.draw do
   end
 
   namespace :suppliers do
-    resources :jobs, only: [:index]
+    resources :jobs, only: [:index] do
+      member do
+        put :attend
+      end
+    end
     resources :resumes, only: [:index]
   end
 
