@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   namespace :suppliers do
     resources :jobs, only: [:index]
     resources :resumes, only: [:index]
+    resources :attentions, only: [:create]
   end
 
   resources :deliveries, only: []
