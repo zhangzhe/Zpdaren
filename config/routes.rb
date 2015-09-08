@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root :to => 'passthrough#index'
   get 'front_page' => 'front_page#index'
+  post 'check_signature' => 'front_page#check_signature'
 
   devise_for :recruiters, controllers: {
     sessions: 'authentication/recruiters/sessions',
