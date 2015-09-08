@@ -16,6 +16,16 @@ ActiveRecord::Schema.define(version: 20150908033652) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "attentions", force: :cascade do |t|
+    t.integer  "supplier_id"
+    t.integer  "job_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "attentions", ["job_id"], name: "index_attentions_on_job_id", using: :btree
+  add_index "attentions", ["supplier_id"], name: "index_attentions_on_supplier_id", using: :btree
+
   create_table "companies", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -25,16 +35,6 @@ ActiveRecord::Schema.define(version: 20150908033652) do
   end
 
   add_index "companies", ["user_id"], name: "index_companies_on_user_id", using: :btree
-
-  create_table "concerns", force: :cascade do |t|
-    t.integer  "supplier_id"
-    t.integer  "job_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "concerns", ["job_id"], name: "index_concerns_on_job_id", using: :btree
-  add_index "concerns", ["supplier_id"], name: "index_concerns_on_supplier_id", using: :btree
 
   create_table "deliveries", force: :cascade do |t|
     t.integer  "resume_id"
