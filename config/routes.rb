@@ -51,13 +51,13 @@ Rails.application.routes.draw do
   end
 
   namespace :suppliers do
-    resources :jobs, only: [:index]
-    resources :resumes, only: [:index]
+    resources :jobs, only: [:index, :show]
+    resources :resumes, only: [:index, :create]
     resources :attentions, only: [:create]
+    resources :deliveries, only: [:new, :create]
   end
 
   resources :deliveries, only: []
-  resources :jobs, only: [:show]
 
   resources :resumes, except: [:new] do
     collection do
@@ -66,7 +66,6 @@ Rails.application.routes.draw do
 
     member do
       get 'download'
-      post 'create_and_deliver'
     end
   end
 end

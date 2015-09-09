@@ -1,0 +1,38 @@
+<div class="sidebar-module sidebar-module-inset">
+  <h4>为他上传简历</h4>
+  <p>
+    <button class='btn btn-primary active' data-toggle="modal" data-target="#newResumeModal">本地上传</button>
+  </p>
+  <p>
+    <%= link_to '简历库上传', new_suppliers_delivery_path(job_id: job.id), class: 'btn btn-primary active' %>
+  </p>
+</div>
+
+<div class="modal fade" id="newResumeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">新建简历</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for Resume.new, url: suppliers_resumes_path do |f| %>
+          <%= flash[:error] %>
+          <%= hidden_field_tag 'job_id', job.id %>
+          <p>
+            <%= f.text_field 'candidate_name', class: "form-control", :placeholder => "候选人姓名" %>
+          </p>
+          <p>
+            <%= f.text_field 'tag_list', class: "form-control", :placeholder => "标签(*多个标签以','隔开)" %>
+          </p>
+          <p>
+            <%= f.file_field 'attachment' %>
+          </p>
+          <p>
+            <%= f.submit '推荐', class: "btn btn-primary active" %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

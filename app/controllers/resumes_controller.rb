@@ -14,14 +14,6 @@ class ResumesController < ApplicationController
     end
   end
 
-  def create_and_deliver
-    job = Job.find(params[:job_id])
-    resume = Resume.create!(resume_params)
-    current_supplier.resumes << resume
-    job.delivery!(resume)
-    redirect_to :back
-  end
-
   def edit
     @resume = Resume.find(params[:id])
   end
@@ -57,9 +49,5 @@ class ResumesController < ApplicationController
   def update_resume_params
     params[:resume][:reviewed] = true
     params.require(:resume).permit(:name, :mobile, :email, :description, :reviewed, :tag_list)
-  end
-
-  def resume_params
-    params[:resume].permit(:candidate_name, :tag_list, :attachment)
   end
 end
