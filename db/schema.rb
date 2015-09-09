@@ -126,4 +126,11 @@ ActiveRecord::Schema.define(version: 20150909080858) do
 
   add_index "wallets", ["user_id"], name: "index_wallets_on_user_id", using: :btree
 
+  create_table "weixins", force: :cascade do |t|
+    t.string   "user_name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 end

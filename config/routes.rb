@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  get 'qr_codes/show'
+
   root :to => 'passthrough#index'
   get 'front_page' => 'front_page#index'
   post 'check_signature' => 'front_page#check_signature'
+  get 'check_signature' => 'front_page#check_signature'
 
   devise_for :recruiters, controllers: {
     sessions: 'authentication/recruiters/sessions',
@@ -18,6 +21,8 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: {
     sessions: 'authentication/admins/sessions',
   }
+
+  resources :qr_codes, only: [:show]
 
   namespace :admins do
     resources :resumes, only: [:index, :edit] do
