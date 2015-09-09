@@ -1,19 +1,6 @@
 <div class="row">
   <%= link_to "职位列表", recruiters_jobs_path %>/添加职位信息
   <p>
-    <%= form_for @job, url: recruiters_jobs_path do |f| %>
-      <p>
-        <%= f.text_field :title, class: "form-control", placeholder: "职位名称" %>
-      </p>
-      <p>
-        <%= f.text_area :description, class: "form-control", placeholder: "职位描述", rows: 10 %>
-      </p>
-      <p>
-        <%= f.text_field :bonus, class: "form-control", placeholder: "红包" %>
-      </p>
-      <p>
-        <%= f.submit "发布", class: "btn btn-primary" %>
-      </p>
-    <% end %>
+    <%= render 'form', url: recruiters_jobs_path, method: 'POST', job: @job %>
   </p>
 </div>

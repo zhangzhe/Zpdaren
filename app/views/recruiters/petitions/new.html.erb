@@ -1,0 +1,17 @@
+<div>
+  <%= form_for Petition.new, url: recruiters_petitions_path do |f| %>
+    <p class="lead"><%= @job.title %></p>
+    <p><%= simple_format @job.description %></p>
+    <p>佣金：<%= @job.bonus %>元</p>
+    <p>
+      <%= hidden_field_tag 'petition[job_id]', @job.id %>
+    </p>
+    <p>
+      <%= f.label '退款原因：' %>
+      <%= f.text_area :reason, class: "form-control", rows: 20 %>
+    </p>
+    <p>
+      <%= f.submit '提交', class: 'btn btn-primary' %>
+    </p>
+  <% end %>
+</div>

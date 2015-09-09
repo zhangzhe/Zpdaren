@@ -18,6 +18,19 @@ class Recruiters::JobsController < ApplicationController
     redirect_to deposit_pay_new_recruiters_job_path(job)
   end
 
+  def show
+    @job = Job.find(params[:id])
+  end
+
+  def edit
+    @job = Job.find(params[:id])
+  end
+
+  def update
+    job = Job.update(params[:id], job_params)
+    redirect_to recruiters_jobs_path
+  end
+
   def deposit_pay_new
     @job = Job.find(params[:id])
   end

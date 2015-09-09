@@ -1,0 +1,13 @@
+<div>
+  <p class="lead"><%= @job.title %></p>
+  <p>
+    职位佣金：<%= @job.bonus %>
+  </p>
+  <p>职位描述</p>
+  <p>
+    <%= @job.description %>
+  </p>
+  <p>
+    <%= link_to '编辑', edit_recruiters_job_path(@job), class: 'btn btn-primary' %>
+  </p>
+</div>
