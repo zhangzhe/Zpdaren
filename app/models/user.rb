@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable
+  has_one :weixin
 
   def receive(pay)
     if self.wallet
