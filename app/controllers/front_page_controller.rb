@@ -15,7 +15,7 @@ class FrontPageController < ApplicationController
       weixin = Weixin.where(:user_name => "oQluvt9GRkr6jZeMyNC7sYnI_iVA").take
       weixin.destroy
       render :nothing => true
-    elsif params["xml"]["echostr"]
+    elsif params["echostr"]
       token = "12345qwert"
       signature = Digest::SHA1.hexdigest([token, params[:timestamp], params[:nonce]].sort.join)
       if signature == params[:signature]
