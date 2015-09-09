@@ -5,7 +5,6 @@
         <th>被推荐人</th>
         <th>标签</th>
         <th>简历原件</th>
-        <th>已推荐给</th>
         <th>状态</th>
       </tr>
     </thead>
@@ -16,11 +15,12 @@
           <td><%= resume.tag_list %></td>
           <td><%= link_to resume.attachment.file.file.split('/')[-1], original_resume_download_admins_resume_path(resume[:id]) %></td>
           <td>
-          <% resume.deliveries.map(&:job).each do |job| %>
-            <%= link_to "#{job.company_name}: #{job.title}", suppliers_job_path(job) %> &nbsp;
-          <% end %>
+            <% if resume.deliveried?(@job) %>
+              已推荐
+            <% else %>
+              <%= link_to '推荐', suppliers_deliveries_path(delivery: { job_id: params[:job_id], resume_id: resume.id }), method: :post, class: 'btn btn-primary active' %>
+            <% end %>
           </td>
-          <td>获得简历红包<%= resume.resume_bonus %>元</td>
         </tr>
       <% end %>
     </tbody>

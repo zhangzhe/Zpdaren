@@ -10,7 +10,7 @@
           <ul class="nav nav-sidebar">
             <% active = controller.class == Suppliers::JobsController ? "active" : "" %>
             <li class="<%= active %>"><%= link_to "职位列表", suppliers_jobs_path %></li>
-            <% active = controller.class == Suppliers::ResumesController ? "active" : "" %>
+            <% active = [Suppliers::ResumesController, Suppliers::DeliveriesController].include?(controller.class) ? "active" : "" %>
             <li class="<%= active %>"><%= link_to "我的简历列表", suppliers_resumes_path %></li>
             <li><a href="#">统计信息</a></li>
           </ul>

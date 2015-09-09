@@ -5,6 +5,11 @@ class Suppliers::JobsController < ApplicationController
     @jobs = Job.approved
   end
 
+  def show
+    @job = Job.find(params[:id])
+    render layout: 'jobs'
+  end
+
   def watch
     job = Job.find(params[:id])
     current_supplier.watch!(job)

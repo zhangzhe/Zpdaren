@@ -24,4 +24,8 @@ class Resume < ActiveRecord::Base
     self.resumes.where(:supplier_id => supplier.id)
   end
 
+  def deliveried?(job)
+    jobs.include?(job)
+  end
+
 end
