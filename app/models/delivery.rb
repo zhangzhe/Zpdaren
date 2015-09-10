@@ -20,7 +20,7 @@ class Delivery < ActiveRecord::Base
       transitions :from => :recommended, :to => :viewed
     end
 
-    event :pay do
+    event :pay, :after => :notify_supplier do
       transitions :from => :viewed, :to => :paid
     end
   end
@@ -35,10 +35,14 @@ class Delivery < ActiveRecord::Base
 
   def notify_recruiter
     RecruiterMailer.email_resume_recommended(recruiter, resume, job).deliver_now
-    p "notify_recruiter"
   end
 
   def recruiter
     job.company.recruiter
+  end
+
+  private
+  def notify_supplier
+    Weixin.notify_resume_paid(self) if resume.supplier.weixin
   end
 end
