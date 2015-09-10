@@ -1,5 +1,4 @@
-class Recruiters::PetitionsController < ApplicationController
-  layout 'recruiters'
+class Recruiters::PetitionsController < Recruiters::BaseController
 
   def index
     @petitions = current_recruiter.petitions

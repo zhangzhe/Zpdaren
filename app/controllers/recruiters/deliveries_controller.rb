@@ -1,6 +1,4 @@
-class Recruiters::DeliveriesController < ApplicationController
-  layout "recruiters"
-
+class Recruiters::DeliveriesController < Recruiters::BaseController
   def index
     @deliveries = []
     if params[:job_id]

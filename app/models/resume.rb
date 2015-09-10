@@ -5,6 +5,7 @@ class Resume < ActiveRecord::Base
   # scope :approved, -> { where('state' => "approved") }
 
   validates_presence_of :candidate_name, :attachment
+  default_scope { order('created_at DESC') }
 
   acts_as_taggable
   acts_as_taggable_on :skills, :interests

@@ -1,5 +1,4 @@
-class Recruiters::ResumesController < Admins::BaseController
-  layout "recruiters"
+class Recruiters::ResumesController < Recruiters::BaseController
 
   def index
     @resumes = Resume.active

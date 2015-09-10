@@ -1,4 +1,4 @@
-class Suppliers::AttentionsController < ApplicationController
+class Suppliers::AttentionsController < Suppliers::BaseController
 
   def create
     Attention.create!(attention_params)

@@ -1,5 +1,4 @@
-class Recruiters::JobsController < ApplicationController
-  layout "recruiters"
+class Recruiters::JobsController < Recruiters::BaseController
 
   def index
     if current_recruiter.company.description.blank?
