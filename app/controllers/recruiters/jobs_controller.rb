@@ -44,8 +44,8 @@ class Recruiters::JobsController < ApplicationController
   end
 
   def complete
-    @job = Job.find(params[:id])
-    @job.complete! if job.approved? && job.may_complete?
+    job = Job.find(params[:id])
+    job.complete! if job.approved? && job.may_complete?
     redirect_to :back
   end
 
