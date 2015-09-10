@@ -17,10 +17,12 @@
       </div>
       <div class="modal-body">
         <%= form_for Resume.new, url: suppliers_resumes_path do |f| %>
-          <%= flash[:error] %>
           <%= hidden_field_tag 'job_id', job.id %>
           <p>
             <%= f.text_field 'candidate_name', class: "form-control", :placeholder => "候选人姓名" %>
+          </p>
+          <p>
+            <%= f.text_field 'mobile', class: 'form-control', :placeholder => '候选人手机号码' %>
           </p>
           <p>
             <%= f.text_field 'tag_list', class: "form-control", :placeholder => "标签(*多个标签以','隔开)" %>
