@@ -17,7 +17,7 @@ class Resume < ActiveRecord::Base
     state :submitted, :initial => true
     state :approved
 
-    event :approve , :after => :notify_recruiter do
+    event :approve , :after => :notify_recruiter_and_supplier do
       transitions :from => :submitted, :to => :approved
     end
   end
@@ -39,11 +39,12 @@ class Resume < ActiveRecord::Base
   end
 
   private
-  def notify_recruiter
+  def notify_recruiter_and_supplier
+    # email for recruiter
     deliveries.each do |deliver|
       deliver.notify_recruiter
-      p "notify_recruiter"
     end
+    # weixin for supplier
+    Weixin.notify_resume_approved(self)
   end
-
 end

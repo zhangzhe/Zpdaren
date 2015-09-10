@@ -9,4 +9,8 @@ class User < ActiveRecord::Base
       self.wallet = Wallet.create!({money: pay})
     end
   end
+
+  def weixin_name
+    weixin.user_name
+  end
 end
