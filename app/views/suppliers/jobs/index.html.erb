@@ -19,7 +19,7 @@
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
           <td>
             <% if job.resumes_count_from(current_supplier) > 0 %>
-              <a id="resumesForJob" tabindex="0" data-placement="bottom" role="button" data-toggle="popover" data-trigger="focus" data-content="<%= render 'delivery_list', deliveries: job.deliveries_from(current_supplier) %>" title="已推荐简历列表">已推荐简历<%= job.resumes_count_from(current_supplier) %>份</a>
+              <a class="resumesForJob" tabindex="0" data-placement="bottom" role="button" data-toggle="popover" data-trigger="focus" data-content="<%= render 'delivery_list', deliveries: job.deliveries_from(current_supplier) %>" title="已推荐简历列表">已推荐简历<%= job.resumes_count_from(current_supplier) %>份</a>
             <% else %>
               未推简历
             <% end %>
