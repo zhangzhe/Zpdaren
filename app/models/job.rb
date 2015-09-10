@@ -9,7 +9,7 @@ class Job < ActiveRecord::Base
   # scope :pre_approved, -> { where("state = 'submitted' and deposit is not null")}
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
   scope :approved, -> { where('state' => 'approved')}
-  default_scope order('created_at DESC')
+  default_scope { order('created_at DESC') }
 
   include AASM
   aasm.attribute_name :state
@@ -114,6 +114,5 @@ class Job < ActiveRecord::Base
   private
   def notify_recruiter
     RecruiterMailer.email_jd_approved(recruiter).deliver_now
-    p "notify_recruiter"
   end
 end
