@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150909065224) do
+ActiveRecord::Schema.define(version: 20150909080858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,13 @@ ActiveRecord::Schema.define(version: 20150909065224) do
   end
 
   add_index "jobs", ["company_id"], name: "index_jobs_on_company_id", using: :btree
+
+  create_table "petitions", force: :cascade do |t|
+    t.integer "recruiter_id"
+    t.integer "job_id"
+    t.text    "reason"
+    t.string  "state"
+  end
 
   create_table "resumes", force: :cascade do |t|
     t.string   "candidate_name"
