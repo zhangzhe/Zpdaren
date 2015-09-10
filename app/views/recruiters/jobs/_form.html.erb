@@ -1,0 +1,14 @@
+<%= form_for job || Job.new, url: url, method: method do |f| %>
+  <p>
+    <%= f.text_field :title, class: "form-control", placeholder: "职位名称" %>
+  </p>
+  <p>
+    <%= f.text_area :description, class: "form-control", placeholder: "职位描述", rows: 10 %>
+  </p>
+  <p>
+    <%= f.text_field :bonus, class: "form-control", placeholder: "红包" %>
+  </p>
+  <p>
+    <%= f.submit "发布", class: "btn btn-primary" %>
+  </p>
+<% end %>

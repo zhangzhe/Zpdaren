@@ -59,6 +59,13 @@ ActiveRecord::Schema.define(version: 20150910024624) do
 
   add_index "jobs", ["company_id"], name: "index_jobs_on_company_id", using: :btree
 
+  create_table "petitions", force: :cascade do |t|
+    t.integer "recruiter_id"
+    t.integer "job_id"
+    t.text    "reason"
+    t.string  "state"
+  end
+
   create_table "resumes", force: :cascade do |t|
     t.string   "candidate_name"
     t.text     "attachment"
