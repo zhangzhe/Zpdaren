@@ -18,7 +18,7 @@
             <td><%= delivery.resume_tag_list %></td>
             <td><%= delivery.paid? ? "已付费" : "未付费" %></td>
             <td>
-              <%= link_to '查看', recruiters_delivery_path(delivery), class: 'btn btn-primary active' %>
+              <%= link_to '查看', recruiters_delivery_path(delivery), class: 'btn btn-primary active' unless @job.finished?%>
             </td>
           </tr>
         <% end %>

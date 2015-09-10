@@ -8,6 +8,6 @@
     <%= @job.description %>
   </p>
   <p>
-    <%= link_to '编辑', edit_recruiters_job_path(@job), class: 'btn btn-primary' %>
+    <%= link_to '编辑', edit_recruiters_job_path(@job), class: 'btn btn-primary' unless @job.finished? %>
   </p>
 </div>
