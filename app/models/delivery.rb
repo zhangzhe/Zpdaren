@@ -2,10 +2,12 @@ class Delivery < ActiveRecord::Base
   belongs_to :job
   belongs_to :resume
 
-  delegate :reviewed, :candidate_name, :tag_list, :mobile, :email, to: :resume, prefix: true
+  delegate :candidate_name, :tag_list, :mobile, :email, to: :resume, prefix: true
   delegate :title, to: :job, prefix: true
 
   scope :paid, -> { where(state: 'paid') }
+
+  after_create :notify_recruiter, if: Proc.new { self.resume.approved? }
 
   include AASM
   aasm.attribute_name :state
@@ -29,5 +31,14 @@ class Delivery < ActiveRecord::Base
 
   def description
     resume.description
+  end
+
+  def notify_recruiter
+    RecruiterMailer.email_resume_recommended(recruiter, resume, job).deliver_now
+    p "notify_recruiter"
+  end
+
+  def recruiter
+    job.company.recruiter
   end
 end

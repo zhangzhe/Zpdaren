@@ -10,6 +10,7 @@ class Admins::ResumesController < Admins::BaseController
 
   def check_and_update
     resume = Resume.update(params[:id], resume_params)
+    resume.approve!
     redirect_to admins_resumes_path
   end
 
@@ -20,7 +21,6 @@ class Admins::ResumesController < Admins::BaseController
 
   private
   def resume_params
-    params[:resume][:reviewed] = true
     params.require(:resume).permit(:name, :mobile, :email, :description, :reviewed, :tag_list)
   end
 end

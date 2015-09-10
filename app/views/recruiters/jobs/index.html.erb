@@ -13,7 +13,7 @@
       <% @jobs.each do |job| %>
         <tr>
           <td><%= link_to job.title, recruiters_job_path(job) %></td>
-          <td><%= link_to job.resumes.active.count, recruiters_deliveries_path(:job_id => job) %></td>
+          <td><%= link_to job.resumes.approved.count, recruiters_deliveries_path(:job_id => job) %></td>
           <td><%= job.bonus %> / <%= job.original_deposit %></td>
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
           <td>

@@ -31,7 +31,7 @@ class Job < ActiveRecord::Base
       transitions :from => :freezing, :to => :submitted
     end
 
-    event :approve do
+    event :approve, :after => :notify_recruiter do
       transitions :from => :deposit_paid, :to => :approved
     end
 
@@ -102,7 +102,17 @@ class Job < ActiveRecord::Base
     end
   end
 
+  def recruiter
+    company.recruiter
+  end
+
   def petition?
     (self.deposit_paid? || self.approved?) && petitions.find_by_state(:submitted).nil?
+  end
+
+  private
+  def notify_recruiter
+    RecruiterMailer.email_jd_approved(recruiter).deliver_now
+    p "notify_recruiter"
   end
 end
