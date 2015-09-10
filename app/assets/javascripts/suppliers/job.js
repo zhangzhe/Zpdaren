@@ -1,5 +1,5 @@
 $(function(){
-  $('#resumesForJob').popover(
+  $(".resumesForJob").popover(
     {
       html: true
     }

@@ -18,6 +18,8 @@
             <li class="<%= active %>"><%= link_to "公司列表", admins_companies_path %></li>
             <% active = controller.class == Admins::PetitionsController ? "active" : "" %>
             <li class="<%= active %>"><%= link_to "退款申请列表", admins_petitions_path %></li>
+            <% active = controller.class == Admins::DrawingsController ? "active" : "" %>
+            <li class="<%= active %>"><%= link_to "HR申请提现列表", admins_drawings_path %></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

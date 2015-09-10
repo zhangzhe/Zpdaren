@@ -12,6 +12,10 @@
             <li class="<%= active %>"><%= link_to "职位列表", suppliers_jobs_path %></li>
             <% active = [Suppliers::ResumesController, Suppliers::DeliveriesController].include?(controller.class) ? "active" : "" %>
             <li class="<%= active %>"><%= link_to "我的简历列表", suppliers_resumes_path %></li>
+            <% active = controller.class == Suppliers::UsersController ? "active" : "" %>
+            <li class="<%= active %>"><%= link_to "个人中心", suppliers_user_path(current_supplier) %></li>
+            <% active = controller.class == Suppliers::DrawingsController ? "active" : "" %>
+            <li class="<%= active %>"><%= link_to "提现历史", suppliers_drawings_path %></li>
             <li><a href="#">统计信息</a></li>
           </ul>
         </div>
