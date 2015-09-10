@@ -12,7 +12,7 @@
         红包：<%= @job.bonus %>
       </p>
       <p>
-        <% unless @job.approved? %>
+        <% if @job.deposit_paid? %>
           <%= f.submit "审核通过", class: "btn btn-primary" %>
         <% end %>
       </p>
