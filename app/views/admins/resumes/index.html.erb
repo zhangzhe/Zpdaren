@@ -15,7 +15,7 @@
           <td><%= resume.tag_list %></td>
           <td><%= link_to resume.attachment.file.file.split('/')[-1], original_resume_download_admins_resume_path(resume[:id]) %></td>
           <td>
-            <% if resume.reviewed? %>
+            <% if resume.approved? %>
               已审核
             <% else %>
               <%= link_to '审核', edit_admins_resume_path(resume.id), class: 'btn btn-primary active' %>

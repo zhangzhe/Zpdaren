@@ -2,15 +2,25 @@ class Resume < ActiveRecord::Base
   has_many :deliveries
   has_many :jobs, through: :deliveries
   belongs_to :supplier
-  scope :active, -> { where('reviewed' => true) }
+  # scope :approved, -> { where('state' => "approved") }
 
   validates_presence_of :candidate_name, :attachment
-
 
   acts_as_taggable
   acts_as_taggable_on :skills, :interests
 
   mount_uploader :attachment, FileUploader
+
+  include AASM
+  aasm.attribute_name :state
+  aasm do
+    state :submitted, :initial => true
+    state :approved
+
+    event :approve , :after => :notify_recruiter do
+      transitions :from => :submitted, :to => :approved
+    end
+  end
 
   def resume_bonus
     count = 0
@@ -26,6 +36,14 @@ class Resume < ActiveRecord::Base
 
   def deliveried?(job)
     jobs.include?(job)
+  end
+
+  private
+  def notify_recruiter
+    deliveries.each do |deliver|
+      deliver.notify_recruiter
+      p "notify_recruiter"
+    end
   end
 
 end

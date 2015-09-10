@@ -30,7 +30,7 @@ class Job < ActiveRecord::Base
       transitions :from => :freezing, :to => :submitted
     end
 
-    event :approve do
+    event :approve, :after => :notify_recruiter do
       transitions :from => :deposit_paid, :to => :approved
     end
 
@@ -99,5 +99,15 @@ class Job < ActiveRecord::Base
     else
       return self.update_attribute(:deposit, self.deposit - pay)
     end
+  end
+
+  def recruiter
+    company.recruiter
+  end
+
+  private
+  def notify_recruiter
+    RecruiterMailer.email_jd_approved(recruiter).deliver_now
+    p "notify_recruiter"
   end
 end

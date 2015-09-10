@@ -11,7 +11,7 @@
     </thead>
     <tbody>
       <% @deliveries.each do |delivery| %>
-        <% if delivery.resume && delivery.resume_reviewed %>
+        <% if delivery.resume && delivery.resume.approved? %>
           <tr>
             <td><%= delivery.job_title %></td>
             <td><%= delivery.resume_candidate_name %></td>

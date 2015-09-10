@@ -5,4 +5,3 @@ ActionMailer::Base.smtp_settings = {
   :password       => "1234qwerQWER",
   :authentication => :plain                 # :plain, :login or :cram_md5
 }
-
