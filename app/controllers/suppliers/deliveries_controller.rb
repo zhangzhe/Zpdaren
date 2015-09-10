@@ -1,4 +1,4 @@
-class Suppliers::DeliveriesController < ApplicationController
+class Suppliers::DeliveriesController < Suppliers::BaseController
   layout 'suppliers'
   def new
     @job = Job.find(params[:job_id])

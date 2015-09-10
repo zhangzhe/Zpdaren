@@ -1,5 +1,4 @@
-class Recruiters::CompaniesController < ApplicationController
-  layout "recruiters"
+class Recruiters::CompaniesController < Recruiters::BaseController
   def edit
     @company = current_recruiter.company
   end

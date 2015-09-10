@@ -8,6 +8,7 @@ class Delivery < ActiveRecord::Base
   scope :paid, -> { where(state: 'paid') }
 
   after_create :notify_recruiter, if: Proc.new { self.resume.approved? }
+  default_scope { order('created_at DESC') }
 
   include AASM
   aasm.attribute_name :state

@@ -3,4 +3,5 @@ class Company < ActiveRecord::Base
   has_many :jobs
 
   scope :active, -> { where.not('name' => nil) }
+  default_scope { order('created_at DESC') }
 end

@@ -1,4 +1,4 @@
-class Suppliers::ResumesController < ApplicationController
+class Suppliers::ResumesController < Suppliers::BaseController
   layout "suppliers"
 
   def index
