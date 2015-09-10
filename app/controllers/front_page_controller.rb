@@ -12,7 +12,7 @@ class FrontPageController < ApplicationController
       user.create_weixin(:user_name => params["xml"]["FromUserName"])
       render :nothing => true
     elsif params["xml"] && params["xml"]["Event"] == "unsubscribe" && params["xml"]["EventKey"]
-      weixin = Weixin.where(:user_name => "oQluvt9GRkr6jZeMyNC7sYnI_iVA").take
+      weixin = Weixin.where(:user_name => params["xml"]["FromUserName"]).take
       weixin.destroy
       render :nothing => true
     elsif params["echostr"]
