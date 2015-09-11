@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20150911035032) do
 
   add_index "jobs", ["company_id"], name: "index_jobs_on_company_id", using: :btree
 
-  create_table "refund_requests", force: :cascade do |t|
+  create_table "petitions", force: :cascade do |t|
     t.integer "recruiter_id"
     t.integer "job_id"
     t.text    "reason"

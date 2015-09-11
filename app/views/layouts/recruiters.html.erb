@@ -9,9 +9,9 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <% active = controller.class == Recruiters::JobsController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to "我发布的职位(数量)", recruiters_jobs_path %></li>
+            <li class="<%= active %>"><%= link_to current_recruiter.jobs_num > 0 ? "我发布的职位 <span class=\"badge\">#{current_recruiter.jobs_num}</span>".html_safe : "我发布的职位", recruiters_jobs_path %></li>
             <% active = controller.class == Recruiters::DeliveriesController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to "推荐给我的简历(数量)", recruiters_deliveries_path %></li>
+            <li class="<%= active %>"><%= link_to current_recruiter.deliveries_num > 0 ? "推荐给我的简历 <span class=\"badge\">#{current_recruiter.deliveries_num}</span>".html_safe : "推荐给我的简历", recruiters_deliveries_path %></li>
             <% active = controller.class == Recruiters::RefundRequestsController ? "active" : "" %>
             <li class="<%= active %>"><%= link_to "我的退款", recruiters_refund_requests_path(current_recruiter.company) %></li>
             <% active = controller.class == Recruiters::CompaniesController ? "active" : "" %>
