@@ -56,7 +56,7 @@ class Weixin < ActiveRecord::Base
         req.url "/cgi-bin/message/template/send?access_token=#{response_result['access_token']}"
         req.body =  "{ \"touser\":\"#{delivery.resume.supplier.weixin_name}\", \"template_id\":\"N7X9PhMz8Ezgj_6mXBu_zJOVlvvCZlYq4JV3Uxl3eGA\", \"url\":\"http://weixin.qq.com/download\",\"topcolor\":\"#FF0000\", \"data\": {
       \"first\": {
-      \"value\":\"#{delivery.resume.supplier.email}, 您好。您的红包金额发生变动\",
+      \"value\":\"#{delivery.resume.supplier.email}, 您好！您的简历库中的 #{delivery.resume.candidate_name}的简历被查看，您因此获得的红包：\",
       \"color\":\"#173177\"
       },
       \"keyword1\":{
