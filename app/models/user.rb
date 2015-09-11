@@ -20,9 +20,4 @@ class User < ActiveRecord::Base
   def weixin_name
     weixin.user_name
   end
-
-  private
-  def create_wallet
-    self.create_wallet
-  end
 end
