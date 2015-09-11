@@ -13,7 +13,7 @@ class Recruiter < User
   def deliveries_num
     deliveries = []
     self.jobs.map do |job|
-      deliveries << job.deliveries.recommended unless job.deliveries.recommended.blank?
+      deliveries << job.approved_deliveries unless job.deliveries.recommended.blank?
     end
     deliveries.flatten!
     deliveries.count > 100 ? '99+' : deliveries.count

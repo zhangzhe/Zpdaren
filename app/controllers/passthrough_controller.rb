@@ -4,7 +4,7 @@ class PassthroughController < ApplicationController
   def index
     redirect_path = case current_user
     when Admin
-      admins_users_path
+      admins_jobs_path
     when Recruiter
       recruiters_jobs_path
     when Supplier

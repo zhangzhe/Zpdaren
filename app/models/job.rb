@@ -1,7 +1,7 @@
 class Job < ActiveRecord::Base
   belongs_to :recruiter, :foreign_key => :user_id
-  has_many :deliveries
   has_many :resumes, through: :deliveries
+  has_many :deliveries
   has_many :attentions
   has_many :suppliers, through: :attentions
   has_many :refund_requests
@@ -41,6 +41,14 @@ class Job < ActiveRecord::Base
     end
   end
 
+  def approved_deliveries
+    result = []
+    self.deliveries.each do |delivery|
+      result << delivery if delivery.recommended? && delivery.resume.approved?
+    end
+    result
+  end
+
   def resumes_bonus_for(supplier)
     count = 0
     resumes_from(supplier).map(&:deliveries).flatten.each do |delivery|
@@ -65,10 +73,10 @@ class Job < ActiveRecord::Base
 
   def bonus_for_each_resume
     if deposit
-     (0.005 * deposit).to_i
-   else
-     0
-   end
+      (0.005 * deposit).to_i
+    else
+      0
+    end
   end
 
   def original_deposit
@@ -76,7 +84,7 @@ class Job < ActiveRecord::Base
   end
 
   def bonus_for_entry
-     (bonus * 0.8).to_i
+    (bonus * 0.8).to_i
   end
 
   def company

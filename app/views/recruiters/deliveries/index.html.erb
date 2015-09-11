@@ -13,13 +13,13 @@
       <% @deliveries.each do |delivery| %>
         <% if delivery.resume && delivery.resume.approved? %>
           <tr>
-            <td><%= delivery.job_title %></td>
+            <td>
+              <%= link_to delivery.job_title, recruiters_delivery_path(delivery) %>
+            </td>
             <td><%= delivery.resume_candidate_name %></td>
             <td><%= delivery.resume_tag_list %></td>
             <td><%= delivery.paid? ? "已付费" : "未付费" %></td>
-            <td>
-              <%= link_to '查看', recruiters_delivery_path(delivery), class: 'btn btn-primary active' unless delivery.job.finished? %>
-            </td>
+            <td><%= link_to '查看', recruiters_delivery_path(delivery), class: 'btn btn-primary active' unless delivery.paid? %></td>
           </tr>
         <% end %>
       <% end %>

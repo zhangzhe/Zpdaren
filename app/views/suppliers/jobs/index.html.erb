@@ -3,8 +3,7 @@
     <thead>
       <tr>
         <th>标题</th>
-        <th>入职红包</th>
-        <th>简历红包</th>
+        <th>入职红包/查看红包</th>
         <th>发布时间</th>
         <th>状态</th>
         <th>操作</th>
@@ -14,8 +13,7 @@
       <% @jobs.each do |job| %>
         <tr>
           <td><%= link_to job.title, suppliers_job_path(job), :target => "_blank" %></td>
-          <td><%= job.bonus_for_entry %>元</td>
-          <td>简历被查看可获得<%= job.resumes_bonus_for(current_supplier) %>元红包</td>
+          <td><%= job.bonus_for_entry %>/<%= job.bonus_for_each_resume %></td>
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
           <td>
             <% if job.resumes_count_from(current_supplier) > 0 %>
