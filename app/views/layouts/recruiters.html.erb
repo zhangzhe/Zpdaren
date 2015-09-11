@@ -9,14 +9,14 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <% active = controller.class == Recruiters::JobsController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to "职位列表", recruiters_jobs_path %></li>
-
+            <li class="<%= active %>"><%= link_to "我发布的职位(数量)", recruiters_jobs_path %></li>
             <% active = controller.class == Recruiters::DeliveriesController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to "我的简历列表", recruiters_deliveries_path %></li>
+            <li class="<%= active %>"><%= link_to "推荐给我的简历(数量)", recruiters_deliveries_path %></li>
+            <% active = controller.class == Recruiters::RefundRequestsController ? "active" : "" %>
+            <li class="<%= active %>"><%= link_to "我的退款", recruiters_refund_requests_path(current_recruiter.company) %></li>
             <% active = controller.class == Recruiters::CompaniesController ? "active" : "" %>
             <li class="<%= active %>"><%= link_to "公司信息", recruiters_company_path(current_recruiter.company) %></li>
-            <% active = controller.class == Recruiters::RefundRequestsController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to "我的申请", recruiters_refund_requests_path(current_recruiter.company) %></li>
+
             <li><a href="#">统计信息</a></li>
           </ul>
         </div>

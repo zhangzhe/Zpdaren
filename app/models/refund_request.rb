@@ -1,6 +1,7 @@
 class RefundRequest < ActiveRecord::Base
   belongs_to :job
   delegate :title, :bonus, :description, :created_at, to: :job, prefix: true
+  default_scope { order('created_at DESC') }
 
   include AASM
   aasm.attribute_name :state
@@ -22,9 +23,10 @@ class RefundRequest < ActiveRecord::Base
   def state_show
     case self.state.to_sym
     when :submitted
-      '已提交'
+      '等待审批'
     when :agreed
-      '同意退款'
+      #TODO
+      '完成退款'
     when :refused
       '申请被拒绝'
     end
