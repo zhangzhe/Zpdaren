@@ -9,6 +9,7 @@ class Job < ActiveRecord::Base
   # scope :pre_approved, -> { where("state = 'submitted' and deposit is not null")}
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
   scope :approved, -> { where('state' => 'approved')}
+  scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'approved']) }
   default_scope { order('created_at DESC') }
 
   include AASM

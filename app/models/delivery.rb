@@ -6,6 +6,7 @@ class Delivery < ActiveRecord::Base
   delegate :id, :title, to: :job, prefix: true
 
   scope :paid, -> { where(state: 'paid') }
+  scope :recommended, -> { where(state: 'recommended') }
 
   after_create :notify_recruiter, if: Proc.new { self.resume.approved? }
   default_scope { order('created_at DESC') }
