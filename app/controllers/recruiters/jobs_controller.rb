@@ -36,7 +36,7 @@ class Recruiters::JobsController < Recruiters::BaseController
 
   def deposit_pay
     job = Job.update(params[:job][:id], deposit_pay_params)
-    admin = Admin.first
+    admin = Admin.admin
     admin.receive(job.deposit)
     job.pay!
     redirect_to recruiters_jobs_path

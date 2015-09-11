@@ -21,7 +21,7 @@ class Delivery < ActiveRecord::Base
       transitions :from => :recommended, :to => :viewed
     end
 
-    event :pay, :after => :notify_supplier do
+    event :pay, :after => :notify_supplier_and_transfer_money do
       transitions :from => :viewed, :to => :paid
     end
   end
@@ -39,11 +39,24 @@ class Delivery < ActiveRecord::Base
   end
 
   def recruiter
-    job.company.recruiter
+    job.recruiter
   end
 
   private
+  def notify_supplier_and_transfer_money
+    notify_supplier
+    transfer_money
+  end
+
   def notify_supplier
     Weixin.notify_resume_paid(self) if resume.supplier.weixin
+  end
+
+  def transfer_money
+    bonus = job.bonus_for_each_resume
+    ActiveRecord::Base.transaction do
+      Admin.admin.pay(bonus)
+      recruiter.receive(bonus)
+    end
   end
 end

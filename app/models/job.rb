@@ -35,7 +35,7 @@ class Job < ActiveRecord::Base
       transitions :from => :deposit_paid, :to => :approved
     end
 
-    event :complete do
+    event :complete, :after => :pay_supplier do
       transitions :from => :approved, :to => :finished
     end
   end
@@ -113,5 +113,10 @@ class Job < ActiveRecord::Base
   private
   def notify_recruiter
     RecruiterMailer.email_jd_approved(recruiter).deliver_now
+  end
+
+  def pay_and_notify_supplier
+    # choose resume and pay the supplier
+    # notify_supplier
   end
 end

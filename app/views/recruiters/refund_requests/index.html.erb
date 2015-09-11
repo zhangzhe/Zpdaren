@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th>职位名称</th>
-        <th>佣金</th>
+        <th>押金</th>
         <th>创建时间</th>
         <th>状态</th>
       </tr>
@@ -12,7 +12,7 @@
       <% @refund_requests.each do |refund_request| %>
         <tr>
           <td><%= refund_request.job_title %></td>
-          <td><%= refund_request.job_bonus %></td>
+          <td><%= refund_request.job_deposit %></td>
           <td><%= refund_request.job_created_at.localtime.to_date.to_s(:db) %></td>
           <td><%= refund_request.state_show %></td>
         </tr>

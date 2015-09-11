@@ -19,7 +19,7 @@
           <td>
             <%= Recruiters::JobsHelper::state_show(job) %>
             <%= link_to '支付', deposit_pay_new_recruiters_job_path(job), class: "btn btn-primary" if job.submitted? %>
-            <%= link_to '招聘完成', complete_recruiters_job_path(job), class: "btn btn-primary", method: :put if job.approved? %>
+            <%= link_to '招聘完成并支付尾款', complete_recruiters_job_path(job), class: "btn btn-primary", method: :put if job.approved? %>
             <%= link_to '退款', new_recruiters_refund_request_path(job_id: job.id), class: "btn btn-primary" if job.refund_request? %>
             <%= link_to '下架', freeze_recruiters_job_path(job), class: "btn btn-primary", method: :put if job.submitted? %>
             <%= link_to '上架', active_recruiters_job_path(job), class: "btn btn-primary", method: :put if job.freezing? %>
