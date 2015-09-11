@@ -113,6 +113,6 @@ class Job < ActiveRecord::Base
 
   private
   def notify_recruiter
-    RecruiterMailer.email_jd_approved(recruiter).deliver_now
+    RecruiterMailer.email_jd_approved(recruiter, self).deliver_now
   end
 end

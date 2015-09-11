@@ -3,7 +3,7 @@ class Delivery < ActiveRecord::Base
   belongs_to :resume
 
   delegate :candidate_name, :tag_list, :mobile, :email, to: :resume, prefix: true
-  delegate :title, to: :job, prefix: true
+  delegate :id, :title, to: :job, prefix: true
 
   scope :paid, -> { where(state: 'paid') }
 
@@ -35,7 +35,7 @@ class Delivery < ActiveRecord::Base
   end
 
   def notify_recruiter
-    RecruiterMailer.email_resume_recommended(recruiter, resume, job).deliver_now
+    RecruiterMailer.email_resume_recommended(recruiter, self).deliver_now
   end
 
   def recruiter

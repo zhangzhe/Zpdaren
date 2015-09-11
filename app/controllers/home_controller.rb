@@ -1,4 +1,4 @@
-class FrontPageController < ApplicationController
+class HomeController < ApplicationController
   protect_from_forgery :except => [:check_signature]
 
   def index

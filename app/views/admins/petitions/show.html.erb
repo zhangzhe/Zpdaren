@@ -5,7 +5,7 @@
 <p><%= @petition.reason %></p>
 <p>
   <% if @petition.submitted? %>
-    <%= link_to '同意', agree_admins_petition_path(@petition), method: :put, class: 'btn btn-success' %>
+    <%= link_to '完成', agree_admins_petition_path(@petition), method: :put, class: 'btn btn-success' %>
     <%= link_to '拒绝', refuse_admins_petition_path(@petition), method: :put, class: 'btn btn-danger' %>
   <% else %>
     <h3>审批结果：<%= @petition.state_show %></h3>

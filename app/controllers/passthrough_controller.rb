@@ -10,7 +10,7 @@ class PassthroughController < ApplicationController
     when Supplier
       suppliers_jobs_path
     else
-      front_page_path
+      home_path
     end
     redirect_to redirect_path
   end

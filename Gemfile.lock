@@ -84,7 +84,11 @@ GEM
     colored (1.2)
     colorize (0.7.7)
     columnize (0.9.0)
+    config (1.0.0)
+      activesupport (>= 3.0)
+      deep_merge (~> 1.0.0)
     debug_inspector (0.0.2)
+    deep_merge (1.0.1)
     devise (3.5.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -240,6 +244,7 @@ DEPENDENCIES
   carrierwave!
   certified
   coffee-rails (~> 4.1.0)
+  config
   devise
   faraday
   jbuilder (~> 2.0)
