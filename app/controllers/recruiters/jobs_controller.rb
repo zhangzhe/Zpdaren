@@ -4,16 +4,16 @@ class Recruiters::JobsController < Recruiters::BaseController
     if current_recruiter.company.description.blank?
       redirect_to edit_recruiters_company_path(current_recruiter.company)
     else
-      @jobs = current_recruiter.company.jobs
+      @jobs = current_recruiter.jobs
     end
   end
 
   def new
-    @job = current_recruiter.company.jobs.build
+    @job = current_recruiter.jobs.build
   end
 
   def create
-    job = current_recruiter.company.jobs.create!(job_params)
+    job = current_recruiter.jobs.create!(job_params)
     redirect_to deposit_pay_new_recruiters_job_path(job)
   end
 

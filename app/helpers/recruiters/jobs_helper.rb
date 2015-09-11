@@ -8,7 +8,7 @@ module Recruiters::JobsHelper
     when :deposit_paid
       '待审核'
     when :approved
-      '招聘中'
+      '审核完成，招聘中'
     when :finished
       '招聘完成'
     end

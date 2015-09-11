@@ -1,12 +1,11 @@
 class Job < ActiveRecord::Base
-  belongs_to :company
+  belongs_to :recruiter, :foreign_key => :user_id
   has_many :deliveries
   has_many :resumes, through: :deliveries
   has_many :attentions
   has_many :suppliers, through: :attentions
   has_many :refund_requests
 
-  # scope :pre_approved, -> { where("state = 'submitted' and deposit is not null")}
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
   scope :approved, -> { where('state' => 'approved')}
   default_scope { order('created_at DESC') }
@@ -41,10 +40,6 @@ class Job < ActiveRecord::Base
     end
   end
 
-  def original_deposit
-    (bonus * 0.2).to_i
-  end
-
   def resumes_bonus_for(supplier)
     count = 0
     resumes_from(supplier).map(&:deliveries).flatten.each do |delivery|
@@ -75,8 +70,16 @@ class Job < ActiveRecord::Base
    end
   end
 
+  def original_deposit
+    (bonus * 0.2).to_i
+  end
+
   def bonus_for_entry
      (bonus * 0.8).to_i
+  end
+
+  def company
+    recruiter.company
   end
 
   def company_name
@@ -101,10 +104,6 @@ class Job < ActiveRecord::Base
     else
       return self.update_attribute(:deposit, self.deposit - pay)
     end
-  end
-
-  def recruiter
-    company.recruiter
   end
 
   def refund_request?

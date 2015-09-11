@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable
   has_one :weixin
+  has_one :wallet
   default_scope { order('created_at DESC') }
+
 
   def receive(pay)
     if self.wallet

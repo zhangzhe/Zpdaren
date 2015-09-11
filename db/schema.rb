@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911035032) do
+ActiveRecord::Schema.define(version: 20150911065444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,20 +59,13 @@ ActiveRecord::Schema.define(version: 20150911035032) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "company_id"
+    t.integer  "user_id"
     t.integer  "bonus"
     t.integer  "deposit"
     t.string   "state"
   end
 
-  add_index "jobs", ["company_id"], name: "index_jobs_on_company_id", using: :btree
-
-  create_table "refund_requests", force: :cascade do |t|
-    t.integer "recruiter_id"
-    t.integer "job_id"
-    t.text    "reason"
-    t.string  "state"
-  end
+  add_index "jobs", ["user_id"], name: "index_jobs_on_user_id", using: :btree
 
   create_table "refund_requests", force: :cascade do |t|
     t.integer  "job_id"
