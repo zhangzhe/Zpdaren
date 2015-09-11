@@ -8,6 +8,7 @@ class Job < ActiveRecord::Base
 
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
   scope :approved, -> { where('state' => 'approved')}
+  scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'approved']) }
   default_scope { order('created_at DESC') }
 
   include AASM
@@ -112,7 +113,7 @@ class Job < ActiveRecord::Base
 
   private
   def notify_recruiter
-    RecruiterMailer.email_jd_approved(recruiter).deliver_now
+    RecruiterMailer.email_jd_approved(recruiter, self).deliver_now
   end
 
   def pay_and_notify_supplier

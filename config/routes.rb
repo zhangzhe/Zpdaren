@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   get 'qr_codes/show'
 
   root :to => 'passthrough#index'
-  get 'front_page' => 'front_page#index'
-  post 'check_signature' => 'front_page#check_signature'
-  get 'check_signature' => 'front_page#check_signature'
+  get 'home' => 'home#index'
+  post 'check_signature' => 'home#check_signature'
+  get 'check_signature' => 'home#check_signature'
 
   devise_for :recruiters, controllers: {
     sessions: 'authentication/recruiters/sessions',

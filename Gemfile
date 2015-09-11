@@ -59,3 +59,4 @@ gem 'pdfkit', '~> 0.8.2'
 gem 'actionpack-xml_parser'
 gem "faraday"
 gem 'certified'
+gem 'config'

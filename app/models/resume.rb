@@ -46,6 +46,6 @@ class Resume < ActiveRecord::Base
       deliver.notify_recruiter
     end
     # weixin for supplier
-    Weixin.notify_resume_approved(self)
+    Weixin.notify_resume_approved(self) if self.supplier.weixin
   end
 end
