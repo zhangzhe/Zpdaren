@@ -1,12 +1,11 @@
 class Job < ActiveRecord::Base
-  belongs_to :company
+  belongs_to :recruiter, :foreign_key => :user_id
   has_many :deliveries
   has_many :resumes, through: :deliveries
   has_many :attentions
   has_many :suppliers, through: :attentions
   has_many :refund_requests
 
-  # scope :pre_approved, -> { where("state = 'submitted' and deposit is not null")}
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
   scope :approved, -> { where('state' => 'approved')}
   scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'approved']) }
@@ -37,13 +36,9 @@ class Job < ActiveRecord::Base
       transitions :from => :deposit_paid, :to => :approved
     end
 
-    event :complete do
+    event :complete, :after => :pay_supplier do
       transitions :from => :approved, :to => :finished
     end
-  end
-
-  def original_deposit
-    (bonus * 0.2).to_i
   end
 
   def resumes_bonus_for(supplier)
@@ -76,8 +71,16 @@ class Job < ActiveRecord::Base
    end
   end
 
+  def original_deposit
+    (bonus * 0.2).to_i
+  end
+
   def bonus_for_entry
      (bonus * 0.8).to_i
+  end
+
+  def company
+    recruiter.company
   end
 
   def company_name
@@ -104,10 +107,6 @@ class Job < ActiveRecord::Base
     end
   end
 
-  def recruiter
-    company.recruiter
-  end
-
   def refund_request?
     (self.deposit_paid? || self.approved?) && refund_requests.find_by_state(:submitted).nil?
   end
@@ -115,5 +114,10 @@ class Job < ActiveRecord::Base
   private
   def notify_recruiter
     RecruiterMailer.email_jd_approved(recruiter, self).deliver_now
+  end
+
+  def pay_and_notify_supplier
+    # choose resume and pay the supplier
+    # notify_supplier
   end
 end

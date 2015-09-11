@@ -1,6 +1,6 @@
 class RefundRequest < ActiveRecord::Base
   belongs_to :job
-  delegate :title, :bonus, :description, :created_at, to: :job, prefix: true
+  delegate :title, :bonus, :description, :created_at, :deposit, to: :job, prefix: true
   default_scope { order('created_at DESC') }
 
   include AASM
@@ -11,7 +11,7 @@ class RefundRequest < ActiveRecord::Base
     state :agreed
     state :refused
 
-    event :agree do
+    event :agree, :after => :refund_to_recruiter do
       transitions :from => :submitted, :to => :agreed
     end
 
@@ -30,5 +30,18 @@ class RefundRequest < ActiveRecord::Base
     when :refused
       '申请被拒绝'
     end
+  end
+
+  private
+
+  def refund_to_recruiter
+    ActiveRecord::Base.transaction do
+      recruiter.receive(job.deposit)
+      Admin.admin.pay(job.deposit)
+    end
+  end
+
+  def recruiter
+    self.job.recruiter
   end
 end

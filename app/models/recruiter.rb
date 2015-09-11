@@ -2,7 +2,7 @@ class Recruiter < User
   devise :database_authenticatable, :registerable, :trackable, :validatable, :recoverable
 
   has_one :company, :foreign_key => :user_id
-  has_many :jobs, through: :company
+  has_many :jobs, :foreign_key => :user_id
   has_many :refund_requests
   before_create :init_blank_comapny
 

@@ -4,8 +4,6 @@ class Supplier < User
   has_many :attentions
   has_many :drawings
 
-  has_one :wallet, foreign_key: :user_id
-
   delegate :money, to: :wallet, prefix: true
 
   def watch!(job)

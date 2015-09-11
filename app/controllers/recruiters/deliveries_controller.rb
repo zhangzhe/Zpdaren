@@ -4,7 +4,7 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
     if params[:job_id]
       jobs = [Job.find(params[:job_id])]
     else
-      jobs = current_recruiter.company.jobs
+      jobs = current_recruiter.jobs
     end
     jobs.map do |job|
       @deliveries << job.deliveries unless job.deliveries.blank?
