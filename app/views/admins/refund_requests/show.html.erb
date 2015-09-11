@@ -1,0 +1,13 @@
+<p class="lead"><%= @refund_request.job_title %></p>
+<p><%= simple_format @refund_request.job_description %></p>
+<p>佣金：<%= @refund_request.job_bonus %>元</p>
+<p>退款理由：</p>
+<p><%= @refund_request.reason %></p>
+<p>
+  <% if @refund_request.submitted? %>
+    <%= link_to '同意', agree_admins_refund_request_path(@refund_request), method: :put, class: 'btn btn-success' %>
+    <%= link_to '拒绝', refuse_admins_refund_request_path(@refund_request), method: :put, class: 'btn btn-danger' %>
+  <% else %>
+    <h3>审批结果：<%= @refund_request.state_show %></h3>
+  <% end %>
+</p>

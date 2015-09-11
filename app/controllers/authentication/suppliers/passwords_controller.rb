@@ -27,6 +27,6 @@ class Authentication::Suppliers::PasswordsController < Devise::PasswordsControll
 
   # The path used after sending reset password instructions
   def after_sending_reset_password_instructions_path_for(resource_name)
-    front_page_path
+    home_path
   end
 end
