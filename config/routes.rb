@@ -76,8 +76,6 @@ Rails.application.routes.draw do
     resources :drawings, only: [:index,:create]
   end
 
-  resources :deliveries, only: []
-
   resources :resumes, except: [:new] do
     collection do
       get 'download'
