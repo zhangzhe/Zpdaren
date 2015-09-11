@@ -15,8 +15,8 @@
             <li class="<%= active %>"><%= link_to "我的简历列表", recruiters_deliveries_path %></li>
             <% active = controller.class == Recruiters::CompaniesController ? "active" : "" %>
             <li class="<%= active %>"><%= link_to "公司信息", recruiters_company_path(current_recruiter.company) %></li>
-            <% active = controller.class == Recruiters::PetitionsController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to "我的申请", recruiters_petitions_path(current_recruiter.company) %></li>
+            <% active = controller.class == Recruiters::RefundRequestsController ? "active" : "" %>
+            <li class="<%= active %>"><%= link_to "我的申请", recruiters_refund_requests_path(current_recruiter.company) %></li>
             <li><a href="#">统计信息</a></li>
           </ul>
         </div>

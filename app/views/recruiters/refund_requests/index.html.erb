@@ -9,12 +9,12 @@
       </tr>
     </thead>
     <tbody>
-      <% @petitions.each do |petition| %>
+      <% @refund_requests.each do |refund_request| %>
         <tr>
-          <td><%= link_to petition.job_title, admins_petition_path(petition) %></td>
-          <td><%= petition.job_bonus %></td>
-          <td><%= petition.job_created_at.localtime.to_date.to_s(:db) %></td>
-          <td><%= petition.state_show %></td>
+          <td><%= refund_request.job_title %></td>
+          <td><%= refund_request.job_bonus %></td>
+          <td><%= refund_request.job_created_at.localtime.to_date.to_s(:db) %></td>
+          <td><%= refund_request.state_show %></td>
         </tr>
       <% end %>
     </tbody>

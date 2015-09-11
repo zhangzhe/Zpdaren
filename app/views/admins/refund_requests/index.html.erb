@@ -1,0 +1,22 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>职位名称</th>
+        <th>佣金</th>
+        <th>创建时间</th>
+        <th>状态</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @refund_requests.each do |refund_request| %>
+        <tr>
+          <td><%= link_to refund_request.job_title, admins_refund_request_path(refund_request) %></td>
+          <td><%= refund_request.job_bonus %></td>
+          <td><%= refund_request.job_created_at.localtime.to_date.to_s(:db) %></td>
+          <td><%= refund_request.state_show %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

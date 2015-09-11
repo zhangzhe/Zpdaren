@@ -1,11 +1,8 @@
-class Petition < ActiveRecord::Base
+class RefundRequest < ActiveRecord::Base
   belongs_to :job
-  belongs_to :recruiter
-
   delegate :title, :bonus, :description, :created_at, to: :job, prefix: true
 
   include AASM
-
   aasm.attribute_name :state
 
   aasm do
