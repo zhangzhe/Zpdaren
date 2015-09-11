@@ -4,7 +4,7 @@ class Job < ActiveRecord::Base
   has_many :resumes, through: :deliveries
   has_many :attentions
   has_many :suppliers, through: :attentions
-  has_many :petitions
+  has_many :refund_requests
 
   # scope :pre_approved, -> { where("state = 'submitted' and deposit is not null")}
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
@@ -107,8 +107,8 @@ class Job < ActiveRecord::Base
     company.recruiter
   end
 
-  def petition?
-    (self.deposit_paid? || self.approved?) && petitions.find_by_state(:submitted).nil?
+  def refund_request?
+    (self.deposit_paid? || self.approved?) && refund_requests.find_by_state(:submitted).nil?
   end
 
   private

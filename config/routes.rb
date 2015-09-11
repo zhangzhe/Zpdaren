@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index]
     resources :companies, only: [:index, :show]
     resources :jobs, only: [:index, :show, :edit, :update]
-    resources :petitions, only: [:index, :show] do
+    resources :refund_requests, only: [:index, :show] do
       member do
         put :agree
         put :refuse
@@ -64,7 +64,7 @@ Rails.application.routes.draw do
         get :pay
       end
     end
-    resources :petitions, only: [:index, :new, :create]
+    resources :refund_requests, only: [:index, :new, :create]
   end
 
   namespace :suppliers do

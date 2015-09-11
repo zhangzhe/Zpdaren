@@ -16,8 +16,8 @@
             <li class="<%= active %>"><%= link_to '职位', admins_jobs_path %></li>
             <% active = controller.class == Admins::CompaniesController ? "active" : "" %>
             <li class="<%= active %>"><%= link_to "公司列表", admins_companies_path %></li>
-            <% active = controller.class == Admins::PetitionsController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to "退款申请列表", admins_petitions_path %></li>
+            <% active = controller.class == Admins::RefundRequestsController ? "active" : "" %>
+            <li class="<%= active %>"><%= link_to "退款申请列表", admins_refund_requests_path %></li>
             <% active = controller.class == Admins::DrawingsController ? "active" : "" %>
             <li class="<%= active %>"><%= link_to "HR申请提现列表", admins_drawings_path %></li>
           </ul>
