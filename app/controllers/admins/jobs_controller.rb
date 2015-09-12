@@ -20,6 +20,6 @@ class Admins::JobsController < Admins::BaseController
 
   private
   def job_params
-    params.require(:job).permit(:title, :description)
+    params.require(:job).permit(:title, :description, :tag_list)
   end
 end

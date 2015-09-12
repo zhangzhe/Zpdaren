@@ -62,7 +62,7 @@ class Recruiters::JobsController < Recruiters::BaseController
 
   private
   def job_params
-    params[:job].permit(:title, :description, :bonus, :state)
+    params[:job].permit(:title, :description, :bonus, :state, :tag_list)
   end
 
   def deposit_pay_params
