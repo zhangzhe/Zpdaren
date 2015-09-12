@@ -11,6 +11,9 @@ class Job < ActiveRecord::Base
   scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'approved']) }
   default_scope { order('created_at DESC') }
 
+  acts_as_taggable
+  acts_as_taggable_on :skills, :interests
+
   include AASM
   aasm.attribute_name :state
   aasm do

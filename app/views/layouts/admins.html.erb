@@ -9,25 +9,24 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <% active = controller.class == Admins::JobsController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to '职位', admins_jobs_path %></li>
+            <li class="<%= active %>"><%= link_to '职位列表', admins_jobs_path %></li>
             <% active = controller.class == Admins::ResumesController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to "简历", admins_resumes_path %></li>
+            <li class="<%= active %>"><%= link_to "简历列表", admins_resumes_path %></li>
             <% active = controller.class == Admins::RefundRequestsController ? "active" : "" %>
             <li class="<%= active %>"><%= link_to "退款申请", admins_refund_requests_path %></li>
             <% active = controller.class == Admins::DrawingsController ? "active" : "" %>
             <li class="<%= active %>"><%= link_to "提现申请", admins_drawings_path %></li>
             <% active = controller.class == Admins::CompaniesController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to "公司", admins_companies_path %></li>
+            <li class="<%= active %>"><%= link_to "公司列表", admins_companies_path %></li>
             <% active = controller.class == Admins::UsersController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to '用户', admins_users_path %></li>
+            <li class="<%= active %>"><%= link_to '用户列表', admins_users_path %></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <%= bootstrap_flash %>
           <%= yield %>
         </div>
       </div>
     </div>
   </body>
 </html>
-<!-- http://getbootstrap.com/getting-started/ -->
-
