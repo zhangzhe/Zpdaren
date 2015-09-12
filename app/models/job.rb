@@ -39,7 +39,7 @@ class Job < ActiveRecord::Base
       transitions :from => :deposit_paid, :to => :approved
     end
 
-    event :complete, :after => :pay_supplier do
+    event :complete, :after => :pay_and_notify_supplier do
       transitions :from => :approved, :to => :finished
     end
   end
