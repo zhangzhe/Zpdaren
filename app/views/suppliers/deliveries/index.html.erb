@@ -1,0 +1,29 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>标题</th>
+        <th>入职红包/查看红包</th>
+        <th>推荐时间</th>
+        <th>状态</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @deliveries.each do |delivery| %>
+        <tr>
+          <td><%= link_to delivery.job_title, suppliers_job_path(delivery.job), :target => "_blank" %></td>
+          <td><%= delivery.job.bonus_for_entry %>/<%= delivery.job.bonus_for_each_resume %></td>
+          <td><%= delivery.created_at.localtime.to_date.to_s(:db) %></td>
+          <td>
+            <p>
+              <%= Suppliers::DeliveriesHelper.state_show(delivery) %>
+            </p>
+            <p>
+              <%= delivery.viewed_at.strftime("%Y-%m-%d %H:%m") if delivery.viewed_at %>
+            </p>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

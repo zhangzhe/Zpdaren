@@ -1,7 +1,7 @@
 class Recruiters::RefundRequestsController < Recruiters::BaseController
 
   def index
-    @refund_requests = current_recruiter.jobs.map(&:refund_requests).flatten!
+    @refund_requests = current_recruiter.jobs.map(&:refund_requests).flatten! || []
   end
 
   def new

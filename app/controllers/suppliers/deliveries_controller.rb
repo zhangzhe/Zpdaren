@@ -1,5 +1,10 @@
 class Suppliers::DeliveriesController < Suppliers::BaseController
   layout 'suppliers'
+
+  def index
+    @deliveries = current_supplier.deliveries
+  end
+
   def new
     @job = Job.find(params[:job_id])
     @resumes = current_supplier.resumes

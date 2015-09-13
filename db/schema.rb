@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911065444) do
+ActiveRecord::Schema.define(version: 20150913070024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20150911065444) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "state"
+    t.datetime "viewed_at"
   end
 
   add_index "deliveries", ["resume_id", "job_id"], name: "index_deliveries_on_resume_id_and_job_id", using: :btree

@@ -71,7 +71,7 @@ Rails.application.routes.draw do
     resources :jobs, only: [:index, :show]
     resources :resumes, only: [:index, :create]
     resources :attentions, only: [:create]
-    resources :deliveries, only: [:new, :create]
+    resources :deliveries, only: [:index, :new, :create]
     resources :users, only: [:show]
     resources :drawings, only: [:index,:create]
   end
