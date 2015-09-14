@@ -34,7 +34,11 @@ Rails.application.routes.draw do
 
     resources :users, only: [:index]
     resources :companies, only: [:index, :show]
-    resources :jobs, only: [:index, :show, :edit, :update]
+    resources :jobs, only: [:index, :show, :edit, :update] do
+      member do
+        put :complete
+      end
+    end
     resources :refund_requests, only: [:index, :show] do
       member do
         put :agree
@@ -62,6 +66,7 @@ Rails.application.routes.draw do
     resources :deliveries, only: [:index, :show] do
       member do
         get :pay
+        put :final_pay
       end
     end
     resources :refund_requests, only: [:index, :new, :create]

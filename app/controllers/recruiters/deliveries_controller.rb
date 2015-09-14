@@ -2,14 +2,15 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
   def index
     @deliveries = []
     if params[:job_id]
-      jobs = [Job.find(params[:job_id])]
+      @job = Job.find(params[:job_id])
+      @deliveries = @job.deliveries.paid
     else
       jobs = current_recruiter.jobs
+      jobs.map do |job|
+        @deliveries << job.deliveries unless job.deliveries.blank?
+      end
+      @deliveries.flatten!
     end
-    jobs.map do |job|
-      @deliveries << job.deliveries unless job.deliveries.blank?
-    end
-    @deliveries.flatten!
   end
 
   def show
@@ -20,6 +21,14 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
   def pay
     @delivery = Delivery.find(params[:id])
     @delivery.pay! if @delivery.viewed? && @delivery.may_pay?
+    redirect_to :back
+  end
+
+  def final_pay
+    delivery = Delivery.find(params[:id])
+    job = delivery.job
+    supplier = delivery.resume.supplier
+    job.pay_final_payment_to(supplier)
     redirect_to :back
   end
 end

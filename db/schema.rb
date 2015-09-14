@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150913070024) do
+ActiveRecord::Schema.define(version: 20150914060540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(version: 20150913070024) do
   create_table "drawings", force: :cascade do |t|
     t.integer  "supplier_id"
     t.integer  "money"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "final_payment_requests", force: :cascade do |t|
+    t.integer  "job_id"
+    t.integer  "supplier_id"
+    t.float    "money"
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -129,7 +138,7 @@ ActiveRecord::Schema.define(version: 20150913070024) do
 
   create_table "wallets", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "money"
+    t.float    "money",      default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

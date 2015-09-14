@@ -1,11 +1,22 @@
 <div class="table-responsive">
+  <% if params[:job_id] %>
+    <ol class="breadcrumb">
+      <li>
+        <%= link_to '职位列表', recruiters_jobs_path %>
+      <li>
+        <%= link_to truncate(@job.title), recruiters_job_path(@job) %>
+      </li>
+      <li class="active">推荐列表</li>
+    </ol>
+  <% end %>
   <table class="table table-striped">
     <thead>
       <tr>
         <th>投递职位</th>
-        <th>推荐人</th>
+        <th>被推荐人</th>
         <th>标签</th>
-        <th>状态</th>
+        <th>简历状态</th>
+        <th>尾款状态</th>
         <th>操作</th>
       </tr>
     </thead>
@@ -19,7 +30,11 @@
             <td><%= delivery.resume_candidate_name %></td>
             <td><%= delivery.resume_tag_list %></td>
             <td><%= delivery.paid? ? "已付费" : "未付费" %></td>
-            <td><%= link_to '查看', recruiters_delivery_path(delivery), class: 'btn btn-primary active' unless delivery.paid? %></td>
+            <td><%= delivery.job.final_payment_request.nil? ? (delivery.job.finished? ? '已付尾款' : '未付尾款') : '尾款支付中...' %></td>
+            <td>
+              <%= link_to '查看', recruiters_delivery_path(delivery), class: 'btn btn-primary active' unless delivery.paid? %>
+              <%= link_to '支付尾款', final_pay_recruiters_delivery_path(delivery), class: 'btn btn-primary active', method: :put if delivery.job.approved? && delivery.paid? && delivery.job.may_complete? && delivery.job.final_payment_request.nil? %>
+            </td>
           </tr>
         <% end %>
       <% end %>
