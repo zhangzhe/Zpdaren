@@ -20,7 +20,7 @@
           <li><%= link_to current_user.wallet.money, "" %></li>
           <% if current_user.weixin.nil? %>
             <li>
-              <%= link_to image_tag("xiaoqrcode"), 'javascript:void(0);', 'data-toggle': 'modal', 'data-target': '#bigQrcode' %>
+              <%= link_to image_tag("xiaoqrcode"), 'javascript:void(0);', 'data-toggle' => 'modal', 'data-target' => '#bigQrcode' %>
             </li>
           <% end %>
         <% end %>
