@@ -142,8 +142,7 @@ class Job < ActiveRecord::Base
       resumes = Resume.tagged_with(tags)
       result << resumes unless resumes.blank?
     end
-    result.flatten!.uniq!
-    result
+    result.flatten.uniq
   end
 
   private
