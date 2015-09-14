@@ -2,9 +2,8 @@ class Resume < ActiveRecord::Base
   has_many :deliveries
   has_many :jobs, through: :deliveries
   belongs_to :supplier
-  # scope :approved, -> { where('state' => "approved") }
 
-  validates_presence_of :candidate_name, :attachment
+  validates_presence_of :candidate_name, :mobile, :attachment
   default_scope { order('created_at DESC') }
 
   acts_as_taggable

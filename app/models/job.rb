@@ -6,6 +6,7 @@ class Job < ActiveRecord::Base
   has_many :attentions
   has_many :suppliers, through: :attentions
   has_many :refund_requests
+  after_update :deliver_matching_resumes
 
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
   scope :approved, -> { where('state' => 'approved')}
@@ -76,8 +77,8 @@ class Job < ActiveRecord::Base
   end
 
   def bonus_for_each_resume
-    if deposit
-      (0.005 * deposit).to_i
+    if bonus
+      (0.005 * bonus).to_i
     else
       0
     end
@@ -125,6 +126,24 @@ class Job < ActiveRecord::Base
 
   def pay_final_payment_to(supplier)
     self.final_payment_request = FinalPaymentRequest.create(supplier_id: supplier.id, money: self.bonus_for_entry)
+  end
+
+  def deliver_matching_resumes
+    matching_resumes.each do |resume|
+      self.delivery!(resume) unless Delivery.find_by_resume_id_and_job_id(resume.id, self.id)
+    end
+  end
+
+  def matching_resumes
+    in_group_size = (Job.find(4).tags.count*0.6).round
+    groups = Job.find(4).tags.map(&:name).combination(in_group_size).to_a
+    result = []
+    groups.each do |tags|
+      resumes = Resume.tagged_with(tags)
+      result << resumes unless resumes.blank?
+    end
+    result.flatten!.uniq!
+    result
   end
 
   private

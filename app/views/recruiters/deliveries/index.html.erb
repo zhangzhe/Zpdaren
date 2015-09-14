@@ -30,7 +30,7 @@
             <td><%= delivery.resume_candidate_name %></td>
             <td><%= delivery.resume_tag_list %></td>
             <td><%= delivery.paid? ? "已付费" : "未付费" %></td>
-            <td><%= delivery.job.final_payment_request.nil? ? (delivery.job.finished? ? '已付尾款' : '未付尾款') : '尾款支付中...' %></td>
+            <td><%= delivery.job.final_payment_request ? (delivery.job.finished? ? '已付尾款' : '尾款支付中...') : '未付尾款' %></td>
             <td>
               <%= link_to '查看', recruiters_delivery_path(delivery), class: 'btn btn-primary active' unless delivery.paid? %>
               <%= link_to '支付尾款', final_pay_recruiters_delivery_path(delivery), class: 'btn btn-primary active', method: :put if delivery.job.approved? && delivery.paid? && delivery.job.may_complete? && delivery.job.final_payment_request.nil? %>
