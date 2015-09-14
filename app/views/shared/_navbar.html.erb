@@ -17,10 +17,11 @@
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
           <li><%= link_to current_user.email, "" %></li>
-           <li><%= link_to current_user.wallet.money, "" %></li>
-
+          <li><%= link_to current_user.wallet.money, "" %></li>
           <% if current_user.weixin.nil? %>
-            <li><%= link_to image_tag("xiaoqrcode"), qr_code_path(current_user.id), :target => "_blank" %></li>
+            <li>
+              <%= link_to image_tag("xiaoqrcode"), 'javascript:void(0);', 'data-toggle': 'modal', 'data-target': '#bigQrcode' %>
+            </li>
           <% end %>
         <% end %>
 
@@ -51,3 +52,13 @@
   </div>
 </nav>
 <br>
+
+<% if current_user %>
+  <div id='bigQrcode' class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content" style='width: 300px; height: 300px;'>
+        <%= image_tag qr_code_path(current_user.id), style: 'width: 100%;' %>
+      </div>
+    </div>
+  </div>
+<% end %>

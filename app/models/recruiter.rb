@@ -3,7 +3,6 @@ class Recruiter < User
 
   has_one :company, :foreign_key => :user_id
   has_many :jobs, :foreign_key => :user_id
-  has_many :refund_requests
   before_create :init_blank_comapny
 
   def jobs_num

@@ -18,7 +18,7 @@ class Delivery < ActiveRecord::Base
     state :viewed
     state :paid
 
-    event :view do
+    event :view, after: :viewed_at_update do
       transitions :from => :recommended, :to => :viewed
     end
 
@@ -59,5 +59,11 @@ class Delivery < ActiveRecord::Base
       resume.supplier.receive(bonus)
       recruiter.pay(bonus)
     end
+  end
+
+  private
+
+  def viewed_at_update
+    self.update_attribute(:viewed_at, Time.now)
   end
 end
