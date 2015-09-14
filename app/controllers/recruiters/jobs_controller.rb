@@ -42,11 +42,11 @@ class Recruiters::JobsController < Recruiters::BaseController
     redirect_to recruiters_jobs_path
   end
 
-  def complete
-    job = Job.find(params[:id])
-    job.complete! if job.approved? && job.may_complete?
-    redirect_to :back
-  end
+  # def complete
+  #   job = Job.find(params[:id])
+  #   job.complete! if job.approved? && job.may_complete?
+  #   redirect_to :back
+  # end
 
   def freeze
     job = Job.find(params[:id])

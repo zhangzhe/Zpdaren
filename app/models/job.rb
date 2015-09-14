@@ -1,5 +1,6 @@
 class Job < ActiveRecord::Base
   belongs_to :recruiter, :foreign_key => :user_id
+  has_one :final_payment_request
   has_many :resumes, through: :deliveries
   has_many :deliveries
   has_many :attentions
@@ -121,6 +122,10 @@ class Job < ActiveRecord::Base
 
   def refund_request?
     (self.deposit_paid? || self.approved?) && refund_requests.find_by_state(:submitted).nil?
+  end
+
+  def pay_final_payment_to(supplier)
+    self.final_payment_request = FinalPaymentRequest.create(supplier_id: supplier.id, money: self.bonus_for_entry)
   end
 
   def deliver_matching_resumes

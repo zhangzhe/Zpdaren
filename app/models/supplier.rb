@@ -4,6 +4,7 @@ class Supplier < User
   has_many :deliveries, through: :resumes
   has_many :attentions
   has_many :drawings
+  has_many :final_payment_requests
 
   delegate :money, to: :wallet, prefix: true
 
