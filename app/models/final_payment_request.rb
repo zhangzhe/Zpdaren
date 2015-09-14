@@ -1,5 +1,6 @@
 class FinalPaymentRequest < ActiveRecord::Base
   belongs_to :job
+  belongs_to :supplier
 
   include AASM
   aasm.attribute_name :state

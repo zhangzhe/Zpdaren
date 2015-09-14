@@ -21,7 +21,7 @@ class Admins::JobsController < Admins::BaseController
   def complete
     job = Job.find(params[:id])
     final_payment_request = job.final_payment_request
-    supplier = Supplier.find(final_payment_request.supplier_id)
+    supplier = final_payment_request.supplier
     Job.transaction do
       supplier.wallet.update_money(:+, job.bonus_for_entry)
       job.complete!
