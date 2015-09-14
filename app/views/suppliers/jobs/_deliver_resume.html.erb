@@ -7,34 +7,4 @@
     <%= link_to '从简历库推荐', new_suppliers_delivery_path(job_id: job.id), class: 'btn btn-primary active' %>
   </p>
 </div>
-
-<div class="modal fade" id="newResumeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">新建简历</h4>
-      </div>
-      <div class="modal-body">
-        <%= form_for Resume.new, url: suppliers_resumes_path do |f| %>
-          <%= hidden_field_tag 'job_id', job.id %>
-          <p>
-            <%= f.text_field 'candidate_name', class: "form-control", :placeholder => "候选人姓名" %>
-          </p>
-          <p>
-            <%= f.text_field 'mobile', class: 'form-control', :placeholder => '候选人手机号码' %>
-          </p>
-          <p>
-            <%= f.text_field 'tag_list', class: "form-control", :placeholder => "简历标签(*多个标签以','隔开)" %>
-          </p>
-          <p>
-            <%= f.file_field 'attachment' %>
-          </p>
-          <p>
-            <%= f.submit '推荐', class: "btn btn-primary active" %>
-          </p>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render "/suppliers/shared/resume_form", job: job %>
