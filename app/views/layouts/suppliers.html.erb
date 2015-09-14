@@ -13,7 +13,7 @@
             <% active = controller.class == Suppliers::DeliveriesController ? "active" : "" %>
             <li class="<%= active %>"><%= link_to "我的推荐", suppliers_deliveries_path %></li>
             <% active = controller.class == Suppliers::ResumesController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to "我上传的简历", suppliers_resumes_path %></li>
+            <li class="<%= active %>"><%= link_to "我的简历", suppliers_resumes_path %></li>
             <% active = controller.class == Suppliers::UsersController ? "active" : "" %>
             <li class="<%= active %>"><%= link_to "个人中心", suppliers_user_path(current_supplier) %></li>
             <% active = controller.class == Suppliers::DrawingsController ? "active" : "" %>
