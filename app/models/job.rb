@@ -6,7 +6,6 @@ class Job < ActiveRecord::Base
   has_many :attentions
   has_many :suppliers, through: :attentions
   has_many :refund_requests
-  after_update :deliver_matching_resumes
 
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
   scope :approved, -> { where('state' => 'approved')}
@@ -38,7 +37,7 @@ class Job < ActiveRecord::Base
       transitions :from => :freezing, :to => :submitted
     end
 
-    event :approve, :after => :notify_recruiter do
+    event :approve, :after => :notify_recruiter_and_deliver_matching_resumes do
       transitions :from => :deposit_paid, :to => :approved
     end
 
@@ -144,9 +143,10 @@ class Job < ActiveRecord::Base
   end
 
   private
-
-  def notify_recruiter
+  def notify_recruiter_and_deliver_matching_resumes
     RecruiterMailer.email_jd_approved(recruiter, self).deliver_now
+    debugger
+    deliver_matching_resumes
   end
 
   def pay_and_notify_supplier
