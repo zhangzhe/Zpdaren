@@ -1,0 +1,10 @@
+  a{
+    cursor: pointer;
+  }
+  #attended{
+    color: red;
+  }
+  #unattend{
+    text-decoration: none;
+    color: gray;
+  }

@@ -1,10 +1,10 @@
-module Suppliers::DeliveriesHelper
+module Recruiters::DeliveriesHelper
   def self.state_show(delivery)
     case delivery.state.to_sym
-    when :recommended
-      '已推荐'
+    when :submitted
+      '未查看'
     when :viewed
-      '被查看'
+      '已查看'
     when :paid
       '已付费'
     when :refused

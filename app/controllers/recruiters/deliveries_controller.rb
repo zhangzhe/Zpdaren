@@ -31,4 +31,9 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
     job.pay_final_payment_to(supplier)
     redirect_to :back
   end
+
+  def refuse
+    @delivery = Delivery.find(params[:id])
+    @delivery.refuse! if @delivery.viewed? && @delivery.may_refuse?
+  end
 end

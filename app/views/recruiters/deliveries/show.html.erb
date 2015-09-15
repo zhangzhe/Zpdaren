@@ -1,18 +1,15 @@
 <div>
   <p class="lead"><%= @delivery.candidate_name %></p>
-
-
   <p>
     <% if @delivery.paid? %>
       <%= @delivery.resume_mobile %>
       <%= @delivery.resume_email %>
     <% else %>
-      候选人联系方式(付费<20>元后可看) <%= link_to "付费20元", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary active", role: "button" %>
+      候选人联系方式(付费<20>元后可看)
     <% end %>
   </p>
 
-
-
   <p><%= simple_format @delivery.description %></p>
-
+  <%= link_to "付费20元", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary active", role: "button", method: :put if @delivery.viewed? %>
+  <%= link_to "拒绝", refuse_recruiters_delivery_path(@delivery), class: "btn btn-primary active", role: "button", method: :put if @delivery.viewed? %>
 </div>

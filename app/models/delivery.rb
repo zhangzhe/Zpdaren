@@ -1,6 +1,7 @@
 class Delivery < ActiveRecord::Base
   belongs_to :job
   belongs_to :resume
+  has_one :refuse_reason
 
   delegate :candidate_name, :tag_list, :mobile, :email, to: :resume, prefix: true
   delegate :id, :title, to: :job, prefix: true
@@ -17,6 +18,7 @@ class Delivery < ActiveRecord::Base
     state :recommended, :initial => true
     state :viewed
     state :paid
+    state :refused
 
     event :view, after: :viewed_at_update do
       transitions :from => :recommended, :to => :viewed
@@ -24,6 +26,10 @@ class Delivery < ActiveRecord::Base
 
     event :pay, :after => :notify_supplier_and_transfer_money do
       transitions :from => :viewed, :to => :paid
+    end
+
+    event :refuse do
+      transitions :from => :viewed, :to => :refused
     end
   end
 
