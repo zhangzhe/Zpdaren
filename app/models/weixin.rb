@@ -18,7 +18,7 @@ class Weixin < ActiveRecord::Base
       response = Weixin.conn.get '/cgi-bin/token', { :appid => Weixin.mp_appid, :secret => Weixin.mp_secret, :grant_type => "client_credential" }
       response_result = JSON(response.body)
       message = {
-        touser: subscribe_user.name,
+        touser: subscribe_user.user_name,
         msgtype: 'text',
         text: {
           content: '您好，欢迎关注众聘达人！'
