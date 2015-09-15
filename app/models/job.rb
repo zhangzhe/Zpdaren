@@ -142,6 +142,13 @@ class Job < ActiveRecord::Base
     similar_entity(Job)
   end
 
+  def update_and_approve(job_params)
+    self.attributes = job_params
+    RecruiterMailer.edit_job_notify(self).deliver_now if self.changed?
+    self.save!
+    self.approve!
+  end
+
   private
   def notify_recruiter_and_deliver_matching_resumes
     RecruiterMailer.email_jd_approved(recruiter, self).deliver_now
