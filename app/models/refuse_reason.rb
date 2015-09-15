@@ -5,6 +5,6 @@ class RefuseReason < ActiveRecord::Base
 
   private
   def notify_supplier
-    # Weixin.notify_resume_refused(self.delivery)
+    Weixin.notify_resume_refused(self.delivery) if Rails.env == 'production'
   end
 end
