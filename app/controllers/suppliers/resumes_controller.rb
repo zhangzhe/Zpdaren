@@ -16,7 +16,7 @@ class Suppliers::ResumesController < Suppliers::BaseController
           job = Job.find(params[:job_id])
           job.delivery!(resume)
         end
-        flash[:success] = '简历上传成功，我们会尽快完成审核，请耐心等待。'
+        flash[:success] = '简历上传成功。我们会尽快审核，请耐心等待。'
       else
         flash[:error] = resume.errors.full_messages
       end
@@ -27,6 +27,6 @@ class Suppliers::ResumesController < Suppliers::BaseController
   private
 
   def resume_params
-    params[:resume].permit(:candidate_name, :tag_list, :attachment, :mobile)
+    params[:resume].permit(:candidate_name, :tag_list, :attachment, :mobile, :auto_delivery)
   end
 end

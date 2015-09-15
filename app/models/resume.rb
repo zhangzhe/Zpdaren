@@ -2,9 +2,10 @@ class Resume < ActiveRecord::Base
   has_many :deliveries
   has_many :jobs, through: :deliveries
   belongs_to :supplier
-
   validates_presence_of :candidate_name, :mobile, :attachment
   default_scope { order('created_at DESC') }
+  after_update :auto_deliver
+  include SimilarEntity
 
   acts_as_taggable
   acts_as_taggable_on :skills, :interests
@@ -36,6 +37,16 @@ class Resume < ActiveRecord::Base
 
   def deliveried?(job)
     jobs.include?(job)
+  end
+
+  def auto_deliver
+    matching_jobs.each do |job|
+      job.delivery!(self) if (self.auto_delivery? && !Delivery.find_by_resume_id_and_job_id(self.id, job.id))
+    end
+  end
+
+  def matching_jobs
+    similar_entity(Job)
   end
 
   private

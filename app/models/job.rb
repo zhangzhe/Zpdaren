@@ -12,6 +12,7 @@ class Job < ActiveRecord::Base
   scope :approved, -> { where('state' => 'approved')}
   scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'approved']) }
   default_scope { order('created_at DESC') }
+  include SimilarEntity
 
   acts_as_taggable
   acts_as_taggable_on :skills, :interests
@@ -130,22 +131,20 @@ class Job < ActiveRecord::Base
 
   def deliver_matching_resumes
     matching_resumes.each do |resume|
-      self.delivery!(resume) unless Delivery.find_by_resume_id_and_job_id(resume.id, self.id)
+      self.delivery!(resume) if (resume.auto_delivery? && !Delivery.find_by_resume_id_and_job_id(resume.id, self.id))
     end
   end
 
   def matching_resumes
-    in_group_size = (Job.find(4).tags.count*0.6).round
-    groups = Job.find(4).tags.map(&:name).combination(in_group_size).to_a
-    result = []
-    groups.each do |tags|
-      resumes = Resume.tagged_with(tags)
-      result << resumes unless resumes.blank?
-    end
-    result.flatten.uniq
+    similar_entity(Resume)
+  end
+
+  def similar_jobs
+    similar_entity(Job)
   end
 
   private
+
   def notify_recruiter
     RecruiterMailer.email_jd_approved(recruiter, self).deliver_now
   end
