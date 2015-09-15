@@ -3,7 +3,6 @@ class Suppliers::JobsController < Suppliers::BaseController
 
   def index
     @jobs = Job.approved
-
   end
 
   def show

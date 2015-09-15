@@ -12,6 +12,7 @@ class Job < ActiveRecord::Base
   scope :approved, -> { where('state' => 'approved')}
   scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'approved']) }
   default_scope { order('created_at DESC') }
+  include SimilarEntity
 
   acts_as_taggable
   acts_as_taggable_on :skills, :interests
@@ -143,22 +144,6 @@ class Job < ActiveRecord::Base
   end
 
   private
-  def similar_entity(entity)
-    result = []
-    tag_group.each do |tags|
-      entities = entity.tagged_with(tags)
-      result << entities unless entities.blank?
-    end
-    result.flatten.uniq
-  end
-
-  def tag_group
-    self.tags.map(&:name).combination(group_size).to_a
-  end
-
-  def group_size
-    (self.tags.count*0.6).round
-  end
 
   def notify_recruiter
     RecruiterMailer.email_jd_approved(recruiter, self).deliver_now

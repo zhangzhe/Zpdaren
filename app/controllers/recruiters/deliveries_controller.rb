@@ -3,7 +3,7 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
     @deliveries = []
     if params[:job_id]
       @job = Job.find(params[:job_id])
-      @deliveries = @job.deliveries.paid
+      @deliveries = @job.deliveries
     else
       jobs = current_recruiter.jobs
       jobs.map do |job|
