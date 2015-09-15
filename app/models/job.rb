@@ -130,22 +130,36 @@ class Job < ActiveRecord::Base
 
   def deliver_matching_resumes
     matching_resumes.each do |resume|
-      self.delivery!(resume) unless Delivery.find_by_resume_id_and_job_id(resume.id, self.id)
+      self.delivery!(resume) if (resume.auto_delivery? && !Delivery.find_by_resume_id_and_job_id(resume.id, self.id))
     end
   end
 
   def matching_resumes
-    in_group_size = (Job.find(4).tags.count*0.6).round
-    groups = Job.find(4).tags.map(&:name).combination(in_group_size).to_a
+    similar_entity(Resume)
+  end
+
+  def similar_jobs
+    similar_entity(Job)
+  end
+
+  private
+  def similar_entity(entity)
     result = []
-    groups.each do |tags|
-      resumes = Resume.tagged_with(tags)
-      result << resumes unless resumes.blank?
+    tag_group.each do |tags|
+      entities = entity.tagged_with(tags)
+      result << entities unless entities.blank?
     end
     result.flatten.uniq
   end
 
-  private
+  def tag_group
+    self.tags.map(&:name).combination(group_size).to_a
+  end
+
+  def group_size
+    (self.tags.count*0.6).round
+  end
+
   def notify_recruiter
     RecruiterMailer.email_jd_approved(recruiter, self).deliver_now
   end

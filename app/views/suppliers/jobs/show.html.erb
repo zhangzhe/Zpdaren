@@ -22,13 +22,12 @@
   </p>
 
   <p>
-    <h4>相关其他职位需求</h4>
+    <h4>更多类似职位需求</h4>
     <ol class="list-unstyled">
-      <li><a href="#"><%= @job.title %></a></li>
-      <li><a href="#"><%= @job.title %></a></li>
-      <li><a href="#"><%= @job.title %></a></li>
-      <li><a href="#"><%= @job.title %></a></li>
-      <li><a href="#"><%= @job.title %></a></li>
+
+      <% @similar_jobs.each do |job| %>
+        <li><%= link_to job.title, suppliers_job_path(job) %></a></li>
+      <% end %>
     </ol>
   </p>
 <% end %>

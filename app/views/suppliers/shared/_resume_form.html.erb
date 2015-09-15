@@ -17,6 +17,11 @@
           <p>
             <%= f.text_field 'tag_list', class: "form-control", :placeholder => "简历标签(*多个标签以','隔开)" %>
           </p>
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :auto_delivery, {checked: true} %> 设置自动托管（如果设置，之后一旦有匹配的职位出现，您的简历会被自动推荐。您将会收到更多的简历红包和入职红包。）
+            </label>
+          </div>
           <p>
             <%= f.file_field 'attachment' %>
           </p>

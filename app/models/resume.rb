@@ -11,6 +11,36 @@ class Resume < ActiveRecord::Base
 
   mount_uploader :attachment, FileUploader
 
+  after_update :auto_deliver
+
+  def auto_deliver
+    matching_jobs.each do |job|
+      # job state check, only for needed
+      job.delivery!(self) if (self.auto_delivery? && !Delivery.find_by_resume_id_and_job_id(self.id, job.id))
+    end
+  end
+
+  def matching_jobs
+    similar_entity(Job)
+  end
+
+  def similar_entity(entity)
+    result = []
+    tag_group.each do |tags|
+      entities = entity.tagged_with(tags)
+      result << entities unless entities.blank?
+    end
+    result.flatten.uniq
+  end
+
+  def tag_group
+    self.tags.map(&:name).combination(group_size).to_a
+  end
+
+  def group_size
+    (self.tags.count*0.6).round
+  end
+
   include AASM
   aasm.attribute_name :state
   aasm do

@@ -3,10 +3,12 @@ class Suppliers::JobsController < Suppliers::BaseController
 
   def index
     @jobs = Job.approved
+
   end
 
   def show
     @job = Job.find(params[:id])
+    @similar_jobs = @job.similar_jobs
     render layout: 'jobs'
   end
 
