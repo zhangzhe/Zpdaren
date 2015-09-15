@@ -14,6 +14,22 @@ class Weixin < ActiveRecord::Base
       Faraday.new(:url => 'https://api.weixin.qq.com')
     end
 
+    def send_subscribe_notification_to(subscribe_user)
+      response = Weixin.conn.get '/cgi-bin/token', { :appid => Weixin.mp_appid, :secret => Weixin.mp_secret, :grant_type => "client_credential" }
+      response_result = JSON(response.body)
+      message = {
+        touser: subscribe_user.name,
+        msgtype: 'text',
+        text: {
+          content: '您好，欢迎关注众聘达人！'
+        }
+      }
+      response = Weixin.conn.post do |req|
+        req.url "/cgi-bin/message/custom/send?access_token=#{response_result['access_token']}"
+        req.body = message.to_json
+      end
+    end
+
     def notify_resume_approved(resume)
       # {{first.DATA}}
       # 变动金额：{{keyword1.DATA}}

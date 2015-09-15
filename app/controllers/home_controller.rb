@@ -9,7 +9,8 @@ class HomeController < ApplicationController
     if params["xml"] && params["xml"]["Event"] == "subscribe" && params["xml"]["EventKey"]
       user_id = params["xml"]["EventKey"].split("_").last.to_i
       user = User.find(user_id)
-      user.create_weixin(:user_name => params["xml"]["FromUserName"])
+      subscribe_user = user.create_weixin(:user_name => params["xml"]["FromUserName"])
+      Weixin.send_subscribe_notification_to(subscribe_user)
       render :nothing => true
     elsif params["xml"] && params["xml"]["Event"] == "unsubscribe" && params["xml"]["EventKey"]
       weixin = Weixin.where(:user_name => params["xml"]["FromUserName"]).take
