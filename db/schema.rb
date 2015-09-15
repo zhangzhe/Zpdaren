@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20150915044549) do
     t.text     "description"
     t.integer  "supplier_id"
     t.string   "state"
+    t.boolean  "auto_delivery"
   end
 
   create_table "taggings", force: :cascade do |t|

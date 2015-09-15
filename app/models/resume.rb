@@ -2,9 +2,9 @@ class Resume < ActiveRecord::Base
   has_many :deliveries
   has_many :jobs, through: :deliveries
   belongs_to :supplier
-
   validates_presence_of :candidate_name, :mobile, :attachment
   default_scope { order('created_at DESC') }
+  include SimilarEntity
 
   acts_as_taggable
   acts_as_taggable_on :skills, :interests
@@ -17,7 +17,7 @@ class Resume < ActiveRecord::Base
     state :submitted, :initial => true
     state :approved
 
-    event :approve , :after => :notify_recruiter_and_supplier do
+    event :approve , :after => :notify_recruiter_and_supplier_and_auto_deliver do
       transitions :from => :submitted, :to => :approved
     end
   end
@@ -38,13 +38,24 @@ class Resume < ActiveRecord::Base
     jobs.include?(job)
   end
 
+  def auto_deliver
+    matching_jobs.each do |job|
+      job.delivery!(self) if (self.auto_delivery? && !Delivery.find_by_resume_id_and_job_id(self.id, job.id))
+    end
+  end
+
+  def matching_jobs
+    similar_entity(Job)
+  end
+
   private
-  def notify_recruiter_and_supplier
+  def notify_recruiter_and_supplier_and_auto_deliver
     # email for recruiter
     deliveries.each do |deliver|
       deliver.notify_recruiter
     end
     # weixin for supplier
     Weixin.notify_resume_approved(self) if self.supplier.weixin
+    auto_deliver
   end
 end

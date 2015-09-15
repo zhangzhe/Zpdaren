@@ -67,8 +67,6 @@ class Delivery < ActiveRecord::Base
     end
   end
 
-  private
-
   def viewed_at_update
     self.update_attribute(:viewed_at, Time.now)
   end
