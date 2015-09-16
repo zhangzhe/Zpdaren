@@ -144,10 +144,10 @@ class Job < ActiveRecord::Base
 
   def update_and_approve(job_params)
     self.attributes = job_params
-    p "***************************#{self.changed? && self.valid?}"
-    RecruiterMailer.edit_job_notify(self).deliver_now if self.changed? && self.valid?
-    self.save!
-    self.approve!
+    if self.changed? and self.save!
+      RecruiterMailer.edit_job_notify(self).deliver_now
+      self.approve!
+    end
   end
 
   private
