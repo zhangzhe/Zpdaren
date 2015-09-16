@@ -8,16 +8,15 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <% active = controller.class == Suppliers::JobsController ? "active" : "" %>
+            <% active = active_for?(Suppliers::JobsController) %>
             <li class="<%= active %>"><%= link_to "我收到的职位", suppliers_jobs_path %></li>
-            <% active = controller.class == Suppliers::ResumesController ? "active" : "" %>
+            <% active = active_for?(Suppliers::ResumesController) %>
             <li class="<%= active %>"><%= link_to "我的简历", suppliers_resumes_path %></li>
-            <% active = controller.class == Suppliers::DeliveriesController ? "active" : "" %>
+            <% active = active_for?(Suppliers::DeliveriesController) %>
             <li class="<%= active %>"><%= link_to "我的推荐", suppliers_deliveries_path %></li>
-
-            <% active = controller.class == Suppliers::UsersController ? "active" : "" %>
+            <% active = active_for?(Suppliers::UsersController) %>
             <li class="<%= active %>"><%= link_to "个人中心", suppliers_user_path(current_supplier) %></li>
-            <% active = controller.class == Suppliers::DrawingsController ? "active" : "" %>
+            <% active = active_for?(Suppliers::DrawingsController) %>
             <li class="<%= active %>"><%= link_to "提现历史", suppliers_drawings_path %></li>
           </ul>
         </div>
