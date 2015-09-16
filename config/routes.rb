@@ -10,12 +10,14 @@ Rails.application.routes.draw do
     sessions: 'authentication/recruiters/sessions',
     registrations: 'authentication/recruiters/registrations',
     passwords: 'authentication/recruiters/passwords',
+    confirmations: 'authentication/recruiters/confirmations'
   }
 
   devise_for :suppliers, controllers: {
     sessions: 'authentication/suppliers/sessions',
     registrations: 'authentication/suppliers/registrations',
     passwords: 'authentication/suppliers/passwords',
+    confirmations: 'authentication/suppliers/confirmations'
   }
 
   devise_for :admins, controllers: {
