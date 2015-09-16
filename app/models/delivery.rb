@@ -1,11 +1,11 @@
 class Delivery < ActiveRecord::Base
   belongs_to :job
   belongs_to :resume
-  has_one :reject
+  has_one :rejection
 
   delegate :candidate_name, :tag_list, :mobile, :email, to: :resume, prefix: true
   delegate :id, :title, to: :job, prefix: true
-  delegate :reason, :other, to: :reject, prefix: true
+  delegate :reason, :other, to: :rejection, prefix: true
 
   scope :paid, -> { where(state: 'paid') }
   scope :recommended, -> { where(state: 'recommended') }

@@ -1,6 +1,6 @@
-class CreateRejects < ActiveRecord::Migration
+class CreateRejections < ActiveRecord::Migration
   def change
-    create_table :rejects do |t|
+    create_table :rejections do |t|
       t.integer :delivery_id
       t.string :reason
       t.text :other
