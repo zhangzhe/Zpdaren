@@ -22,7 +22,7 @@
               <% end %>
             </p>
             <p>
-              <%= delivery.viewed_at.strftime("%Y-%m-%d %H:%m") if delivery.viewed? && delivery.viewed_at %>
+              <%= delivery.read_at.strftime("%Y-%m-%d %H:%m") if delivery.read? %>
             </p>
           </td>
         </tr>

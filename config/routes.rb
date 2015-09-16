@@ -67,7 +67,6 @@ Rails.application.routes.draw do
       member do
         put :pay
         put :final_pay
-        put :refuse
       end
     end
     resources :refund_requests, only: [:index, :new, :create]

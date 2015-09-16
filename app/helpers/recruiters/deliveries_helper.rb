@@ -3,8 +3,6 @@ module Recruiters::DeliveriesHelper
     case delivery.state.to_sym
     when :submitted
       '未查看'
-    when :viewed
-      '已查看'
     when :paid
       '已付费'
     when :refused

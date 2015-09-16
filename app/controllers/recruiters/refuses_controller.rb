@@ -10,8 +10,9 @@ class Recruiters::RefusesController < Recruiters::BaseController
       flash[:error] = refuse.errors.messages[:reason]
       redirect_to :back
     else
-      reason.delivery.refuse!
-      redirect_to recruiters_delivery_path(refuse.delivery)
+      delivery = refuse.delivery
+      delivery.refuse! if delivery.recommended? && delivery.may_refuse?
+      redirect_to recruiters_delivery_path(delivery)
     end
   end
 
