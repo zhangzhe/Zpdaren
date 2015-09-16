@@ -84,11 +84,32 @@ class Weixin < ActiveRecord::Base
       \"color\":\"#173177\"
       },
       \"remark\":{
-      \"value\":\"您可以随时登录Epin领取。感谢您的推荐。\",
+      \"value\":\"您可以随时登录众聘达人领取。感谢您的推荐。\",
       \"color\":\"#173177\"
       }}}"
       end
        response_result = JSON(response.body)
+    end
+
+    def notify_resume_refused(delivery)
+      response = Weixin.conn.get '/cgi-bin/token', { :appid => Weixin.mp_appid, :secret => Weixin.mp_secret, :grant_type => "client_credential" }
+      response_result = JSON(response.body)
+      response = Weixin.conn.post do |req|
+        req.url "/cgi-bin/message/template/send?access_token=#{response_result['access_token']}"
+        req.body =  "{ \"touser\":\"#{delivery.resume.supplier.weixin_name}\", \"template_id\":\"N7X9PhMz8Ezgj_6mXBu_zJOVlvvCZlYq4JV3Uxl3eGA\", \"url\":\"http://#{Setting.domain.host}\",\"topcolor\":\"#FF0000\", \"data\": {
+      \"first\": {
+      \"value\":\"#{delivery.resume.supplier.email}, 您好！您推荐的#{delivery.resume.candidate_name},被#{delivery.job.title}拒绝\",
+      \"color\":\"#173177\"
+      },
+      \"keyword2\":{
+      \"value\":\"#{Time.now.localtime.to_s(:db)}\",
+      \"color\":\"#173177\"
+      },
+      \"remark\":{
+      \"value\":\"详情您可以随时登录众聘达人查看。感谢您的推荐。\",
+      \"color\":\"#173177\"
+      }}}"
+      end
     end
 
     private

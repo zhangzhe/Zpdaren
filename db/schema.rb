@@ -86,6 +86,14 @@ ActiveRecord::Schema.define(version: 20150916060551) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "rejections", force: :cascade do |t|
+    t.integer  "delivery_id"
+    t.string   "reason"
+    t.text     "other"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "resumes", force: :cascade do |t|
     t.string   "candidate_name"
     t.text     "attachment"

@@ -17,6 +17,9 @@
           <td>
             <p>
               <%= Suppliers::DeliveriesHelper.state_show(delivery) %>
+              <% if delivery.refused? && delivery.rejection %>
+                <a class="resumesForJob" tabindex="0" data-placement="bottom" role="button" data-toggle="popover" data-trigger="focus" data-content="<%= delivery.rejection_reason.push(delivery.rejection_other).each {|reason| p reason }.join(',') %>" title="">原因</a>
+              <% end %>
             </p>
             <p>
               <%= delivery.read_at.strftime("%Y-%m-%d %H:%m") if delivery.read? %>

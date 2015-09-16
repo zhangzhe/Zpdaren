@@ -65,11 +65,12 @@ Rails.application.routes.draw do
     resources :companies, only: [:show, :edit, :update]
     resources :deliveries, only: [:index, :show] do
       member do
-        get :pay
+        put :pay
         put :final_pay
       end
     end
     resources :refund_requests, only: [:index, :new, :create]
+    resources :rejections, only: [:new, :create]
   end
 
   namespace :suppliers do

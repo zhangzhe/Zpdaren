@@ -1,9 +1,11 @@
 class Delivery < ActiveRecord::Base
   belongs_to :job
   belongs_to :resume
+  has_one :rejection
 
   delegate :candidate_name, :tag_list, :mobile, :email, to: :resume, prefix: true
   delegate :id, :title, to: :job, prefix: true
+  delegate :reason, :other, to: :rejection, prefix: true
 
   scope :paid, -> { where(state: 'paid') }
   scope :recommended, -> { where(state: 'recommended') }
@@ -18,9 +20,14 @@ class Delivery < ActiveRecord::Base
   aasm do
     state :recommended, :initial => true
     state :paid
+    state :refused
 
     event :pay, :after => :notify_supplier_and_transfer_money do
       transitions :from => :recommended, :to => :paid
+    end
+
+    event :refuse do
+      transitions :from => :recommended, :to => :refused
     end
   end
 

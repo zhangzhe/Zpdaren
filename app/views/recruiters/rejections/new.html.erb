@@ -1,0 +1,22 @@
+<%= form_for Rejection.new, url: recruiters_rejections_path do |f| %>
+  <%= hidden_field_tag 'rejection[delivery_id]', @delivery.id %>
+  <p>
+    拒绝原因：
+  </p>
+  <p>
+    <%= check_box_tag 'rejection[reason][]',  "工作经验不足" %>工作经验不足
+  </p>
+  <p>
+    <%= check_box_tag 'rejection[reason][]', "专业不对口" %>专业不对口
+  </p>
+  <p>
+    <%= check_box_tag 'rejection[reason][]', "年龄太大" %>年龄太大
+  </p>
+  <p>
+    其他：
+  </p>
+  <p>
+    <%= text_area_tag 'rejection[other]', nil, class: "form-control", rows: 10 %>
+  </p>
+  <%= f.submit "提交", class: "btn btn-primary" %>
+<% end %>
