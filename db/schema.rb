@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20150916060551) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "refuses", force: :cascade do |t|
+  create_table "rejects", force: :cascade do |t|
     t.integer  "delivery_id"
     t.string   "reason"
     t.text     "other"

@@ -1,5 +1,6 @@
-class Refuse < ActiveRecord::Base
+class Reject < ActiveRecord::Base
   belongs_to :delivery
+  serialize :reason
   validates_presence_of :reason, message: '请填写拒绝原因！', if: :other_is_empty?
 
   after_create :notify_supplier

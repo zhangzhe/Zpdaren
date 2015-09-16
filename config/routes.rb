@@ -70,7 +70,7 @@ Rails.application.routes.draw do
       end
     end
     resources :refund_requests, only: [:index, :new, :create]
-    resources :refuses, only: [:new, :create]
+    resources :rejects, only: [:new, :create]
   end
 
   namespace :suppliers do

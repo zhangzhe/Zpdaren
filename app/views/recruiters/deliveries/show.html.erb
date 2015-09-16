@@ -11,5 +11,5 @@
 
   <p><%= simple_format @delivery.description %></p>
   <%= link_to "付费20元", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary active", role: "button", method: :put if @delivery.recommended? %>
-  <%= link_to "拒绝", new_recruiters_refuse_path(delivery_id: @delivery.id), class: "btn btn-primary active", role: "button" if @delivery.recommended? %>
+  <%= link_to "拒绝", new_recruiters_reject_path(delivery_id: @delivery.id), class: "btn btn-primary active", role: "button" if @delivery.recommended? %>
 </div>
