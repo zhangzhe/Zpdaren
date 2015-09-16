@@ -148,6 +148,13 @@ class Job < ActiveRecord::Base
     similar_entity(Job)
   end
 
+  def update_and_approve(job_params)
+    self.attributes = job_params
+    if self.changed? and self.save!
+      RecruiterMailer.edit_job_notify(self).deliver_now
+      self.approve!
+    end
+  end
   def in_hiring?
     !['freezing', 'finished'].include?(self.state)
   end
