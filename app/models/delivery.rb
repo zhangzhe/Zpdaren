@@ -36,6 +36,10 @@ class Delivery < ActiveRecord::Base
     read_at.blank?
   end
 
+  def approve!
+    self.update_attribute(:approved, true)
+  end
+
   def candidate_name
     resume.candidate_name
   end

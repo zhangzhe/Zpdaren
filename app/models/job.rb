@@ -10,7 +10,7 @@ class Job < ActiveRecord::Base
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
   scope :approved, -> { where('state' => 'approved')}
   scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'approved']) }
-  scope :in_hiring, -> { where('state in (?)', ['freezing', 'finished']) }
+  scope :in_hiring, -> { where.not('state in (?)', ['freezing', 'finished']) }
 
   default_scope { order('created_at DESC') }
   include SimilarEntity
@@ -144,10 +144,13 @@ class Job < ActiveRecord::Base
     similar_entity(Job)
   end
 
+  def in_hiring?
+    !['freezing', 'finished'].include?(self.state)
+  end
+
   private
   def notify_recruiter_and_deliver_matching_resumes
     RecruiterMailer.email_jd_approved(recruiter, self).deliver_now
-    debugger
     deliver_matching_resumes
   end
 

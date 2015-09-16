@@ -49,6 +49,10 @@ class Resume < ActiveRecord::Base
 
   private
   def notify_recruiter_and_supplier_and_auto_deliver
+    # set approved
+    deliveries.each do |deliver|
+      deliver.approve!
+    end
     # email for recruiter
     deliveries.each do |deliver|
       deliver.notify_recruiter
