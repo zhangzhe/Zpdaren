@@ -2,6 +2,7 @@ class RefundRequest < ActiveRecord::Base
   belongs_to :job
   delegate :title, :bonus, :description, :created_at, :deposit, to: :job, prefix: true
   default_scope { order('created_at DESC') }
+  scope :waiting_approved, -> { where('state' => 'submitted')}
 
   include AASM
   aasm.attribute_name :state

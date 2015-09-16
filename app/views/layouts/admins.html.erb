@@ -9,13 +9,27 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <% active = controller.class == Admins::JobsController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to '职位列表', admins_jobs_path %></li>
+
+           <li class="<%= active %>">
+             <%= link_to Job.waiting_approved.count > 0 ? "职位列表 <span class=\"badge\">#{Job.waiting_approved.count}</span>".html_safe : "职位列表", admins_jobs_path %>
+           </li>
+
             <% active = controller.class == Admins::ResumesController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to "简历列表", admins_resumes_path %></li>
+            <li class="<%= active %>">
+              <%= link_to Resume.waiting_approved.count > 0 ? "简历列表 <span class=\"badge\">#{Resume.waiting_approved.count}</span>".html_safe : "简历列表", admins_resumes_path %>
+            </li>
+
+
             <% active = controller.class == Admins::RefundRequestsController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to "退款申请", admins_refund_requests_path %></li>
+
+            <li class="<%= active %>">
+              <%= link_to RefundRequest.waiting_approved.count > 0 ? "退款申请 <span class=\"badge\">#{RefundRequest.waiting_approved.count}</span>".html_safe : "退款申请", admins_refund_requests_path %>
+            </li>
+
             <% active = controller.class == Admins::DrawingsController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to "提现申请", admins_drawings_path %></li>
+            <li class="<%= active %>">
+              <%= link_to Drawing.waiting_approved.count > 0 ? "提现申请 <span class=\"badge\">#{Drawing.waiting_approved.count}</span>".html_safe : "提现申请", admins_drawings_path %>
+            </li>
             <% active = controller.class == Admins::CompaniesController ? "active" : "" %>
             <li class="<%= active %>"><%= link_to "公司列表", admins_companies_path %></li>
             <% active = controller.class == Admins::UsersController ? "active" : "" %>
