@@ -10,6 +10,8 @@ class Job < ActiveRecord::Base
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
   scope :approved, -> { where('state' => 'approved')}
   scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'approved']) }
+  scope :in_hiring, -> { where.not('state in (?)', ['freezing', 'finished']) }
+
   default_scope { order('created_at DESC') }
   include SimilarEntity
 
@@ -46,12 +48,12 @@ class Job < ActiveRecord::Base
     end
   end
 
+  def unread_deliveries
+    self.deliveries.unread
+  end
+
   def approved_deliveries
-    result = []
-    self.deliveries.each do |delivery|
-      result << delivery if delivery.recommended? && delivery.resume.approved?
-    end
-    result
+    self.deliveries.approved
   end
 
   def resumes_bonus_for(supplier)
@@ -140,6 +142,10 @@ class Job < ActiveRecord::Base
 
   def similar_jobs
     similar_entity(Job)
+  end
+
+  def in_hiring?
+    !['freezing', 'finished'].include?(self.state)
   end
 
   private

@@ -9,9 +9,9 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <% active = controller.class == Recruiters::JobsController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to current_recruiter.jobs_num > 0 ? "我发布的职位 <span class=\"badge\">#{current_recruiter.jobs_num}</span>".html_safe : "我发布的职位", recruiters_jobs_path %></li>
+            <li class="<%= active %>"><%= link_to current_recruiter.jobs_count > 0 ? "我发布的职位 <span class=\"badge\">#{current_recruiter.in_hiring_jobs_count}/#{current_recruiter.jobs_count}</span>".html_safe : "我发布的职位", recruiters_jobs_path %></li>
             <% active = controller.class == Recruiters::DeliveriesController ? "active" : "" %>
-            <li class="<%= active %>"><%= link_to current_recruiter.deliveries_num > 0 ? "推荐给我的简历 <span class=\"badge\">#{current_recruiter.deliveries_num}</span>".html_safe : "推荐给我的简历", recruiters_deliveries_path %></li>
+            <li class="<%= active %>"><%= link_to current_recruiter.approved_resumes_count > 0 ? "推荐给我的简历 <span class=\"badge\">#{current_recruiter.unread_resumes_count}/#{current_recruiter.approved_resumes_count}</span>".html_safe : "推荐给我的简历", recruiters_deliveries_path %></li>
             <% active = controller.class == Recruiters::CompaniesController ? "active" : "" %>
             <li class="<%= active %>"><%= link_to "公司信息", recruiters_company_path(current_recruiter.company) %></li>
             <% active = controller.class == Recruiters::RefundRequestsController ? "active" : "" %>
