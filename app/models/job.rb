@@ -48,6 +48,10 @@ class Job < ActiveRecord::Base
     end
   end
 
+  def self.waiting_approved
+    deposit_paid
+  end
+
   def unread_deliveries
     self.deliveries.unread
   end

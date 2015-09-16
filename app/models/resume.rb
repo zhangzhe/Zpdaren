@@ -4,6 +4,7 @@ class Resume < ActiveRecord::Base
   belongs_to :supplier
   validates_presence_of :candidate_name, :mobile, :attachment
   default_scope { order('created_at DESC') }
+  scope :waiting_approved, -> { where('state' => 'submitted')}
 
   acts_as_taggable
   acts_as_taggable_on :skills, :interests
