@@ -1,7 +1,7 @@
 class Delivery < ActiveRecord::Base
   belongs_to :job
   belongs_to :resume
-  has_one :refuse_reason
+  has_one :refuse
 
   delegate :candidate_name, :tag_list, :mobile, :email, to: :resume, prefix: true
   delegate :id, :title, to: :job, prefix: true
