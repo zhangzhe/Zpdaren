@@ -1,6 +1,7 @@
 class Drawing < ActiveRecord::Base
   belongs_to :supplier
   has_one :wallet, through: :supplier
+  scope :waiting_approved, -> { where('state' => 'submitted')}
 
   include AASM
 

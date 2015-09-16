@@ -2,7 +2,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>职位名称</th>
+        <th>推荐给</th>
         <th>被推荐人</th>
         <th>推荐时间</th>
         <th>状态</th>
@@ -19,7 +19,7 @@
               <%= Suppliers::DeliveriesHelper.state_show(delivery) %>
             </p>
             <p>
-              <%= delivery.viewed_at.strftime("%Y-%m-%d %H:%m") if delivery.viewed? && delivery.viewed_at %>
+              <%= delivery.read_at.strftime("%Y-%m-%d %H:%m") if delivery.read? %>
             </p>
           </td>
         </tr>

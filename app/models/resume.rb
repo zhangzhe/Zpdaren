@@ -4,13 +4,13 @@ class Resume < ActiveRecord::Base
   belongs_to :supplier
   validates_presence_of :candidate_name, :mobile, :attachment
   default_scope { order('created_at DESC') }
-  include SimilarEntity
+  scope :waiting_approved, -> { where('state' => 'submitted')}
 
   acts_as_taggable
   acts_as_taggable_on :skills, :interests
-
   mount_uploader :attachment, FileUploader
 
+  include SimilarEntity
   include AASM
   aasm.attribute_name :state
   aasm do
@@ -50,6 +50,10 @@ class Resume < ActiveRecord::Base
 
   private
   def notify_recruiter_and_supplier_and_auto_deliver
+    # set approved
+    deliveries.each do |deliver|
+      deliver.approve!
+    end
     # email for recruiter
     deliveries.each do |deliver|
       deliver.notify_recruiter

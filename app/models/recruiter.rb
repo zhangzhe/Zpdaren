@@ -5,17 +5,20 @@ class Recruiter < User
   has_many :jobs, :foreign_key => :user_id
   before_create :init_blank_comapny
 
-  def jobs_num
+  def jobs_count
     self.jobs.available.count > 100 ? '99+' : self.jobs.count
   end
 
-  def deliveries_num
-    deliveries = []
-    self.jobs.map do |job|
-      deliveries << job.approved_deliveries unless job.deliveries.recommended.blank?
-    end
-    deliveries.flatten!
-    deliveries.count > 100 ? '99+' : deliveries.count
+  def in_hiring_jobs_count
+    self.jobs.in_hiring.count
+  end
+
+  def unread_resumes_count
+    self.jobs.map(&:unread_deliveries).flatten.count
+  end
+
+  def approved_resumes_count
+    self.jobs.map(&:approved_deliveries).flatten.count
   end
 
   private
