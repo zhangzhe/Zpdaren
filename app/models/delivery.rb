@@ -7,6 +7,8 @@ class Delivery < ActiveRecord::Base
 
   scope :paid, -> { where(state: 'paid') }
   scope :recommended, -> { where(state: 'recommended') }
+  scope :unread, -> { where('read_at' => nil, 'approved' => true) }
+  scope :approved, -> { where('approved' => true) }
 
   after_create :notify_recruiter, if: Proc.new { self.resume.approved? }
   default_scope { order('created_at DESC') }
@@ -15,16 +17,23 @@ class Delivery < ActiveRecord::Base
   aasm.attribute_name :state
   aasm do
     state :recommended, :initial => true
-    state :viewed
     state :paid
 
-    event :view, after: :viewed_at_update do
-      transitions :from => :recommended, :to => :viewed
-    end
-
     event :pay, :after => :notify_supplier_and_transfer_money do
-      transitions :from => :viewed, :to => :paid
+      transitions :from => :recommended, :to => :paid
     end
+  end
+
+  def read!
+    self.update_attribute(:read_at, Time.now)
+  end
+
+  def read?
+    !unread?
+  end
+
+  def unread?
+    read_at.blank?
   end
 
   def candidate_name
@@ -59,9 +68,5 @@ class Delivery < ActiveRecord::Base
       resume.supplier.receive(bonus)
       recruiter.pay(bonus)
     end
-  end
-
-  def viewed_at_update
-    self.update_attribute(:viewed_at, Time.now)
   end
 end

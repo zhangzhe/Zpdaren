@@ -13,8 +13,7 @@
     <thead>
       <tr>
         <th>投递职位</th>
-        <th>被推荐人</th>
-        <th>标签</th>
+        <th>简历标签</th>
         <th>简历状态</th>
         <th>尾款状态</th>
         <th>操作</th>
@@ -25,9 +24,13 @@
         <% if delivery.resume && delivery.resume.approved? %>
           <tr>
             <td>
-              <%= link_to delivery.job_title, recruiters_delivery_path(delivery) %>
+              <% link_to_resume = link_to delivery.job_title, recruiters_delivery_path(delivery) %>
+              <% if delivery.unread? %>
+                <strong><%= link_to_resume %></strong>
+              <% else %>
+                <%= link_to_resume %>
+              <% end %>
             </td>
-            <td><%= delivery.resume_candidate_name %></td>
             <td><%= delivery.resume_tag_list %></td>
             <td><%= delivery.paid? ? "已付费" : "未付费" %></td>
             <td><%= delivery.job.final_payment_request ? (delivery.job.finished? ? '已付尾款' : '尾款支付中...') : '未付尾款' %></td>
