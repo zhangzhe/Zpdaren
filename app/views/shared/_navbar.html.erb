@@ -25,7 +25,7 @@
           <% end %>
         <% end %>
 
-        <% if signed_in? %>
+        <% if current_user %>
           <li><%= link_to "退出", destroy_admin_session_path, :method => "DELETE" %></li>
         <% else %>
 

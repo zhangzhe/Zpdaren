@@ -61,3 +61,4 @@ gem 'actionpack-xml_parser'
 gem "faraday"
 gem 'certified'
 gem 'config'
+gem 'devise-i18n'

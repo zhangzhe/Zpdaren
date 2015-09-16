@@ -26,5 +26,6 @@ module Epin
     config.active_record.raise_in_transactional_callbacks = true
     config.middleware.use PDFKit::Middleware, :print_media_type => true
     config.middleware.insert_after ActionDispatch::ParamsParser, ActionDispatch::XmlParamsParser
+    config.i18n.default_locale = "zh-CN"
   end
 end
