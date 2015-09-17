@@ -4,8 +4,26 @@
       <tr>
         <th>职位名称</th>
         <th>简历数量</th>
-        <th>红包</th>
-        <th>发布时间</th>
+        <th>
+          <%= sortable '红包', 'bonus' %>
+          <% if sort_column == 'bonus' %>
+            <% if sort_direction == 'DESC' %>
+              <i class="fa fa-caret-down"></i>
+            <% else %>
+              <i class="fa fa-caret-up"></i>
+            <% end %>
+          <% end %>
+        </th>
+        <th>
+          <%= sortable '发布时间', 'created_at' %>
+          <% if sort_column == 'created_at' %>
+            <% if sort_direction == 'DESC' %>
+              <i class="fa fa-caret-down"></i>
+            <% else %>
+              <i class="fa fa-caret-up"></i>
+            <% end %>
+          <% end %>
+        </th>
         <th>操作/状态</th>
       </tr>
     </thead>

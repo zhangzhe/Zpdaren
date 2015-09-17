@@ -5,6 +5,16 @@
         <th>推荐人</th>
         <th>标签</th>
         <th>简历原件</th>
+        <th>
+          <%= sortable '推荐时间', 'created_at' %>
+          <% if sort_column == 'created_at' %>
+            <% if sort_direction == 'DESC' %>
+              <i class="fa fa-caret-down"></i>
+            <% else %>
+              <i class="fa fa-caret-up"></i>
+            <% end %>
+          <% end %>
+        </th>
         <th>状态/操作</th>
       </tr>
     </thead>
@@ -13,7 +23,9 @@
         <tr>
           <td><%= resume.candidate_name %></td>
           <td><%= resume.tag_list %></td>
-          <td><%= link_to resume.attachment.file.file.split('/')[-1], original_resume_download_admins_resume_path(resume[:id]) %></td>
+          <td><%= link_to resume.attachment.file.file.split('/')[-1], original_resume_download_admins_resume_path(resume[:id]) %>
+          </td>
+          <td><%= resume.created_at.localtime.to_s(:db) %></td>
           <td>
             <% if resume.approved? %>
               已审核
