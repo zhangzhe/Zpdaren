@@ -61,3 +61,5 @@ gem 'actionpack-xml_parser'
 gem "faraday"
 gem 'certified'
 gem 'config'
+gem 'will_paginate', '~> 3.0.7'
+

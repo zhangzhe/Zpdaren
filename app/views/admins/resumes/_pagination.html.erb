@@ -1,0 +1,19 @@
+<nav>
+  <ul class="pagination">
+    <% if params[:page].to_i > 1 %>
+      <li>
+        <%= link_to raw("<span aria-hidden=\"true\">&laquo;</span>"), admins_resumes_path(page: params[:page].to_i - 1, key: params[:key]), 'aria-label' => 'Previous' %>
+      </li>
+    <% end %>
+    <% 1.upto(total_page).each do |page| %>
+      <li class="<%= params[:page].to_i == page ? 'active' : '' %>">
+        <%= link_to page, admins_resumes_path(page: page, key: params[:key]) %>
+      </li>
+    <% end %>
+    <% if (total_page > 0) && (params[:page].to_i < total_page) %>
+      <li>
+        <%= link_to raw("<span aria-hidden=\"true\">&raquo;</span>"), admins_resumes_path(page: params[:page].to_i + 1, key: params[:key]), 'aria-label' => 'Next' %>
+      </li>
+    <% end %>
+  </ul>
+</nav>
