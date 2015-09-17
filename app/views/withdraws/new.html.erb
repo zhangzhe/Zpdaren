@@ -1,0 +1,25 @@
+<ol class="breadcrumb">
+  <li>
+    <%= link_to '账户管理', recruiters_path %>
+  </li>
+  <li class="active">提现到支付宝</li>
+</ol>
+<div>
+
+  <%= form_for @withdraw, html: {class: "form-inline"} do |f| %>
+    <div class="form-group">
+      <label for="exampleInputEmail2">收款支付宝账号</label>
+      <%= f.text_field :zhifubao_account, class: "form-control", placeholder: "收款支付宝账号" %>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon">￥</div>
+          <%= f.text_field :amount, class: "form-control", placeholder: "提现金额" %>
+          <div class="input-group-addon">.00</div>
+        </div>
+    </div>
+
+    <%= f.submit "确认提现", class: "btn btn-primary" %>
+  <% end %>
+
+</div>

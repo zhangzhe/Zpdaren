@@ -1,4 +1,15 @@
 module ApplicationHelper
+  def current_user_account_path
+    case
+    when current_recruiter
+      recruiters_path
+    when current_supplier
+      suppliers_path
+    else
+      ""
+    end
+  end
+
   def active_for?(current_controller)
     controller.class == current_controller ? "active" : ""
   end
