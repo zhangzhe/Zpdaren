@@ -1,33 +1,5 @@
-<div class="table-responsive">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>职位名称</th>
-        <th>简历数量</th>
-        <th>红包</th>
-        <th>发布时间</th>
-        <th>操作/状态</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @jobs.each do |job| %>
-        <tr>
-          <td><%= link_to job.title, edit_admins_job_path(job.id) %></td>
-          <td><%= job.resumes.count %></td>
-          <td><%= job.bonus %></td>
-          <td><%= job.created_at.localtime.to_s(:db) %></td>
-          <td>
-            <% if job.deposit_paid? %>
-              <%= link_to "审核", edit_admins_job_path(job.id), class: "btn btn-primary" %>
-            <% else  %>
-              <%= Recruiters::JobsHelper::state_show(job) %>
-            <% end %>
-            <% if job.final_payment_request && job.final_payment_request.submitted? %>
-              <%= link_to "收到尾款", complete_admins_job_path(job.id), class: "btn btn-primary", method: :put %>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<%= render 'search' %>
+<%= render 'list', jobs: @jobs %>
+<div class='text-center'>
+  <%= will_paginate @jobs, renderer: BootstrapPagination::Rails, previous_label: '上一页', next_label: '下一页' %>
 </div>

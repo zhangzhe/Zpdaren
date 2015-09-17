@@ -48,8 +48,10 @@ class Job < ActiveRecord::Base
     end
   end
 
-  def self.waiting_approved
-    deposit_paid
+  class << self
+    def waiting_approved
+      deposit_paid
+    end
   end
 
   def unread_deliveries
@@ -155,6 +157,7 @@ class Job < ActiveRecord::Base
       self.approve!
     end
   end
+
   def in_hiring?
     !['freezing', 'finished'].include?(self.state)
   end
