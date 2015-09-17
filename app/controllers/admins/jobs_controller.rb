@@ -1,5 +1,4 @@
 class Admins::JobsController < Admins::BaseController
-  before_action :set_page, only: [:index, :search]
 
   def index
     if params[:key].present?
@@ -38,17 +37,5 @@ class Admins::JobsController < Admins::BaseController
   private
   def job_params
     params.require(:job).permit(:title, :description, :tag_list)
-  end
-
-  def set_page
-    params[:page] ||= 1
-  end
-
-  def total_page(jobs)
-    if jobs.count % Settings.pagination.page_size == 0
-      jobs.count / Settings.pagination.page_size
-    else
-      jobs.count / Settings.pagination.page_size + 1
-    end
   end
 end
