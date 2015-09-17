@@ -12,10 +12,6 @@ module DeviseHelper
     html.html_safe
   end
 
-  def signed_in?
-    current_user
-  end
-
   def current_user
     current_admin || current_recruiter || current_supplier
   end
