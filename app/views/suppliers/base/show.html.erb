@@ -1,0 +1,7 @@
+<div>
+<h3>账户余额</h3>
+  <%= current_supplier.wallet.money %>
+  <p>
+    <%= link_to "提现到支付宝", new_withdraw_path, :class => "btn btn-primary" %>
+  </p>
+</div>

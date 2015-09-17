@@ -10,10 +10,10 @@ class WithdrawsController < ApplicationController
       flash[:error] = "请输入正确的金额!"
       redirect_to :back
     else
-    current_user.wallet.create_withdraw_and_self_balance!(withdraw_params)
-    flash[:success] = "提现成功，提现金额 #{withdraw_params[:amount]} 元会在一个工作日内打入您的支付宝账号，请注意查收。"
-     redirect_to redirect_path
-  end
+      current_user.wallet.create_withdraw_and_self_balance!(withdraw_params)
+      flash[:success] = "提现成功，提现金额 #{withdraw_params[:amount]} 元会在一个工作日内打入您的支付宝账号，请注意查收。"
+      redirect_to redirect_path
+    end
 
   end
 

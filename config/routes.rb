@@ -51,11 +51,6 @@ Rails.application.routes.draw do
         put :refuse
       end
     end
-    resources :drawings, only: [:index] do
-      member do
-        put :review
-      end
-    end
   end
 
   namespace :recruiters do
@@ -84,7 +79,5 @@ Rails.application.routes.draw do
     resources :resumes, only: [:index, :create]
     resources :attentions, only: [:create]
     resources :deliveries, only: [:index, :new, :create]
-    resources :users, only: [:show]
-    resources :drawings, only: [:index,:create]
   end
 end
