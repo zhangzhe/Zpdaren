@@ -2,7 +2,12 @@ class Suppliers::ResumesController < Suppliers::BaseController
   layout "suppliers"
 
   def index
-    @resumes = current_supplier.resumes
+    if params[:key].present?
+      @resumes = current_supplier.resumes.tagged_with([params[:key]], any: true, wild: true)
+    else
+      @resumes = current_supplier.resumes
+    end
+    @resumes = @resumes.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def create

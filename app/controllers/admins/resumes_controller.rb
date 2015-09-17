@@ -2,10 +2,11 @@ class Admins::ResumesController < Admins::BaseController
 
   def index
     if params[:key].present?
-      @resumes = Resume.tagged_with([params[:key]], any: true, wild: true).paginate(page: params[:page], per_page: Settings.pagination.page_size)
+      @resumes = Resume.tagged_with([params[:key]], any: true, wild: true)
     else
-      @resumes = Resume.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+      @resumes = Resume.all
     end
+    @resumes = @resumes.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def edit

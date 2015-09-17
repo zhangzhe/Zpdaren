@@ -1,4 +1,4 @@
-<%= render 'search' %>
+<%= render 'admins/shared/search', url: admins_resumes_path, placeholder: '输入简历标签' %>
 <%= render 'list', resumes: @resumes %>
 <div class='text-center'>
   <%= will_paginate @resumes, renderer: BootstrapPagination::Rails, previous_label: '上一页', next_label: '下一页' %>

@@ -1,32 +1,7 @@
-<div class="table-responsive">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>姓名</th>
-        <th>标签</th>
-        <th>已推荐给</th>
-        <th>奖励</th>
-        <th>简历原件</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @resumes.each do |resume| %>
-        <tr>
-          <td><%= resume.candidate_name %></td>
-          <td><%= resume.tag_list %></td>
-          <td>
-          <% resume.deliveries.map(&:job).each do |job| %>
-            <%= link_to truncate("#{job.company_name}: #{job.title}"), suppliers_job_path(job), :target => "_blank" %> &nbsp;<br>
-          <% end %>
-          </td>
-          <td>获得红包<%= resume.resume_bonus %>元</td>
-          <td><%= link_to "下载", original_resume_download_admins_resume_path(resume[:id]) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <button class='btn btn-primary btn-lg active' data-toggle="modal" data-target="#newResumeModal">上传简历</button>
-
-  <%= render "/suppliers/shared/resume_form" %>
+<%= render 'suppliers/shared/search', url: suppliers_resumes_path, placeholder: '输入简历标签' %>
+<%= render 'list', resumes: @resumes %>
+<div class='text-center'>
+  <%= will_paginate @resumes, renderer: BootstrapPagination::Rails, previous_label: '上一页', next_label: '下一页' %>
 </div>
+<button class='btn btn-primary btn-lg active' data-toggle="modal" data-target="#newResumeModal">上传简历</button>
+<%= render "/suppliers/shared/resume_form" %>
