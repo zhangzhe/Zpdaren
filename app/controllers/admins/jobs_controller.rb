@@ -3,12 +3,10 @@ class Admins::JobsController < Admins::BaseController
 
   def index
     if params[:key].present?
-      @jobs = Job.where("title ilike ?", "%#{params[:key]}%")
+      @jobs = Job.where("title ilike ?", "%#{params[:key]}%").paginate(page: params[:page], per_page: Settings.pagination.page_size)
     else
-      @jobs = Job.all
+      @jobs = Job.paginate(page: params[:page], per_page: Settings.pagination.page_size)
     end
-    @total_page = total_page(@jobs)
-    @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def edit
