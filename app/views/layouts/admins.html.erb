@@ -14,8 +14,10 @@
             <li class="<%= active %>"><%= link_to "简历列表#{badge_for_admin(Resume)}".html_safe, admins_resumes_path %></li>
             <% active = active_for?(Admins::RefundRequestsController) %>
             <li class="<%= active %>"><%= link_to "退款申请#{badge_for_admin(RefundRequest)}".html_safe, admins_refund_requests_path %></li>
-            <% active = active_for?(Admins::DrawingsController) %>
-            <li class="<%= active %>"><%= link_to "提现申请#{badge_for_admin(Drawing)}".html_safe, admins_drawings_path %></li>
+
+            <% active = active_for?(Admins::MoneyTransfersController) %>
+            <li class="<%= active %>"><%= link_to "存款/提现确认#{badge_for_admin(MoneyTransfer)}".html_safe, admins_money_transfers_path %></li>
+
             <% active = active_for?(Admins::CompaniesController) %>
             <li class="<%= active %>"><%= link_to "公司列表", admins_companies_path %></li>
             <% active = active_for?(Admins::UsersController) %>

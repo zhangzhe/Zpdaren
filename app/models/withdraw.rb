@@ -1,0 +1,2 @@
+class Withdraw < MoneyTransfer
+end

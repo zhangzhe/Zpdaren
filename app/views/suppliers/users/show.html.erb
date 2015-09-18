@@ -1,4 +1,0 @@
-<p>可提现金额：<%= @supplier.wallet ? @supplier.wallet_money : 0 %>元</p>
-<p>
-  <%= link_to '申请提现', suppliers_drawings_path(drawing: {money: @supplier.wallet_money}), class: 'btn btn-primary active', method: :post if @supplier.wallet && @supplier.wallet_money.to_i > 0 %>
-</p>

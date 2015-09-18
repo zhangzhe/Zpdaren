@@ -1,0 +1,2 @@
+class Deposit < MoneyTransfer
+end

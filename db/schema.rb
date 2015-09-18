@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916090451) do
+ActiveRecord::Schema.define(version: 20150918031851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,14 +48,6 @@ ActiveRecord::Schema.define(version: 20150916090451) do
 
   add_index "deliveries", ["resume_id", "job_id"], name: "index_deliveries_on_resume_id_and_job_id", using: :btree
 
-  create_table "drawings", force: :cascade do |t|
-    t.integer  "supplier_id"
-    t.integer  "money"
-    t.string   "state"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "final_payment_requests", force: :cascade do |t|
     t.integer  "job_id"
     t.integer  "supplier_id"
@@ -77,6 +69,17 @@ ActiveRecord::Schema.define(version: 20150916090451) do
   end
 
   add_index "jobs", ["user_id"], name: "index_jobs_on_user_id", using: :btree
+
+  create_table "money_transfers", force: :cascade do |t|
+    t.string   "type"
+    t.integer  "amount"
+    t.integer  "wallet_id"
+    t.string   "state"
+    t.string   "zhifubao_account"
+    t.string   "string"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
   create_table "refund_requests", force: :cascade do |t|
     t.integer  "job_id"
@@ -127,6 +130,17 @@ ActiveRecord::Schema.define(version: 20150916090451) do
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
+  create_table "transfers", force: :cascade do |t|
+    t.string   "amount"
+    t.string   "integer"
+    t.string   "wallet_id"
+    t.string   "state"
+    t.string   "string"
+    t.string   "zhifubao_account"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -164,6 +178,15 @@ ActiveRecord::Schema.define(version: 20150916090451) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "withdraws", force: :cascade do |t|
+    t.integer  "amount"
+    t.integer  "wallet_id"
+    t.string   "state"
+    t.string   "zhifubao_account"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
 end

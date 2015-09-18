@@ -16,7 +16,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
-          <li><%= link_to current_user.email, "" %></li>
+          <li><%= link_to current_user.email, current_user_account_path %></li>
           <li><%= link_to current_user.wallet.money, "" %></li>
           <% if current_user.weixin.nil? %>
             <li>
