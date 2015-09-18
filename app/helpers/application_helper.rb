@@ -1,4 +1,15 @@
 module ApplicationHelper
+  def current_user_account_path
+    case
+    when current_recruiter
+      recruiters_path
+    when current_supplier
+      suppliers_path
+    else
+      ""
+    end
+  end
+
   def active_for?(current_controller)
     controller.class == current_controller ? "active" : ""
   end
@@ -13,5 +24,10 @@ module ApplicationHelper
 
   def badge_for_recruiter_resumes(recruiter)
     " <span class=\"badge\">#{recruiter.unread_resumes_count}/#{recruiter.approved_resumes_count}</span>" if (recruiter.approved_resumes_count > 0)
+  end
+
+  def sortable(title, column)
+    direction = (column == sort_column && sort_direction == "DESC") ? "ASC" : "DESC"
+    link_to title, {:sort => column, :direction => direction}
   end
 end

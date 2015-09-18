@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
+  resources :withdraws
   get 'qr_codes/show'
 
   root :to => 'passthrough#index'
   get 'home' => 'home#index'
   post 'check_signature' => 'home#check_signature'
   get 'check_signature' => 'home#check_signature'
+
+  get 'recruiters' => 'recruiters/base#show'
+  get 'suppliers' => 'suppliers/base#show'
 
   devise_for :recruiters, controllers: {
     sessions: 'authentication/recruiters/sessions',
@@ -34,6 +38,8 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :money_transfers, only: [:index, :update]
+
     resources :users, only: [:index]
     resources :companies, only: [:index, :show]
     resources :jobs, only: [:index, :show, :edit, :update] do
@@ -45,11 +51,6 @@ Rails.application.routes.draw do
       member do
         put :agree
         put :refuse
-      end
-    end
-    resources :drawings, only: [:index] do
-      member do
-        put :review
       end
     end
   end
@@ -80,17 +81,5 @@ Rails.application.routes.draw do
     resources :resumes, only: [:index, :create]
     resources :attentions, only: [:create]
     resources :deliveries, only: [:index, :new, :create]
-    resources :users, only: [:show]
-    resources :drawings, only: [:index,:create]
-  end
-
-  resources :resumes, except: [:new] do
-    collection do
-      get 'download'
-    end
-
-    member do
-      get 'download'
-    end
   end
 end

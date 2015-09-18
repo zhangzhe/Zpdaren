@@ -13,7 +13,7 @@
         <tr>
           <td><%= resume.candidate_name %></td>
           <td><%= resume.tag_list %></td>
-          <td><%= link_to resume.attachment.file.file.split('/')[-1], original_resume_download_admins_resume_path(resume[:id]) %></td>
+          <td><%= resume.attachment.file.file.split('/')[-1] %></td>
           <td>
             <% if resume.deliveried?(@job) %>
               已推荐

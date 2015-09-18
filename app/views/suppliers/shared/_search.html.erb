@@ -1,0 +1,12 @@
+<%= form_tag url, method: :get do %>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="input-group">
+        <%= text_field_tag 'key', nil, class: 'form-control', placeholder: placeholder %>
+        <span class="input-group-btn">
+          <%= submit_tag '搜索', class: 'btn btn-default' %>
+        </span>
+      </div>
+    </div>
+  </div>
+<% end %>

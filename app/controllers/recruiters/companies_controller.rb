@@ -5,11 +5,7 @@ class Recruiters::CompaniesController < Recruiters::BaseController
 
   def update
     @company = Company.update(params[:id], company_params)
-    redirect_to recruiters_company_path(@company)
-  end
-
-  def show
-    @company = Company.find(params[:id])
+    redirect_to recruiters_path
   end
 
   private
