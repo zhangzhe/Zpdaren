@@ -1,0 +1,22 @@
+<ol class="breadcrumb">
+  <li>
+    <%= link_to '我发布的职位', recruiters_jobs_path %>
+  </li>
+  <li>
+    <%= link_to @job.title, recruiters_jobs_path(@job.id) %>
+  </li>
+  <li class="active">预付定金</li>
+</ol>
+
+<div>
+  <%= form_for @job, url: recruiters_deposits_path, method: 'POST' do |f| %>
+    <%= f.hidden_field :id, value: @job.id %>
+    <%= f.hidden_field :deposit, value: (@job.bonus * 0.2).to_i %>
+
+    <p class="lead">请转账 <%= (@job.bonus * 0.2).to_i %> 元到支付宝账号：<%= Admin.admin.zhifubao_account %></p>
+    <p>
+      <%= f.submit '转账完成', class: 'btn btn-primary' %>
+      <%= link_to '稍后付', recruiters_jobs_path, class: 'btn btn-default' %>
+    </p>
+  <% end %>
+</div>
