@@ -8,7 +8,7 @@ class QrCodesController < ApplicationController
       req.url "/cgi-bin/qrcode/create?access_token=#{response_result['access_token']}"
       req.body = "{ \"expire_seconds\": 604800, \"action_name\": \"QR_SCENE\", \"action_info\": { \"scene\": { \"scene_id\": #{scene_id} } } }"
     end
-     response_result = JSON(response.body)
-     redirect_to "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=#{response_result['ticket']}"
+    response_result = JSON(response.body)
+    @ticket = response_result['ticket']
   end
 end

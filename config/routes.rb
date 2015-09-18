@@ -67,6 +67,9 @@ Rails.application.routes.draw do
     end
     resources :companies, only: [:show, :edit, :update]
     resources :deliveries, only: [:index, :show] do
+      collection do
+        get :paid_index
+      end
       member do
         put :pay
         put :final_pay
