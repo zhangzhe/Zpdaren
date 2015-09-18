@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :withdraws
+
+
+  resources :withdraws, only: [:new, :create]
+
   get 'qr_codes/show'
 
   root :to => 'passthrough#index'
@@ -58,8 +61,6 @@ Rails.application.routes.draw do
   namespace :recruiters do
     resources :jobs, except: [:destroy] do
       member do
-        get :deposit_pay_new
-        put :deposit_pay
         put :complete
         put :freeze
         put :active
@@ -77,6 +78,7 @@ Rails.application.routes.draw do
     end
     resources :refund_requests, only: [:index, :new, :create]
     resources :rejections, only: [:new, :create]
+    resources :deposits, only: [:new, :create]
   end
 
   namespace :suppliers do

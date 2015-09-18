@@ -4,4 +4,8 @@ class Admin < User
   def self.admin
     self.first
   end
+
+  def zhifubao_account
+    "hellohuohua"
+  end
 end

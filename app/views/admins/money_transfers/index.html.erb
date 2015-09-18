@@ -16,7 +16,7 @@
           <td><%= deposit.amount %></td>
           <td><%= deposit.wallet.user.email %></td>
           <td><%= deposit.created_at.localtime.to_s(:db) %></td>
-          <td><%= link_to "已收到", "", class: "btn btn-primary", method: :put %>
+          <td><%= deposit.state %>&nbsp;&nbsp;<%= link_to "已收到", admins_money_transfer_path(deposit), class: "btn btn-primary", method: :put if deposit.submitted? %>
         </tr>
       <% end %>
     </tbody>
