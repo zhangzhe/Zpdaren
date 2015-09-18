@@ -3,7 +3,6 @@ class Resume < ActiveRecord::Base
   has_many :jobs, through: :deliveries
   belongs_to :supplier
   validates_presence_of :candidate_name, :mobile, :attachment
-  default_scope { order('created_at DESC') }
   scope :waiting_approved, -> { where('state' => 'submitted')}
 
   acts_as_taggable

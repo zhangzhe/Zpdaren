@@ -1,7 +1,14 @@
 class Admins::JobsController < Admins::BaseController
+  helper_method :sort_column
 
   def index
-    @jobs = Job.all
+    if params[:key].present?
+      @jobs = Job.where("title ilike ?", "%#{params[:key]}%")
+    else
+      @jobs = Job.all
+    end
+    @jobs = @jobs.order("#{params[:sort]} #{params[:direction]}")
+    @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def edit
@@ -33,5 +40,9 @@ class Admins::JobsController < Admins::BaseController
   private
   def job_params
     params.require(:job).permit(:title, :description, :tag_list)
+  end
+
+  def sort_column
+    Job.column_names.include?(params[:sort]) ? params[:sort] : 'created_at'
   end
 end

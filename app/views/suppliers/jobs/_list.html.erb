@@ -1,0 +1,55 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>职位名称</th>
+        <th>
+          <%= sortable '入职红包/查看红包', 'bonus' %>
+          <% if sort_column == 'bonus' %>
+            <% if sort_direction == 'DESC' %>
+              <i class="fa fa-caret-down"></i>
+            <% else %>
+              <i class="fa fa-caret-up"></i>
+            <% end %>
+          <% end %>
+        </th>
+        <th>
+          <%= sortable '发布时间', 'created_at' %>
+          <% if sort_column == 'created_at' %>
+            <% if sort_direction == 'DESC' %>
+              <i class="fa fa-caret-down"></i>
+            <% else %>
+              <i class="fa fa-caret-up"></i>
+            <% end %>
+          <% end %>
+        </th>
+        <th>状态</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% jobs.each do |job| %>
+        <tr>
+          <td><%= link_to truncate(job.title), suppliers_job_path(job), :target => "_blank" %></td>
+          <td><%= job.bonus_for_entry %>/<%= job.bonus_for_each_resume %></td>
+          <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
+          <td>
+            <% if job.resumes_count_from(current_supplier) > 0 %>
+              <a class="resumesForJob" tabindex="0" data-placement="bottom" role="button" data-toggle="popover" data-trigger="focus" data-content="<%= render 'delivery_list', deliveries: job.deliveries_from(current_supplier) %>" title="已推荐简历列表">已推荐简历<%= job.resumes_count_from(current_supplier) %>份</a>
+            <% else %>
+              未推简历
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "为他推荐", suppliers_job_path(job), class: "btn btn-primary active", role: "button", :target => "_blank" %>
+            <% if job.watch_by?(current_supplier) %>
+              <i class="fa fa-heart" id='attended'></i>
+            <% else %>
+              <%= link_to '', suppliers_attentions_path(attention: { job_id: job.id, supplier_id: current_supplier.id }), class: 'fa fa-heart-o', method: :post, id: 'unattend' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

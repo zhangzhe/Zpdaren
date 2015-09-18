@@ -12,7 +12,6 @@ class Job < ActiveRecord::Base
   scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'approved']) }
   scope :in_hiring, -> { where.not('state in (?)', ['freezing', 'finished']) }
 
-  default_scope { order('created_at DESC') }
   include SimilarEntity
 
   acts_as_taggable
@@ -48,8 +47,10 @@ class Job < ActiveRecord::Base
     end
   end
 
-  def self.waiting_approved
-    deposit_paid
+  class << self
+    def waiting_approved
+      deposit_paid
+    end
   end
 
   def unread_deliveries
