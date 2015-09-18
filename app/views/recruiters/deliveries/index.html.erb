@@ -34,7 +34,6 @@
             <td>
               <%= delivery.job_title %>
             </td>
-            <td><%= delivery.resume_tag_list %></td>
             <td><%= Recruiters::DeliveriesHelper.state_show(delivery) %><%= delivery.job.final_payment_request ? (delivery.job.finished? ? '/已付尾款' : '/尾款支付中...') : '/未付尾款'  if delivery.paid? %></td>
             <td>
               <%= link_to '查看简历', recruiters_delivery_path(delivery), class: 'btn btn-primary active' unless delivery.paid? || delivery.refused? %>
