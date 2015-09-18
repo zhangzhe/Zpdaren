@@ -1,7 +1,7 @@
 module Recruiters::DeliveriesHelper
   def self.state_show(delivery)
     case delivery.state.to_sym
-    when :submitted
+    when :recommended
       '未查看'
     when :paid
       '已付费'

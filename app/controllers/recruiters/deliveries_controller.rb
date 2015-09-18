@@ -13,6 +13,12 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
     end
   end
 
+  def paid_index
+    @job = Job.find(params[:job_id])
+    @deliveries = @job.deliveries.paid
+    render 'index'
+  end
+
   def show
     @delivery = Delivery.find(params[:id])
     @delivery.read! if @delivery.unread?
