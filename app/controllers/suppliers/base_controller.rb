@@ -1,8 +1,10 @@
 class Suppliers::BaseController < ApplicationController
   helper_method :sort_direction
   before_action :default_sort, only: [:index]
-
   layout 'suppliers'
+
+  def show
+  end
 
   private
   def sort_direction

@@ -21,7 +21,7 @@ class Admins::JobsController < Admins::BaseController
 
   def update
     job = Job.find(params[:id])
-    job.update_and_approve(job_params)
+    job.update_and_approve!(job_params)
     redirect_to admins_jobs_path
   end
 

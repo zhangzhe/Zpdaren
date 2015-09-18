@@ -1,0 +1,52 @@
+<h2>存款确认</h2>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>金额</th>
+        <th>来自</th>
+        <th>转账时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @deposits.each do |deposit| %>
+        <tr>
+          <td><%= deposit.amount %></td>
+          <td><%= deposit.wallet.user.email %></td>
+          <td><%= deposit.created_at.localtime.to_s(:db) %></td>
+          <td><%= link_to "已收到", "", class: "btn btn-primary", method: :put %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<hr/>
+
+<h2>提现申请</h2>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>金额</th>
+        <th>来自</th>
+        <th>支付宝账号</th>
+        <th>状态/操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @withdraws.each do |withdraw| %>
+        <tr>
+          <td><%= withdraw.amount %></td>
+          <td><%= withdraw.wallet.user.email %></td>
+          <td><%= withdraw.zhifubao_account %></td>
+          <td><%= withdraw.state %>&nbsp;&nbsp;<%= link_to "转账完成", admins_money_transfer_path(withdraw), class: "btn btn-primary", method: :put if withdraw.submitted? %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

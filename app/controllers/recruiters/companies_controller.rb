@@ -15,6 +15,7 @@ class Recruiters::CompaniesController < Recruiters::BaseController
 
   def show
     @company = Company.find(params[:id])
+    redirect_to recruiters_path
   end
 
   private
