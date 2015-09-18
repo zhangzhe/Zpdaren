@@ -5,7 +5,6 @@
   <li class="active">提现到支付宝</li>
 </ol>
 <div>
-
   <%= form_for @withdraw, html: {class: "form-inline"} do |f| %>
     <div class="form-group">
       <label for="exampleInputEmail2">收款支付宝账号</label>
@@ -21,5 +20,4 @@
 
     <%= f.submit "确认提现", class: "btn btn-primary" %>
   <% end %>
-
 </div>

@@ -38,6 +38,8 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :money_transfers, only: [:index, :update]
+
     resources :users, only: [:index]
     resources :companies, only: [:index, :show]
     resources :jobs, only: [:index, :show, :edit, :update] do

@@ -1,6 +1,5 @@
 class Wallet < ActiveRecord::Base
-  belongs_to :supplier, foreign_key: :user_id
-  belongs_to :admin, foreign_key: :user_id
+  belongs_to :user
   has_many :withdraws
 
   def update_money(operator, value)
