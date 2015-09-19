@@ -13,7 +13,11 @@ class Recruiters::JobsController < Recruiters::BaseController
   end
 
   def create
-    job = current_recruiter.jobs.create!(job_params)
+    job = current_recruiter.jobs.create(job_params)
+    if job.errors.any?
+      flash[:error] = job.errors.full_messages.first
+      redirect_to :back and return
+    end
     redirect_to new_recruiters_deposit_path(:job_id => job.id)
   end
 

@@ -207,3 +207,13 @@ zh-CN:
       user:
         email: '邮箱'
         password: '密码'
+      resume:
+        candidate_name: '候选人姓名'
+        mobile: '手机号'
+        attachment: '简历附件'
+        tag_list: '标签'
+      job:
+        title: '位置名称'
+        description: '职位描述'
+        bonus: '红包'
+        tag_list: '职位标签'
