@@ -9,7 +9,10 @@
     <%= f.text_field :bonus, class: "form-control", placeholder: "红包" %>
   </p>
   <p>
-    <%= f.text_field :tag_list, value: job.tag_list.to_s, class: 'form-control', placeholder: "简历标签(多个标签以','隔开)" %>
+    <%= render '/shared/tag' %>
+  </p>
+  <p>
+    <%= f.text_field :tag_list, value: job.tag_list.to_s, class: 'form-control auto-tags' %>
   </p>
   <p>
     <%= f.submit "发布", class: "btn btn-primary" %>

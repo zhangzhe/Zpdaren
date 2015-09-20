@@ -15,7 +15,10 @@
             <%= f.text_field 'mobile', class: 'form-control', :placeholder => '候选人手机号码' %>
           </p>
           <p>
-            <%= f.text_field 'tag_list', class: "form-control", :placeholder => "简历标签(*多个标签以','隔开)" %>
+            <%= render '/shared/tag' %>
+          </p>
+          <p>
+            <%= f.text_field 'tag_list', class: "form-control auto-tags" %>
           </p>
           <div class="checkbox">
             <label>
