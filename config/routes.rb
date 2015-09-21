@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
 
+  namespace :api do
+    resources :tags, only: [:index]
+  end
+
   resources :withdraws, only: [:new, :create]
 
   get 'qr_codes/show'
