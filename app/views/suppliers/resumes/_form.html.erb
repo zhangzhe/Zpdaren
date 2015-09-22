@@ -1,0 +1,29 @@
+<%= form_for resume, url: suppliers_resumes_path do |f| %>
+  <%= hidden_field_tag 'job_id', job_id if job_id %>
+  <p>
+    <%= f.text_field 'candidate_name', class: "form-control", :placeholder => "候选人姓名(必填)" %>
+  </p>
+  <p>
+    <%= f.text_field 'mobile', class: 'form-control', :placeholder => '候选人手机号码(必填)' %>
+  </p>
+  <p>
+    <%= f.text_field 'email', class: 'form-control', :placeholder => '候选人邮箱(必填)' %>
+  </p>
+  <p>
+    <%= render '/shared/tag' %>
+  </p>
+  <p>
+    <%= f.text_field 'tag_list', class: "form-control auto-tags" %>
+  </p>
+  <div class="checkbox">
+    <label>
+      <%= f.check_box :auto_delivery, {checked: true} %> 设置自动托管（如果设置，之后一旦有匹配的职位出现，您的简历会被自动推荐。您将会收到更多的简历红包和入职红包。）
+    </label>
+  </div>
+  <p>
+    <%= f.file_field 'attachment' %>
+  </p>
+  <p>
+    <%= f.submit '上传', class: "btn btn-primary active" %>
+  </p>
+<% end %>

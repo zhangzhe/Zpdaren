@@ -2,6 +2,7 @@ class Recruiters::JobsController < Recruiters::BaseController
 
   def index
     if current_recruiter.company.description.blank?
+      flash[:error] = "请先完善公司信息，然后才能发布职位"
       redirect_to edit_recruiters_company_path(current_recruiter.company)
     else
       @jobs = current_recruiter.jobs
@@ -13,12 +14,12 @@ class Recruiters::JobsController < Recruiters::BaseController
   end
 
   def create
-    job = current_recruiter.jobs.create(job_params)
-    if job.errors.any?
-      flash[:error] = job.errors.full_messages.first
-      redirect_to :back and return
+    @job = current_recruiter.jobs.create(job_params)
+    if @job.errors.any?
+      flash[:error] = @job.errors.full_messages.first
+      render 'new' and return
     end
-    redirect_to new_recruiters_deposit_path(:job_id => job.id)
+    redirect_to new_recruiters_deposit_path(:job_id => @job.id)
   end
 
   def show
@@ -30,7 +31,11 @@ class Recruiters::JobsController < Recruiters::BaseController
   end
 
   def update
-    job = Job.update(params[:id], job_params)
+    @job = Job.update(params[:id], job_params)
+    if @job.errors.any?
+      flash[:error] = @job.errors.full_messages.first
+      render 'edit' and return
+    end
     redirect_to recruiters_jobs_path
   end
 

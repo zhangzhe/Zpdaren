@@ -1,5 +1,10 @@
 <div class="row">
-  <%= link_to "职位列表", recruiters_jobs_path %>/添加职位信息
+<ol class="breadcrumb">
+  <li>
+    <%= link_to "职位列表", recruiters_jobs_path %>
+  </li>
+  <li class="active">添加职位信息</li>
+</ol>
   <p>
     <%= render 'form', url: recruiters_jobs_path, method: 'POST', job: @job %>
   </p>

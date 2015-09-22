@@ -1,0 +1,7 @@
+<ol class="breadcrumb">
+  <li>
+    <%= link_to '我的简历', suppliers_resumes_path %>
+  </li>
+  <li class="active">上传简历</li>
+</ol>
+<%= render 'form', resume: @resume, job_id: params[:job_id] %>
