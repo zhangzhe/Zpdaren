@@ -1,10 +1,9 @@
 <div class="sidebar-module sidebar-module-inset">
   <h4>为他推荐简历</h4>
   <p>
-    <button class='btn btn-primary active' data-toggle="modal" data-target="#newResumeModal">本地上传简历</button>
+    <%= link_to '本地上传简历', new_suppliers_resume_path(job_id: job.id), class: 'btn btn-primary active' %>
   </p>
   <p>
     <%= link_to '从简历库推荐', new_suppliers_delivery_path(job_id: job.id), class: 'btn btn-primary active' %>
   </p>
 </div>
-<%= render "/suppliers/shared/resume_form", job: job %>

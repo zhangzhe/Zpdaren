@@ -3,7 +3,7 @@ class Recruiter < User
 
   has_one :company, :foreign_key => :user_id
   has_many :jobs, :foreign_key => :user_id
-  before_create :init_blank_comapny
+  after_create :init_blank_comapny
 
   def jobs_count
     self.jobs.available.count > 100 ? '99+' : self.jobs.count
