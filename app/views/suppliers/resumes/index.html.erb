@@ -3,5 +3,4 @@
 <div class='text-center'>
   <%= will_paginate @resumes, renderer: BootstrapPagination::Rails, previous_label: '上一页', next_label: '下一页' %>
 </div>
-<button class='btn btn-primary btn-lg active' data-toggle="modal" data-target="#newResumeModal">上传简历</button>
-<%= render "/suppliers/shared/resume_form" %>
+<%= link_to '上传简历', new_suppliers_resume_path, class: 'btn btn-primary btn-lg active' %>

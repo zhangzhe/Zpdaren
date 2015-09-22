@@ -20,7 +20,7 @@
           <% end %>
           </td>
           <td>获得红包<%= resume.resume_bonus %>元</td>
-          <td><%= link_to "下载", original_resume_download_admins_resume_path(resume[:id]) %></td>
+          <td><%= link_to "下载", download_suppliers_resume_path(resume[:id]) %></td>
         </tr>
       <% end %>
     </tbody>
