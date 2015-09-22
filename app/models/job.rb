@@ -8,7 +8,7 @@ class Job < ActiveRecord::Base
   has_many :refund_requests
 
   validates_presence_of :title, :description, :bonus, :tag_list
-  validates_length_of :title, maximum: 20
+  validates_length_of :title, maximum: 50
   validates_numericality_of :bonus, greater_than_or_equal_to: 1000
 
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}

@@ -7,7 +7,7 @@ class Recruiters::CompaniesController < Recruiters::BaseController
     @company = Company.update(params[:id], company_params)
     if @company.errors.any?
       flash[:error] = @company.errors.messages.values.first.first
-      redirect_to :back
+      render 'edit' and return
     else
       redirect_to recruiters_company_path(@company)
     end
