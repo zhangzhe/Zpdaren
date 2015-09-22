@@ -1,6 +1,7 @@
 class Job < ActiveRecord::Base
   belongs_to :recruiter, :foreign_key => :user_id
   has_one :final_payment_request
+  has_one :company, through: :recruiter
   has_many :resumes, through: :deliveries
   has_many :deliveries
   has_many :attentions
@@ -10,6 +11,8 @@ class Job < ActiveRecord::Base
   validates_presence_of :title, :description, :bonus, :tag_list
   validates_length_of :title, maximum: 20
   validates_numericality_of :bonus, greater_than_or_equal_to: 1000
+
+  delegate :name, :id, to: :company, prefix: true
 
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
   scope :approved, -> { where('state' => 'approved')}
