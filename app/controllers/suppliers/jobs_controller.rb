@@ -3,11 +3,9 @@ class Suppliers::JobsController < Suppliers::BaseController
   layout "suppliers"
 
   def index
-    if params[:key].present?
-      @jobs = Job.approved.where("title ilike ?", "%#{params[:key]}%")
-    else
-      @jobs = Job.approved
-    end
+    @jobs = Job.approved
+    @jobs = @jobs.where("user_id = ? ", params[:recruiter_id]) if params[:recruiter_id]
+    @jobs = @jobs.where("title ilike ?", "%#{params[:key]}%") if params[:key].present?
     @jobs = @jobs.order("#{params[:sort]} #{params[:direction]}")
     @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
