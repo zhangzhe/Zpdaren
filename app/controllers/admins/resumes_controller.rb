@@ -16,8 +16,12 @@ class Admins::ResumesController < Admins::BaseController
   end
 
   def check_and_update
-    resume = Resume.update(params[:id], resume_params)
-    resume.approve!
+    @resume = Resume.update(params[:id], resume_params)
+    if @resume.errors.any?
+      flash[:error] = @resume.errors.full_messages.first
+      render 'edit' and return
+    end
+    @resume.approve!
     redirect_to admins_resumes_path
   end
 

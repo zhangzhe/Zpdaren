@@ -213,6 +213,7 @@ zh-CN:
         email: '邮箱'
         attachment: '简历附件'
         tag_list: '标签'
+        description: '工作经历、教育背景等描述'
       job:
         title: '位置名称'
         description: '职位描述'
