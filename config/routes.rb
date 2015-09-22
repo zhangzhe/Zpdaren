@@ -87,7 +87,7 @@ Rails.application.routes.draw do
 
   namespace :suppliers do
     resources :jobs, only: [:index, :show]
-    resources :resumes, only: [:index, :create]
+    resources :resumes, only: [:index, :new, :create]
     resources :attentions, only: [:create]
     resources :deliveries, only: [:index, :new, :create]
   end
