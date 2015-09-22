@@ -30,6 +30,11 @@ class Suppliers::ResumesController < Suppliers::BaseController
     end
   end
 
+  def download
+    resume = Resume.find(params[:id])
+    send_file resume.attachment.file.file
+  end
+
   private
 
   def resume_params
