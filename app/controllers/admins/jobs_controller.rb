@@ -20,8 +20,12 @@ class Admins::JobsController < Admins::BaseController
   end
 
   def update
-    job = Job.find(params[:id])
-    job.update_and_approve!(job_params)
+    @job = Job.find(params[:id])
+    @job.update_and_approve!(job_params)
+    if @job.errors.any?
+      flash[:error] = @job.errors.full_messages.first
+      render 'edit' and return
+    end
     redirect_to admins_jobs_path
   end
 
