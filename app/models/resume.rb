@@ -3,7 +3,7 @@ class Resume < ActiveRecord::Base
   has_many :jobs, through: :deliveries
   belongs_to :supplier
   validates_presence_of :candidate_name, :mobile, :tag_list
-  validates_presence_of :email, :description, on: :update
+  # validates_presence_of :email, :description, on: :update
   validates_presence_of :attachment, message: '不能为空'
   validates_length_of :candidate_name, maximum: 10
   validates_uniqueness_of :mobile, :email, message: '系统中已经存在，请上选择其他候选人'
