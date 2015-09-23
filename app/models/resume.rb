@@ -53,7 +53,6 @@ class Resume < ActiveRecord::Base
     similar_entity(Job)
   end
 
-
   class << self
     def default_candidate_name
       Faker::Name.name if Rails.env == "development"

@@ -237,6 +237,7 @@ class Job < ActiveRecord::Base
   end
 
   private
+
   def notify_recruiter_and_deliver_matching_resumes
     RecruiterMailer.email_jd_approved(recruiter, self).deliver_now
     deliver_matching_resumes
