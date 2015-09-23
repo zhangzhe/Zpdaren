@@ -13,12 +13,6 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
     end
   end
 
-  def paid_index
-    @job = Job.find(params[:job_id])
-    @deliveries = @job.deliveries.paid
-    render 'index'
-  end
-
   def show
     @delivery = Delivery.find(params[:id])
     @delivery.read! if @delivery.unread?
@@ -26,16 +20,12 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
 
   def pay
     @delivery = Delivery.find(params[:id])
-    @delivery.pay! if @delivery.recommended? && @delivery.may_pay?
-    flash[:success] = "支付成功，您现在可以查看候选人联系方式。"
-    redirect_to :back
-  end
-
-  def final_pay
-    delivery = Delivery.find(params[:id])
-    job = delivery.job
-    supplier = delivery.resume.supplier
-    job.pay_final_payment_to(supplier)
+    if @delivery.recommended?
+      @delivery.pay!
+      flash[:success] = "支付成功，您现在可以查看候选人联系方式。"
+    else
+      flash[:error] = "未知错误，请联系管理员！"
+    end
     redirect_to :back
   end
 end

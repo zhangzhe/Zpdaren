@@ -24,11 +24,17 @@
         <% if delivery.resume && delivery.resume.approved? %>
           <tr>
             <td>
+              <% if delivery.refused? %>
+                <s>
+              <% end %>
               <% link_to_resume = link_to(delivery.candidate_brief, recruiters_delivery_path(delivery)) %>
               <% if delivery.unread? %>
                 <strong><%= link_to_resume %></strong>
               <% else %>
                 <%= link_to_resume %>
+              <% end %>
+              <% if delivery.refused? %>
+                </s>
               <% end %>
             <td>
               <%= delivery.job_title %>

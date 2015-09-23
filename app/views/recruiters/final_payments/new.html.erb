@@ -8,6 +8,6 @@
   <li><%= link_to "支付尾款", recruiters_final_payments_path(:job_id => @job) %></li>
 </ol>
 <div>
-  <p class="lead">请转账 <%= (@job.bonus_for_entry).to_i %>元作为成功招聘<%= @job.title %>的尾款， 到支付宝账号：<%= Admin.admin.zhifubao_account %></p>
+  <p class="lead">请转账 <%= (@job.bonus_for_entry).to_i %>元作为成功招聘<%= @job.title %>的尾款， 到支付宝账号：<%= Admin.admin.zhifubao_account %>。<br>完成后，请点击下面的转账完成确认按钮。</p>
   <%= link_to '转账完成', recruiters_final_payments_path(:delivery_id => @delivery.id), class: 'btn btn-primary active', method: :post %>
 </div>

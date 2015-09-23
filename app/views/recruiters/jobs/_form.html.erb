@@ -12,8 +12,7 @@
     <%= render '/shared/tag' %>
   </p>
   <p>
-    <% job.tag_list = "100, 200, 300, 400, 500" if Rails.env = "develop" %>
-    <%= f.text_field :tag_list, value: job.tag_list.to_s, class: 'form-control auto-tags' %>
+    <%= f.text_field :tag_list, value: Job.default_tag_list, class: 'form-control auto-tags' %>
   </p>
   <p>
     <%= f.submit "发布", class: "btn btn-primary" %>

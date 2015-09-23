@@ -65,6 +65,9 @@ class Job < ActiveRecord::Base
     end
   end
 
+  def editable?
+     !["final_payment_paid", "finished", "freezing"].include?(self.state)
+  end
 
   def unread_deliveries
     self.deliveries.unread
@@ -104,12 +107,12 @@ class Job < ActiveRecord::Base
     end
   end
 
-  def original_deposit
-    (bonus * 0.2).to_i
-  end
-
   def bonus_for_entry
     (bonus * 0.8).to_i
+  end
+
+  def original_deposit
+    (bonus * 0.2).to_i
   end
 
   def company
@@ -187,6 +190,10 @@ class Job < ActiveRecord::Base
       [4000, 5000, 6000, 7000, 8000].sample if Rails.env = "develop"
     end
 
+    def default_tag_list
+      Faker::Lorem.words(5).join(", ") if Rails.env = "develop"
+    end
+
     def default_description
       "既然在招聘 Rails，我们的要求有哪些呢，其实要求不高，很简单，你只需要对这些东西：
 
@@ -237,6 +244,10 @@ class Job < ActiveRecord::Base
 
   def pay_and_notify_supplier
     # choose resume and pay the supplier
-    # notify_supplier
+    notify_supplier
+  end
+
+  def notify_supplier
+    Weixin.notify_resume_paid(resume, job) if resume.supplier.weixin
   end
 end

@@ -29,18 +29,18 @@ class Admins::JobsController < Admins::BaseController
     redirect_to admins_jobs_path
   end
 
-  def complete
-    # FIXME
-    job = Job.find(params[:id])
-    final_payment_request = job.final_payment_request
-    supplier = final_payment_request.supplier
-    Job.transaction do
-      supplier.wallet.update_money(:+, job.bonus_for_entry)
-      job.complete!
-      job.final_payment_request.pay!
-    end
-    redirect_to :back
-  end
+  # def complete
+  #   # FIXME
+  #   job = Job.find(params[:id])
+  #   final_payment_request = job.final_payment_request
+  #   supplier = final_payment_request.supplier
+  #   Job.transaction do
+  #     supplier.wallet.update_money(:+, job.bonus_for_entry)
+  #     job.complete!
+  #     job.final_payment_request.pay!
+  #   end
+  #   redirect_to :back
+  # end
 
   private
   def job_params

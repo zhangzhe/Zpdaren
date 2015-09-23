@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
     if self.wallet.money.to_i > money
       self.wallet.update_attribute(:money, self.wallet.money.to_i - money)
     else
-      # raise "余额不足"
+      # FIXME: 显示具体错误
+      raise "余额不足"
     end
   end
 
