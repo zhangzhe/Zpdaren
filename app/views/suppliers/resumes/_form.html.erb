@@ -7,7 +7,8 @@
     <%= f.text_field 'mobile', value: Resume.default_mobile, class: 'form-control', :placeholder => '候选人手机号码(必填)' %>
   </p>
   <p>
-    <%= f.text_field 'email', value: Resume.default_email.html_safe, class: 'form-control', :placeholder => '候选人邮箱(必填)' %>
+
+    <%= f.text_field 'email', value: Resume.default_email, class: 'form-control', :placeholder => '候选人邮箱(必填)' %>
   </p>
   <p>
     <%= render '/shared/tag' %>
