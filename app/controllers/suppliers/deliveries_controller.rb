@@ -14,6 +14,7 @@ class Suppliers::DeliveriesController < Suppliers::BaseController
     resume = Resume.find(params[:delivery][:resume_id])
     delivery = Delivery.create!(delivery_params)
     delivery.update_attributes!(:approved => resume.approved?)
+    flash[:success] = "操作完成！"
     redirect_to suppliers_job_path(id: params[:delivery][:job_id])
   end
 

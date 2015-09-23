@@ -13,7 +13,7 @@
     <%= f.hidden_field :id, value: @job.id %>
     <%= f.hidden_field :deposit, value: (@job.bonus * 0.2).to_i %>
 
-    <p class="lead">请转账 <%= (@job.bonus * 0.2).to_i %> 元到支付宝账号：<%= Admin.admin.zhifubao_account %></p>
+    <p class="lead">请转账 <%= (@job.bonus * 0.2).to_i %> 元到支付宝账号：<%= Admin.admin.zhifubao_account %>。<br>完成后，请点击下面的转账完成确认按钮。</p>
     <p>
       <%= f.submit '转账完成', class: 'btn btn-primary' %>
       <%= link_to '稍后付', recruiters_jobs_path, class: 'btn btn-default' %>

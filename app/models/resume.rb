@@ -53,6 +53,25 @@ class Resume < ActiveRecord::Base
     similar_entity(Job)
   end
 
+
+  class << self
+    def default_candidate_name
+      Faker::Name.name if Rails.env == "development"
+    end
+
+    def default_mobile
+      Faker::Number.number(11) if Rails.env == "development"
+    end
+
+    def default_email
+      Faker::Internet.email if Rails.env == "development"
+    end
+
+    def default_tag_list
+      Faker::Lorem.words(5).join(", ") if Rails.env == "development"
+    end
+  end
+
   private
   def notify_recruiter_and_supplier_and_auto_deliver
     # set approved

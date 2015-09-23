@@ -40,9 +40,6 @@
             <% else  %>
               <%= Recruiters::JobsHelper::state_show(job) %>
             <% end %>
-            <% if job.final_payment_request && job.final_payment_request.submitted? %>
-              <%= link_to "收到尾款", complete_admins_job_path(job.id), class: "btn btn-primary", method: :put %>
-            <% end %>
           </td>
         </tr>
       <% end %>

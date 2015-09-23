@@ -3,8 +3,6 @@ class Supplier < User
   has_many :resumes
   has_many :deliveries, through: :resumes
   has_many :attentions
-  has_many :final_payment_requests
-
   delegate :money, to: :wallet, prefix: true
 
   def watch!(job)

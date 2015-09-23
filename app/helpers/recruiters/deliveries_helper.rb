@@ -4,7 +4,7 @@ module Recruiters::DeliveriesHelper
     when :recommended
       '未查看'
     when :paid
-      '已付费'
+      '已查看'
     when :refused
       '已拒绝'
     end

@@ -1,15 +1,28 @@
+
 <div>
+  <ol class="breadcrumb">
+    <li>
+      <%= link_to '推荐给我的简历', recruiters_deliveries_path %>
+    </li>
+
+    <li>
+      <%= @delivery.candidate_brief %>
+    </li>
+  </ol>
+
   <p class="lead"><%= @delivery.candidate_name %></p>
 
   <p><%= simple_format @delivery.description %></p>
 
   <hr>
   <p>
-    <h3>联系方式 </h3>
+
     <% if @delivery.paid? %>
+      <h3>联系方式 </h3>
       <p><%= @delivery.resume_mobile %></p>
       <p><%= @delivery.resume_email %></p>
-    <% else %>
+    <% elsif !@delivery.refused? %>
+      <h3>联系方式 </h3>
       付费<%= @delivery.job.bonus_for_each_resume %>元后可看
     <% end %>
   </p>

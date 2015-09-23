@@ -61,7 +61,7 @@ class Weixin < ActiveRecord::Base
        response_result = JSON(response.body)
     end
 
-    def notify_resume_paid(delivery)
+    def notify_supplier_deposit_paid(resume, job)
       # {{first.DATA}}
       # 变动金额：{{keyword1.DATA}}
       # 变动时间：{{keyword2.DATA}}
@@ -70,13 +70,13 @@ class Weixin < ActiveRecord::Base
       response_result = JSON(response.body)
       response = Weixin.conn.post do |req|
         req.url "/cgi-bin/message/template/send?access_token=#{response_result['access_token']}"
-        req.body =  "{ \"touser\":\"#{delivery.resume.supplier.weixin_name}\", \"template_id\":\"N7X9PhMz8Ezgj_6mXBu_zJOVlvvCZlYq4JV3Uxl3eGA\", \"url\":\"http://weixin.qq.com/download\",\"topcolor\":\"#FF0000\", \"data\": {
+        req.body =  "{ \"touser\":\"#{resume.supplier.weixin_name}\", \"template_id\":\"N7X9PhMz8Ezgj_6mXBu_zJOVlvvCZlYq4JV3Uxl3eGA\", \"url\":\"http://weixin.qq.com/download\",\"topcolor\":\"#FF0000\", \"data\": {
       \"first\": {
-      \"value\":\"#{delivery.resume.supplier.email}, 您好！您的简历库中的 #{delivery.resume.candidate_name}的简历被查看，您因此获得的红包：\",
+      \"value\":\"#{resume.supplier.email}, 您好！您的简历库中的 #{resume.candidate_name}的简历被查看，您因此获得的红包：\",
       \"color\":\"#173177\"
       },
       \"keyword1\":{
-      \"value\":\"#{delivery.job.bonus_for_each_resume}\",
+      \"value\":\"#{job.bonus_for_each_resume}\",
       \"color\":\"#173177\"
       },
       \"keyword2\":{
@@ -85,6 +85,36 @@ class Weixin < ActiveRecord::Base
       },
       \"remark\":{
       \"value\":\"您可以随时登录众聘达人领取。感谢您的推荐。\",
+      \"color\":\"#173177\"
+      }}}"
+      end
+       response_result = JSON(response.body)
+    end
+
+    def notify_supplier_final_payment_paid(resume, job)
+      # {{first.DATA}}
+      # 变动金额：{{keyword1.DATA}}
+      # 变动时间：{{keyword2.DATA}}
+      # {{remark.DATA}}
+      response = Weixin.conn.get '/cgi-bin/token', { :appid => Weixin.mp_appid, :secret => Weixin.mp_secret, :grant_type => "client_credential" }
+      response_result = JSON(response.body)
+      response = Weixin.conn.post do |req|
+        req.url "/cgi-bin/message/template/send?access_token=#{response_result['access_token']}"
+        req.body =  "{ \"touser\":\"#{resume.supplier.weixin_name}\", \"template_id\":\"N7X9PhMz8Ezgj_6mXBu_zJOVlvvCZlYq4JV3Uxl3eGA\", \"url\":\"http://weixin.qq.com/download\",\"topcolor\":\"#FF0000\", \"data\": {
+      \"first\": {
+      \"value\":\"#{resume.supplier.email}, 您好！您推荐的 #{resume.candidate_name}以成功入职，您因此获得的红包：\",
+      \"color\":\"#173177\"
+      },
+      \"keyword1\":{
+      \"value\":\"#{job.bonus_for_entry}\",
+      \"color\":\"#173177\"
+      },
+      \"keyword2\":{
+      \"value\":\"#{Time.now.localtime.to_s(:db)}\",
+      \"color\":\"#173177\"
+      },
+      \"remark\":{
+      \"value\":\"您可以随时登录众聘达人领取。再次感谢您的推荐！\",
       \"color\":\"#173177\"
       }}}"
       end

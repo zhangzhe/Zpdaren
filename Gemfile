@@ -47,6 +47,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'rails_best_practices', '~> 1.15.7'
   gem 'rails-erd', '~> 1.4.2'
+  gem 'faker'
 end
 
 gem "twitter-bootstrap-rails"

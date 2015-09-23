@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150918031851) do
+ActiveRecord::Schema.define(version: 20150923061830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,23 +39,15 @@ ActiveRecord::Schema.define(version: 20150918031851) do
   create_table "deliveries", force: :cascade do |t|
     t.integer  "resume_id"
     t.integer  "job_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "state"
     t.datetime "read_at"
     t.boolean  "approved"
+    t.integer  "final_payment_id"
   end
 
   add_index "deliveries", ["resume_id", "job_id"], name: "index_deliveries_on_resume_id_and_job_id", using: :btree
-
-  create_table "final_payment_requests", force: :cascade do |t|
-    t.integer  "job_id"
-    t.integer  "supplier_id"
-    t.float    "money"
-    t.string   "state"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "jobs", force: :cascade do |t|
     t.string   "title"
@@ -76,7 +68,6 @@ ActiveRecord::Schema.define(version: 20150918031851) do
     t.integer  "wallet_id"
     t.string   "state"
     t.string   "zhifubao_account"
-    t.string   "string"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end

@@ -6,9 +6,11 @@ module Recruiters::JobsHelper
     when :freezing
       '已下架'
     when :deposit_paid
-      '待审核'
+      '待确认'
     when :approved
-      '招聘进行中'
+      '招聘中'
+    when :final_payment_paid
+      '支付确认中'
     when :finished
       '招聘完成'
     end

@@ -1,4 +1,11 @@
 <div>
+
+  <ol class="breadcrumb">
+    <li>
+      <%= link_to '我发布的职位', recruiters_jobs_path %>
+    </li>
+  </ol>
+
   <p class="lead"><%= @job.title %></p>
   <p>
     职位佣金：<%= @job.bonus %>
@@ -8,6 +15,6 @@
     <%= @job.description %>
   </p>
   <p>
-    <%= link_to '编辑', edit_recruiters_job_path(@job), class: 'btn btn-primary' unless @job.finished? %>
+    <%= link_to '编辑', edit_recruiters_job_path(@job), class: 'btn btn-primary' if @job.editable? %>
   </p>
 </div>

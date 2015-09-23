@@ -13,22 +13,29 @@
       <% @jobs.each do |job| %>
         <tr>
           <td>
-            <% link_to_job = link_to job.title, recruiters_job_path(job) %>
+            <% link_to_job = link_to truncate(job.title), recruiters_job_path(job) %>
             <% if job.in_hiring? %>
               <strong><%= link_to_job %></strong>
             <% else %>
               <%= link_to_job %>
             <% end %>
           </td>
-          <td><%= link_to job.resumes.approved.count, recruiters_deliveries_path(:job_id => job) %></td>
+          <td>
+            <% if job.resumes.approved.count > 0 %>
+              <%= link_to job.resumes.approved.count, recruiters_deliveries_path(:job_id => job) %>
+            <% else %>
+              <%= job.resumes.approved.count %>
+            <% end %>
+          </td>
           <td><%= job.bonus %> / <%= job.original_deposit %></td>
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
           <td>
             <%= Recruiters::JobsHelper::state_show(job) %>
 
-            <%= link_to '支付', new_recruiters_deposit_path(job_id: job.id), class: "btn btn-primary" if job.submitted? %>
-            <%= link_to '招聘完成并支付尾款', paid_index_recruiters_deliveries_path(job_id: job.id), class: "btn btn-primary" if job.approved? %>
-            <%= link_to '退款', new_recruiters_refund_request_path(job_id: job.id), class: "btn btn-primary" if job.refund_request? %>
+            <%= link_to '预付订金', new_recruiters_deposit_path(job_id: job.id), class: "btn btn-primary" if job.submitted? %>
+            <%#= link_to '招聘完成并支付尾款', paid_index_recruiters_deliveries_path(job_id: job.id), class: "btn btn-primary" if job.approved? %>
+            <%= link_to '支付尾款', recruiters_final_payments_path(job_id: job.id), class: "btn btn-primary" if job.available_for_final_payment? %>
+            <%#= link_to '退款', new_recruiters_refund_request_path(job_id: job.id), class: "btn btn-primary" if job.can_refund? %>
 
             <%= link_to '下架', freeze_recruiters_job_path(job), class: "btn btn-primary", method: :put if job.submitted? %>
             <%= link_to '上架', active_recruiters_job_path(job), class: "btn btn-primary", method: :put if job.freezing? %>
