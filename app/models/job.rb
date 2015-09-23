@@ -183,15 +183,15 @@ class Job < ActiveRecord::Base
     end
 
     def default_title
-      "Ruby开发工程师#{rand(1000)}" if Rails.env = "develop"
+      "Ruby开发工程师#{rand(1000)}" if Rails.env == "development"
     end
 
     def default_bonus
-      [4000, 5000, 6000, 7000, 8000].sample if Rails.env = "develop"
+      [4000, 5000, 6000, 7000, 8000].sample if Rails.env == "development"
     end
 
     def default_tag_list
-      Faker::Lorem.words(5).join(", ") if Rails.env = "develop"
+      Faker::Lorem.words(5).join(", ") if Rails.env == "development"
     end
 
     def default_description
@@ -232,7 +232,7 @@ class Job < ActiveRecord::Base
   Github 地址；
   English 优异；
   有设计能力、前端开发经验；
-  内推，内推成功者可以获得36氪独家冠名的销售的私人服务XXOO一次。"  if Rails.env = "develop"
+  内推，内推成功者可以获得36氪独家冠名的销售的私人服务XXOO一次。"  if Rails.env == "development"
     end
   end
 
