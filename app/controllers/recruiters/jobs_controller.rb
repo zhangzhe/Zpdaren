@@ -19,6 +19,7 @@ class Recruiters::JobsController < Recruiters::BaseController
       flash[:error] = @job.errors.full_messages.first
       render 'new' and return
     end
+    flash[:success] = "发布完成！"
     redirect_to new_recruiters_deposit_path(:job_id => @job.id)
   end
 
@@ -36,6 +37,7 @@ class Recruiters::JobsController < Recruiters::BaseController
       flash[:error] = @job.errors.full_messages.first
       render 'edit' and return
     end
+    flash[:success] = "修改完成！"
     redirect_to recruiters_jobs_path
   end
 

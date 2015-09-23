@@ -27,6 +27,7 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
   def pay
     @delivery = Delivery.find(params[:id])
     @delivery.pay! if @delivery.recommended? && @delivery.may_pay?
+    flash[:success] = "支付成功，您现在可以查看候选人联系方式。"
     redirect_to :back
   end
 

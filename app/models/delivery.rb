@@ -2,6 +2,7 @@ class Delivery < ActiveRecord::Base
   belongs_to :job
   belongs_to :resume
   has_one :rejection
+  belongs_to :final_payment, :foreign_key => :final_payment_id
 
   delegate :candidate_name, :tag_list, :mobile, :email, to: :resume, prefix: true
   delegate :id, :title, to: :job, prefix: true
@@ -51,6 +52,10 @@ class Delivery < ActiveRecord::Base
     resume.candidate_name
   end
 
+  def candidate_brief
+    "#{self.candidate_name}: (#{self.resume_tag_list})"
+  end
+
   def description
     resume.description
   end
@@ -61,6 +66,10 @@ class Delivery < ActiveRecord::Base
 
   def recruiter
     job.recruiter
+  end
+
+  def available_for_final_payment?
+    self.paid? && self.final_payment.nil?
   end
 
   private

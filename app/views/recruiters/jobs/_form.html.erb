@@ -1,17 +1,18 @@
 <%= form_for job || Job.new, url: url, method: method do |f| %>
   <p>
-    <%= f.text_field :title, class: "form-control", placeholder: "职位名称" %>
+    <%= f.text_field :title, value: Job.default_title, class: "form-control", placeholder: "职位名称" %>
   </p>
   <p>
-    <%= f.text_area :description, class: "form-control", placeholder: "职位描述", rows: 10 %>
+    <%= f.text_area :description, value: Job.default_description, class: "form-control", placeholder: "职位描述", rows: 10 %>
   </p>
   <p>
-    <%= f.text_field :bonus, class: "form-control", placeholder: "红包" %>
+    <%= f.text_field :bonus, value: Job.default_bonus, class: "form-control", placeholder: "红包" %>
   </p>
   <p>
     <%= render '/shared/tag' %>
   </p>
   <p>
+    <% job.tag_list = "100, 200, 300, 400, 500" if Rails.env = "develop" %>
     <%= f.text_field :tag_list, value: job.tag_list.to_s, class: 'form-control auto-tags' %>
   </p>
   <p>

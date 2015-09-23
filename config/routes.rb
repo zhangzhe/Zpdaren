@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   namespace :api do
     resources :tags, only: [:index]
   end
@@ -83,6 +82,7 @@ Rails.application.routes.draw do
     resources :refund_requests, only: [:index, :new, :create]
     resources :rejections, only: [:new, :create]
     resources :deposits, only: [:new, :create]
+    resources :final_payments, only: [:index, :new, :create]
   end
 
   namespace :suppliers do

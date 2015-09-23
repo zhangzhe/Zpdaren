@@ -1,4 +1,15 @@
+
 <div>
+  <ol class="breadcrumb">
+    <li>
+      <%= link_to '推荐我的简历', recruiters_deliveries_path %>
+    </li>
+
+    <li>
+      <%= @delivery.candidate_brief %>
+    </li>
+  </ol>
+
   <p class="lead"><%= @delivery.candidate_name %></p>
 
   <p><%= simple_format @delivery.description %></p>

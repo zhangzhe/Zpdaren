@@ -7,15 +7,14 @@
       <li>
         <%= link_to truncate(@job.title), recruiters_job_path(@job) %>
       </li>
-      <li class="active">推荐列表</li>
+      <li class="active">支付尾款</li>
     </ol>
   <% end %>
   <table class="table table-striped">
     <thead>
       <tr>
-
         <th>被推荐人</th>
-        <th>投递职位</th>
+        <th>简历状态</th>
         <th>操作</th>
       </tr>
     </thead>
@@ -24,17 +23,14 @@
         <% if delivery.resume && delivery.resume.approved? %>
           <tr>
             <td>
-              <% link_to_resume = link_to(delivery.candidate_brief, recruiters_delivery_path(delivery)) %>
               <% if delivery.unread? %>
-                <strong><%= link_to_resume %></strong>
+                <strong><%= delivery.candidate_name %></strong>
               <% else %>
-                <%= link_to_resume %>
+                <%= link_to(("#{delivery.candidate_name}"), recruiters_delivery_path(delivery), :target => "_blank") %>
               <% end %>
+            <td><%= Recruiters::DeliveriesHelper.state_show(delivery) %></td>
             <td>
-              <%= delivery.job_title %>
-            </td>
-            <td>
-              <%= link_to '查看简历', recruiters_delivery_path(delivery), class: 'btn btn-primary active' unless delivery.paid? || delivery.refused? %>
+              <%= link_to '支付', new_recruiters_final_payment_path(:delivery_id => delivery.id), class: 'btn btn-primary active' if delivery.available_for_final_payment? %>
             </td>
           </tr>
         <% end %>

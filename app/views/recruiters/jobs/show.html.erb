@@ -1,4 +1,11 @@
 <div>
+
+  <ol class="breadcrumb">
+    <li>
+      <%= link_to '我发布的职位', recruiters_jobs_path %>
+    </li>
+  </ol>
+
   <p class="lead"><%= @job.title %></p>
   <p>
     职位佣金：<%= @job.bonus %>

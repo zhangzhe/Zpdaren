@@ -30,6 +30,7 @@ class Admins::JobsController < Admins::BaseController
   end
 
   def complete
+    # FIXME
     job = Job.find(params[:id])
     final_payment_request = job.final_payment_request
     supplier = final_payment_request.supplier
