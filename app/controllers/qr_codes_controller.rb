@@ -1,7 +1,7 @@
 class QrCodesController < ApplicationController
   def show
     scene_id = params[:id]
-    response = Weixin.conn.get '/cgi-bin/token', { :appid => Weixin.mp_appid, :secret => Weixin.mp_secret, :grant_type => "client_credential" }
+    response = Weixin.conn.get '/cgi-bin/token', { :appid => Weixin.appid, :secret => Weixin.secret, :grant_type => "client_credential" }
     response_result = JSON(response.body)
 
     response = Weixin.conn.post do |req|

@@ -3,20 +3,19 @@ class Resume < ActiveRecord::Base
   has_many :jobs, through: :deliveries
   belongs_to :supplier
   validates_presence_of :candidate_name, :mobile, :tag_list
-  # validates_presence_of :email, :description, on: :update
   validates_presence_of :attachment, message: '不能为空'
   validates_length_of :candidate_name, maximum: 10
   validates_uniqueness_of :mobile, :email, message: '系统中已经存在，请上选择其他候选人'
   validates_length_of :mobile, is: 11
-
   scope :waiting_approved, -> { where('state' => 'submitted')}
+  extend DefaultValue
+  include SimilarEntity
+  include AASM
 
   acts_as_taggable
   acts_as_taggable_on :skills, :interests
   mount_uploader :attachment, FileUploader
 
-  include SimilarEntity
-  include AASM
   aasm.attribute_name :state
   aasm do
     state :submitted, :initial => true
@@ -51,24 +50,6 @@ class Resume < ActiveRecord::Base
 
   def matching_jobs
     similar_entity(Job)
-  end
-
-  class << self
-    def default_candidate_name
-      Faker::Name.name if Rails.env == "development"
-    end
-
-    def default_mobile
-      Faker::Number.number(11) if Rails.env == "development"
-    end
-
-    def default_email
-      Faker::Internet.email if Rails.env == "development"
-    end
-
-    def default_tag_list
-      Faker::Lorem.words(5).join(", ") if Rails.env == "development"
-    end
   end
 
   private
