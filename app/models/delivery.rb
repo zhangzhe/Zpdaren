@@ -101,11 +101,6 @@ class Delivery < ActiveRecord::Base
     job.save!
   end
 
-  # FIXME: refactor dupplicate code
-  def notify_supplier_final_payment_paid
-    Weixin.notify_supplier_final_payment_paid(self.resume, self.job) if supplier.weixin
-  end
-
   def transfer_final_payment_to_admin
     bonus = job.bonus_for_entry
     ActiveRecord::Base.transaction do
@@ -124,6 +119,11 @@ class Delivery < ActiveRecord::Base
 
   def notify_supplier_deposit_paid
     Weixin.notify_supplier_deposit_paid(self.resume, self.job) if supplier.weixin
+  end
+
+  # FIXME: refactor dupplicate code
+  def notify_supplier_final_payment_paid
+    Weixin.notify_supplier_final_payment_paid(self.resume, self.job) if supplier.weixin
   end
 
   def transfer_deposit

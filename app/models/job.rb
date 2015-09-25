@@ -56,14 +56,6 @@ class Job < ActiveRecord::Base
     event :approve, :after => :notify_recruiter_and_deliver_matching_resumes do
       transitions :from => :deposit_paid, :to => :approved
     end
-
-    event :pay_final_payment do
-      transitions :from => :approved, :to => :final_payment_paid
-    end
-
-    event :complete, :after => :pay_and_notify_supplier do
-      transitions :from => :final_payment_paid, :to => :finished
-    end
   end
 
   def editable?
@@ -182,20 +174,8 @@ class Job < ActiveRecord::Base
   end
 
   private
-
   def notify_recruiter_and_deliver_matching_resumes
     RecruiterMailer.email_jd_approved(recruiter, self).deliver_now
     deliver_matching_resumes
-  end
-
-  def pay_and_notify_supplier
-    # choose resume and pay the supplier
-    # bugs??
-    notify_supplier
-  end
-
-  def notify_supplier
-    # bugs??
-    Weixin.notify_resume_paid(resume, job) if resume.supplier.weixin
   end
 end
