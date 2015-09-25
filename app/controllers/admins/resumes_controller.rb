@@ -15,6 +15,7 @@ class Admins::ResumesController < Admins::BaseController
     @resume = Resume.find(params[:id])
   end
 
+  # FIXME: refactor name
   def check_and_update
     @resume = Resume.update(params[:id], resume_params)
     if @resume.errors.any?

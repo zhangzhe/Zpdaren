@@ -2,10 +2,6 @@ class Wallet < ActiveRecord::Base
   belongs_to :user
   has_many :withdraws
 
-  def update_money(operator, value)
-    self.update_attribute(:money, self.money.send(operator.to_sym, value))
-  end
-
   def build_withdraw_template
     self.withdraws.new(:amount => self.money.to_i, :zhifubao_account => zhifubao_account)
   end

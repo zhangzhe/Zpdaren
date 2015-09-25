@@ -1,5 +1,4 @@
 class Suppliers::DeliveriesController < Suppliers::BaseController
-  layout 'suppliers'
 
   def index
     @deliveries = current_supplier.deliveries
@@ -19,7 +18,6 @@ class Suppliers::DeliveriesController < Suppliers::BaseController
   end
 
   private
-
   def delivery_params
     params.require(:delivery).permit(:job_id, :resume_id)
   end

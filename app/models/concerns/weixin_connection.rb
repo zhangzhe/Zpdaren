@@ -1,4 +1,17 @@
-module WeixinNotification
+module WeixinConnection
+  def qrcode_url(ticket)
+    "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=#{ticket}"
+  end
+
+  def qr_code_ticket(scene_id)
+    response = conn.post do |req|
+      req.url "/cgi-bin/qrcode/create?access_token=#{access_token}"
+      req.body = "{ \"expire_seconds\": 604800, \"action_name\": \"QR_SCENE\", \"action_info\": { \"scene\": { \"scene_id\": #{scene_id} } } }"
+    end
+    response_result = JSON(response.body)
+    response_result['ticket']
+  end
+
   def send_subscribe_notification_to(subscribe_user)
     message = {
       touser: subscribe_user.user_name,

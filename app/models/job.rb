@@ -70,16 +70,6 @@ class Job < ActiveRecord::Base
     self.deliveries.approved
   end
 
-  def resumes_bonus_for(supplier)
-    count = 0
-    resumes_from(supplier).map(&:deliveries).flatten.each do |delivery|
-      if delivery.paid?
-        count += 1
-      end
-    end
-    return (count * bonus_for_each_resume)
-  end
-
   def resumes_count_from(supplier)
     resumes_from(supplier).count
   end
@@ -135,7 +125,7 @@ class Job < ActiveRecord::Base
     end
   end
 
-  def can_refund?
+  def may_refund?
     (self.deposit_paid? || self.approved?) && refund_requests.find_by_state(:submitted).nil?
   end
 
