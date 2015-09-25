@@ -21,6 +21,15 @@ class Recruiter < User
     self.jobs.map(&:approved_deliveries).flatten.count
   end
 
+  def create_and_pay_final_payment_for!(delivery)
+    ActiveRecord::Base.transaction do
+      self.receive(delivery.job.bonus_for_entry)
+      delivery.final_payment = FinalPayment.create!(:amount => delivery.job.bonus_for_entry, :wallet_id => self.wallet.id, :zhifubao_account => Admin.admin.zhifubao_account)
+      delivery.save!
+      delivery.pay_final_payment!
+    end
+  end
+
   private
   def init_blank_comapny
     create_company

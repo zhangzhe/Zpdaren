@@ -1,6 +1,5 @@
 class Suppliers::JobsController < Suppliers::BaseController
   helper_method :sort_column
-  layout "suppliers"
 
   def index
     @jobs = Job.approved
@@ -14,12 +13,6 @@ class Suppliers::JobsController < Suppliers::BaseController
     @job = Job.find(params[:id])
     @similar_jobs = @job.similar_jobs
     render layout: 'jobs'
-  end
-
-  def watch
-    job = Job.find(params[:id])
-    current_supplier.watch!(job)
-    redirect_to :back
   end
 
   private

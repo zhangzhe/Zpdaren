@@ -21,17 +21,6 @@ class Drawing < ActiveRecord::Base
     end
   end
 
-  def review!(opt)
-    if opt == 'agree'
-      self.agree! if self.submitted? && self.may_agree?
-    elsif opt == 'refuse'
-      if self.submitted? && self.may_refuse?
-        self.refuse!
-        wallet.update_attribute(:money, self.money)
-      end
-    end
-  end
-
   def state_show
     case self.state.to_sym
     when :submitted

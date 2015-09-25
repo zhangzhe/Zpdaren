@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923061830) do
+ActiveRecord::Schema.define(version: 20150925080933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,8 @@ ActiveRecord::Schema.define(version: 20150923061830) do
     t.datetime "updated_at",       null: false
   end
 
+  add_index "money_transfers", ["wallet_id"], name: "index_money_transfers_on_wallet_id", using: :btree
+
   create_table "refund_requests", force: :cascade do |t|
     t.integer  "job_id"
     t.text     "reason"
@@ -80,6 +82,8 @@ ActiveRecord::Schema.define(version: 20150923061830) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "refund_requests", ["job_id"], name: "index_refund_requests_on_job_id", using: :btree
+
   create_table "rejections", force: :cascade do |t|
     t.integer  "delivery_id"
     t.string   "reason"
@@ -87,6 +91,8 @@ ActiveRecord::Schema.define(version: 20150923061830) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "rejections", ["delivery_id"], name: "index_rejections_on_delivery_id", using: :btree
 
   create_table "resumes", force: :cascade do |t|
     t.string   "candidate_name"
@@ -159,5 +165,7 @@ ActiveRecord::Schema.define(version: 20150923061830) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "weixins", ["user_id"], name: "index_weixins_on_user_id", using: :btree
 
 end

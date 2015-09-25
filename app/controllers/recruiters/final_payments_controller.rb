@@ -12,13 +12,7 @@ class Recruiters::FinalPaymentsController < Recruiters::BaseController
 
   def create
     delivery = Delivery.find(params[:delivery_id])
-    ActiveRecord::Base.transaction do
-      current_recruiter.receive(delivery.job.bonus_for_entry)
-      delivery.final_payment = FinalPayment.create!(:amount => delivery.job.bonus_for_entry, :wallet_id => current_recruiter.wallet.id, :zhifubao_account => Admin.admin.zhifubao_account)
-      delivery.save!
-      delivery.pay_final_payment!
-    end
-
+    current_recruiter.create_and_pay_final_payment_for!(delivery)
     flash[:info] = "恭喜您招聘成功，非常感谢您的支持！"
     redirect_to recruiters_jobs_path
   end

@@ -1,5 +1,4 @@
 class Suppliers::ResumesController < Suppliers::BaseController
-  layout "suppliers"
 
   def index
     if params[:key].present?
@@ -36,7 +35,6 @@ class Suppliers::ResumesController < Suppliers::BaseController
   end
 
   private
-
   def resume_params
     params[:resume].permit(:candidate_name, :tag_list, :attachment, :mobile, :email, :auto_delivery)
   end

@@ -5,7 +5,4 @@ class Supplier < User
   has_many :attentions
   delegate :money, to: :wallet, prefix: true
 
-  def watch!(job)
-    self.attentions.create!(job_id: job.id)
-  end
 end

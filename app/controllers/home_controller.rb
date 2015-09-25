@@ -5,6 +5,7 @@ class HomeController < ApplicationController
   end
 
   require 'digest/sha1'
+  # FIXME: change to weixin callback
   def check_signature
     if params["xml"] && params["xml"]["Event"] == "subscribe" && params["xml"]["EventKey"]
       user_id = params["xml"]["EventKey"].split("_").last.to_i
