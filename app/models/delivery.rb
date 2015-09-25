@@ -71,12 +71,8 @@ class Delivery < ActiveRecord::Base
     self.update_attribute(:approved, true)
   end
 
-  def candidate_name
-    resume.candidate_name
-  end
-
   def candidate_brief
-    "#{self.candidate_name}: (#{self.resume_tag_list})"
+    "#{self.resume_candidate_name}: (#{self.resume_tag_list})"
   end
 
   def description
@@ -91,20 +87,18 @@ class Delivery < ActiveRecord::Base
     job.recruiter
   end
 
+  def supplier
+    resume.supplier
+  end
+
   def available_for_final_payment?
     self.paid? && self.final_payment.nil?
   end
 
   private
-
   def sync_job
     job.state = self.state
     job.save!
-  end
-
-  # FIXME: refactor dupplicate code
-  def notify_supplier_final_payment_paid
-    Weixin.notify_supplier_final_payment_paid(self.resume, self.job) if resume.supplier.weixin
   end
 
   def transfer_final_payment_to_admin
@@ -119,19 +113,24 @@ class Delivery < ActiveRecord::Base
     bonus = job.bonus_for_entry
     ActiveRecord::Base.transaction do
       Admin.admin.pay(bonus)
-      resume.supplier.receive(bonus)
+      supplier.receive(bonus)
     end
   end
 
   def notify_supplier_deposit_paid
-    Weixin.notify_supplier_deposit_paid(self.resume, self.job) if resume.supplier.weixin
+    Weixin.notify_supplier_deposit_paid(self.resume, self.job) if supplier.weixin
+  end
+
+  # FIXME: refactor dupplicate code
+  def notify_supplier_final_payment_paid
+    Weixin.notify_supplier_final_payment_paid(self.resume, self.job) if supplier.weixin
   end
 
   def transfer_deposit
     bonus = job.bonus_for_each_resume
     ActiveRecord::Base.transaction do
       Admin.admin.pay(bonus)
-      resume.supplier.receive(bonus)
+      supplier.receive(bonus)
     end
   end
 end

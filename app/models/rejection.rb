@@ -7,7 +7,7 @@ class Rejection < ActiveRecord::Base
 
   private
   def notify_supplier
-    Weixin.notify_resume_refused(self.delivery) if Rails.env == 'production'
+    Weixin.send_resume_refused_notification(self.delivery)
   end
 
   def reason_is_nil?
