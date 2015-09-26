@@ -13,7 +13,7 @@
             <% active = active_for?(Recruiters::DeliveriesController) %>
             <li class="<%= active %>"><%= link_to "推荐给我的简历#{badge_for_recruiter_resumes(current_recruiter)}".html_safe, recruiters_deliveries_path %></li>
             <% active = active_for?(Recruiters::RefundRequestsController) %>
-            <li class="<%= active %>"><%#= link_to "我的退款", recruiters_refund_requests_path(current_recruiter.company) %></li>
+            <li class="<%= active %>"><%= link_to "我的退款", recruiters_refund_requests_path(current_recruiter.company) %></li>
             <% active = active_for?(Recruiters::BaseController) %>
             <li class="<%= active %>"><%= link_to "账户管理", recruiters_path %></li>
           </ul>

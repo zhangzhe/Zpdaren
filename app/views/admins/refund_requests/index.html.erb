@@ -5,19 +5,18 @@
         <th>职位名称</th>
         <th>押金</th>
         <th>创建时间</th>
-        <th>状态</th>
+        <th>状态/操作</th>
       </tr>
     </thead>
     <tbody>
       <% @refund_requests.each do |refund_request| %>
         <tr>
-          <td><%= refund_request.job_title %></td>
+          <td><%= link_to refund_request.job_title, admins_refund_request_path(refund_request) %></td>
           <td><%= refund_request.job_deposit %></td>
           <td><%= refund_request.job_created_at.localtime.to_date.to_s(:db) %></td>
           <td>
             <% if refund_request.submitted? %>
-              <%= link_to '同意', agree_admins_refund_request_path(refund_request), method: :put, class: 'btn btn-success' %>
-              <%= link_to '拒绝', refuse_admins_refund_request_path(refund_request), method: :put, class: 'btn btn-danger' %>
+              <%= link_to "查看", admins_refund_request_path(refund_request), class: 'btn btn-success' %>
             <% else %>
               <%= refund_request.state_show %>
             <% end %>
