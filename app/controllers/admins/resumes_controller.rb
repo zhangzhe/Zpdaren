@@ -15,8 +15,7 @@ class Admins::ResumesController < Admins::BaseController
     @resume = Resume.find(params[:id])
   end
 
-  # FIXME: refactor name
-  def check_and_update
+  def update_and_approve
     @resume = Resume.update(params[:id], resume_params)
     if @resume.errors.any?
       flash[:error] = @resume.errors.full_messages.first
@@ -26,7 +25,7 @@ class Admins::ResumesController < Admins::BaseController
     redirect_to admins_resumes_path
   end
 
-  def original_resume_download
+  def download
     resume = Resume.find(params[:id])
     send_file resume.attachment.file.file
   end

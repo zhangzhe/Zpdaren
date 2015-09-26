@@ -1,7 +1,9 @@
 <p class="lead"><%= @refund_request.job_title %></p>
 <p><%= simple_format @refund_request.job_description %></p>
-<p>佣金：<%= @refund_request.job_bonus %>元</p>
-<p>退款理由：</p>
+<hr>
+<h2>佣金：</h2>
+<p><%= @refund_request.job_bonus %>元</p>
+<h2>退款理由：</h2>
 <p><%= @refund_request.reason %></p>
 <p>
   <% if @refund_request.submitted? %>

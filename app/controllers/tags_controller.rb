@@ -1,4 +1,4 @@
-class Api::TagsController < ApplicationController
+class TagsController < ApplicationController
 
   def index
     tags = Tag.find_by_q(params)

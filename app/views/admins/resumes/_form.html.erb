@@ -1,8 +1,8 @@
-<%= form_for resume, url: check_and_update_admins_resume_path, method: 'PUT' do |f| %>
+<%= form_for resume, url: update_and_approve_admins_resume_path, method: 'PUT' do |f| %>
   <p>
     <%= f.label '姓名' %>
     (
-      <%= link_to '简历原件', original_resume_download_admins_resume_path(resume[:id]) %>
+      <%= link_to '简历原件', download_admins_resume_path(resume[:id]) %>
     )
     <br />
     <%= f.text_field :candidate_name, class: 'form-control' %>

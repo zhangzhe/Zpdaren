@@ -14,7 +14,6 @@ class WithdrawsController < ApplicationController
       flash[:success] = "提现成功，提现金额 #{withdraw_params[:amount]} 元会在一个工作日内打入您的支付宝账号，请注意查收。"
       redirect_to redirect_path
     end
-
   end
 
   private

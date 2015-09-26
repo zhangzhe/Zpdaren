@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
 
-  namespace :api do
-    resources :tags, only: [:index]
-  end
-
+  resources :tags, only: [:index]
   resources :withdraws, only: [:new, :create]
 
-  get 'qr_codes/show'
+  get 'qr_codes' => "qr_codes#show"
 
   root :to => 'passthrough#index'
   get 'home' => 'home#index'
-  post 'check_signature' => 'home#check_signature'
-  get 'check_signature' => 'home#check_signature'
+
+  # remove later
+  match 'check_signature' => 'home#check_signature', via: [:get, :post]
+  match 'weixin_callback' => 'home#weixin_callback', via: [:get, :post]
 
   get 'recruiters' => 'recruiters/base#show'
   get 'suppliers' => 'suppliers/base#show'
@@ -34,13 +33,11 @@ Rails.application.routes.draw do
     sessions: 'authentication/admins/sessions',
   }
 
-  resources :qr_codes, only: [:show]
-
   namespace :admins do
     resources :resumes, only: [:index, :edit] do
       member do
-        put :check_and_update
-        get :original_resume_download
+        put :update_and_approve
+        get :download
       end
     end
 
@@ -61,6 +58,7 @@ Rails.application.routes.draw do
     end
   end
 
+  # HERE
   namespace :recruiters do
     resources :jobs, except: [:destroy] do
       member do
