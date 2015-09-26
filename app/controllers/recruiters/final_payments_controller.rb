@@ -1,5 +1,5 @@
 class Recruiters::FinalPaymentsController < Recruiters::BaseController
-  def index
+  def deliveries_list
     flash.now[:info] = "请选择一份简历作为支付目标"
     @job = Job.find(params[:job_id])
     @deliveries = @job.deliveries

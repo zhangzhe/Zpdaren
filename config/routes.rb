@@ -45,11 +45,7 @@ Rails.application.routes.draw do
 
     resources :users, only: [:index]
     resources :companies, only: [:index, :show]
-    resources :jobs, only: [:index, :show, :edit, :update] do
-      member do
-        put :complete
-      end
-    end
+    resources :jobs, only: [:index, :show, :edit, :update]
     resources :refund_requests, only: [:index, :show] do
       member do
         put :agree
@@ -58,11 +54,9 @@ Rails.application.routes.draw do
     end
   end
 
-  # HERE
   namespace :recruiters do
     resources :jobs, except: [:destroy] do
       member do
-        put :complete
         put :freeze
         put :active
       end
@@ -71,18 +65,21 @@ Rails.application.routes.draw do
     resources :deliveries, only: [:index, :show] do
       member do
         put :pay
-        put :final_pay
       end
     end
     resources :refund_requests, only: [:index, :new, :create]
     resources :rejections, only: [:new, :create]
     resources :deposits, only: [:new, :create]
-    resources :final_payments, only: [:index, :new, :create]
+    resources :final_payments, only: [:new, :create] do
+      collection do
+        get :deliveries_list
+      end
+    end
   end
 
   namespace :suppliers do
     resources :jobs, only: [:index, :show]
-    resources :resumes, only: [:index, :new, :create, :download] do
+    resources :resumes, only: [:index, :new, :create] do
       member do
         get :download
       end

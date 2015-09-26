@@ -3,5 +3,4 @@ class Recruiters::BaseController < ApplicationController
 
   def show
   end
-
 end

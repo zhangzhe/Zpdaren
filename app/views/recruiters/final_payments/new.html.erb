@@ -5,7 +5,7 @@
   <li>
     <%= link_to truncate(@job.title), recruiters_job_path(@job) %>
   </li>
-  <li><%= link_to "支付尾款", recruiters_final_payments_path(:job_id => @job) %></li>
+  <li><%= link_to "支付尾款", deliveries_list_recruiters_final_payments_path(:job_id => @job) %></li>
 </ol>
 <div>
   <p class="lead">请转账 <%= (@job.bonus_for_entry).to_i %>元作为成功招聘<%= @job.title %>的尾款， 到支付宝账号：<%= Admin.admin.zhifubao_account %>。<br>完成后，请点击下面的转账完成确认按钮。</p>
