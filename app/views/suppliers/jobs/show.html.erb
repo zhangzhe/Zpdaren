@@ -1,33 +1,24 @@
 <% content_for :job_info do %>
-
     <h2 class="blog-post-title"><%= @job.title %></h2>
     <p class="blog-post-meta"><%= @job.company_name %>提供<%= @job.bonus_for_entry %>元招聘红包</p>
-
     <p><%= simple_format @job.description %></p>
     <hr>
     <h2 class="blog-post-title">关于<%= @job.company_name %></h2>
     <blockquote><%= @job.company_description %></blockquote>
-
-  </div><!-- /.blog-post -->
+  </div>
 <% end %>
 
 <% content_for :other_job_info do %>
   <hr/>
   <p>
-    <%= render "deliver_resume", job: @job %>
+    <%= render "resume_deliver", job: @job %>
   </p>
 
   <p>
-    <%= render "resumes", job: @job %>
+    <%= render "delivered_resumes", job: @job %>
   </p>
 
   <p>
-    <h4>更多类似职位需求</h4>
-    <ol class="list-unstyled">
-
-      <% @similar_jobs.each do |job| %>
-        <li><%= link_to job.title, suppliers_job_path(job) %></a></li>
-      <% end %>
-    </ol>
+    <%= render "similar_jobs", similar_jobs: @similar_jobs %>
   </p>
 <% end %>
