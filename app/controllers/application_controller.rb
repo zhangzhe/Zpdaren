@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   include DeviseHelper
-  # before_filter :authorize
+  before_filter :authorize
 
   # 3 roles: admins, recruiters, suppliers, the function under these 3 roles would be only used by the role
   def authorize
