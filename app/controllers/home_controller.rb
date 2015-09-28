@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
   protect_from_forgery :except => [:check_signature, :weixin_callback]
-  layout 'home'
 
   def index
   end
