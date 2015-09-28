@@ -15,7 +15,6 @@ class Recruiters::DepositsController < Recruiters::BaseController
   end
 
   private
-
   def deposit_params
     params[:job].permit(:deposit)
   end
