@@ -4,4 +4,10 @@ class Authentication::Suppliers::PasswordsController < Devise::PasswordsControll
     home_path
   end
 
+  private
+  def render(*args)
+    options = args.extract_options!
+    options[:template] = "/authentication/passwords/#{params[:action]}"
+    super(*(args << options))
+  end
 end
