@@ -9,13 +9,8 @@ class Recruiters::CompaniesController < Recruiters::BaseController
       flash[:error] = @company.errors.messages.values.first.first
       render 'edit' and return
     else
-      redirect_to recruiters_company_path(@company)
+      redirect_to recruiters_path(@company)
     end
-  end
-
-  def show
-    @company = Company.find(params[:id])
-    redirect_to recruiters_path
   end
 
   private

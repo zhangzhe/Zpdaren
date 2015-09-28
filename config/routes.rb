@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   get 'recruiters' => 'recruiters/base#show'
   get 'suppliers' => 'suppliers/base#show'
+  get 'admins' => 'admins/base#show'
 
   devise_for :recruiters, controllers: {
     sessions: 'authentication/recruiters/sessions',
@@ -61,7 +62,7 @@ Rails.application.routes.draw do
         put :active
       end
     end
-    resources :companies, only: [:show, :edit, :update]
+    resources :companies, only: [:edit, :update]
     resources :deliveries, only: [:index, :show] do
       member do
         put :pay

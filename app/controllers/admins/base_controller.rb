@@ -3,6 +3,10 @@ class Admins::BaseController < ApplicationController
   before_action :default_sort, only: [:index]
   layout 'admins'
 
+  # 管理员账户信息
+  def show
+  end
+
   private
   def sort_direction
     %w(ASC DESC).include?(params[:direction]) ? params[:direction] : 'DESC'

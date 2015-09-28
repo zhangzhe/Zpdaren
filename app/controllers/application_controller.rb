@@ -17,9 +17,13 @@ class ApplicationController < ActionController::Base
     controller_route_profix = params[:controller].controller_profix
     if roles.include?(controller_route_profix)
       if current_user
-        redirect_to root_url, :alert => "没有权限，请联系管理员！" unless current_user.type == controller_route_profix
+        unless current_user.type == controller_route_profix
+          flash[:alert] ||= "没有权限，请联系管理员！"
+          redirect_to root_url
+        end
       else
-        redirect_to home_url, alert: '请先登录！'
+        flash[:alert] ||= '请先登录！'
+        redirect_to home_url
       end
     end
   end
