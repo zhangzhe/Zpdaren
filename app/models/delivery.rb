@@ -5,7 +5,7 @@ class Delivery < ActiveRecord::Base
   belongs_to :final_payment, :foreign_key => :final_payment_id
 
   delegate :candidate_name, :tag_list, :mobile, :email, to: :resume, prefix: true
-  delegate :id, :title, to: :job, prefix: true
+  delegate :id, :title, :user_id, to: :job, prefix: true
   delegate :reason, :other, to: :rejection, prefix: true
 
   scope :paid, -> { where(state: 'paid') }
@@ -93,6 +93,18 @@ class Delivery < ActiveRecord::Base
 
   def available_for_final_payment?
     self.paid? && self.final_payment.nil?
+  end
+
+  def resume_paid_in_other_delivery?
+    resume.ever_paid_by?(recruiter)
+  end
+
+  def paid_by?(recruiter)
+    recruiter_id == recruiter.id
+  end
+
+  def recruiter_id
+    job_user_id
   end
 
   private
