@@ -40,7 +40,7 @@
               <%= delivery.job_title %>
             </td>
             <td>
-              <%= link_to '查看简历', recruiters_delivery_path(delivery), class: 'btn btn-primary active' unless delivery.paid? || delivery.refused? %>
+              <%= link_to '查看简历', recruiters_delivery_path(delivery), class: 'btn btn-primary active' unless (delivery.paid? || delivery.refused? || delivery.resume_paid_in_other_delivery?) %>
             </td>
           </tr>
         <% end %>

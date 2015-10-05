@@ -52,6 +52,12 @@ class Resume < ActiveRecord::Base
     similar_entity(Job)
   end
 
+  def ever_paid_by?(recruiter)
+    deliveries.each do |delivery|
+      return true if delivery.paid_by?(recruiter)
+    end
+  end
+
   private
   def notify_recruiter_and_supplier_and_auto_deliver
     # set approved

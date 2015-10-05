@@ -16,6 +16,9 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
   def show
     @delivery = Delivery.find(params[:id])
     @delivery.read! if @delivery.unread?
+    if !@delivery.paid? && @delivery.resume_paid_in_other_delivery?
+      flash.now[:info] = "这份简历您曾经支付过，可以直接查看联系方式。"
+    end
   end
 
   def pay
