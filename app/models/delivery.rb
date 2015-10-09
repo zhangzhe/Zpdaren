@@ -92,7 +92,6 @@ class Delivery < ActiveRecord::Base
   end
 
   def available_for_final_payment?
-    # self.final_payment.nil? && self.paid?
     self.final_payment.nil? && self.ever_paid?
   end
 
