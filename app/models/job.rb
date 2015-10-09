@@ -10,8 +10,8 @@ class Job < ActiveRecord::Base
       return false
     end
   end
-  has_many :attentions
-  has_many :suppliers, through: :attentions
+  has_many :watchings
+  has_many :suppliers, through: :watchings
   has_many :refund_requests
 
   validates_presence_of :title, :description, :bonus, :tag_list
@@ -113,7 +113,7 @@ class Job < ActiveRecord::Base
     Delivery.create(:resume_id => resume.id, :job_id => self.id)
   end
 
-  def watch_by?(supplier)
+  def watched_by?(supplier)
     suppliers.include?(supplier)
   end
 

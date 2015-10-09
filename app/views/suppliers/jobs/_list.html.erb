@@ -42,10 +42,10 @@
           </td>
           <td>
             <%= link_to "为他推荐", suppliers_job_path(job), class: "btn btn-primary active", role: "button", :target => "_blank" %>
-            <% if job.watch_by?(current_supplier) %>
+            <% if job.watched_by?(current_supplier) %>
               <i class="fa fa-heart" id='attended'></i>
             <% else %>
-              <%= link_to '', suppliers_attentions_path(attention: { job_id: job.id, supplier_id: current_supplier.id }), class: 'fa fa-heart-o', method: :post, id: 'unattend' %>
+              <%= link_to '', suppliers_watchings_path(watching: { job_id: job.id, supplier_id: current_supplier.id }), class: 'fa fa-heart-o', method: :post, id: 'unattend' %>
             <% end %>
           </td>
         </tr>

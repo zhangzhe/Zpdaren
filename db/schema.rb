@@ -11,20 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150925080933) do
+ActiveRecord::Schema.define(version: 20151009015519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "attentions", force: :cascade do |t|
-    t.integer  "supplier_id"
-    t.integer  "job_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "attentions", ["job_id"], name: "index_attentions_on_job_id", using: :btree
-  add_index "attentions", ["supplier_id"], name: "index_attentions_on_supplier_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
     t.integer  "user_id"
@@ -158,6 +148,16 @@ ActiveRecord::Schema.define(version: 20150925080933) do
   end
 
   add_index "wallets", ["user_id"], name: "index_wallets_on_user_id", using: :btree
+
+  create_table "watchings", force: :cascade do |t|
+    t.integer  "supplier_id"
+    t.integer  "job_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "watchings", ["job_id"], name: "index_watchings_on_job_id", using: :btree
+  add_index "watchings", ["supplier_id"], name: "index_watchings_on_supplier_id", using: :btree
 
   create_table "weixins", force: :cascade do |t|
     t.string   "user_name"
