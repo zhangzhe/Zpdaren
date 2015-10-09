@@ -85,7 +85,7 @@ Rails.application.routes.draw do
         get :download
       end
     end
-    resources :attentions, only: [:create]
+    resources :watchings, only: [:create]
     resources :deliveries, only: [:index, :new, :create]
   end
 end
