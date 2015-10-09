@@ -56,6 +56,7 @@ class Resume < ActiveRecord::Base
     deliveries.each do |delivery|
       return true if delivery.paid_by?(recruiter)
     end
+    return false
   end
 
   private
