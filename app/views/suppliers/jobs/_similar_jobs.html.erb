@@ -1,0 +1,6 @@
+<h4>更多类似职位需求</h4>
+<ol class="list-unstyled">
+  <% similar_jobs.each do |job| %>
+  <li><%= link_to job.title, suppliers_job_path(job) %></a></li>
+  <% end %>
+</ol>
