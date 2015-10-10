@@ -1,0 +1,9 @@
+<p>
+  亲爱的<%= @recruiter.email %>
+</p>
+
+<p style=\"text-indent:2em;\">
+  您提交的职位<%= link_to @job.title,  "#{ROOT_URL}/recruiters/jobs/#{@job.id}" %>已被管理员审核通过并发布，谢谢您的耐心等待。因为一份好的职位描述才能为企业带来更多的众聘推荐，所以我们加入了审核流程并查收了您的职位押金。
+ <br> 我们有职位描述的推荐模板供您参考。如果长期没有收到满意的推荐，可以尝试优化职位描述、提高红包数额或提供更精确的需求标签。
+</p>
+<%= render "/shared/mail_footer" %>
