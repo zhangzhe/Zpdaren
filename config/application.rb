@@ -14,3 +14,5 @@ module Epin
     config.autoload_paths += %W(#{config.root}/app/models/users)
   end
 end
+
+ROOT_URL = "http://#{Settings.domain.host}:#{Settings.domain.port}"

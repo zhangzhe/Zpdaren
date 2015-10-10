@@ -13,8 +13,6 @@ class ApplicationController < ActionController::Base
 
   # 3 roles: admins, recruiters, suppliers, the function under these 3 roles would be only used by the role
   def authorize
-    @current_server_root_url ||= "#{request.protocol}#{request.host_with_port}#{request.fullpath}"
-
     roles = ["Admin", "Recruiter", "Supplier"]
     controller_route_profix = params[:controller].controller_profix
     if roles.include?(controller_route_profix)

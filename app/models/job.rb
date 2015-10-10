@@ -146,7 +146,7 @@ class Job < ActiveRecord::Base
   def update_and_approve!(job_params)
     self.attributes = job_params
     if self.changed? and self.save
-      RecruiterMailer.edit_job_notify(self).deliver_now
+      RecruiterMailer.job_updated(self).deliver_now
     end
     self.approve!
   end
@@ -165,7 +165,7 @@ class Job < ActiveRecord::Base
 
   private
   def notify_recruiter_and_deliver_matching_resumes
-    RecruiterMailer.email_jd_approved(recruiter, self).deliver_now
+    RecruiterMailer.job_approved(recruiter, self).deliver_now
     deliver_matching_resumes
   end
 end
