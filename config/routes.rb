@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :tags, only: [:index]
   resources :withdraws, only: [:new, :create]
 
-  get 'qr_codes' => "qr_codes#show"
+  get 'qr_codes/:id' => "qr_codes#show", :as => "qr_code"
 
   root :to => 'passthrough#index'
   get 'home' => 'home#index'
