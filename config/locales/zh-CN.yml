@@ -276,4 +276,13 @@ zh-CN:
       not_saved:
         one: "因为1个错误导致此%{resource}保存失败:"
         other: "因为%{count}个错误导致此%{resource}保存失败:"
-
+  activerecord:
+    errors:
+      models:
+        recruiter:
+          attributes:
+            email:
+              blank: "邮箱不能为空"
+              taken: "此邮箱已在系统中存在，请使用其他邮箱注册"
+            password:
+              blank: "密码不能为空"

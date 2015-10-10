@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
-  devise :database_authenticatable
   has_one :weixin
   has_one :wallet
   default_scope { order('created_at DESC') }
   after_create :create_wallet
+  devise :database_authenticatable
+
 
   def receive(money)
     self.wallet.update_attribute(:money, self.wallet.money.to_i + money)
