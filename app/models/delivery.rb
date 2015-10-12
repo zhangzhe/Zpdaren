@@ -48,7 +48,7 @@ class Delivery < ActiveRecord::Base
     event :complete do
       after do
         sync_job
-        transfer_final_payment
+        transfer_final_payment_to_supplier
         notify_supplier_final_payment_paid
       end
       transitions :from => :final_payment_paid, :to => :finished
@@ -80,7 +80,7 @@ class Delivery < ActiveRecord::Base
   end
 
   def notify_recruiter
-    RecruiterMailer.email_resume_recommended(recruiter, self).deliver_now
+    RecruiterMailer.resume_recommended(recruiter, self).deliver_now
   end
 
   def recruiter
@@ -123,12 +123,12 @@ class Delivery < ActiveRecord::Base
   def transfer_final_payment_to_admin
     bonus = job.bonus_for_entry
     ActiveRecord::Base.transaction do
-      Admin.admin.receive(bonus)
       recruiter.pay(bonus)
+      Admin.admin.receive(bonus)
     end
   end
 
-  def transfer_final_payment
+  def transfer_final_payment_to_supplier
     bonus = job.bonus_for_entry
     ActiveRecord::Base.transaction do
       Admin.admin.pay(bonus)
