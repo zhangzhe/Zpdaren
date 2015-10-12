@@ -11,11 +11,11 @@ class User < ActiveRecord::Base
   end
 
   def pay(money)
-    if self.wallet.money.to_i > money
+    if self.wallet.money.to_i >= money
       self.wallet.update_attribute(:money, self.wallet.money.to_i - money)
     else
       # FIXME: 显示具体错误
-      # raise "余额不足"
+      raise "余额不足"
     end
   end
 
