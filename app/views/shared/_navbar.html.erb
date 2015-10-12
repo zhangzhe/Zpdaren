@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/home">众聘达人</a>
+      <a class="navbar-brand" href="/home"><%= image_tag "logo", height: '20px' %></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <% if current_user %>
@@ -15,7 +15,6 @@
           <li><a href="/">管理页面</a></li>
         </ul>
       <% end %>
-
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
           <li><%= link_to current_user.email, current_user_account_path %></li>
@@ -29,30 +28,30 @@
         <% if current_user %>
           <li><%= link_to "退出", destroy_admin_session_path, :method => "DELETE" %></li>
         <% else %>
-
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="">招聘方 <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><%= link_to '注册', new_recruiter_registration_path %></li>
-            <li><%= link_to '登录', new_recruiter_session_path %></li>
-            <li><%= link_to '忘记密码', new_recruiter_password_path %></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="">推荐方 <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><%= link_to '注册', new_supplier_registration_path %></li>
-            <li><%= link_to '登录', new_supplier_session_path %></li>
-            <li><%= link_to '忘记密码', new_supplier_password_path %></li>
-          </ul>
-        </li>
-         <li><%= link_to '管理员登录', new_admin_session_path unless Rails.env == "production" %></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">招聘方<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to '注册', new_recruiter_registration_path %></li>
+              <li><%= link_to '登录', new_recruiter_session_path %></li>
+              <li><%= link_to '忘记密码', new_recruiter_password_path %></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">推荐方<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to '注册', new_supplier_registration_path %></li>
+              <li><%= link_to '登录', new_supplier_session_path %></li>
+              <li><%= link_to '忘记密码', new_supplier_password_path %></li>
+            </ul>
+          </li>
+          <li>
+            <%= link_to '管理员登录', new_admin_session_path unless Rails.env == "production" %>
+          </li>
         <% end %>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
 </nav>
-<br>
 
 <div id='bigQrcode' class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 </div>

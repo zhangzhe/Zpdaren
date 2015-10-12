@@ -1,0 +1,31 @@
+<div class="jumbotron">
+  <div class="container">
+    <%= bootstrap_flash %>
+    <h1>众聘达人</h1>
+    <p>
+      众聘达人是火花旗下的招聘平台，火花团队的合伙人来自MIT、Draper University和甲骨文等名校和名企，发起于硅谷，获得IDG资本注资。我们致力于打造Uber for HR，让人力资源和招聘行业的资源充分优化，为企业解决难以找到人才渠道的问题。众聘，让招聘更简单！
+    </p>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-md-6">
+      <h2>招聘方</h2>
+      <p>
+        如果你是相对早期的公司，为有限的人才来源而苦恼，这里众多的HR和业内资深人士将为你推荐大量的简历。只需给出入职红包金额和20%订金，HR们将开始“接单”并为你推荐。我们也同时欢迎大型的公司扩充自己的招聘渠道，我们这里会有各大招聘网站得不到的简历！
+      </p>
+      <p>
+        <a class="btn btn-default" href="/recruiters/sign_in" role="button">了解更多 &raquo;</a></p>
+    </div>
+    <div class="col-md-6">
+      <h2>推荐方</h2>
+      <p>
+        你可以是人力资源工作者、招聘专员、掌握大量简历的业内资深人士也可以是猎头。这里有大量需求和入职红包，会让你手中的简历和资源得到充分利用，碎片化的时间将为你带来足够的收益。
+      </p>
+      <p><a class="btn btn-default" href="/suppliers/sign_in" role="button">了解更多 &raquo;</a></p>
+    </div>
+  </div>
+  <hr>
+</div> <!-- /container -->
