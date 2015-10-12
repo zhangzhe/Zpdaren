@@ -18,19 +18,6 @@ body {
 }
 
 /*
- * Top navigation
- * Hide default border to remove 1px line.
- */
-
-/*
- FIXME: change the name
- */
-.navbar-fixed-top {
-  border: 0;
-  position: absolute;
-}
-
-/*
  * Sidebar
  */
 
