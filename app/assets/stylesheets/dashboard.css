@@ -93,3 +93,6 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+.carousel{
+  margin-top: 11px;
+}
