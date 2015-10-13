@@ -96,3 +96,27 @@ body {
 .carousel{
   margin-top: 11px;
 }
+
+/*首页招聘方和推荐方*/
+  .role-entity{
+    width: 240px;
+    margin: 0 43px;
+    display: inline-block;
+  }
+  .role-entity img{
+    width: 240px;
+  }
+  .role-entity .title{
+    margin-top: 30px;
+    font-size: 18px;
+  }
+  .role-entity .descrition{
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  .role-entity .more{
+    color: #338ce4;
+    font-size: 12px;
+    margin-top: 44px;
+  }
+/**********************/
