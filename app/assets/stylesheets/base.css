@@ -1,3 +1,27 @@
 .text-center{
   text-align: center;
 }
+.fs18{
+  font-size: 18px;
+}
+.fs14{
+  font-size: 14px;
+}
+.fs12{
+  font-size: 12px;
+}
+.mb20{
+  margin-bottom: 20px;
+}
+.pt48{
+  padding-top: 48px;
+}
+.pb48{
+  padding-bottom: 48px;
+}
+.lh20{
+  line-height: 20px;
+}
+.h180{
+  height: 180px;
+}
