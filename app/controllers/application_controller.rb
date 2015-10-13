@@ -23,7 +23,11 @@ class ApplicationController < ActionController::Base
         end
       else
         flash[:alert] ||= '请先登录！'
-        redirect_to home_url
+        if request.referer.present?
+          redirect_to request.referer.end_with?('/sign_in') ? :back : home_url
+        else
+          redirect_to home_url
+        end
       end
     end
   end
