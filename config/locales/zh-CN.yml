@@ -277,9 +277,13 @@ zh-CN:
         one: "因为1个错误导致此%{resource}保存失败:"
         other: "因为%{count}个错误导致此%{resource}保存失败:"
   activerecord:
+    attributes:
+      user:
+        email: ''
+        password: ''
     errors:
       models:
-        recruiter:
+        user:
           attributes:
             email:
               blank: "邮箱不能为空"
