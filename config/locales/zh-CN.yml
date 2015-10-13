@@ -277,16 +277,13 @@ zh-CN:
         one: "因为1个错误导致此%{resource}保存失败:"
         other: "因为%{count}个错误导致此%{resource}保存失败:"
   activerecord:
+    attributes:
+      user:
+        email: ''
+        password: ''
     errors:
       models:
-        supplier:
-          attributes:
-            email:
-              blank: "邮箱不能为空"
-              taken: "此邮箱已在系统中存在，请使用其他邮箱注册"
-            password:
-              blank: "密码不能为空"
-        recruiter:
+        user:
           attributes:
             email:
               blank: "邮箱不能为空"
