@@ -13,10 +13,4 @@ module PasswordForgetable
   def after_sending_reset_password_instructions_path_for(resource_name)
     home_path
   end
-
-  def render(*args)
-    options = args.extract_options!
-    options[:template] = "/authentication/#{controller_name}/#{params[:action]}"
-    super(*(args << options))
-  end
 end
