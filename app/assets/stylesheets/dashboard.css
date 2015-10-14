@@ -127,3 +127,14 @@ body {
 .jumbotron-bgc{
   background-color: #f5f5f5;
 }
+
+
+/*合作伙伴*/
+  .partner-logo{
+    height: 100px;
+    line-height: 100px;
+  }
+  .partner-logo img{
+    width: 100px;
+  }
+/**********************/
