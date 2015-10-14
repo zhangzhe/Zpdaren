@@ -25,6 +25,9 @@
     <%= f.file_field 'attachment' %>
   </p>
   <p>
+    <%= f.text_field 'leave_message', class: 'form-control', :placeholder => '给招聘方留言...(选填，50字内)' %>
+  </p>
+  <p>
     <%= f.submit '上传', class: "btn btn-primary active" %>
   </p>
 <% end %>

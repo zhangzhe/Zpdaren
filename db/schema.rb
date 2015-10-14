@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151009015519) do
+ActiveRecord::Schema.define(version: 20151014033520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20151009015519) do
     t.integer  "supplier_id"
     t.string   "state"
     t.boolean  "auto_delivery"
+    t.string   "leave_message"
   end
 
   create_table "taggings", force: :cascade do |t|
