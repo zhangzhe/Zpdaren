@@ -14,7 +14,7 @@
     <%= @delivery.resume_tag_list.each{|tag|}.join(' ') %>
   </p>
   <p>
-    <span class="label label-info"><%= "推荐者留言：#{@delivery.resume_leave_message}" if @delivery.resume_leave_message.present? %></span>
+    <span class="label label-info"><%= "推荐者留言：#{@delivery.resume_message}" if @delivery.resume_message.present? %></span>
   </p>
   <hr>
   <p><%= simple_format @delivery.description %></p>

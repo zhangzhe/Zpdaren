@@ -7,7 +7,7 @@ class Resume < ActiveRecord::Base
   validates_length_of :candidate_name, maximum: 10
   validates_uniqueness_of :mobile, :email, message: '系统中已经存在，请上选择其他候选人'
   validates_length_of :mobile, is: 11
-  validates_length_of :leave_message, maximum: 50
+  validates_length_of :message, maximum: 50
   scope :waiting_approved, -> { where('state' => 'submitted')}
   extend DefaultValue
   include SimilarEntity

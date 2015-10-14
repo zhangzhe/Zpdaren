@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20151014033520) do
     t.integer  "supplier_id"
     t.string   "state"
     t.boolean  "auto_delivery"
-    t.string   "leave_message"
+    t.string   "message"
   end
 
   create_table "taggings", force: :cascade do |t|
