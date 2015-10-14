@@ -1,4 +1,6 @@
 <div class="container">
+  <br>
+  <%= bootstrap_flash %>
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "form-signin" }) do |f| %>
     <h2>修改密码</h2>
     <%= devise_error_messages! %>
