@@ -1,6 +1,30 @@
 .text-center{
   text-align: center;
 }
-.margin-top-20{
+.fs18{
+  font-size: 18px;
+}
+.fs14{
+  font-size: 14px;
+}
+.fs12{
+  font-size: 12px;
+}
+.mt20{
   margin-top: 20px;
+}
+.mb20{
+  margin-bottom: 20px;
+}
+.pt48{
+  padding-top: 48px;
+}
+.pb48{
+  padding-bottom: 48px;
+}
+.lh20{
+  line-height: 20px;
+}
+.h180{
+  height: 180px;
 }
