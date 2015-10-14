@@ -1,5 +1,5 @@
 class Recruiter < User
-  devise :database_authenticatable, :registerable, :trackable, :validatable, :recoverable, :confirmable
+  devise :database_authenticatable, :registerable, :trackable, :recoverable, :confirmable
 
   has_one :company, :foreign_key => :user_id
   has_many :jobs, :foreign_key => :user_id
