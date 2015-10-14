@@ -202,23 +202,6 @@ zh-CN:
       long: "%Y年%b%d日 %H:%M"
       short: "%b%d日 %H:%M"
     pm: 下午
-  activerecord:
-    attributes:
-      user:
-        email: '邮箱'
-        password: '密码'
-      resume:
-        candidate_name: '候选人姓名'
-        mobile: '手机号'
-        email: '邮箱'
-        attachment: '简历附件'
-        tag_list: '标签'
-        description: '工作经历、教育背景等描述'
-      job:
-        title: '位置名称'
-        description: '职位描述'
-        bonus: '红包'
-        tag_list: '职位标签'
   devise:
     confirmations:
       confirmed: "恭喜您，注册成功，现在可以登录了"
@@ -281,6 +264,18 @@ zh-CN:
       user:
         email: ''
         password: ''
+      resume:
+        candidate_name: '候选人姓名'
+        mobile: '手机号'
+        email: '邮箱'
+        attachment: '简历附件'
+        tag_list: '标签'
+        description: '工作经历、教育背景等描述'
+      job:
+        title: '位置名称'
+        description: '职位描述'
+        bonus: '红包'
+        tag_list: '职位标签'
     errors:
       models:
         user:

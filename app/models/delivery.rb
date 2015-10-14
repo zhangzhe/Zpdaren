@@ -4,7 +4,7 @@ class Delivery < ActiveRecord::Base
   has_one :rejection
   belongs_to :final_payment, :foreign_key => :final_payment_id
 
-  delegate :candidate_name, :tag_list, :mobile, :email, to: :resume, prefix: true
+  delegate :candidate_name, :tag_list, :mobile, :email, :message, to: :resume, prefix: true
   delegate :id, :title, :user_id, to: :job, prefix: true
   delegate :reason, :other, to: :rejection, prefix: true
 

@@ -1,17 +1,22 @@
-
 <div>
   <ol class="breadcrumb">
     <li>
       <%= link_to '推荐给我的简历', recruiters_deliveries_path %>
     </li>
-
     <li>
-      <%= @delivery.candidate_brief %>
+      <%= @delivery.resume_candidate_name %>
     </li>
   </ol>
 
   <p class="lead"><%= @delivery.resume_candidate_name %></p>
-
+  <p>
+    <i class="fa fa-tags"></i>
+    <%= @delivery.resume_tag_list.each{|tag|}.join(' ') %>
+  </p>
+  <p>
+    <span class="label label-info"><%= "推荐者留言：#{@delivery.resume_message}" if @delivery.resume_message.present? %></span>
+  </p>
+  <hr>
   <p><%= simple_format @delivery.description %></p>
 
   <hr>

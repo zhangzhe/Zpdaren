@@ -27,7 +27,7 @@
               <% if delivery.refused? %>
                 <s>
               <% end %>
-              <% link_to_resume = link_to(delivery.candidate_brief, recruiters_delivery_path(delivery)) %>
+              <% link_to_resume = link_to(delivery.resume_candidate_name, recruiters_delivery_path(delivery)) %>
               <% if delivery.unread? %>
                 <strong><%= link_to_resume %></strong>
               <% else %>
