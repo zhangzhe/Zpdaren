@@ -28,21 +28,15 @@
         <% if current_user %>
           <li><%= link_to "退出", destroy_admin_session_path, :method => "DELETE" %></li>
         <% else %>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">招聘方<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><%= link_to '注册', new_recruiter_registration_path %></li>
-              <li><%= link_to '登录', new_recruiter_session_path %></li>
-              <li><%= link_to '忘记密码', new_recruiter_password_path %></li>
-            </ul>
+          <li>
+            <a href="#" data-toggle="modal" data-target="#ModalRecruiter">
+              我要招聘
+            </a>
           </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">推荐方<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><%= link_to '注册', new_supplier_registration_path %></li>
-              <li><%= link_to '登录', new_supplier_session_path %></li>
-              <li><%= link_to '忘记密码', new_supplier_password_path %></li>
-            </ul>
+          <li>
+            <a href="#" data-toggle="modal" data-target="#ModalSupplier">
+              我要推荐
+            </a>
           </li>
           <li>
             <%= link_to '管理员登录', new_admin_session_path unless Rails.env == "production" %>
@@ -55,3 +49,6 @@
 
 <div id='bigQrcode' class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 </div>
+
+<%= render "/home/modal_recruiter" %>
+<%= render "/home/modal_supplier" %>
