@@ -59,7 +59,7 @@ class Job < ActiveRecord::Base
   end
 
   def editable?
-     !["final_payment_paid", "finished", "freezing"].include?(self.state)
+     ["submitted", "deposit_paid"].include?(self.state)
   end
 
   def unread_deliveries

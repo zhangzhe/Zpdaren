@@ -22,15 +22,15 @@
   <hr>
   <p>
 
-    <% if @delivery.paid? || @delivery.resume_paid_in_other_delivery? %>
+    <% if @delivery.paid? %>
       <h3>联系方式 </h3>
       <p><%= @delivery.resume_mobile %></p>
       <p><%= @delivery.resume_email %></p>
     <% elsif !@delivery.refused? %>
       <h3>联系方式 </h3>
       付费<%= @delivery.job.bonus_for_each_resume %>元后可看
-      <%= link_to "从订金中扣除#{@delivery.job.bonus_for_each_resume}元", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary active", role: "button", method: :put if @delivery.recommended? %>
-      <%= link_to "拒绝", new_recruiters_rejection_path(delivery_id: @delivery.id), class: "btn btn-primary active", role: "button" if @delivery.recommended? %>
+      <%= link_to "从订金中扣除#{@delivery.job.bonus_for_each_resume}元", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary active", role: "button", method: :put if @delivery.approved? %>
+      <%= link_to "拒绝", new_recruiters_rejection_path(delivery_id: @delivery.id), class: "btn btn-primary active", role: "button" if @delivery.approved? %>
     <% end %>
   </p>
 </div>

@@ -35,12 +35,13 @@ Rails.application.routes.draw do
   }
 
   namespace :admins do
-    resources :resumes, only: [:index, :edit] do
+    resources :resumes, only: [:index, :edit, :update] do
       member do
-        put :update_and_approve
         get :download
       end
     end
+
+    resources :deliveries, only: [:index]
 
     resources :money_transfers, only: [:index, :update]
 

@@ -3,6 +3,8 @@ module Recruiters::DeliveriesHelper
     case delivery.state.to_sym
     when :recommended
       '未查看'
+    when :approved
+      '未查看'
     when :paid
       '已查看'
     when :refused

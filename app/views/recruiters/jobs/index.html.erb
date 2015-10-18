@@ -21,10 +21,10 @@
             <% end %>
           </td>
           <td>
-            <% if job.resumes.approved.count > 0 %>
-              <%= link_to job.resumes.approved.count, recruiters_deliveries_path(:job_id => job) %>
+            <% if job.deliveries.approved.count > 0 %>
+              <%= link_to job.deliveries.approved.count, recruiters_deliveries_path(:job_id => job) %>
             <% else %>
-              <%= job.resumes.approved.count %>
+              <%= job.deliveries.approved.count %>
             <% end %>
           </td>
           <td><%= job.bonus %> / <%= job.original_deposit %></td>

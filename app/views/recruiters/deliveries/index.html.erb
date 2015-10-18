@@ -16,12 +16,12 @@
 
         <th>被推荐人</th>
         <th>投递职位</th>
-        <th>操作</th>
+        <th>操作/状态</th>
       </tr>
     </thead>
     <tbody>
       <% @deliveries.each do |delivery| %>
-        <% if delivery.resume && delivery.resume.approved? %>
+        <% unless delivery.recommended? %>
           <tr>
             <td>
               <% if delivery.refused? %>
@@ -40,7 +40,8 @@
               <%= delivery.job_title %>
             </td>
             <td>
-              <%= link_to '查看简历', recruiters_delivery_path(delivery), class: 'btn btn-primary active' unless (delivery.paid? || delivery.refused? || delivery.resume_paid_in_other_delivery?) %>
+              <%= link_to '查看简历', recruiters_delivery_path(delivery), class: 'btn btn-primary active' if delivery.approved? %>
+              <%= Recruiters::DeliveriesHelper.state_show(delivery) unless ['recommended', 'approved'].include?(delivery.state) %>
             </td>
           </tr>
         <% end %>

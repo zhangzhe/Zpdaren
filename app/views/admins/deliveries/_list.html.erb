@@ -1,0 +1,40 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>推荐人</th>
+        <th>标签</th>
+        <th>简历原件</th>
+        <th>
+          <%= sortable '推荐时间', 'created_at' %>
+          <% if sort_column == 'created_at' %>
+            <% if sort_direction == 'DESC' %>
+              <i class="fa fa-caret-down"></i>
+            <% else %>
+              <i class="fa fa-caret-up"></i>
+            <% end %>
+          <% end %>
+        </th>
+        <th>状态/操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% deliveries.each do |delivery| %>
+        <tr>
+          <td><%= delivery.resume_candidate_name %></td>
+          <td><%= delivery.resume_tag_list %></td>
+          <td><%= link_to delivery.resume.attachment.file.file.split('/')[-1], download_admins_resume_path(delivery.resume_id) %>
+          </td>
+          <td><%= delivery.created_at.localtime.to_s(:db) %></td>
+          <td>
+            <% if delivery.recommended? %>
+              <%= link_to '审核', edit_admins_resume_path(delivery.resume_id, delivery_id: delivery.id), class: 'btn btn-primary active' %>
+            <% else %>
+              已审核
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

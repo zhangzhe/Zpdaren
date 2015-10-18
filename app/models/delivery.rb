@@ -4,37 +4,42 @@ class Delivery < ActiveRecord::Base
   has_one :rejection
   belongs_to :final_payment, :foreign_key => :final_payment_id
 
-  delegate :candidate_name, :tag_list, :mobile, :email, :message, to: :resume, prefix: true
+  delegate :id, :candidate_name, :tag_list, :mobile, :email, :message, to: :resume, prefix: true
   delegate :id, :title, :user_id, to: :job, prefix: true
   delegate :reason, :other, to: :rejection, prefix: true
 
   scope :paid, -> { where(state: 'paid') }
   scope :recommended, -> { where(state: 'recommended') }
-  scope :unread, -> { where('read_at' => nil, 'approved' => true) }
-  scope :approved, -> { where('approved' => true) }
+  scope :waiting_approved, -> { where(state: 'recommended') }
 
-  after_create :notify_recruiter, if: Proc.new { self.resume.approved? }
-  default_scope { order('created_at DESC') }
+  scope :unread, -> { where('read_at' => nil, 'state' => 'approved') }
+  scope :approved, -> { where('state' => 'approved') }
 
   include AASM
   aasm.attribute_name :state
   aasm do
     state :recommended, :initial => true
+    state :approved
     state :paid
     state :refused
     state :final_payment_paid
     state :finished
 
+    event :approve, :after => :notify_recruiter_and_supplier do
+      transitions :from => :recommended, :to => :approved
+    end
+
     event :pay do
       after do
         notify_supplier_deposit_paid
         transfer_deposit
+        pay_all_deliveries_from_the_same_one_resume_for_the_same_one_recruiter
       end
-      transitions :from => :recommended, :to => :paid
+      transitions :from => :approved, :to => :paid
     end
 
     event :refuse do
-      transitions :from => :recommended, :to => :refused
+      transitions :from => :approved, :to => :refused
     end
 
     event :pay_final_payment do
@@ -42,7 +47,7 @@ class Delivery < ActiveRecord::Base
         sync_job
         transfer_final_payment_to_admin
       end
-      transitions :from => [:recommended, :paid], :to => :final_payment_paid
+      transitions :from => :paid, :to => :final_payment_paid
     end
 
     event :complete do
@@ -67,20 +72,12 @@ class Delivery < ActiveRecord::Base
     read_at.blank?
   end
 
-  def approve!
-    self.update_attribute(:approved, true)
-  end
-
   def candidate_brief
     "#{self.resume_candidate_name}: (#{self.resume_tag_list})"
   end
 
   def description
     resume.description
-  end
-
-  def notify_recruiter
-    RecruiterMailer.resume_recommended(recruiter, self).deliver_now
   end
 
   def recruiter
@@ -100,10 +97,6 @@ class Delivery < ActiveRecord::Base
       return true if delivery.paid_by?(recruiter)
     end
     false
-  end
-
-  def resume_paid_in_other_delivery?
-    resume.ever_paid_by?(recruiter)
   end
 
   def paid_by?(recruiter)
@@ -150,6 +143,17 @@ class Delivery < ActiveRecord::Base
     ActiveRecord::Base.transaction do
       Admin.admin.pay(bonus)
       supplier.receive(bonus)
+    end
+  end
+
+  def notify_recruiter_and_supplier
+    RecruiterMailer.resume_recommended(recruiter, self).deliver_now
+    Weixin.notify_resume_approved(self.resume) if self.resume.supplier.weixin
+  end
+
+  def pay_all_deliveries_from_the_same_one_resume_for_the_same_one_recruiter
+    self.resume.deliveries.where("resume_id = ? and state = ?", self.resume_id, 'approved').each do |delivery|
+      delivery.pay!
     end
   end
 end

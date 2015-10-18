@@ -15,14 +15,15 @@ class Admins::ResumesController < Admins::BaseController
     @resume = Resume.find(params[:id])
   end
 
-  def update_and_approve
+  def update
     @resume = Resume.update(params[:id], resume_params)
     if @resume.errors.any?
       flash[:error] = @resume.errors.full_messages.first
       render 'edit' and return
     end
-    @resume.approve!
-    redirect_to admins_resumes_path
+    delivery = @resume.deliveries.find(params[:resume][:delivery_id])
+    delivery.approve!
+    redirect_to admins_deliveries_path
   end
 
   def download

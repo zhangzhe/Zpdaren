@@ -1,4 +1,5 @@
-<%= form_for resume, url: update_and_approve_admins_resume_path, method: 'PUT' do |f| %>
+<%= form_for resume, url: admins_resume_path, method: 'PUT' do |f| %>
+  <%= f.hidden_field :delivery_id, value: params[:delivery_id] %>
   <p>
     <%= f.label '姓名' %>
     (
@@ -31,6 +32,6 @@
     <%= f.text_field :message, class: 'form-control' %>
   </p>
   <p>
-    <%= f.submit '保存', class: "btn btn-primary" if resume.submitted? && resume.may_approve? %>
+    <%= f.submit '保存', class: "btn btn-primary" %>
   </p>
 <% end %>
