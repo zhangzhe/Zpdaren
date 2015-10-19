@@ -162,6 +162,6 @@ class Delivery < ActiveRecord::Base
 
   def notify_recruiter_and_supplier
     RecruiterMailer.resume_recommended(recruiter, self).deliver_now
-    Weixin.notify_resume_approved(self.resume) if self.resume.supplier.weixin
+    Weixin.notify_resume_approved(self) if self.resume.supplier.weixin
   end
 end
