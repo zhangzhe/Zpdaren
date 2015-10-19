@@ -3,6 +3,7 @@ class Recruiter < User
 
   has_one :company, :foreign_key => :user_id
   has_many :jobs, :foreign_key => :user_id
+  has_many :deliveries, through: :jobs
   after_create :init_blank_comapny
 
   def jobs_count
@@ -13,8 +14,8 @@ class Recruiter < User
     self.jobs.in_hiring.count
   end
 
-  def unpay_resumes_count
-    self.jobs.map(&:unpay_deliveries).flatten.count
+  def unprocess_resumes_count
+    self.deliveries.where("resume_id not in (?)", self.deliveries.process.map(&:resume_id).uniq).count
   end
 
   def recruiter_watchable_resumes_count

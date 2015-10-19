@@ -21,7 +21,7 @@
             <% end %>
           </td>
           <td>
-            <%= link_to "#{job.unpay_deliveries.count}/#{job.recruiter_watchable_deliveries.count}", recruiters_deliveries_path(:job_id => job) %>
+            <%= link_to "#{job.unprocess_deliveries.count}/#{job.recruiter_watchable_deliveries.count}", recruiters_deliveries_path(:job_id => job) %>
           </td>
           <td><%= job.bonus %> / <%= job.original_deposit %></td>
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
