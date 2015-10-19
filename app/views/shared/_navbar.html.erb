@@ -18,7 +18,7 @@
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
           <li><%= link_to current_user.email, current_user_account_path %></li>
-          <% if current_supplier && current_supplier.weixin.nil? %>
+          <% if current_user.weixin_subscribable? %>
             <li>
               <%= link_to image_tag("xiaoqrcode"), qr_code_path(current_user.id), remote: true %>
             </li>
