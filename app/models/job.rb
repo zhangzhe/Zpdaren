@@ -66,8 +66,8 @@ class Job < ActiveRecord::Base
     self.deliveries.unread
   end
 
-  def approved_deliveries
-    self.deliveries.approved
+  def recruiter_watchable_deliveries
+    self.deliveries.recruiter_watchable
   end
 
   def resumes_count_from(supplier)

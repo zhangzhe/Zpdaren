@@ -5,7 +5,7 @@ class Delivery < ActiveRecord::Base
   belongs_to :final_payment, :foreign_key => :final_payment_id
 
   delegate :id, :candidate_name, :tag_list, :mobile, :email, :message, to: :resume, prefix: true
-  delegate :id, :title, :user_id, to: :job, prefix: true
+  delegate :id, :title, :user_id, :bonus, :description, :tag_list, to: :job, prefix: true
   delegate :reason, :other, to: :rejection, prefix: true
 
   scope :paid, -> { where(state: 'paid') }
@@ -14,6 +14,7 @@ class Delivery < ActiveRecord::Base
 
   scope :unread, -> { where('read_at' => nil, 'state' => 'approved') }
   scope :approved, -> { where('state' => 'approved') }
+  scope :recruiter_watchable, -> { where("state != 'submitted'") }
 
   include AASM
   aasm.attribute_name :state

@@ -4,7 +4,11 @@ module Suppliers::DeliveriesHelper
     when :recommended
       '已推荐，未审核'
     when :approved
-      '审核通过'
+      if delivery.ever_paid?
+        '已付费'
+      else
+        '审核通过'
+      end
     when :paid
       '已付费'
     when :refused

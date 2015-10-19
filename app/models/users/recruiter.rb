@@ -17,8 +17,8 @@ class Recruiter < User
     self.jobs.map(&:unread_deliveries).flatten.count
   end
 
-  def approved_resumes_count
-    self.jobs.map(&:approved_deliveries).flatten.count
+  def recruiter_watchable_resumes_count
+    self.jobs.map(&:recruiter_watchable_deliveries).flatten.count
   end
 
   def create_and_pay_final_payment_for!(delivery)

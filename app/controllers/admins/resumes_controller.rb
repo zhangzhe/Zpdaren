@@ -13,6 +13,7 @@ class Admins::ResumesController < Admins::BaseController
 
   def edit
     @resume = Resume.find(params[:id])
+    @delivery = Delivery.find(params[:delivery_id])
   end
 
   def update
