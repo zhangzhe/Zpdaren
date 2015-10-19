@@ -23,6 +23,6 @@ class User < ActiveRecord::Base
   end
 
   def weixin_subscribable?
-    current_user.type == "Supplier" && current_user.weixin.nil?
+    self.type == "Supplier" && self.weixin.nil?
   end
 end
