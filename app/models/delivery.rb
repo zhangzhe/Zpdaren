@@ -25,7 +25,7 @@ class Delivery < ActiveRecord::Base
     state :final_payment_paid
     state :finished
 
-    event :approve, :after => :notify_recruiter_and_supplier do
+    event :approve, :after => :notify_recruiter_and_supplier_and_auto_pay do
       transitions :from => :recommended, :to => :approved
     end
 
@@ -33,7 +33,6 @@ class Delivery < ActiveRecord::Base
       after do
         notify_supplier_deposit_paid
         transfer_deposit
-        pay_all_deliveries_from_the_same_one_resume_for_the_same_one_recruiter
       end
       transitions :from => :approved, :to => :paid
     end
@@ -146,14 +145,8 @@ class Delivery < ActiveRecord::Base
     end
   end
 
-  def notify_recruiter_and_supplier
+  def notify_recruiter_and_supplier_and_auto_pay
     RecruiterMailer.resume_recommended(recruiter, self).deliver_now
     Weixin.notify_resume_approved(self.resume) if self.resume.supplier.weixin
-  end
-
-  def pay_all_deliveries_from_the_same_one_resume_for_the_same_one_recruiter
-    self.resume.deliveries.where("resume_id = ? and state = ?", self.resume_id, 'approved').each do |delivery|
-      delivery.pay!
-    end
   end
 end

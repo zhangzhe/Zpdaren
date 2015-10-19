@@ -3,13 +3,10 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
     @deliveries = []
     if params[:job_id]
       @job = Job.find(params[:job_id])
-      @deliveries = @job.deliveries
+      @deliveries = @job.deliveries.order("created_at DESC")
     else
-      jobs = current_recruiter.jobs
-      jobs.map do |job|
-        @deliveries << job.deliveries unless job.deliveries.blank?
-      end
-      @deliveries.order("created_at DESC").flatten!
+      job_ids = current_recruiter.jobs.map(&:id)
+      @deliveries = Delivery.includes(:job).where("job_id in (?)", job_ids).order("created_at DESC")
     end
   end
 
@@ -17,12 +14,8 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
     @delivery = Delivery.find(params[:id])
     if @delivery.unread?
       @delivery.read!
-      flash.now[:info] = "这份简历您曾经支付过，可以直接查看联系方式。" if @delivery.paid?
+      flash.now[:info] = "这份简历您曾经支付过，可以直接查看联系方式。" if @delivery.ever_paid?
     end
-    # @delivery.read! if @delivery.unread?
-    # if !@delivery.paid? && @delivery.resume_paid_in_other_delivery?
-    #   flash.now[:info] = "这份简历您曾经支付过，可以直接查看联系方式。"
-    # end
   end
 
   def pay

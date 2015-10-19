@@ -22,7 +22,7 @@
   <hr>
   <p>
 
-    <% if @delivery.paid? %>
+    <% if @delivery.paid? || @delivery.ever_paid? %>
       <h3>联系方式 </h3>
       <p><%= @delivery.resume_mobile %></p>
       <p><%= @delivery.resume_email %></p>

@@ -9,6 +9,10 @@ module Suppliers::DeliveriesHelper
       '已付费'
     when :refused
       '已拒绝'
+    when :final_payment_paid
+      '已支付尾款'
+    when :finished
+      '完成招聘'
     end
   end
 end

@@ -40,8 +40,8 @@
               <%= delivery.job_title %>
             </td>
             <td>
-              <%= link_to '查看简历', recruiters_delivery_path(delivery), class: 'btn btn-primary active' if delivery.approved? %>
-              <%= Recruiters::DeliveriesHelper.state_show(delivery) unless ['recommended', 'approved'].include?(delivery.state) %>
+              <%= link_to '查看简历', recruiters_delivery_path(delivery), class: 'btn btn-primary active' unless (delivery.paid? || delivery.refused? || delivery.ever_paid?) %>
+              <%= Recruiters::DeliveriesHelper.state_show(delivery) %>
             </td>
           </tr>
         <% end %>
