@@ -32,6 +32,7 @@ class Recruiter < User
 
   private
   def init_blank_comapny
-    create_company
+    company = Company.create(:user_id => self.id)
+    company.save(:validate => false)
   end
 end

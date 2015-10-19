@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20151014033520) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "mobile"
   end
 
   add_index "companies", ["user_id"], name: "index_companies_on_user_id", using: :btree
