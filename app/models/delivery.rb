@@ -116,9 +116,9 @@ class Delivery < ActiveRecord::Base
 
   def money_earned
     if self.paid?
-      return self.job.bonus_for_each_resume
+      return self.job.bonus_for_each_resume/2
     elsif self.finished?
-       return (self.job.bonus_for_each_resume + job.bonus_for_entry)
+       return (self.job.bonus_for_each_resume/2 + job.bonus_for_entry)
     end
   end
 
@@ -156,13 +156,13 @@ class Delivery < ActiveRecord::Base
   def transfer_deposit
     bonus = job.bonus_for_each_resume
     ActiveRecord::Base.transaction do
-      Admin.admin.pay(bonus)
+      Admin.admin.pay(bonus/2)
       if job.deposit >= bonus
         job.update_attributes(:deposit => job.deposit - bonus)
       else
         raise "您的押金已用完，请联系管理员"
       end
-      supplier.receive(bonus)
+      supplier.receive(bonus/2)
     end
   end
 end

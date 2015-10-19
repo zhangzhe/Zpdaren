@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014033520) do
+ActiveRecord::Schema.define(version: 20151016039999) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20151014033520) do
     t.datetime "updated_at",       null: false
     t.string   "state"
     t.datetime "read_at"
-    t.boolean  "approved"
     t.integer  "final_payment_id"
+    t.boolean  "approved"
   end
 
   add_index "deliveries", ["resume_id", "job_id"], name: "index_deliveries_on_resume_id_and_job_id", using: :btree
@@ -93,9 +93,9 @@ ActiveRecord::Schema.define(version: 20151014033520) do
     t.string   "email"
     t.text     "description"
     t.integer  "supplier_id"
-    t.string   "state"
     t.boolean  "auto_delivery"
     t.string   "message"
+    t.string   "state"
   end
 
   create_table "taggings", force: :cascade do |t|
