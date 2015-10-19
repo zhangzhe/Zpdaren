@@ -75,7 +75,7 @@ module WeixinConnection
   # 简历状态：{{keyword4.DATA}}
   # 时间：{{keyword5.DATA}}
   # {{remark.DATA}}
-  def notify_resume_approved(resume)
+  def notify_resume_approved(delivery)
     template_id = "D8iifbTdXyl__XGNpOF_3FItm5y8vpauWptkADXciVQ"
     response = conn.post do |req|
       req.url "/cgi-bin/message/template/send?access_token=#{access_token}"
