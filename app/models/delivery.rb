@@ -25,7 +25,7 @@ class Delivery < ActiveRecord::Base
     state :final_payment_paid
     state :finished
 
-    event :approve, :after => :notify_recruiter_and_supplier_and_auto_pay do
+    event :approve, :after => :notify_recruiter_and_supplier do
       transitions :from => :recommended, :to => :approved
     end
 
@@ -145,7 +145,7 @@ class Delivery < ActiveRecord::Base
     end
   end
 
-  def notify_recruiter_and_supplier_and_auto_pay
+  def notify_recruiter_and_supplier
     RecruiterMailer.resume_recommended(recruiter, self).deliver_now
     Weixin.notify_resume_approved(self.resume) if self.resume.supplier.weixin
   end
