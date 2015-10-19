@@ -116,9 +116,9 @@ class Delivery < ActiveRecord::Base
 
   def money_earned
     if self.paid?
-      return self.job.bonus_for_each_resume
+      return self.job.bonus_for_each_resume/2
     elsif self.finished?
-       return (self.job.bonus_for_each_resume + job.bonus_for_entry)
+       return (self.job.bonus_for_each_resume/2 + job.bonus_for_entry)
     end
   end
 
