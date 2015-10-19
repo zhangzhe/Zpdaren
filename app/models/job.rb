@@ -117,14 +117,6 @@ class Job < ActiveRecord::Base
     suppliers.include?(supplier)
   end
 
-  def view_pay(pay)
-    if self.deposit < pay
-      return '余额不足'
-    else
-      return self.update_attribute(:deposit, self.deposit - pay)
-    end
-  end
-
   def may_refund?
     (self.deposit_paid? || self.approved?) && refund_requests.find_by_state(:submitted).nil?
   end
