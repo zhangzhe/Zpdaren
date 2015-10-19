@@ -1,6 +1,6 @@
 <div>
 <h3>账户余额</h3>
-  <%= current_recruiter.wallet.money %>
+  <%= current_recruiter.wallet.money %>元
   <p>
     <%= link_to "提现到支付宝", new_withdraw_path, :class => "btn btn-primary" if current_recruiter.wallet.money > 0 %>
   </p>
@@ -11,6 +11,7 @@
   <h3>公司信息</h3>
   <div>
     <p class="lead"><%= current_recruiter.company.name %></p>
+    <p><%= current_recruiter.company.mobile %></p>
     <p><%= simple_format current_recruiter.company.description %></p>
     <p>
       <%= link_to "修改公司信息", edit_recruiters_company_path(current_recruiter.company), :class => "btn btn-primary" %>

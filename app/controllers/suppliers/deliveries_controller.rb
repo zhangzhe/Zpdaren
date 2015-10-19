@@ -1,7 +1,7 @@
 class Suppliers::DeliveriesController < Suppliers::BaseController
 
   def index
-    @deliveries = current_supplier.deliveries
+    @deliveries = current_supplier.deliveries.order("created_at DESC")
   end
 
   def new
@@ -12,7 +12,6 @@ class Suppliers::DeliveriesController < Suppliers::BaseController
   def create
     resume = Resume.find(params[:delivery][:resume_id])
     delivery = Delivery.create!(delivery_params)
-    delivery.update_attributes!(:approved => resume.approved?)
     flash[:success] = "操作完成！"
     redirect_to suppliers_job_path(id: params[:delivery][:job_id])
   end

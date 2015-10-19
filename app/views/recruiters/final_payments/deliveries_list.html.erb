@@ -20,7 +20,7 @@
     </thead>
     <tbody>
       <% @deliveries.each do |delivery| %>
-        <% if delivery.resume && delivery.resume.approved? %>
+        <% if delivery.paid? %>
           <tr>
             <td>
               <% if delivery.unread? %>

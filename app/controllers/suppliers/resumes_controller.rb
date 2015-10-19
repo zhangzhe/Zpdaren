@@ -20,8 +20,9 @@ class Suppliers::ResumesController < Suppliers::BaseController
       if params[:job_id]
         job = Job.find(params[:job_id])
         job.delivery!(@resume)
+        message = '简历上传成功。我们会尽快审核，请耐心等待。'
       end
-      flash[:success] = '简历上传成功。我们会尽快审核，请耐心等待。'
+      flash[:success] = message || '简历上传成功。'
       redirect_to params[:job_id] ? suppliers_job_path(params[:job_id]) : suppliers_resumes_path and return
     else
       flash[:error] = @resume.errors.full_messages.first
@@ -36,6 +37,6 @@ class Suppliers::ResumesController < Suppliers::BaseController
 
   private
   def resume_params
-    params[:resume].permit(:candidate_name, :tag_list, :attachment, :mobile, :email, :auto_delivery, :message)
+    params[:resume].permit(:candidate_name, :tag_list, :attachment, :mobile, :email, :message, :auto_delivery)
   end
 end

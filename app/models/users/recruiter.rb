@@ -3,6 +3,7 @@ class Recruiter < User
 
   has_one :company, :foreign_key => :user_id
   has_many :jobs, :foreign_key => :user_id
+  has_many :deliveries, through: :jobs
   after_create :init_blank_comapny
 
   def jobs_count
@@ -13,12 +14,12 @@ class Recruiter < User
     self.jobs.in_hiring.count
   end
 
-  def unread_resumes_count
-    self.jobs.map(&:unread_deliveries).flatten.count
+  def unprocess_resumes_count
+    self.deliveries.where("resume_id not in (?)", self.deliveries.process.map(&:resume_id).uniq).count
   end
 
-  def approved_resumes_count
-    self.jobs.map(&:approved_deliveries).flatten.count
+  def recruiter_watchable_resumes_count
+    self.jobs.map(&:recruiter_watchable_deliveries).flatten.count
   end
 
   def create_and_pay_final_payment_for!(delivery)
@@ -32,6 +33,7 @@ class Recruiter < User
 
   private
   def init_blank_comapny
-    create_company
+    company = Company.create(:user_id => self.id)
+    company.save(:validate => false)
   end
 end
