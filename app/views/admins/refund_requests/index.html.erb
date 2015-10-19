@@ -3,8 +3,8 @@
     <thead>
       <tr>
         <th>职位名称</th>
-        <th>押金</th>
-        <th>创建时间</th>
+        <th>退款金额</th>
+        <th>申请时间</th>
         <th>状态/操作</th>
       </tr>
     </thead>
@@ -16,7 +16,7 @@
           <td><%= refund_request.job_created_at.localtime.to_date.to_s(:db) %></td>
           <td>
             <% if refund_request.submitted? %>
-              <%= link_to "查看", admins_refund_request_path(refund_request), class: 'btn btn-success' %>
+              <%= link_to "操作", admins_refund_request_path(refund_request), class: 'btn btn-success' %>
             <% else %>
               <%= refund_request.state_show %>
             <% end %>
