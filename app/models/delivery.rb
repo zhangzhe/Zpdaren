@@ -89,7 +89,7 @@ class Delivery < ActiveRecord::Base
   end
 
   def available_for_final_payment?
-    self.final_payment.nil? && self.ever_paid?
+    self.final_payment.nil? && self.paid?
   end
 
   def ever_paid?
@@ -100,7 +100,7 @@ class Delivery < ActiveRecord::Base
   end
 
   def paid_by?(recruiter)
-    self.paid? && recruiter_id == recruiter.id
+    (self.paid? || self.final_payment_paid? || self.finished? ) && recruiter_id == recruiter.id
   end
 
   def recruiter_id
