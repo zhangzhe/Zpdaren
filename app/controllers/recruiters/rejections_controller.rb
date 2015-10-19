@@ -11,7 +11,7 @@ class Recruiters::RejectionsController < Recruiters::BaseController
       redirect_to :back
     else
       delivery = rejection.delivery
-      delivery.refuse! if delivery.recommended? && delivery.may_refuse?
+      delivery.refuse!
       redirect_to recruiters_delivery_path(delivery)
     end
   end

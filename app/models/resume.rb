@@ -8,24 +8,15 @@ class Resume < ActiveRecord::Base
   validates_uniqueness_of :mobile, :email, message: '系统中已经存在，请上选择其他候选人'
   validates_length_of :mobile, is: 11
   validates_length_of :message, maximum: 50
-  scope :waiting_approved, -> { where('state' => 'submitted')}
+
+  after_create :auto_deliver
+
   extend DefaultValue
   include SimilarEntity
-  include AASM
 
   acts_as_taggable
   acts_as_taggable_on :skills, :interests
   mount_uploader :attachment, FileUploader
-
-  aasm.attribute_name :state
-  aasm do
-    state :submitted, :initial => true
-    state :approved
-
-    event :approve , :after => :notify_recruiter_and_supplier_and_auto_deliver do
-      transitions :from => :submitted, :to => :approved
-    end
-  end
 
   def resume_bonus
     count = 0
@@ -43,6 +34,7 @@ class Resume < ActiveRecord::Base
     jobs.include?(job)
   end
 
+  private
   def auto_deliver
     matching_jobs.each do |job|
       job.delivery!(self) if (self.auto_delivery? && !Delivery.find_by_resume_id_and_job_id(self.id, job.id))
@@ -51,27 +43,5 @@ class Resume < ActiveRecord::Base
 
   def matching_jobs
     similar_entity(Job)
-  end
-
-  def ever_paid_by?(recruiter)
-    deliveries.each do |delivery|
-      return true if delivery.paid_by?(recruiter)
-    end
-    return false
-  end
-
-  private
-  def notify_recruiter_and_supplier_and_auto_deliver
-    # set approved
-    deliveries.each do |deliver|
-      deliver.approve!
-    end
-    # email for recruiter
-    deliveries.each do |deliver|
-      deliver.notify_recruiter
-    end
-    # weixin for supplier
-    Weixin.notify_resume_approved(self) if self.supplier.weixin
-    auto_deliver
   end
 end

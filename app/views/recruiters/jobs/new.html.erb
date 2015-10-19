@@ -6,6 +6,25 @@
   <li class="active">添加职位信息</li>
 </ol>
   <p>
-    <%= render 'form', url: recruiters_jobs_path, method: 'POST', job: @job %>
+    <%= form_for Job.new, url: recruiters_jobs_path, method: "POST" do |f| %>
+      <p>
+        <%= f.text_field :title, value: Job.default_jd_title, class: "form-control", placeholder: "职位名称" %>
+      </p>
+      <p>
+        <%= f.text_area :description, value: Job.default_jd_description, class: "form-control", placeholder: "职位描述", rows: 10 %>
+      </p>
+      <p>
+        <%= f.text_field :bonus, value: Job.default_bonus, class: "form-control", placeholder: "红包" %>
+      </p>
+      <p>
+        <%= render '/shared/tag' %>
+      </p>
+      <p>
+        <%= f.text_field :tag_list, value: Job.default_tag_list, class: 'form-control auto-tags' %>
+      </p>
+      <p>
+        <%= f.submit "发布", class: "btn btn-primary" %>
+      </p>
+    <% end %>
   </p>
 </div>

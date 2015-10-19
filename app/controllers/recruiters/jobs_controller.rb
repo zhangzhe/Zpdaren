@@ -2,7 +2,7 @@ class Recruiters::JobsController < Recruiters::BaseController
 
   def index
     if current_recruiter.company.description.blank?
-      flash[:error] = "请先完善公司信息，然后才能发布职位"
+      flash[:notice] = "请先完善公司信息，然后再发布职位"
       redirect_to edit_recruiters_company_path(current_recruiter.company)
     else
       @jobs = current_recruiter.jobs

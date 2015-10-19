@@ -59,15 +59,15 @@ class Job < ActiveRecord::Base
   end
 
   def editable?
-     !["final_payment_paid", "finished", "freezing"].include?(self.state)
+     ["submitted", "deposit_paid"].include?(self.state)
   end
 
-  def unread_deliveries
-    self.deliveries.unread
+  def unprocess_deliveries
+    self.deliveries.where("resume_id not in (?)", self.recruiter.deliveries.process.map(&:resume_id).uniq)
   end
 
-  def approved_deliveries
-    self.deliveries.approved
+  def recruiter_watchable_deliveries
+    self.deliveries.recruiter_watchable
   end
 
   def resumes_count_from(supplier)
@@ -115,14 +115,6 @@ class Job < ActiveRecord::Base
 
   def watched_by?(supplier)
     suppliers.include?(supplier)
-  end
-
-  def view_pay(pay)
-    if self.deposit < pay
-      return '余额不足'
-    else
-      return self.update_attribute(:deposit, self.deposit - pay)
-    end
   end
 
   def may_refund?

@@ -1,13 +1,14 @@
 <div class="sidebar-module sidebar-module-inset">
   <h4>已推荐简历</h4>
-  <% job.resumes.each do |resume| %>
-  <div class="resumeItem">
-    <span class="lead"><%= resume.candidate_name %></span>
-    <br>
-    <%= resume.tag_list %>
-    <br>
-    <td><%= link_to resume.attachment.file.file.split('/')[-1], download_admins_resume_path(resume[:id]) %></td>
-    <hr>
-  </div>
+  <% job.deliveries_from(current_user).each do |delivery| %>
+    <% resume = delivery.resume %>
+    <div class="resumeItem">
+      <span class="lead"><%= resume.candidate_name %></span>
+      <br>
+      <%= resume.tag_list %>
+      <br>
+      <td><%= link_to resume.attachment.file.file.split('/')[-1], download_admins_resume_path(resume[:id]) %></td>
+      <hr>
+    </div>
   <% end %>
 </div>

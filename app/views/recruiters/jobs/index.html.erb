@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th>职位名称</th>
-        <th>收到简历</th>
+        <th>未查看的简历/收到的简历</th>
         <th>红包/订金</th>
         <th>创建时间</th>
         <th>状态</th>
@@ -21,11 +21,7 @@
             <% end %>
           </td>
           <td>
-            <% if job.resumes.approved.count > 0 %>
-              <%= link_to job.resumes.approved.count, recruiters_deliveries_path(:job_id => job) %>
-            <% else %>
-              <%= job.resumes.approved.count %>
-            <% end %>
+            <%= link_to "#{job.unprocess_deliveries.count}/#{job.recruiter_watchable_deliveries.count}", recruiters_deliveries_path(:job_id => job) %>
           </td>
           <td><%= job.bonus %> / <%= job.original_deposit %></td>
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
