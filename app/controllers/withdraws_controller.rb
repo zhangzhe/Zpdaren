@@ -14,6 +14,9 @@ class WithdrawsController < ApplicationController
       flash[:success] = "提现成功，提现金额 #{withdraw_params[:amount]} 元会在一个工作日内打入您的支付宝账号，请注意查收。"
       redirect_to redirect_path
     end
+  rescue ActiveRecord::RecordInvalid => e
+    flash[:error] = "输入有误，请从新输入!"
+    redirect_to :back
   end
 
   private
@@ -36,6 +39,6 @@ class WithdrawsController < ApplicationController
   end
 
   def withdraw_params
-    params[:withdraw].permit(:amount, :zhifubao_account)
+    params[:withdraw].permit(:amount, :zhifubao_account, :mobile)
   end
 end

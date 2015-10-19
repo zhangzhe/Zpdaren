@@ -8,14 +8,17 @@
   <%= form_for @withdraw, html: {class: "form-inline"} do |f| %>
     <div class="form-group">
       <label for="exampleInputEmail2">收款支付宝账号</label>
-      <%= f.text_field :zhifubao_account, class: "form-control", placeholder: "收款支付宝账号" %>
+      <%= f.text_field :zhifubao_account, class: "form-control", placeholder: "收款支付宝账号", value: @withdraw.previous_withdraw.try(:zhifubao_account) %>
     </div>
     <div class="form-group">
       <div class="input-group">
         <div class="input-group-addon">￥</div>
-          <%= f.text_field :amount, class: "form-control", placeholder: "提现金额" %>
+          <%= f.text_field :amount, class: "form-control", placeholder: "提现金额", size: 7 %>
           <div class="input-group-addon">.00</div>
         </div>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :mobile, class: "form-control", placeholder: "手机号", value: @withdraw.previous_withdraw.try(:mobile) %>
     </div>
 
     <%= f.submit "确认提现", class: "btn btn-primary" %>
