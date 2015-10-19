@@ -156,8 +156,8 @@ class Delivery < ActiveRecord::Base
   def transfer_deposit
     bonus = job.bonus_for_each_resume
     ActiveRecord::Base.transaction do
-      Admin.admin.pay(bonus)
-      supplier.receive(bonus)
+      Admin.admin.pay(bonus/2)
+      supplier.receive(bonus/2)
     end
   end
 end

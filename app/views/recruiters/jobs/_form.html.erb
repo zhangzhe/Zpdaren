@@ -1,4 +1,4 @@
-<%= form_for job || Job.new, url: url, method: method do |f| %>
+<%= form_for @job || Job.new, url: url, method: method do |f| %>
   <p>
     <%= f.text_field :title, value: Job.default_jd_title, class: "form-control", placeholder: "职位名称" %>
   </p>
