@@ -24,12 +24,12 @@ class RefundRequest < ActiveRecord::Base
   def state_show
     case self.state.to_sym
     when :submitted
-      '等待审批'
+      '等待退款'
     when :agreed
       #TODO
       '完成退款'
     when :refused
-      '申请被拒绝'
+      '退款被拒绝'
     end
   end
 

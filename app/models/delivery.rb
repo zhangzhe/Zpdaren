@@ -149,6 +149,11 @@ class Delivery < ActiveRecord::Base
     bonus = job.bonus_for_each_resume
     ActiveRecord::Base.transaction do
       Admin.admin.pay(bonus)
+      if job.deposit >= bonus
+        job.update_attributes(:deposit => job.deposit - bonus)
+      else
+        raise "您的押金已用完，请联系管理员"
+      end
       supplier.receive(bonus)
     end
   end
