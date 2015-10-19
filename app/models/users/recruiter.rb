@@ -13,8 +13,8 @@ class Recruiter < User
     self.jobs.in_hiring.count
   end
 
-  def unread_resumes_count
-    self.jobs.map(&:unread_deliveries).flatten.count
+  def unpay_resumes_count
+    self.jobs.map(&:unpay_deliveries).flatten.count
   end
 
   def recruiter_watchable_resumes_count

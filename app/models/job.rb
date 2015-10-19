@@ -62,8 +62,8 @@ class Job < ActiveRecord::Base
      ["submitted", "deposit_paid"].include?(self.state)
   end
 
-  def unread_deliveries
-    self.deliveries.unread
+  def unpay_deliveries
+    self.deliveries.where("resume_id not in (?)", self.deliveries.pay.map(&:resume_id).uniq)
   end
 
   def recruiter_watchable_deliveries

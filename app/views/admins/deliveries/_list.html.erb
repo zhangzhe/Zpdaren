@@ -24,7 +24,7 @@
         <tr>
           <td><%= delivery.resume_candidate_name %></td>
           <td><%= delivery.resume_tag_list %></td>
-          <td><%= delivery.job_title %></td>
+          <td><%= "【#{delivery.job.company_name}】#{delivery.job_title}" %></td>
           <td><%= link_to delivery.resume.attachment.file.file.split('/')[-1], download_admins_resume_path(delivery.resume_id) %>
           </td>
           <td><%= delivery.created_at.localtime.to_s(:db) %></td>

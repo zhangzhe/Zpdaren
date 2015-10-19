@@ -23,7 +23,7 @@ module ApplicationHelper
   end
 
   def badge_for_recruiter_resumes(recruiter)
-    " <span class=\"badge\">#{recruiter.unread_resumes_count}/#{recruiter.recruiter_watchable_resumes_count}</span>" if (recruiter.recruiter_watchable_resumes_count > 0)
+    " <span class=\"badge\">#{recruiter.unpay_resumes_count}/#{recruiter.recruiter_watchable_resumes_count}</span>" if (recruiter.recruiter_watchable_resumes_count > 0)
   end
 
   def sortable(title, column)

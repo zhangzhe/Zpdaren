@@ -13,6 +13,7 @@ class Delivery < ActiveRecord::Base
   scope :waiting_approved, -> { where(state: 'recommended') }
 
   scope :unread, -> { where('read_at' => nil, 'state' => 'approved') }
+  scope :pay, -> { where("state in ('paid', 'refused', 'final_payment_paid', 'finished')") }
   scope :approved, -> { where('state' => 'approved') }
   scope :recruiter_watchable, -> { where("state != 'submitted'") }
 

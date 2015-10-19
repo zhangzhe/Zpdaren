@@ -30,7 +30,7 @@
     <tbody>
       <% jobs.each do |job| %>
         <tr>
-          <td><%= link_to job.title, edit_admins_job_path(job.id) %></td>
+          <td><%= link_to "【#{job.company_name}】#{job.title}", edit_admins_job_path(job.id) %></td>
           <td><%= job.resumes.count %></td>
           <td><%= job.bonus %></td>
           <td><%= job.created_at.localtime.to_s(:db) %></td>
