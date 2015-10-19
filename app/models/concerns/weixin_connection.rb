@@ -24,17 +24,40 @@ module WeixinConnection
     end
   end
 
+  # {{first.DATA}}
+  # 招聘方：{{keyword1.DATA}}
+  # 职位：{{keyword2.DATA}}
+  # 被推荐人：{{keyword3.DATA}}
+  # 简历状态：{{keyword4.DATA}}
+  # 时间：{{keyword5.DATA}}
+  # {{remark.DATA}}
   def send_resume_refused_notification(delivery)
-    template_id = "N7X9PhMz8Ezgj_6mXBu_zJOVlvvCZlYq4JV3Uxl3eGA"
+    template_id = "D8iifbTdXyl__XGNpOF_3FItm5y8vpauWptkADXciVQ"
     response = conn.post do |req|
       req.url "/cgi-bin/message/template/send?access_token=#{access_token}"
       req.body =  "{ \"touser\":\"#{delivery.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://#{Settings.domain.host}\",\"topcolor\":\"#FF0000\", \"data\": {
     \"first\": {
-    \"value\":\"#{delivery.supplier.email}, 您好！您推荐的#{delivery.resume_candidate_name},被#{delivery.job_title}拒绝\",
+    \"value\":\"尊敬的用户#{delivery.supplier.email}, 您好！您推荐的#{delivery.resume_candidate_name}被拒绝\",
+    \"color\":\"#173177\"
+    },
+    \"keyword1\":{
+    \"value\":\"#{delivery.job.company.name}\",
     \"color\":\"#173177\"
     },
     \"keyword2\":{
-    \"value\":\"#{Time.now.localtime.to_s(:db)}\",
+    \"value\":\"#{delivery.job_title}\",
+    \"color\":\"#173177\"
+    },
+    \"keyword3\":{
+    \"value\":\"#{delivery.resume_candidate_name}\",
+    \"color\":\"#173177\"
+    },
+    \"keyword4\":{
+    \"value\":\"拒绝\",
+    \"color\":\"#173177\"
+    },
+    \"keyword5\":{
+    \"value\":\"#{Time.now.strftime("%Y年%m月%d日 %H:%m")}\",
     \"color\":\"#173177\"
     },
     \"remark\":{
@@ -42,31 +65,47 @@ module WeixinConnection
     \"color\":\"#173177\"
     }}}"
     end
+    JSON(response.body)
   end
 
   # {{first.DATA}}
-  # 变动金额：{{keyword1.DATA}}
-  # 变动时间：{{keyword2.DATA}}
+  # 招聘方：{{keyword1.DATA}}
+  # 职位：{{keyword2.DATA}}
+  # 被推荐人：{{keyword3.DATA}}
+  # 简历状态：{{keyword4.DATA}}
+  # 时间：{{keyword5.DATA}}
   # {{remark.DATA}}
   def notify_resume_approved(resume)
-    template_id = "wQ3FG81wTdwJXms-HCy_4L_56lIq9z2Zj-gOxv-Gw24"
+    template_id = "D8iifbTdXyl__XGNpOF_3FItm5y8vpauWptkADXciVQ"
     response = conn.post do |req|
       req.url "/cgi-bin/message/template/send?access_token=#{access_token}"
-      req.body =  "{ \"touser\":\"#{resume.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://weixin.qq.com/download\",\"topcolor\":\"#FF0000\", \"data\": {
+      req.body =  "{ \"touser\":\"#{delivery.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://#{Settings.domain.host}\",\"topcolor\":\"#FF0000\", \"data\": {
     \"first\": {
-    \"value\":\"#{resume.supplier.email}, 您好\",
+    \"value\":\"尊敬的用户#{delivery.supplier.email}, 您好！您推荐的#{delivery.resume_candidate_name}审核通过\",
     \"color\":\"#173177\"
     },
     \"keyword1\":{
-    \"value\":\"#{resume.candidate_name}的简历\",
+    \"value\":\"#{delivery.job.company.name}\",
     \"color\":\"#173177\"
     },
     \"keyword2\":{
-    \"value\":\"通过\",
+    \"value\":\"#{delivery.job_title}\",
+    \"color\":\"#173177\"
+    },
+    \"keyword3\":{
+    \"value\":\"#{delivery.resume_candidate_name}\",
+    \"color\":\"#173177\"
+    },
+    \"keyword4\":{
+    \"value\":\"审核通过\",
+    \"color\":\"#173177\"
+    },
+    \"keyword5\":{
+    \"value\":\"#{Time.now.strftime("%Y年%m月%d日 %H:%m")}\",
     \"color\":\"#173177\"
     },
     \"remark\":{
-    \"value\":\"感谢您的推荐，如用户查看您的简历或者被推荐人成功入职，您都会得到相应的红包奖励。\",
+    \"value\":\"详情您可以随时登录众聘达人查看。感谢您的推荐。\",
     \"color\":\"#173177\"
     }}}"
     end
