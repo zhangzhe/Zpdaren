@@ -13,4 +13,13 @@ class MoneyTransfer < ActiveRecord::Base
       transitions :from => :submitted, :to => :finished
     end
   end
+
+  def state_show
+    case state
+    when "submitted"
+      "提交"
+    when "finished"
+      "完成"
+    end
+  end
 end

@@ -19,7 +19,14 @@
             <%= link_to truncate("#{job.company_name}: #{job.title}"), suppliers_job_path(job), :target => "_blank" %> &nbsp;<br>
           <% end %>
           </td>
-          <td>获得红包<%= resume.resume_bonus %>元</td>
+          <td>
+            <% resume.deliveries.each do |delivery| %>
+            <% if delivery.money_earned %>
+              获得红包<%= delivery.money_earned %>元&nbsp;
+            <% end %>
+              <br>
+            <% end %>
+          </td>
           <td><%= link_to "下载", download_suppliers_resume_path(resume[:id]) %></td>
         </tr>
       <% end %>
