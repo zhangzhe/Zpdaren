@@ -7,7 +7,7 @@
         <th>金额</th>
         <th>来自</th>
         <th>转账时间</th>
-        <th>操作</th>
+        <th>状态/操作</th>
       </tr>
     </thead>
     <tbody>
@@ -16,7 +16,13 @@
           <td><%= deposit.amount %></td>
           <td><%= deposit.wallet.user.email %></td>
           <td><%= deposit.created_at.localtime.to_s(:db) %></td>
-          <td><%= link_to "已收到", admins_money_transfer_path(deposit), class: "btn btn-primary", method: :put if deposit.submitted? %>
+          <td>
+            <% if deposit.submitted? %>
+            <%= link_to "已收到", admins_money_transfer_path(deposit), class: "btn btn-primary", method: :put %>
+            <% else %>
+              <%= deposit.state_show %>
+            <% end %>
+
         </tr>
       <% end %>
     </tbody>
@@ -34,7 +40,7 @@
         <th>金额</th>
         <th>来自</th>
         <th>转账时间</th>
-        <th>操作</th>
+        <th>状态/操作</th>
       </tr>
     </thead>
     <tbody>
@@ -43,7 +49,12 @@
           <td><%= final_payment.amount %></td>
           <td><%= final_payment.wallet.user.email %></td>
           <td><%= final_payment.created_at.localtime.to_s(:db) %></td>
-          <td><%= link_to "已收到", admins_money_transfer_path(final_payment), class: "btn btn-primary", method: :put if final_payment.submitted? %>
+          <td>
+            <% if final_payment.submitted? %>
+            <%= link_to "已收到", admins_money_transfer_path(final_payment), class: "btn btn-primary", method: :put %>
+            <% else %>
+              <%= final_payment.state_show %>
+            <% end %>
         </tr>
       <% end %>
     </tbody>
@@ -61,6 +72,7 @@
         <th>金额</th>
         <th>来自</th>
         <th>支付宝账号</th>
+        <th>申请时间</th>
         <th>状态/操作</th>
       </tr>
     </thead>
@@ -70,7 +82,8 @@
           <td><%= withdraw.amount %></td>
           <td><%= withdraw.wallet.user.email %></td>
           <td><%= withdraw.zhifubao_account %></td>
-          <td><%= withdraw.state %>&nbsp;&nbsp;<%= link_to "转账完成", admins_money_transfer_path(withdraw), class: "btn btn-primary", method: :put if withdraw.submitted? %></td>
+          <td><%= withdraw.created_at.localtime.to_s(:db) %></td>
+          <td><%= withdraw.state_show %>&nbsp;&nbsp;<%= link_to "已转账", admins_money_transfer_path(withdraw), class: "btn btn-primary", method: :put if withdraw.submitted? %></td>
           <td></td>
         </tr>
       <% end %>

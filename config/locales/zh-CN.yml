@@ -291,5 +291,14 @@ zh-CN:
               confirmation: "与密码不一致"
         job:
           attributes:
+            title:
+              blank: "不能为空"
+            description:
+              blank: "不能为空"
+            bonus:
+              blank: "不能为空"
             tag_list:
               blank: "不能为空"
+
+
+      translation missing: zh-CN.activerecord.errors.models.job.attributes.bonus.blank
