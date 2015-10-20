@@ -20,7 +20,7 @@
     </thead>
     <tbody>
       <% @deliveries.each do |delivery| %>
-        <% if delivery.paid? %>
+        <% if delivery.ever_paid? && !delivery.ever_final_payment_paid_or_finished? %>
           <tr>
             <td>
               <% if delivery.unread? %>

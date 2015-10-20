@@ -48,7 +48,7 @@ class Delivery < ActiveRecord::Base
         sync_job
         transfer_final_payment_to_admin
       end
-      transitions :from => :paid, :to => :final_payment_paid
+      transitions :from => [:approved, :paid], :to => :final_payment_paid
     end
 
     event :complete do
@@ -90,7 +90,7 @@ class Delivery < ActiveRecord::Base
   end
 
   def available_for_final_payment?
-    self.final_payment.nil? && self.paid?
+    ['approved', 'paid'].include?(self.state) && self.final_payment.nil? && self.ever_paid? && !ever_final_payment_paid_or_finished?
   end
 
   def ever_paid?
@@ -101,7 +101,14 @@ class Delivery < ActiveRecord::Base
   end
 
   def paid_by?(recruiter)
-    (self.paid? || self.final_payment_paid? || self.finished? ) && recruiter_id == recruiter.id
+    self.paid? && recruiter_id == recruiter.id
+  end
+
+  def ever_final_payment_paid_or_finished?
+    self.resume.deliveries.each do |delivery|
+      return true if (delivery.final_payment_paid? || delivery.finished?) && (recruiter_id == recruiter.id)
+    end
+    false
   end
 
   def recruiter_id
