@@ -1,5 +1,5 @@
 class RecruiterMailer < ApplicationMailer
-  default :from => "xiaohua@hellohuohua.com"
+  default :from => "Zpdaren<xiaohua@hellohuohua.com>"
 
   def job_approved(recruiter, job)
     @recruiter = recruiter
