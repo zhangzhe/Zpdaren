@@ -273,7 +273,7 @@ zh-CN:
         tag_list: '标签'
         description: '工作经历、教育背景等描述'
       job:
-        title: '位置名称'
+        title: '职位名称'
         description: '职位描述'
         bonus: '红包'
         tag_list: '职位标签'
@@ -297,8 +297,20 @@ zh-CN:
               blank: "不能为空"
             bonus:
               blank: "不能为空"
+              greater_than_or_equal_to: "不能是负数"
+              not_a_number: "必须是数字"
             tag_list:
               blank: "不能为空"
+        company:
+          attributes:
+            mobile:
+              wrong_length: "电话格式不对，请从新输入"
+        resume:
+          attributes:
+            candidate_name:
+              blank: "候选人姓名不能为空"
+            mobile:
+              blank: "候选人电话不能为空"
+            email:
+              blank: "候选人邮件不能为空"
 
-
-      translation missing: zh-CN.activerecord.errors.models.job.attributes.bonus.blank
