@@ -25,7 +25,6 @@ class Job < ActiveRecord::Base
   scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'approved']) }
   scope :in_hiring, -> { where.not('state in (?)', ['freezing', 'finished']) }
 
-  extend DefaultValue
   include SimilarEntity
   include AASM
 

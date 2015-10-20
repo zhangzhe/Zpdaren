@@ -308,9 +308,11 @@ zh-CN:
         resume:
           attributes:
             candidate_name:
-              blank: "候选人姓名不能为空"
+              blank: "不能为空"
             mobile:
-              blank: "候选人电话不能为空"
+              blank: "不能为空"
             email:
-              blank: "候选人邮件不能为空"
+              blank: "不能为空"
+            tag_list:
+              blank: "不能为空"
 
