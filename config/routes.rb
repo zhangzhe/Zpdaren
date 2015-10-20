@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     resources :money_transfers, only: [:index, :update]
 
     resources :users, only: [:index]
+    resources :suppliers, only: [:index]
     resources :companies, only: [:index, :show]
     resources :jobs, only: [:index, :show, :edit, :update]
     resources :refund_requests, only: [:index, :show] do
