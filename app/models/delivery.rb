@@ -139,12 +139,12 @@ class Delivery < ActiveRecord::Base
   end
 
   def notify_supplier_deposit_paid
-    Weixin.notify_supplier_deposit_paid(self.resume, self.job) if supplier.weixin
+    Weixin.notify_supplier_deposit_paid(self) if supplier.weixin
   end
 
   # FIXME: refactor dupplicate code
   def notify_supplier_final_payment_paid
-    Weixin.notify_supplier_final_payment_paid(self.resume, self.job) if supplier.weixin
+    Weixin.notify_supplier_final_payment_paid(self) if supplier.weixin
   end
 
   def transfer_deposit
