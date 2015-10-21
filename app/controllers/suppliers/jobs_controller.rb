@@ -3,7 +3,7 @@ class Suppliers::JobsController < Suppliers::BaseController
 
   def index
     @jobs = Job.all
-    @jobs = Job.where("user_id = ? ", params[:recruiter_id]) if params[:recruiter_id]
+    @jobs = @jobs.where("user_id = ? ", params[:recruiter_id]) if params[:recruiter_id]
     @jobs = @jobs.where("title ilike ?", "%#{params[:key]}%") if params[:key].present?
     @jobs = @jobs.order("#{params[:sort]} #{params[:direction]}")
     @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)

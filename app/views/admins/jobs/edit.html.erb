@@ -15,8 +15,8 @@
         <%= f.text_field :tag_list, value: @job.tag_list.to_s, class: 'form-control auto-tags' %>
       </p>
       <p>
-        <% if @job.deposit_paid? %>
-          <%= f.submit "审核通过", class: "btn btn-primary" %>
+        <% if @job.editable? %>
+          <%= f.submit "修改并通知用户", class: "btn btn-primary" %>
         <% end %>
       </p>
     <% end %>
