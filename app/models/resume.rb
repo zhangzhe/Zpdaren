@@ -7,23 +7,12 @@ class Resume < ActiveRecord::Base
   validates_length_of :candidate_name, maximum: 10
   validates_uniqueness_of :mobile, :email, message: '系统中已经存在，请上选择其他候选人'
   validates_length_of :mobile, is: 11
-
   after_create :auto_deliver
-
   extend DefaultValue
   include SimilarEntity
-
   acts_as_taggable
   acts_as_taggable_on :skills, :interests
   mount_uploader :attachment, FileUploader
-
-  def resume_bonus
-    count = 0
-    self.deliveries.paid.each do |delivery|
-      count += delivery.job.bonus_for_each_resume
-    end
-    count
-  end
 
   def resumes_from(supplier)
     self.resumes.where(:supplier_id => supplier.id)
