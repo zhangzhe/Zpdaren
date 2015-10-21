@@ -111,6 +111,10 @@ class Delivery < ActiveRecord::Base
     false
   end
 
+  def ever_paid_or_final_payment_paid_or_finished?
+    ever_paid? || ever_final_payment_paid_or_finished?
+  end
+
   def recruiter_id
     job_user_id
   end

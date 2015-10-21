@@ -15,7 +15,7 @@ class Recruiter < User
   end
 
   def unprocess_resumes_count
-    self.deliveries.where("resume_id not in (?)", self.deliveries.process.map(&:resume_id).uniq).count
+    self.deliveries.where("resume_id in (?) and deliveries.state = 'approved' and read_at is null", self.deliveries.process.map(&:resume_id)).count
   end
 
   def recruiter_watchable_resumes_count
