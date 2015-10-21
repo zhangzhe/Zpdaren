@@ -4,7 +4,7 @@ module Suppliers::DeliveriesHelper
     when :recommended
       '已推荐，未审核'
     when :approved
-      delivery.ever_paid? ? '已付费' : '审核通过'
+      delivery.ever_paid_or_final_payment_paid_or_finished? ? '已付费' : '审核通过'
     when :paid
       '已付费'
     when :refused

@@ -1,20 +1,20 @@
 <%= form_for resume, url: suppliers_resumes_path do |f| %>
   <%= hidden_field_tag 'job_id', job_id if job_id %>
   <p>
-    <%= f.text_field 'candidate_name', value: Resume.default_candidate_name, class: "form-control", :placeholder => "候选人姓名(必填)" %>
+    <%= f.text_field 'candidate_name', class: "form-control", :placeholder => "候选人姓名(必填)" %>
   </p>
   <p>
-    <%= f.text_field 'mobile', value: Resume.default_mobile, class: 'form-control', :placeholder => '候选人手机号码(必填)' %>
+    <%= f.text_field 'mobile', class: 'form-control', :placeholder => '候选人手机号码(必填)' %>
   </p>
   <p>
 
-    <%= f.text_field 'email', value: Resume.default_email, class: 'form-control', :placeholder => '候选人邮箱(必填)' %>
+    <%= f.text_field 'email', class: 'form-control', :placeholder => '候选人邮箱(必填)' %>
   </p>
   <p>
     <%= render '/shared/tag' %>
   </p>
   <p>
-    <%= f.text_field :tag_list, value: Resume.default_tag_list, class: 'form-control auto-tags' %>
+    <%= f.text_field :tag_list, class: 'form-control auto-tags' %>
   </p>
   <div class="checkbox">
     <label>
@@ -22,7 +22,7 @@
     </label>
   </div>
   <p>
-    <%= f.file_field 'attachment' %>
+    <%= f.file_field 'attachment', style: "display:inline;width:160px;float:left;" %><span style="color:red;font-size:12px;">请上传pdf、doc、docx、xlsx格式的简历</span>
   </p>
   <p>
     <%= f.text_field 'message', class: 'form-control', :placeholder => '给招聘方留言...(选填，50字内)' %>

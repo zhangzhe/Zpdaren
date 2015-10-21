@@ -14,8 +14,12 @@ class Recruiter < User
     self.jobs.in_hiring.count
   end
 
-  def unprocess_resumes_count
-    self.deliveries.where("resume_id not in (?)", self.deliveries.process.map(&:resume_id).uniq).count
+  def unprocess_deliveries_count
+    unprocess_deliveries = []
+    self.jobs.each do |job|
+      unprocess_deliveries.push(job.unprocess_deliveries)
+    end
+    unprocess_deliveries.flatten.count
   end
 
   def recruiter_watchable_resumes_count

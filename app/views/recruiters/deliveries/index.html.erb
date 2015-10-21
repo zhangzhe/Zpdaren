@@ -40,7 +40,7 @@
               <%= delivery.job_title %>
             </td>
             <td>
-              <%= link_to '查看简历', recruiters_delivery_path(delivery), class: 'btn btn-primary active' if !delivery.ever_paid? %>
+              <%= link_to '查看简历', recruiters_delivery_path(delivery), class: 'btn btn-primary active' if (delivery.ever_paid_or_final_payment_paid_or_finished? && delivery.unread?) || (delivery.approved? && !delivery.ever_paid_or_final_payment_paid_or_finished?) %>
               <%= Recruiters::DeliveriesHelper.state_show(delivery)%>
             </td>
           </tr>

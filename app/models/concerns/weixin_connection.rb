@@ -113,24 +113,39 @@ module WeixinConnection
   end
 
   # {{first.DATA}}
-  # 变动金额：{{keyword1.DATA}}
-  # 变动时间：{{keyword2.DATA}}
+  # 招聘方：{{keyword1.DATA}}
+  # 职位：{{keyword2.DATA}}
+  # 被推荐人：{{keyword3.DATA}}
+  # 奖励：{{keyword4.DATA}}
+  # 时间：{{keyword5.DATA}}
   # {{remark.DATA}}
-  def notify_supplier_deposit_paid(resume, job)
-    template_id = "N7X9PhMz8Ezgj_6mXBu_zJOVlvvCZlYq4JV3Uxl3eGA"
+  def notify_supplier_deposit_paid(delivery)
+    template_id = "WIOViJ34e8OnSrLVHfR8slRFbt0pybhBehx4jm2VhfM"
     response = conn.post do |req|
       req.url "/cgi-bin/message/template/send?access_token=#{access_token}"
-      req.body =  "{ \"touser\":\"#{resume.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://weixin.qq.com/download\",\"topcolor\":\"#FF0000\", \"data\": {
+      req.body =  "{ \"touser\":\"#{delivery.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://weixin.qq.com/download\",\"topcolor\":\"#FF0000\", \"data\": {
     \"first\": {
-    \"value\":\"#{resume.supplier.email}, 您好！您的简历库中的 #{resume.candidate_name}的简历被查看，您因此获得的红包：\",
+    \"value\":\"尊敬的用户#{delivery.supplier.email}, 您好！您推荐的#{delivery.resume_candidate_name}的简历被查看，获得了简历红包：\",
     \"color\":\"#173177\"
     },
     \"keyword1\":{
-    \"value\":\"#{job.bonus_for_each_resume}\",
+    \"value\":\"#{delivery.job.company_name}\",
     \"color\":\"#173177\"
     },
     \"keyword2\":{
-    \"value\":\"#{Time.now.localtime.to_s(:db)}\",
+    \"value\":\"#{delivery.job_title}\",
+    \"color\":\"#173177\"
+    },
+    \"keyword3\":{
+    \"value\":\"#{delivery.resume_candidate_name}\",
+    \"color\":\"#173177\"
+    },
+    \"keyword4\":{
+    \"value\":\"#{delivery.job.bonus_for_each_resume/2}\",
+    \"color\":\"#173177\"
+    },
+    \"keyword5\":{
+    \"value\":\"#{Time.now.strftime("%Y年%m月%d日 %H:%m")}元\",
     \"color\":\"#173177\"
     },
     \"remark\":{
@@ -145,25 +160,37 @@ module WeixinConnection
   # 变动金额：{{keyword1.DATA}}
   # 变动时间：{{keyword2.DATA}}
   # {{remark.DATA}}
-  def notify_supplier_final_payment_paid(resume, job)
-    template_id = "N7X9PhMz8Ezgj_6mXBu_zJOVlvvCZlYq4JV3Uxl3eGA"
+  def notify_supplier_final_payment_paid(delivery)
+    template_id = "WIOViJ34e8OnSrLVHfR8slRFbt0pybhBehx4jm2VhfM"
     response = conn.post do |req|
       req.url "/cgi-bin/message/template/send?access_token=#{access_token}"
-      req.body =  "{ \"touser\":\"#{resume.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://weixin.qq.com/download\",\"topcolor\":\"#FF0000\", \"data\": {
+      req.body =  "{ \"touser\":\"#{delivery.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://weixin.qq.com/download\",\"topcolor\":\"#FF0000\", \"data\": {
     \"first\": {
-    \"value\":\"#{resume.supplier.email}, 您好！您推荐的 #{resume.candidate_name}以成功入职，您因此获得的红包：\",
+    \"value\":\"尊敬的用户#{delivery.supplier.email}, 您好！您推荐的 #{delivery.resume_candidate_name}已成功入职，获得了入职红包：\",
     \"color\":\"#173177\"
     },
     \"keyword1\":{
-    \"value\":\"#{job.bonus_for_entry}\",
+    \"value\":\"#{delivery.job.company_name}\",
     \"color\":\"#173177\"
     },
     \"keyword2\":{
-    \"value\":\"#{Time.now.localtime.to_s(:db)}\",
+    \"value\":\"#{delivery.job_title}\",
+    \"color\":\"#173177\"
+    },
+    \"keyword3\":{
+    \"value\":\"#{delivery.resume_candidate_name}\",
+    \"color\":\"#173177\"
+    },
+    \"keyword4\":{
+    \"value\":\"#{delivery.final_payment.amount}元\",
+    \"color\":\"#173177\"
+    },
+    \"keyword5\":{
+    \"value\":\"#{Time.now.strftime("%Y年%m月%d日 %H:%m")}\",
     \"color\":\"#173177\"
     },
     \"remark\":{
-    \"value\":\"您可以随时登录众聘达人领取。再次感谢您的推荐！\",
+    \"value\":\"您可以随时登录众聘达人领取。感谢您的推荐。\",
     \"color\":\"#173177\"
     }}}"
     end

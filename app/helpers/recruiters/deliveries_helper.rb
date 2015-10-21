@@ -4,7 +4,7 @@ module Recruiters::DeliveriesHelper
     when :recommended
       '未查看'
     when :approved
-      delivery.unread? ? '未查看' : '已查看' if delivery.ever_paid?
+      delivery.ever_paid_or_final_payment_paid_or_finished? && !delivery.unread? ? '已查看' : ''
     when :paid
       '已查看'
     when :refused
