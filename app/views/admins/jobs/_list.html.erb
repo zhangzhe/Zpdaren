@@ -35,9 +35,9 @@
           <td><%= job.bonus %></td>
           <td><%= job.created_at.localtime.to_s(:db) %></td>
           <td>
-            <% if job.deposit_paid? %>
-              <%= link_to "审核", edit_admins_job_path(job.id), class: "btn btn-primary" %>
-            <% else  %>
+            <% if job.editable? %>
+              <%= link_to "修改", edit_admins_job_path(job.id), class: "btn btn-primary" %>
+            <% else %>
               <%= Recruiters::JobsHelper::state_show(job) %>
             <% end %>
           </td>
