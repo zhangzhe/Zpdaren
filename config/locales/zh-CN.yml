@@ -311,6 +311,7 @@ zh-CN:
               blank: "不能为空"
             mobile:
               blank: "不能为空"
+              wrong_length: "格式不对，请从新输入"
             email:
               blank: "不能为空"
             tag_list:

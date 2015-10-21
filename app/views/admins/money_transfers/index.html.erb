@@ -5,7 +5,8 @@
     <thead>
       <tr>
         <th>金额</th>
-        <th>来自</th>
+        <th>来自账号</th>
+        <th>来自职位</th>
         <th>转账时间</th>
         <th>状态/操作</th>
       </tr>
@@ -15,6 +16,7 @@
         <tr>
           <td><%= deposit.amount %></td>
           <td><%= deposit.wallet.user.email %></td>
+          <td><%= deposit.job.try(:title) %></td>
           <td><%= deposit.created_at.localtime.to_s(:db) %></td>
           <td>
             <% if deposit.submitted? %>
@@ -39,6 +41,7 @@
       <tr>
         <th>金额</th>
         <th>来自</th>
+        <th>来自职位</th>
         <th>转账时间</th>
         <th>状态/操作</th>
       </tr>
@@ -48,6 +51,7 @@
         <tr>
           <td><%= final_payment.amount %></td>
           <td><%= final_payment.wallet.user.email %></td>
+          <td><%= final_payment.try(:delivery).try(:job).try(:title) %>:<%= final_payment.delivery.try(:resume).try(:candidate_name) %>的简历</td>
           <td><%= final_payment.created_at.localtime.to_s(:db) %></td>
           <td>
             <% if final_payment.submitted? %>

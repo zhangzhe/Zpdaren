@@ -21,7 +21,7 @@ class Admins::JobsController < Admins::BaseController
 
   def update
     @job = Job.find(params[:id])
-    @job.update_and_approve!(job_params)
+    @job.update_and_notify_supplier!(job_params)
     if @job.errors.any?
       flash[:error] = @job.errors.full_messages.first
       render 'edit' and return

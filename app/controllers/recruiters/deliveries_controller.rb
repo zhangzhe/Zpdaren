@@ -19,9 +19,9 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
   end
 
   def pay
-    @delivery = Delivery.find(params[:id])
-    if @delivery.approved?
-      @delivery.pay!
+    delivery = Delivery.find(params[:id])
+    if delivery.approved?
+      delivery.pay!
       flash[:success] = "支付成功，您现在可以查看候选人联系方式。"
     else
       flash[:error] = "未知错误，请联系管理员！"

@@ -21,8 +21,8 @@ class Job < ActiveRecord::Base
   delegate :name, :id, to: :company, prefix: true
 
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
-  scope :approved, -> { where('state' => 'approved')}
-  scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'approved']) }
+  scope :deposit_paid_confirmed, -> { where('state' => 'deposit_paid_confirmed')}
+  scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'deposit_paid_confirmed']) }
   scope :in_hiring, -> { where.not('state in (?)', ['freezing', 'finished']) }
 
   include SimilarEntity
@@ -35,7 +35,7 @@ class Job < ActiveRecord::Base
   aasm do
     state :submitted, :initial => true
     state :deposit_paid
-    state :approved
+    state :deposit_paid_confirmed
     state :final_payment_paid
     state :finished
     state :freezing
@@ -45,20 +45,20 @@ class Job < ActiveRecord::Base
     end
 
     event :freeze do
-      transitions :from => [:submitted, :deposit_paid, :approved], :to => :freezing
+      transitions :from => [:submitted, :deposit_paid, :deposit_paid_confirmed], :to => :freezing
     end
 
     event :active do
       transitions :from => :freezing, :to => :submitted
     end
 
-    event :approve, :after => :notify_recruiter_and_deliver_matching_resumes do
-      transitions :from => :deposit_paid, :to => :approved
+    event :confirm_deposit_paid, :after => :notify_recruiter_and_deliver_matching_resumes do
+      transitions :from => :deposit_paid, :to => :deposit_paid_confirmed
     end
   end
 
   def editable?
-     ["submitted", "deposit_paid"].include?(self.state)
+     ["submitted", "deposit_paid", "deposit_paid_confirmed"].include?(self.state)
   end
 
   def unprocess_deliveries
@@ -119,7 +119,7 @@ class Job < ActiveRecord::Base
   end
 
   def may_refund?
-    (self.deposit_paid? || self.approved?) && refund_requests.find_by_state(:submitted).nil?
+    (self.deposit_paid? || self.deposit_paid_confirmed?) && refund_requests.find_by_state(:submitted).nil?
   end
 
   def deliver_matching_resumes
@@ -136,12 +136,11 @@ class Job < ActiveRecord::Base
     similar_entity(Job)
   end
 
-  def update_and_approve!(job_params)
+  def update_and_notify_supplier!(job_params)
     self.attributes = job_params
     if self.changed? and self.save
       RecruiterMailer.job_updated(self).deliver_now
     end
-    self.approve!
   end
 
   def in_hiring?
@@ -149,7 +148,7 @@ class Job < ActiveRecord::Base
   end
 
   def available_for_final_payment?
-    self.approved? && self.deliveries.any_available_for_final_payment?
+    self.deposit_paid_confirmed? && self.deliveries.any_available_for_final_payment?
   end
 
   def self.waiting_approved
