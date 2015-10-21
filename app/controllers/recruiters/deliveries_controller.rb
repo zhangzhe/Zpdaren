@@ -12,9 +12,11 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
 
   def show
     @delivery = Delivery.find(params[:id])
-    if @delivery.unread?
-      @delivery.read!
-      flash.now[:info] = "这份简历您曾经支付过，可以直接查看联系方式。" if @delivery.ever_paid_or_final_payment_paid_or_finished?
+    if @delivery.job.deposit_paid_confirmed?
+      if @delivery.unread?
+        @delivery.read!
+        flash.now[:info] = "这份简历您曾经支付过，可以直接查看联系方式。" if @delivery.ever_paid_or_final_payment_paid_or_finished?
+      end
     end
   end
 
