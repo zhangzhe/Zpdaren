@@ -6,6 +6,6 @@ class Admin < User
   end
 
   def zhifubao_account
-    "hellohuohua"
+    "wade.songhang@gmail.com"
   end
 end
