@@ -19,4 +19,3 @@ class CustomFailure < Devise::FailureApp
      end
    end
  end
- 
