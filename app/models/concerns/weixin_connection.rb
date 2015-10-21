@@ -125,7 +125,7 @@ module WeixinConnection
       req.url "/cgi-bin/message/template/send?access_token=#{access_token}"
       req.body =  "{ \"touser\":\"#{delivery.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://weixin.qq.com/download\",\"topcolor\":\"#FF0000\", \"data\": {
     \"first\": {
-    \"value\":\"尊敬的用户#{delivery.supplier.email}, 您好！您推荐的 #{delivery.resume_candidate_name}的简历被查看，获得了简历红包：\",
+    \"value\":\"尊敬的用户#{delivery.supplier.email}, 您好！您推荐的#{delivery.resume_candidate_name}的简历被查看，获得了简历红包：\",
     \"color\":\"#173177\"
     },
     \"keyword1\":{
@@ -136,15 +136,15 @@ module WeixinConnection
     \"value\":\"#{delivery.job_title}\",
     \"color\":\"#173177\"
     },
-    \"keyword2\":{
+    \"keyword3\":{
     \"value\":\"#{delivery.resume_candidate_name}\",
     \"color\":\"#173177\"
     },
-    \"keyword2\":{
+    \"keyword4\":{
     \"value\":\"#{delivery.job.bonus_for_each_resume/2}\",
     \"color\":\"#173177\"
     },
-    \"keyword2\":{
+    \"keyword5\":{
     \"value\":\"#{Time.now.strftime("%Y年%m月%d日 %H:%m")}元\",
     \"color\":\"#173177\"
     },
@@ -177,15 +177,15 @@ module WeixinConnection
     \"value\":\"#{delivery.job_title}\",
     \"color\":\"#173177\"
     },
-    \"keyword2\":{
+    \"keyword3\":{
     \"value\":\"#{delivery.resume_candidate_name}\",
     \"color\":\"#173177\"
     },
-    \"keyword2\":{
+    \"keyword4\":{
     \"value\":\"#{delivery.final_payment.amount}元\",
     \"color\":\"#173177\"
     },
-    \"keyword2\":{
+    \"keyword5\":{
     \"value\":\"#{Time.now.strftime("%Y年%m月%d日 %H:%m")}\",
     \"color\":\"#173177\"
     },
