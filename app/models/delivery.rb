@@ -12,7 +12,6 @@ class Delivery < ActiveRecord::Base
   scope :recommended, -> { where(state: 'recommended') }
   scope :waiting_approved, -> { where(state: 'recommended') }
 
-  scope :unread, -> { where('read_at' => nil, 'state' => 'approved') }
   scope :process, -> { where("deliveries.state in ('paid', 'refused', 'final_payment_paid', 'finished')") }
   scope :approved, -> { where('state' => 'approved') }
   scope :recruiter_watchable, -> { where("state != 'recommended'") }
@@ -71,10 +70,6 @@ class Delivery < ActiveRecord::Base
 
   def unread?
     read_at.blank?
-  end
-
-  def candidate_brief
-    "#{self.resume_candidate_name}: (#{self.resume_tag_list})"
   end
 
   def description

@@ -4,8 +4,8 @@
       <tr>
         <th>公司名称</th>
         <th>联系电话</th>
+        <th>联系邮箱</th>
         <th>公司描述</th>
-        <th>创建时间</th>
       </tr>
     </thead>
     <tbody>
@@ -13,8 +13,8 @@
         <tr>
           <td><%= link_to company.name, admins_company_path(company.id) %></td>
           <td><%= company.mobile %></td>
+          <td><%= company.recruiter.email %></td>
           <td><%= truncate(company.description, length: 30) %></td>
-          <td><%= company.created_at.localtime.to_s(:db) %></td>
         </tr>
       <% end %>
     </tbody>

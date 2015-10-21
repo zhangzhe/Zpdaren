@@ -2,10 +2,9 @@
   <table class="table table-striped">
     <thead>
       <tr>
+        <th>被推荐人</th>
         <th>推荐人</th>
-        <th>标签</th>
         <th>应聘职位</th>
-        <th>简历原件</th>
         <th>
           <%= sortable '推荐时间', 'created_at' %>
           <% if sort_column == 'created_at' %>
@@ -23,9 +22,8 @@
       <% deliveries.each do |delivery| %>
         <tr>
           <td><%= delivery.resume_candidate_name %></td>
-          <td><%= delivery.resume_tag_list %></td>
+          <td><%= delivery.supplier.email %></td>
           <td><%= "【#{delivery.job.company_name}】#{delivery.job_title}" %></td>
-          <td><%= link_to delivery.resume.attachment.file.file.split('/')[-1], download_admins_resume_path(delivery.resume_id) %>
           </td>
           <td><%= delivery.created_at.localtime.to_s(:db) %></td>
           <td>

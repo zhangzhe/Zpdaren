@@ -1,0 +1,20 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>联系邮箱</th>
+        <th>简历数量</th>
+        <th>推荐数量</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @suppliers.each do |supplier| %>
+        <tr>
+          <td><%= supplier.email %></td>
+          <td><%= supplier.resumes.count %></td>
+          <td><%= supplier.deliveries.count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
