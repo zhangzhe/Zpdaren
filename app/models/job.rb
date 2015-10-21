@@ -62,7 +62,9 @@ class Job < ActiveRecord::Base
   end
 
   def unprocess_deliveries
-    self.deliveries.where("resume_id not in (?)", self.recruiter.deliveries.process.map(&:resume_id).uniq)
+    resume_ids = recruiter.deliveries.process.map(&:resume_id)
+    unprocess_deliveries = self.deliveries.where("resume_id not in (?) and deliveries.state = 'approved'", resume_ids) + self.deliveries.where("resume_id in (?) and deliveries.state = 'approved' and read_at is null", resume_ids)
+    unprocess_deliveries
   end
 
   def recruiter_watchable_deliveries
