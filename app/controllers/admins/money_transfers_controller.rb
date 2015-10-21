@@ -13,6 +13,10 @@ class Admins::MoneyTransfersController < Admins::BaseController
       if money_transfer.type == "FinalPayment"
         money_transfer.delivery.complete!
       end
+
+      if money_transfer.type == "Deposit"
+        money_transfer.job.confirm_deposit_paid!
+      end
     end
 
     flash[:success] = "操作完成！"

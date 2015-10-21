@@ -7,7 +7,7 @@ module Recruiters::JobsHelper
       '已下架'
     when :deposit_paid
       '待确认'
-    when :approved
+    when :deposit_paid_confirmed
       '招聘中'
     when :final_payment_paid
       '支付确认中'
