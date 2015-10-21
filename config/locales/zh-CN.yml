@@ -297,7 +297,7 @@ zh-CN:
               blank: "不能为空"
             bonus:
               blank: "不能为空"
-              greater_than_or_equal_to: "不能是负数"
+              greater_than_or_equal_to: 必须大于或等于 %{count}
               not_a_number: "必须是数字"
             tag_list:
               blank: "不能为空"
