@@ -1,0 +1,34 @@
+<h2>尾款确认</h2>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>金额</th>
+        <th>来自</th>
+        <th>来自职位</th>
+        <th>转账时间</th>
+        <th>状态/操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @final_payments.each do |final_payment| %>
+        <tr>
+          <td><%= final_payment.amount %></td>
+          <td><%= final_payment.wallet.user.email %></td>
+          <td><%= final_payment.try(:delivery).try(:job).try(:title) %>:<%= final_payment.delivery.try(:resume).try(:candidate_name) %>的简历</td>
+          <td><%= final_payment.created_at.localtime.to_s(:db) %></td>
+          <td>
+            <% if final_payment.submitted? %>
+            <%= link_to "已收到", admins_money_transfer_path(final_payment), class: "btn btn-primary", method: :put %>
+            <% else %>
+              <%= final_payment.state_show %>
+            <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class='text-center'>
+  <%= will_paginate @final_payments, renderer: BootstrapPagination::Rails, previous_label: '上一页', next_label: '下一页' %>
+</div>
