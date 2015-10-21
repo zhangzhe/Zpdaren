@@ -8,27 +8,5 @@
       编辑职位信息
     </li>
   </ol>
-
-  <p>
-    <%= form_for @job, url: recruiters_job_path, method: "PUT" do |f| %>
-      <p>
-        <%= f.text_field :title, class: "form-control", placeholder: "职位名称" %>
-      </p>
-      <p>
-        <%= f.text_area :description, class: "form-control", placeholder: "职位描述", rows: 10 %>
-      </p>
-      <p>
-        <%= f.text_field :bonus, class: "form-control", placeholder: "红包" %>
-      </p>
-      <p>
-        <%= render '/shared/tag' %>
-      </p>
-      <p>
-        <%= f.text_field :tag_list, value: @job.tag_list.join(", "), class: 'form-control auto-tags' %>
-      </p>
-      <p>
-        <%= f.submit "发布", class: "btn btn-primary" %>
-      </p>
-    <% end %>
-  </p>
+  <%= render 'form', job: @job %>
 </div>
