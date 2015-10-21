@@ -5,7 +5,8 @@
     <thead>
       <tr>
         <th>金额</th>
-        <th>来自</th>
+        <th>来自账号</th>
+        <th>来自职位</th>
         <th>转账时间</th>
         <th>状态/操作</th>
       </tr>
@@ -15,6 +16,7 @@
         <tr>
           <td><%= deposit.amount %></td>
           <td><%= deposit.wallet.user.email %></td>
+          <td><%= deposit.job.try(:title) %></td>
           <td><%= deposit.created_at.localtime.to_s(:db) %></td>
           <td>
             <% if deposit.submitted? %>
@@ -29,5 +31,5 @@
   </table>
 </div>
 <div class='text-center'>
-  <%= will_paginate @deposits, renderer: BootstrapPagination::Rails, previous_label: '上一页', next_label: '下一页', controller: 'aa' %>
+  <%= will_paginate @deposits, renderer: BootstrapPagination::Rails, previous_label: '上一页', next_label: '下一页' %>
 </div>
