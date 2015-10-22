@@ -16,7 +16,7 @@
             <li class="<%= active %>"><%= link_to "退款申请#{badge_for_admin(RefundRequest)}".html_safe, admins_refund_requests_path %></li>
 
             <% active = active_for?(Admins::MoneyTransfersController) %>
-            <li class="<%= active %>"><%= link_to "存款/提现确认#{badge_for_admin(MoneyTransfer)}".html_safe, admins_money_transfers_path %></li>
+            <li class="<%= active %>"><%= link_to "存款/提现确认#{badge_for_admin(MoneyTransfer)}".html_safe, deposits_admins_money_transfers_path %></li>
 
             <% active = active_for?(Admins::CompaniesController) %>
             <li class="<%= active %>"><%= link_to "招聘方列表#{badge_for_admin_for_all(Company.active)}".html_safe, admins_companies_path %></li>
