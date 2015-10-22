@@ -43,7 +43,7 @@ Rails.application.routes.draw do
 
     resources :deliveries, only: [:index]
 
-    resources :money_transfers, only: [:index, :update] do
+    resources :money_transfers, only: [:update] do
       collection do
         get :deposits
         get :final_payments
