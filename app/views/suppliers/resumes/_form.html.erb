@@ -14,7 +14,7 @@
     <%= render '/shared/tag' %>
   </p>
   <p>
-    <%= f.text_field :tag_list, class: 'form-control auto-tags' %>
+    <%= f.text_field :tag_list, value: resume.tag_list.to_s, class: 'form-control auto-tags' %>
   </p>
   <div class="checkbox">
     <label>
