@@ -101,7 +101,7 @@ class Delivery < ActiveRecord::Base
 
   def ever_final_payment_paid_or_finished?
     self.resume.deliveries.each do |delivery|
-      return true if (delivery.final_payment_paid? || delivery.finished?) && (recruiter_id == recruiter.id)
+      return true if (delivery.final_payment_paid? || delivery.finished?) && (delivery.recruiter_id == self.recruiter.id)
     end
     false
   end
