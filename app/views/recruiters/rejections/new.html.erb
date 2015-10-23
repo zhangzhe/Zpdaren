@@ -18,5 +18,5 @@
   <p>
     <%= text_area_tag 'rejection[other]', nil, class: "form-control", rows: 10 %>
   </p>
-  <%= f.submit "提交", class: "btn btn-primary" %>
+  <%= f.submit "提交", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
 <% end %>
