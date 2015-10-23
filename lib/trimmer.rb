@@ -20,7 +20,7 @@ class Trimmer
         trimmed_field(item[key])
       end
     else
-      item.strip!
+      item.strip! if item.is_a?(String)
     end
   end
 end
