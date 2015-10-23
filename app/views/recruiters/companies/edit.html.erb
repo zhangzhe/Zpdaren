@@ -17,7 +17,7 @@
       <%= f.text_field :mobile, class: 'form-control', placeholder: "手机号" %>
     </p>
     <p>
-      <%= f.submit "确定", class: "btn btn-primary" %>
+      <%= f.submit "确定", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
     </p>
   <% end %>
 </div>
