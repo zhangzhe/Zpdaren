@@ -21,6 +21,6 @@
       <%= f.text_field :mobile, class: "form-control", placeholder: "手机号", value: @withdraw.previous_withdraw.try(:mobile) %>
     </div>
 
-    <%= f.submit "确认提现", class: "btn btn-primary" %>
+    <%= f.submit "确认提现", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
   <% end %>
 </div>

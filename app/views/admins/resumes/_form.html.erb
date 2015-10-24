@@ -34,6 +34,6 @@
     <%= f.text_field :message, class: 'form-control' %>
   </p>
   <p>
-    <%= f.submit '保存', class: "btn btn-primary" %>
+    <%= f.submit '保存', class: "btn btn-primary", data: { disable_with: '提交中...' } %>
   </p>
 <% end %>

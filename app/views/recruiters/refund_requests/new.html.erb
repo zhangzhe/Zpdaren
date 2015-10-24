@@ -12,7 +12,7 @@
       <%= f.text_area :reason, class: "form-control", rows: 5 %>
     </p>
     <p>
-      <%= f.submit '提交', class: 'btn btn-primary' %>
+      <%= f.submit '提交', class: 'btn btn-primary', data: { disable_with: '提交中...' } %>
     </p>
   <% end %>
 </div>

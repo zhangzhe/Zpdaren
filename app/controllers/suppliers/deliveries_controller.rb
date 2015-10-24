@@ -11,7 +11,10 @@ class Suppliers::DeliveriesController < Suppliers::BaseController
 
   def create
     resume = Resume.find(params[:delivery][:resume_id])
-    delivery = Delivery.create!(delivery_params)
+    begin
+      delivery = Delivery.create!(delivery_params)
+    rescue ActiveRecord::RecordNotUnique
+    end
     flash[:success] = "操作完成！"
     redirect_to suppliers_job_path(id: params[:delivery][:job_id])
   end

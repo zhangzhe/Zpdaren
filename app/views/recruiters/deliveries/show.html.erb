@@ -20,14 +20,16 @@
   <hr>
   <p>
     <h3>联系方式 </h3>
-    <% if @delivery.job.deposit_paid_confirmed? %>
+    <% if ['deposit_paid_confirmed', 'final_payment_paid', 'finished'].include?(@delivery.job.state) %>
       <% if @delivery.ever_paid_or_final_payment_paid_or_finished? %>
         <p><%= @delivery.resume_mobile %></p>
         <p><%= @delivery.resume_email %></p>
       <% elsif !@delivery.refused? %>
         付费<%= @delivery.job.bonus_for_each_resume %>元后可看
-        <%= link_to "从订金中扣除#{@delivery.job.bonus_for_each_resume}元", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary active", role: "button", method: :put if @delivery.approved? %>
-        <%= link_to "拒绝", new_recruiters_rejection_path(delivery_id: @delivery.id), class: "btn btn-primary active", role: "button" if @delivery.approved? %>
+        <% if @delivery.approved? %>
+          <%= link_to "从订金中扣除#{@delivery.job.bonus_for_each_resume}元", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary active", role: "button", method: :put %>
+          <%= link_to "拒绝", new_recruiters_rejection_path(delivery_id: @delivery.id), class: "btn btn-primary active", role: "button" %>
+        <% end %>
       <% end %>
     <% elsif @delivery.job.deposit_paid? %>
       <div class="alert alert-info" role="alert">订金确认中，请等待</div>
