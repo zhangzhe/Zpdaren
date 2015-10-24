@@ -13,8 +13,8 @@
   <table class="table table-striped">
     <thead>
       <tr>
-
         <th>被推荐人</th>
+        <th>推荐人</th>
         <th>投递职位</th>
         <th>操作/状态</th>
       </tr>
@@ -36,8 +36,11 @@
               <% if delivery.refused? %>
                 </s>
               <% end %>
+              <td>
+                <%= delivery.supplier.email %>
+              </td>
             <td>
-              <%= delivery.job_title %>
+              <%= link_to delivery.job_title, recruiters_job_path(delivery.job) %>
             </td>
             <td>
               <%= link_to '查看简历', recruiters_delivery_path(delivery), class: 'btn btn-primary active' if (delivery.ever_paid_or_final_payment_paid_or_finished? && delivery.unread?) || (delivery.approved? && !delivery.ever_paid_or_final_payment_paid_or_finished?) %>
