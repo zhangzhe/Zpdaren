@@ -216,7 +216,7 @@ zh-CN:
       not_found_in_database: "邮箱或密码错误"
       timeout: "登录超时，请重新登录."
       unauthenticated: "继续操作前请确保您已登录."
-      unconfirmed: "继续操作前请先确认您的帐号."
+      unconfirmed: "请先登录您的注册邮箱绑定账号后再登录"
     mailer:
       confirmation_instructions:
         subject: "邮箱确认【众聘】"

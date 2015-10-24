@@ -5,7 +5,7 @@
   <li>
     <%= link_to @job.title, recruiters_jobs_path(@job.id) %>
   </li>
-  <li class="active">预付定金</li>
+  <li class="active">预付订金</li>
 </ol>
 
 <div>
@@ -14,6 +14,10 @@
     <%= f.hidden_field :deposit, value: (@job.bonus * 0.2).to_i %>
 
     <p class="lead">请转账 <%= (@job.bonus * 0.2).to_i %> 元到【宋航】的支付宝账号：<%= Admin.admin.zhifubao_account %>。<br>完成后，请点击下面的转账完成确认按钮。</p>
+    <p>
+      <%= f.submit '转账完成', class: 'btn btn-primary' %>
+      <%= link_to '稍后付', recruiters_jobs_path, class: 'btn btn-default' %>
+    </p>
     <p>
       <div class="well">
         <h4>备注：</h4>
