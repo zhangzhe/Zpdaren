@@ -8,7 +8,7 @@ class Admins::DeliveriesController < Admins::BaseController
     else
       @deliveries = Delivery.includes(:resume)
     end
-    @deliveries = @deliveries.order("#{params[:sort]} #{params[:direction]}")
+    @deliveries = @deliveries.order_by_state.order("#{params[:sort]} #{params[:direction]}")
     @deliveries = @deliveries.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 

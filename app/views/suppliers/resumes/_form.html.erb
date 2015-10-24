@@ -28,6 +28,6 @@
     <%= f.text_field 'message', class: 'form-control', :placeholder => '给招聘方留言...(选填，50字内)' %>
   </p>
   <p>
-    <%= f.submit '上传', class: "btn btn-primary active" %>
+    <%= f.submit '上传', class: "btn btn-primary active", data: { disable_with: '提交中...' } %>
   </p>
 <% end %>
