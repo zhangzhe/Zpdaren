@@ -25,7 +25,7 @@ class Resume < ActiveRecord::Base
   private
   def auto_deliver
     matching_jobs.each do |job|
-      job.delivery!(self) if (self.auto_delivery? && !Delivery.find_by_resume_id_and_job_id(self.id, job.id))
+      job.delivery!(self) if self.auto_delivery?
     end
   end
 

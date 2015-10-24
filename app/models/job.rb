@@ -111,7 +111,10 @@ class Job < ActiveRecord::Base
   end
 
   def delivery!(resume)
-    Delivery.create(:resume_id => resume.id, :job_id => self.id)
+    begin
+      Delivery.create(:resume_id => resume.id, :job_id => self.id)
+    rescue ActiveRecord::RecordNotUnique
+    end
   end
 
   def watched_by?(supplier)
@@ -124,7 +127,7 @@ class Job < ActiveRecord::Base
 
   def deliver_matching_resumes
     matching_resumes.each do |resume|
-      self.delivery!(resume) if (resume.auto_delivery? && !Delivery.find_by_resume_id_and_job_id(resume.id, self.id))
+      self.delivery!(resume) if resume.auto_delivery?
     end
   end
 
