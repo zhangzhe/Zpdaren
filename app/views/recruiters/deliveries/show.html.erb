@@ -7,7 +7,6 @@
       <%= @delivery.resume_candidate_name %>
     </li>
   </ol>
-
   <p class="lead"><%= @delivery.resume_candidate_name %></p>
   <p>
     <i class="fa fa-tags"></i>
@@ -18,7 +17,6 @@
   </p>
   <hr>
   <p><%= simple_format @delivery.description %></p>
-
   <hr>
   <p>
     <h3>联系方式 </h3>
@@ -36,7 +34,7 @@
     <% elsif @delivery.job.deposit_paid? %>
       <div class="alert alert-info" role="alert">订金确认中，请等待</div>
     <% else %>
-      <div class="alert alert-info" role="alert">请返回[我发布的职位]并支付订金即可查看联系方式</div>
+      <div class="alert alert-info" role="alert">请进入职位&nbsp;<b><%= link_to @delivery.job_title, recruiters_job_path(@delivery.job) %></b>&nbsp;并支付订金即可查看联系方式</div>
     <% end %>
   </p>
 </div>

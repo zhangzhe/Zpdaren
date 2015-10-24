@@ -32,7 +32,7 @@ class Recruiters::JobsController < Recruiters::BaseController
   end
 
   def update
-    @job = Job.update(params[:id], job_params)
+    @job = Job.update(params[:id], job_params_edit)
     if @job.errors.any?
       flash[:error] = @job.errors.full_messages.first
       render 'edit' and return
@@ -55,6 +55,10 @@ class Recruiters::JobsController < Recruiters::BaseController
 
   private
   def job_params
-    params[:job].permit(:title, :description, :bonus, :state, :tag_list)
+    params[:job].permit(:title, :description, :bonus, :tag_list)
+  end
+
+  def job_params_edit
+    params[:job].permit(:title, :description, :tag_list)
   end
 end
