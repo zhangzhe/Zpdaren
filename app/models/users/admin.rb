@@ -5,7 +5,7 @@ class Admin < User
     self.first
   end
 
-  def zhifubao_account
-    "wade.songhang@gmail.com"
+  def bank_account
+    "11054701040001271"
   end
 end

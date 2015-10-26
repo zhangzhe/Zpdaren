@@ -22,11 +22,6 @@
 
         <% if current_user %>
           <li><%= link_to current_user.email, current_user_account_path %></li>
-          <% if current_user.weixin_subscribable? %>
-            <li>
-              <%= link_to image_tag("xiaoqrcode"), qr_code_path(current_user.id), remote: true %>
-            </li>
-          <% end %>
         <% end %>
         <% if current_user %>
           <li><%= link_to "退出", destroy_admin_session_path, :method => "DELETE" %></li>
@@ -55,3 +50,11 @@
 
 <%= render "/home/modal_recruiter" %>
 <%= render "/home/modal_supplier" %>
+<% if current_user && current_user.weixin_subscribable? %>
+  <div class="tittle-qrcode">
+    <a href="<%= qr_code_path(current_user.id) %>" data-remote=true >
+      <i class="fa fa-qrcode"></i>
+    </a>
+    <p>点一下，关注微信公众号</p>
+  </div>
+<% end %>
