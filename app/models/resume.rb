@@ -6,7 +6,6 @@ class Resume < ActiveRecord::Base
   validates_presence_of :attachment, message: '不能为空'
   validates_length_of :candidate_name, maximum: 10
   validates_uniqueness_of :mobile, message: '系统中已经存在，请上选择其他候选人'
-  validates_length_of :mobile, is: 11
   after_create :auto_deliver
   default_scope { order("created_at DESC") }
 
