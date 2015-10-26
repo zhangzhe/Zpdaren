@@ -230,11 +230,13 @@
 
       var markup = '<div id="'+id+'_tagsinput" class="tagsinput"><div id="'+id+'_addTag">';
 
-      if (settings.interactive) {
-        markup = markup + '<input id="'+id+'_tag" value="" data-default="'+settings.defaultText+'" />';
-      }
-
       markup = markup + '</div><div class="tags_clear"></div></div>';
+
+      if (settings.interactive) {
+        markup = markup + '<h4 style="color:red;">在下面的标签输入框中输入想要添加的标签（例如：java、两年工作经验、互联网），完成后直接回车或者点击"添加"按钮，完成一个标签的添加, 添加的标签将输入框上面的空白区域显示</h4>';
+        markup = markup + '<input id="'+id+'_tag" value="" class="form-control tag-input" placeholder="'+settings.defaultText+'" />';
+        markup = markup + '<button type="button" class="btn btn-primary tag-add-btn">添加</button>';
+      }
 
       $(markup).insertAfter(this);
 
@@ -312,6 +314,16 @@
 
                 }
         });
+
+        //自定义事件
+        $('.tag-add-btn').bind('click', function(){
+          if ($('#job_tag_list_tag').val().length > 0 && $('#job_tag_list_tag').val().length <= 20) {
+            $('#job_tag_list').addTag($('#job_tag_list_tag').val(),{focus:true,unique:(settings.unique)});
+            $('#job_tag_list_tag').resetAutosize(settings);
+          };
+        });
+
+
         //Delete last tag on backspace
         data.removeWithBackspace && $(data.fake_input).bind('keydown', function(event)
         {

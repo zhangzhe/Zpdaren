@@ -138,3 +138,15 @@ body {
     width: 100px;
   }
 /**********************/
+
+/*tag input*/
+  .tag-input{
+    margin-top: 10px;
+    width: 400px;
+    display: inline-block;
+    margin-right: 20px;
+  }
+  .tag-add-btn{
+    margin-bottom: 2px;
+  }
+/**********************/
