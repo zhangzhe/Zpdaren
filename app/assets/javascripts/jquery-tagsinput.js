@@ -317,11 +317,11 @@
         });
 
         //自定义事件
-        $('.tag-add-btn').bind('click', function(){
-          if ($('#job_tag_list_tag').val().length > 0 && $('#job_tag_list_tag').val().length <= 20) {
-            $('#job_tag_list').addTag($('#job_tag_list_tag').val(),{focus:true,unique:(settings.unique)});
-            $('#job_tag_list_tag').resetAutosize(settings);
-          };
+        $('.tag-add-btn').bind('click',data,function(event) {
+          if( (event.data.minChars <= $(event.data.fake_input).val().length) && (!event.data.maxChars || (event.data.maxChars >= $(event.data.fake_input).val().length)) ){
+            $(event.data.real_input).addTag($(event.data.fake_input).val(),{focus:true,unique:(settings.unique)});
+            $(event.data.fake_input).resetAutosize(settings);
+            }
         });
 
 
