@@ -13,7 +13,7 @@ class Admins::BaseController < ApplicationController
   end
 
   def default_sort
-    params[:sort] ||= 'created_at'
+    params[:sort] ||= 'created_at' unless params[:controller] == 'admins/deliveries' && params[:action] == 'index'
     params[:direction] ||= 'DESC'
   end
 end
