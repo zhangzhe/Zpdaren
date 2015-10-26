@@ -7,7 +7,7 @@
         <th>应聘职位</th>
         <th>
           <%= sortable '推荐时间', 'created_at' %>
-          <% if sort_column == 'created_at' %>
+          <% if params[:sort].present? %>
             <% if sort_direction == 'DESC' %>
               <i class="fa fa-caret-down"></i>
             <% else %>
@@ -15,7 +15,9 @@
             <% end %>
           <% end %>
         </th>
-        <th>状态/操作</th>
+        <th>
+          <%= link_to '状态/操作', {} %>
+        </th>
       </tr>
     </thead>
     <tbody>

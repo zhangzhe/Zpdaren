@@ -8,13 +8,17 @@ class Admins::DeliveriesController < Admins::BaseController
     else
       @deliveries = Delivery.includes(:resume)
     end
-    @deliveries = @deliveries.order_by_state.order("#{params[:sort]} #{params[:direction]}")
+    if params[:sort].present?
+      @deliveries = @deliveries.order("#{params[:sort]} #{params[:direction]}")
+    else
+      @deliveries = @deliveries.order_by_state.order("created_at DESC")
+    end
     @deliveries = @deliveries.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   private
 
   def sort_column
-    Delivery.column_names.include?(params[:sort]) ? params[:sort] : 'created_at'
+    params[:sort] if Delivery.column_names.include?(params[:sort])
   end
 end
