@@ -1,6 +1,7 @@
 class Suppliers::BaseController < ApplicationController
   helper_method :sort_direction
   layout 'suppliers'
+  before_action :default_sort, only: [:index]
 
   def show
   end
@@ -8,5 +9,10 @@ class Suppliers::BaseController < ApplicationController
   private
   def sort_direction
     %w(ASC DESC).include?(params[:direction]) ? params[:direction] : 'DESC'
+  end
+
+  def default_sort
+    params[:sort] ||= 'created_at'
+    params[:direction] ||= 'DESC'
   end
 end

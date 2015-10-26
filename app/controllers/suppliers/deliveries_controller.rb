@@ -1,7 +1,7 @@
 class Suppliers::DeliveriesController < Suppliers::BaseController
 
   def index
-    @deliveries = current_supplier.deliveries.order("created_at DESC")
+    @deliveries = current_supplier.deliveries.order("#{params[:sort]} #{params[:direction]}")
   end
 
   def new
