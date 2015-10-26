@@ -20,9 +20,6 @@
     <%= render '/shared/tag' %>
   </p>
   <p>
-    标签：
-  </p>
-  <p>
     <%= f.label '简历标签' %><br />
     <%= f.text_field :tag_list, value: resume.tag_list.to_s, class: 'form-control auto-tags' %>
   </p>

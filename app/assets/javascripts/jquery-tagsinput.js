@@ -79,6 +79,7 @@
         var id = $(this).attr('id');
 
         var tagslist = $(this).val().split(delimiter[id]);
+
         if (tagslist[0] == '') {
           tagslist = new Array();
         }
@@ -95,7 +96,7 @@
           var skipTag = false;
         }
 
-        if (value !='' && skipTag != true) {
+        if (value !='' && skipTag != true && (tagslist.length < 5)) {
                     $('<span>').addClass('tag').append(
                         $('<span>').text(value).append('&nbsp;&nbsp;'),
                         $('<a>', {
@@ -228,15 +229,15 @@
         tags_callbacks[id]['onChange'] = settings.onChange;
       }
 
-      var markup = '<div id="'+id+'_tagsinput" class="tagsinput"><div id="'+id+'_addTag">';
-
-      markup = markup + '</div><div class="tags_clear"></div></div>';
-
+      var markup = '';
       if (settings.interactive) {
-        markup = markup + '<h4 style="color:red;">在下面的标签输入框中输入想要添加的标签（例如：java、两年工作经验、互联网），完成后直接回车或者点击"添加"按钮，完成一个标签的添加, 添加的标签将输入框上面的空白区域显示</h4>';
+        markup = markup + '<p class="help-block" style="margin-bottom:0px;font-size:12px;">在下面的标签输入框中输入想要添加的标签（例如：java、两年工作经验、互联网，标签数量不超过5个），完成后直接回车或者点击"添加"按钮，完成一个标签的添加, 添加的标签将输入框上面的空白区域显示.</p>';
         markup = markup + '<input id="'+id+'_tag" value="" class="form-control tag-input" placeholder="'+settings.defaultText+'" />';
         markup = markup + '<button type="button" class="btn btn-primary tag-add-btn">添加</button>';
       }
+      markup = markup + '<div id="'+id+'_tagsinput" class="tagsinput" style="width: 100%; min-height: 42px; height: 42px;background-color: #f0f0f0;border-radius: 4px;border-color: #f0f0f0;"><div id="'+id+'_addTag">';
+
+      markup = markup + '</div><div class="tags_clear"></div></div>';
 
       $(markup).insertAfter(this);
 
