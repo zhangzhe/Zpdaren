@@ -5,7 +5,7 @@ class Admin < User
     self.first
   end
 
-  def zhifubao_account
-    "11054701040001271  开户行：中国农业银行（北四环支行）"
+  def bank_account
+    "11054701040001271"
   end
 end

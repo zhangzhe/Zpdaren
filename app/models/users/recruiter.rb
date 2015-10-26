@@ -29,7 +29,7 @@ class Recruiter < User
   def create_and_pay_final_payment_for!(delivery)
     ActiveRecord::Base.transaction do
       self.receive(delivery.job.bonus_for_entry)
-      delivery.final_payment = FinalPayment.create!(:amount => delivery.job.bonus_for_entry, :wallet_id => self.wallet.id, :zhifubao_account => Admin.admin.zhifubao_account)
+      delivery.final_payment = FinalPayment.create!(:amount => delivery.job.bonus_for_entry, :wallet_id => self.wallet.id, :zhifubao_account => Admin.admin.bank_account)
       delivery.save!
       delivery.pay_final_payment!
     end
