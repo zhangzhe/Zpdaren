@@ -231,7 +231,7 @@
 
       var markup = '';
       if (settings.interactive) {
-        markup = markup + '<p class="help-block" style="margin-bottom:0px;font-size:12px;">在下面的标签输入框中输入想要添加的标签（例如：java、两年工作经验、互联网，标签数量不超过5个），完成后直接回车或者点击"添加"按钮，完成一个标签的添加, 添加的标签将输入框上面的空白区域显示.</p>';
+        markup = markup + '<p class="help-block" style="margin-bottom:0px;font-size:12px;">在下面的标签输入框中输入想要添加的标签，例如：Java、Ruby、HTTP、HTML5、互联网，标签数量不超过5个.</p>';
         markup = markup + '<input id="'+id+'_tag" value="" class="form-control tag-input" placeholder="'+settings.defaultText+'" />';
         markup = markup + '<button type="button" class="btn btn-primary tag-add-btn">添加</button>';
       }
