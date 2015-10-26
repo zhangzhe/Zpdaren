@@ -1,0 +1,8 @@
+<%= render 'index_base' %>
+
+<script type="text/javascript">
+  $(function(){
+    $("#bigQrcode").html("<%= j render('qr_codes/qr_code', :ticket => @ticket) %>");
+    $('#bigQrcode').modal();
+  });
+</script>

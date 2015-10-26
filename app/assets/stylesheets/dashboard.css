@@ -149,3 +149,17 @@ body {
     margin-bottom: 2px;
   }
 /**********************/
+
+/*little qrcode*/
+  .tittle-qrcode{
+    position: fixed;
+    bottom: 40px;
+    left: 20px;
+    z-index: 9999;
+
+  }
+  .tittle-qrcode i{
+    color: #000;
+    font-size: 60px;
+  }
+/**********************/

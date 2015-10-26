@@ -1,13 +1,1 @@
-<% if params[:recruiter_id] %>
-  <ol class="breadcrumb">
-    <li>
-      <%= link_to '我收到的职位', suppliers_jobs_path %>
-    </li>
-    <li class="active"><%= @jobs.first.company_name %></li>
-  </ol>
-<% end %>
-<%= render 'suppliers/shared/search', url: suppliers_jobs_path, placeholder: '输入职位名称' %>
-<%= render 'list', jobs: @jobs %>
-<div class='text-center'>
-  <%= will_paginate @jobs, renderer: BootstrapPagination::Rails, previous_label: '上一页', next_label: '下一页' %>
-</div>
+<%= render 'index_base' %>
