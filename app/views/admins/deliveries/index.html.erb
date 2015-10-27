@@ -1,4 +1,11 @@
-<%= render 'admins/shared/search', url: admins_deliveries_path, placeholder: '输入简历标签' %>
+<% if params[:job_id] %>
+  <ol class="breadcrumb">
+    <li><%= link_to "职位列表", admins_jobs_path(:state => "in_hiring") %></li>
+    <li>为【<%= Job.find(params[:job_id]).title %>】审核推荐</li>
+  </ol>
+<% else %>
+  <%= render 'admins/shared/search', url: admins_deliveries_path, placeholder: '输入简历标签' %>
+<% end %>
 <%= render 'list', deliveries: @deliveries %>
 <div class='text-center'>
   <%= will_paginate @deliveries, renderer: BootstrapPagination::Rails, previous_label: '上一页', next_label: '下一页' %>

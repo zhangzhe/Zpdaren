@@ -25,6 +25,8 @@ class Job < ActiveRecord::Base
   scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'deposit_paid_confirmed']) }
   scope :in_hiring, -> { where.not('state in (?)', ['freezing', 'finished', 'final_payment_paid']) }
   scope :un_hiring, -> { where('state in (?)', ['final_payment_paid', 'freezing', 'finished']) }
+  default_scope { order(created_at: :desc) }
+
 
   include SimilarEntity
   include AASM
