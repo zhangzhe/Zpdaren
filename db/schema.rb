@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151023064727) do
+ActiveRecord::Schema.define(version: 20151027075000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20151023064727) do
     t.string   "state"
     t.datetime "read_at"
     t.integer  "final_payment_id"
+    t.string   "message"
   end
 
   add_index "deliveries", ["resume_id", "job_id"], name: "index_deliveries_on_resume_id_and_job_id", unique: true, using: :btree

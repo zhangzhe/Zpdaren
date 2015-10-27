@@ -1,0 +1,46 @@
+<ol class="breadcrumb">
+  <li><%= link_to "职位列表", admins_jobs_path(:state => "in_hiring") %></li>
+  <li><%= link_to "为【#{@delivery.job.title}】审核推荐", admins_deliveries_path(:job_id => @delivery.job) %></li>
+</ol>
+
+<div class="col-md-5">
+  <H2>
+    <%= @delivery.job_title %>
+  </H2 >
+
+  <p>
+    <%= @delivery.job_tag_list %>
+  </p>
+
+  <p>
+    <%= simple_format  @delivery.job_description %>
+  </p>
+</div>
+<div class="col-md-5 col-md-offset-1">
+  <H2>
+    <%= @delivery.resume_candidate_name %>
+  </H2 >
+
+  <p>
+    <%= @delivery.resume_tag_list %>
+  </p>
+
+  <p>
+    <%= simple_format @delivery.resume.description %>
+  </p>
+</div>
+<div class="col-md-10">
+</div>
+<div class="col-md-6">
+  <hr>
+  <%= form_for @delivery, url: admins_delivery_path, method: 'PUT' do |f| %>
+    <p>
+      <%= f.text_area :message, class: "form-control", placeholder: "候选人简介", rows: 2 %>
+    </p>
+
+    <p>
+      <%= f.submit "确认", class: "btn btn-primary" %>
+    </p>
+  <% end %>
+</div>
+

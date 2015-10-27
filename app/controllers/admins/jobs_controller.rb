@@ -1,6 +1,4 @@
 class Admins::JobsController < Admins::BaseController
-  helper_method :sort_column
-
   def index
     # if params[:key].present?
     #   @jobs = Job.where("title ilike ?", "%#{params[:key]}%")
@@ -38,14 +36,5 @@ class Admins::JobsController < Admins::BaseController
   private
   def job_params
     params.require(:job).permit(:title, :description, :tag_list)
-  end
-
-  def sort_column
-    Job.column_names.include?(params[:sort]) ? params[:sort] : 'state'
-  end
-
-  def default_sort
-    params[:sort] ||= 'state'
-    params[:direction] ||= 'DESC'
   end
 end

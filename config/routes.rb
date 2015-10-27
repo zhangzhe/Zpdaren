@@ -41,7 +41,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :deliveries, only: [:index]
+    resources :deliveries, only: [:index, :edit, :update]
 
     resources :money_transfers, only: [:update] do
       collection do
