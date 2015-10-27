@@ -1,5 +1,6 @@
 <%= form_tag url, method: :get do %>
   <%= hidden_field_tag 'recruiter_id', params[:recruiter_id] if params[:recruiter_id] %>
+  <%= hidden_field_tag 'job_id', params[:job_id] if params[:job_id] %>
   <div class="row">
     <div class="col-lg-12">
       <div class="input-group">

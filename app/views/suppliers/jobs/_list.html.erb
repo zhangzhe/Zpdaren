@@ -12,7 +12,7 @@
     <tbody>
       <% jobs.each do |job| %>
         <tr>
-          <td>【<%= link_to "#{job.company_name}", suppliers_jobs_path(recruiter_id: job.recruiter.id) %>】<%= link_to truncate(job.title), suppliers_job_path(job), :target => "_blank" %></td>
+          <td>【<%= link_to "#{job.company_name}", suppliers_jobs_path(recruiter_id: job.recruiter.id) %>】<%= link_to truncate(job.title), suppliers_job_path(job) %></td>
           <td><%= job.bonus_for_entry %>/<%= job.bonus_for_each_resume %></td>
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
           <td>
@@ -23,7 +23,7 @@
             <% end %>
           </td>
           <td>
-            <%= link_to "为他推荐", suppliers_job_path(job), class: "btn btn-primary active", role: "button", :target => "_blank" %>
+            <%= link_to "为他推荐", suppliers_job_path(job), class: "btn btn-primary active", role: "button" %>
             <!-- <% if job.watched_by?(current_supplier) %>
               <i class="fa fa-heart" id='attended'></i>**/
             <% else %>

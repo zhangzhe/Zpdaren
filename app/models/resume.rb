@@ -8,6 +8,7 @@ class Resume < ActiveRecord::Base
   validates_uniqueness_of :mobile, message: '系统中已经存在，请上选择其他候选人'
   after_create :auto_deliver
   default_scope { order("created_at DESC") }
+  accepts_nested_attributes_for :deliveries
 
   include SimilarEntity
   acts_as_taggable

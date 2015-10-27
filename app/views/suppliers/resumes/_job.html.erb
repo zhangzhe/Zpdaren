@@ -1,0 +1,20 @@
+<div class="well well-lg">
+  <div style="word-break:break-all;">
+    <h2 class="blog-post-title"><%= job.title %></h2>
+    <p>
+      <i class="fa fa-tags"></i>
+      <%= job.tag_list.each{|tag|}.join(' ') %>
+    </p>
+    <p class="blog-post-meta"><%= job.company_name %>提供<%= job.bonus_for_entry %>元招聘红包</p>
+    <p class="btn btn-primary" type="button" data-toggle="collapse" data-target="#DetailCollapse" aria-expanded="false" >更多<i class="fa fa-angle-double-right"></i></p>
+  </div>
+</div>
+
+<div class="collapse" id="DetailCollapse">
+  <div class="well">
+    <h2 class="blog-post-title">关于<%= job.company_name %></h2>
+    <blockquote><%= job.company_description %></blockquote>
+    <hr>
+    <p><%= simple_format job.description %></p>
+  </div>
+</div>

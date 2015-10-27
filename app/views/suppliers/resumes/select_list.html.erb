@@ -1,0 +1,33 @@
+<%= render 'job', job: @job %>
+<%= render 'suppliers/shared/search', url: select_list_suppliers_resumes_path(), placeholder: '输入简历标签' %>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>被推荐人</th>
+        <th>标签</th>
+        <th>简历原件</th>
+        <th>状态</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @resumes.each do |resume| %>
+        <tr>
+          <td><%= resume.candidate_name %></td>
+          <td><%= resume.tag_list %></td>
+          <td><%= resume.attachment.file.file.split('/')[-1] %></td>
+          <td>
+            <% if resume.deliveried?(@job) %>
+              已推荐
+            <% else %>
+              <%= link_to '推荐', new_suppliers_delivery_path(job_id: params[:job_id], resume_id: resume.id), class: 'btn btn-primary active' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class='text-center'>
+  <%= will_paginate @resumes, renderer: BootstrapPagination::Rails, previous_label: '上一页', next_label: '下一页' %>
+</div>
