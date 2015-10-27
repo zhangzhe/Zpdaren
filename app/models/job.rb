@@ -23,7 +23,8 @@ class Job < ActiveRecord::Base
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
   scope :deposit_paid_confirmed, -> { where('state' => 'deposit_paid_confirmed')}
   scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'deposit_paid_confirmed']) }
-  scope :in_hiring, -> { where.not('state in (?)', ['freezing', 'finished']) }
+  scope :in_hiring, -> { where.not('state in (?)', ['freezing', 'finished', 'final_payment_paid']) }
+  scope :un_hiring, -> { where('state in (?)', ['final_payment_paid', 'freezing', 'finished']) }
 
   include SimilarEntity
   include AASM
@@ -57,8 +58,16 @@ class Job < ActiveRecord::Base
     end
   end
 
+  def finished_approve_today?
+    self.deliveries.approved_today.count >= 8
+  end
+
   def editable?
      ["submitted", "deposit_paid", "deposit_paid_confirmed"].include?(self.state)
+  end
+
+  def in_hiring?
+    !['freezing', 'finished', 'final_payment_paid'].include?(self.state)
   end
 
   def unprocess_deliveries
@@ -144,10 +153,6 @@ class Job < ActiveRecord::Base
     if self.changed? and self.save
       RecruiterMailer.job_updated(self).deliver_now
     end
-  end
-
-  def in_hiring?
-    !['freezing', 'finished'].include?(self.state)
   end
 
   def available_for_final_payment?

@@ -8,6 +8,9 @@ class Admins::DeliveriesController < Admins::BaseController
     else
       @deliveries = Delivery.includes(:resume)
     end
+    if params[:job_id]
+      @deliveries = @deliveries.where("job_id = #{params[:job_id]} OR state = 'recommended'")
+    end
     if params[:sort].present?
       @deliveries = @deliveries.order("#{params[:sort]} #{params[:direction]}")
     else

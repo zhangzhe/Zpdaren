@@ -4,7 +4,7 @@ class PassthroughController < ApplicationController
   def index
     redirect_path = case current_user
     when Admin
-      admins_jobs_path
+      admins_jobs_path(:state => "in_hiring")
     when Recruiter
       recruiters_jobs_path
     when Supplier

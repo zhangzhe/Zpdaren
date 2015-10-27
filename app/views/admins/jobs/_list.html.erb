@@ -3,7 +3,8 @@
     <thead>
       <tr>
         <th>职位名称</th>
-        <th>简历数量</th>
+        <th>简历推荐</th>
+        <% if params[:state] == "in_hiring" %><th>今日简历推荐</th><% end %>
         <th>
           <%= sortable '红包', 'bonus' %>
           <% if sort_column == 'bonus' %>
@@ -31,7 +32,13 @@
       <% jobs.each do |job| %>
         <tr>
           <td><%= link_to "【#{job.company_name}】#{job.title}", edit_admins_job_path(job.id) %></td>
-          <td><%= job.resumes.count %></td>
+          <td><span class="label label-primary label-as-badge"><%= job.deliveries.after_approved.count %> / <%= job.deliveries.count %></span></td>
+
+          <% if params[:state] == "in_hiring" %>
+            <% flag = job.finished_approve_today? ? "label-success" : "label-danger" %>
+            <td><span class="label <%= flag %> label-as-badge"><%= job.deliveries.approved_today.count %>/8 </span>&nbsp;<%= link_to "审核推荐", admins_deliveries_path(:job_id => job) unless job.finished_approve_today? %></td>
+          <% end %>
+
           <td><%= job.bonus %></td>
           <td><%= job.created_at.localtime.to_s(:db) %></td>
           <td>

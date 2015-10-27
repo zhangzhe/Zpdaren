@@ -1,4 +1,17 @@
-<%= render 'admins/shared/search', url: admins_jobs_path, placeholder: '输入职位名称' %>
+<%#= render 'admins/shared/search', url: admins_jobs_path, placeholder: '输入职位名称' %>
+<br>
+<ul class="nav nav-tabs">
+  <% active = (params[:state] == "in_hiring") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to '进行中招聘', admins_jobs_path(:state => "in_hiring") %>
+  </li>
+  <% active = (params[:state] == "un_hiring") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to '已完成的招聘', admins_jobs_path(:state => "un_hiring") %>
+  </li>
+</ul>
+<br>
+
 <%= render 'list', jobs: @jobs %>
 <div class='text-center'>
   <%= will_paginate @jobs, renderer: BootstrapPagination::Rails, previous_label: '上一页', next_label: '下一页' %>

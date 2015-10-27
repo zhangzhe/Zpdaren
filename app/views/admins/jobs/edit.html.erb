@@ -1,5 +1,5 @@
 <div class="row">
-  <%= link_to "职位列表", admins_jobs_path %>/审核职位
+  <%= link_to "职位列表", admins_jobs_path(:state => "in_hiring") %>/修改职位
   <p>
     <%= form_for @job, url: admins_job_path do |f| %>
       <p>
