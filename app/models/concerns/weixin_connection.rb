@@ -141,11 +141,11 @@ module WeixinConnection
     \"color\":\"#173177\"
     },
     \"keyword4\":{
-    \"value\":\"#{delivery.job.bonus_for_each_resume/2}\",
+    \"value\":\"#{delivery.job.bonus_for_each_resume/2}元\",
     \"color\":\"#173177\"
     },
     \"keyword5\":{
-    \"value\":\"#{Time.now.strftime("%Y年%m月%d日 %H:%m")}元\",
+    \"value\":\"#{Time.now.strftime("%Y年%m月%d日 %H:%m")}\",
     \"color\":\"#173177\"
     },
     \"remark\":{
