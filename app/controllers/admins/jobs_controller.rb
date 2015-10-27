@@ -2,12 +2,18 @@ class Admins::JobsController < Admins::BaseController
   helper_method :sort_column
 
   def index
-    if params[:key].present?
-      @jobs = Job.where("title ilike ?", "%#{params[:key]}%")
+    # if params[:key].present?
+    #   @jobs = Job.where("title ilike ?", "%#{params[:key]}%")
+    # else
+    #   @jobs = Job.all
+    # end
+    if params[:state] == "in_hiring"
+      @jobs = Job.in_hiring
+    elsif params[:state] == "un_hiring"
+      @jobs = Job.un_hiring
     else
       @jobs = Job.all
     end
-    @jobs = @jobs.order("#{params[:sort]} #{params[:direction]}")
     @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
@@ -35,6 +41,11 @@ class Admins::JobsController < Admins::BaseController
   end
 
   def sort_column
-    Job.column_names.include?(params[:sort]) ? params[:sort] : 'created_at'
+    Job.column_names.include?(params[:sort]) ? params[:sort] : 'state'
+  end
+
+  def default_sort
+    params[:sort] ||= 'state'
+    params[:direction] ||= 'DESC'
   end
 end

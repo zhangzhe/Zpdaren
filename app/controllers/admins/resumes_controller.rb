@@ -24,7 +24,7 @@ class Admins::ResumesController < Admins::BaseController
     end
     delivery = @resume.deliveries.find(params[:resume][:delivery_id])
     delivery.approve!
-    redirect_to admins_deliveries_path
+    redirect_to admins_deliveries_path(:job_id => delivery.job)
   end
 
   def download
