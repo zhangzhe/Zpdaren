@@ -7,11 +7,9 @@
   <H2>
     <%= @delivery.job_title %>
   </H2 >
-
   <p>
     <%= @delivery.job_tag_list %>
   </p>
-
   <p>
     <%= simple_format  @delivery.job_description %>
   </p>
@@ -20,11 +18,9 @@
   <H2>
     <%= @delivery.resume_candidate_name %>
   </H2 >
-
   <p>
     <%= @delivery.resume_tag_list %>
   </p>
-
   <p>
     <%= simple_format @delivery.resume.description %>
   </p>
@@ -37,10 +33,8 @@
     <p>
       <%= f.text_area :message, class: "form-control", placeholder: "候选人简介", rows: 2 %>
     </p>
-
     <p>
       <%= f.submit "确认", class: "btn btn-primary" %>
     </p>
   <% end %>
 </div>
-
