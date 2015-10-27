@@ -25,7 +25,7 @@
         <tr>
           <td><%= delivery.resume_candidate_name %></td>
           <td><%= delivery.supplier.email %></td>
-          <td><%= "【#{delivery.job.company_name}】#{delivery.job_title}" %></td>
+          <td><%= "【#{delivery.job.company_name}】#{delivery.job_title}" %><%= delivery.job.id %></td>
           </td>
           <td><%= delivery.created_at.localtime.to_s(:db) %></td>
           <td>

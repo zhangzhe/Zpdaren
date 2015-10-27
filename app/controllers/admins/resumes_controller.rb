@@ -11,22 +11,6 @@ class Admins::ResumesController < Admins::BaseController
     @resumes = @resumes.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
-  def edit
-    @resume = Resume.find(params[:id])
-    @delivery = Delivery.find(params[:delivery_id])
-  end
-
-  def update
-    @resume = Resume.update(params[:id], resume_params)
-    if @resume.errors.any?
-      flash[:error] = @resume.errors.full_messages.first
-      render 'edit' and return
-    end
-    delivery = @resume.deliveries.find(params[:resume][:delivery_id])
-    delivery.approve!
-    redirect_to admins_deliveries_path(:job_id => delivery.job)
-  end
-
   def download
     resume = Resume.find(params[:id])
     send_file resume.attachment.file.file
