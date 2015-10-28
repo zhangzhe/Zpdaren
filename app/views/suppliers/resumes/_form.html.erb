@@ -1,5 +1,5 @@
 <%= form_for resume, url: suppliers_resumes_path do |f| %>
-  <%= hidden_field_tag 'job_id', job_id if job_id %>
+  <%= hidden_field_tag 'job_id', params[:job_id] if params[:job_id] %>
   <p>
     <%= f.text_field 'candidate_name', class: "form-control", :placeholder => "候选人姓名(必填)" %>
   </p>
@@ -23,7 +23,7 @@
   <% if params[:job_id].present? %>
     <p>
       <%= f.fields_for :deliveries do |deliveries_form| %>
-        <%= hidden_field_tag 'resume[deliveries_attributes][0][job_id]', job_id if job_id %>
+        <%= hidden_field_tag 'resume[deliveries_attributes][0][job_id]', params[:job_id] %>
         <%= deliveries_form.text_field 'message', class: 'form-control', :placeholder => '给招聘方留言...(选填，50字内)' %>
       <% end %>
     </p>

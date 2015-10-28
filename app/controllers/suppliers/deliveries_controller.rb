@@ -12,7 +12,13 @@ class Suppliers::DeliveriesController < Suppliers::BaseController
 
   def create
     begin
-      delivery = Delivery.create!(delivery_params)
+      @delivery = Delivery.new(delivery_params)
+      unless @delivery.save
+        @job = Job.find(delivery_params[:job_id])
+        @resume = Resume.find(delivery_params[:resume_id])
+        flash[:error] = @delivery.errors.full_messages.first
+        render 'new' and return
+      end
     rescue ActiveRecord::RecordNotUnique
     end
     flash[:success] = "操作完成！"

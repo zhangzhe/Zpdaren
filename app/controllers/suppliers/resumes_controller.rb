@@ -11,7 +11,10 @@ class Suppliers::ResumesController < Suppliers::BaseController
 
   def new
     @resume = Resume.new
-    @resume.deliveries.build(job_id: params[:job_id]) if params[:job_id].present?
+    if params[:job_id].present?
+      @job = Job.find(params[:job_id])
+      @resume.deliveries.build()
+    end
   end
 
   def create

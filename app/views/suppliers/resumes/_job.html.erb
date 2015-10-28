@@ -6,7 +6,10 @@
       <%= job.tag_list.each{|tag|}.join(' ') %>
     </p>
     <p class="blog-post-meta"><%= job.company_name %>提供<%= job.bonus_for_entry %>元招聘红包</p>
-    <p class="btn btn-primary" type="button" data-toggle="collapse" data-target="#DetailCollapse" aria-expanded="false" >更多<i class="fa fa-angle-double-right"></i></p>
+    <p>
+      <%= link_to '返回', suppliers_job_path(job), class: 'btn btn-default' %>
+      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#DetailCollapse" aria-expanded="false">更多<i class="fa fa-angle-double-right"></i></button>
+    </p>
   </div>
 </div>
 
@@ -15,6 +18,7 @@
     <h2 class="blog-post-title">关于<%= job.company_name %></h2>
     <blockquote><%= job.company_description %></blockquote>
     <hr>
+    <h3>职位描述</h4>
     <p><%= simple_format job.description %></p>
   </div>
 </div>

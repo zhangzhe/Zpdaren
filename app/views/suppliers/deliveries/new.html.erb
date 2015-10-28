@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
-  <li><%= link_to "职位列表", admins_jobs_path(:state => "in_hiring") %></li>
-  <li><%= link_to "为【#{@job.company_name}--#{@job.title}】推荐", admins_deliveries_path(:job_id => @job.id) %></li>
+  <li><%= link_to "我收到的职位", suppliers_jobs_path %></li>
+  <li><%= link_to "为【#{@job.company_name}--#{@job.title}】推荐", suppliers_job_path(@job) %></li>
 </ol>
 
 <div class="col-md-5">
@@ -21,10 +21,15 @@
   </H2 >
   <p>
     <i class="fa fa-tags"></i>
-    <%= @job.tag_list.each{|tag|}.join(' ') %>
+    <%= @resume.tag_list.each{|tag|}.join(' ') %>
   </p>
   <p>
-    <%= simple_format @resume.description %>
+
+    <% if @resume.description.present? %>
+      <%= simple_format @resume.description %>
+    <% else %>
+      <%= link_to '下载简历原件', download_suppliers_resume_path(@resume) %>
+    <% end %>
   </p>
 </div>
 <div class="col-md-10">
@@ -32,10 +37,10 @@
 <div class="col-md-6">
   <hr>
   <%= form_for @delivery, url: suppliers_deliveries_path, method: 'POST' do |f| %>
-    <%= hidden_field_tag 'delivery[job_id]', params[:job_id] %>
-    <%= hidden_field_tag 'delivery[resume_id]', params[:resume_id] %>
+    <%= hidden_field_tag 'delivery[job_id]', params[:job_id] || params[:delivery][:job_id] %>
+    <%= hidden_field_tag 'delivery[resume_id]', params[:resume_id] || params[:delivery][:resume_id] %>
     <p>
-      <%= f.text_area :message, class: "form-control", placeholder: "候选人简介", rows: 2 %>
+      <%= f.text_field :message, class: "form-control", placeholder: "给招聘方留言...(选填，50字内)" %>
     </p>
     <p>
       <%= f.submit "确认", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
