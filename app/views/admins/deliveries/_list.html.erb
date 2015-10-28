@@ -5,19 +5,8 @@
         <th>被推荐人</th>
         <th>推荐人</th>
         <th>应聘职位</th>
-        <th>
-          <%= sortable '推荐时间', 'created_at' %>
-          <% if params[:sort].present? %>
-            <% if sort_direction == 'DESC' %>
-              <i class="fa fa-caret-down"></i>
-            <% else %>
-              <i class="fa fa-caret-up"></i>
-            <% end %>
-          <% end %>
-        </th>
-        <th>
-          <%= link_to '状态/操作', {} %>
-        </th>
+        <th>推荐时间</th>
+        <th>状态/操作</th>
       </tr>
     </thead>
     <tbody>
@@ -30,7 +19,7 @@
           <td><%= delivery.created_at.localtime.to_s(:db) %></td>
           <td>
             <% if delivery.recommended? %>
-              <%= link_to '审核', edit_admins_delivery_path(delivery), class: 'btn btn-primary active' %>
+              <%= link_to '审核', edit_admins_job_delivery_path(:job_id => delivery.job, :id => delivery), class: 'btn btn-primary active' %>
             <% else %>
               已审核
             <% end %>

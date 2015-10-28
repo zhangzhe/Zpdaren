@@ -40,8 +40,10 @@ Rails.application.routes.draw do
         get :download
       end
     end
-
-    resources :deliveries, only: [:index, :edit, :update]
+    resources :jobs, only: [:index, :show, :edit, :update] do
+      resources :deliveries, only: [:index, :edit, :update]
+    end
+    match 'deliveries' => 'deliveries#index', :via => :get, :as => "deliveries"
 
     resources :money_transfers, only: [:update] do
       collection do
@@ -50,11 +52,9 @@ Rails.application.routes.draw do
         get :withdraws
       end
     end
-
     resources :users, only: [:index]
     resources :suppliers, only: [:index]
     resources :companies, only: [:index, :show]
-    resources :jobs, only: [:index, :show, :edit, :update]
     resources :refund_requests, only: [:index, :show] do
       member do
         put :agree

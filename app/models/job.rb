@@ -161,10 +161,6 @@ class Job < ActiveRecord::Base
     self.deposit_paid_confirmed? && self.deliveries.any_available_for_final_payment?
   end
 
-  def self.waiting_approved
-    deposit_paid
-  end
-
   private
   def notify_recruiter_and_deliver_matching_resumes
     RecruiterMailer.job_approved(recruiter, self).deliver_now
