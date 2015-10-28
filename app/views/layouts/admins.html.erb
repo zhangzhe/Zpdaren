@@ -12,9 +12,6 @@
             <li class="<%= active %>"><%= link_to "职位列表#{badge_for_admin(Job)}".html_safe, admins_jobs_path(:state => "in_hiring") %></li>
             <% active = active_for?(Admins::DeliveriesController) %>
             <li class="<%= active %>"><%= link_to "推荐列表#{badge_for_admin(Delivery)}".html_safe, admins_deliveries_path %></li>
-            <% active = active_for?(Admins::RefundRequestsController) %>
-            <li class="<%= active %>"><%= link_to "退款申请#{badge_for_admin(RefundRequest)}".html_safe, admins_refund_requests_path %></li>
-
             <% active = active_for?(Admins::MoneyTransfersController) %>
             <li class="<%= active %>"><%= link_to "存款/提现确认#{badge_for_admin(MoneyTransfer)}".html_safe, deposits_admins_money_transfers_path %></li>
 
