@@ -7,6 +7,11 @@ class Admins::ResumesController < Admins::BaseController
     else
       @resumes = Resume.all
     end
+    if params[:state] == "uncompleted"
+      @resumes = @resumes.uncompleted
+    elsif params[:state] == "completed"
+      @resumes = @resumes.completed
+    end
     @resumes = @resumes.order("#{params[:sort]} #{params[:direction]}")
     @resumes = @resumes.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end

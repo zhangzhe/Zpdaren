@@ -2,9 +2,8 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>推荐人</th>
+        <th>被推荐人</th>
         <th>标签</th>
-        <th>简历原件</th>
         <th>
           <%= sortable '推荐时间', 'created_at' %>
           <% if sort_column == 'created_at' %>
@@ -23,14 +22,11 @@
         <tr>
           <td><%= resume.candidate_name %></td>
           <td><%= resume.tag_list %></td>
-          <td><%= link_to resume.attachment.file.file.split('/')[-1], download_admins_resume_path(resume[:id]) %>
-          </td>
           <td><%= resume.created_at.localtime.to_s(:db) %></td>
           <td>
-            <% if resume.approved? %>
-              已审核
-            <% else %>
-              <%= link_to '审核', edit_admins_resume_path(resume.id), class: 'btn btn-primary active' %>
+            <%= link_to "下载", download_admins_resume_path(resume[:id]) %>&nbsp;
+            <% if resume.description.blank? %>
+              <%= link_to '完善简历', edit_admins_resume_path(resume), class: 'btn btn-primary btn-sm' %>
             <% end %>
           </td>
         </tr>
