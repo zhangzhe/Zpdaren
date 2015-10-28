@@ -2,6 +2,7 @@ class Suppliers::DeliveriesController < Suppliers::BaseController
 
   def index
     @deliveries = current_supplier.deliveries.order("#{params[:sort]} #{params[:direction]}")
+    @deliveries = @deliveries.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def new
