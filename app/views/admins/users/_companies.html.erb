@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @companies.each do |company| %>
+      <% companies.each do |company| %>
         <tr>
           <td><%= link_to company.name, admins_company_path(company.id) %></td>
           <td><%= company.mobile %></td>
