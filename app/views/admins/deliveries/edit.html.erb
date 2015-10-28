@@ -42,7 +42,7 @@
   <hr>
   <%= form_for @delivery, url: admins_job_delivery_path, method: 'PUT' do |f| %>
     <p>
-      <%= f.text_area :message, class: "form-control", placeholder: "候选人简介", rows: 2 %>
+      <%= f.text_area :message, class: "form-control", placeholder: "给招聘方留言...(选填，50字内)", rows: 2 %>
     </p>
     <p>
       <%= f.submit "确认", class: "btn btn-primary" %>
