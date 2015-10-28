@@ -53,8 +53,7 @@ Rails.application.routes.draw do
       end
     end
     resources :users, only: [:index]
-    resources :suppliers, only: [:index]
-    resources :companies, only: [:index, :show]
+    resources :companies, only: [:show]
     resources :refund_requests, only: [:index, :show] do
       member do
         put :agree
