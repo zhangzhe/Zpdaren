@@ -2,33 +2,35 @@ class Admins::DeliveriesController < Admins::BaseController
   helper_method :sort_column
 
   def index
-    if params[:key].present?
-      resume_ids = Resume.tagged_with([params[:key]], any: true, wild: true).map(&:id)
-      @deliveries = Delivery.includes(:resume).where("resume_id in (?)", resume_ids)
-    else
-      @deliveries = Delivery.includes(:resume)
-    end
     if params[:job_id]
-      @deliveries = @deliveries.where("job_id = #{params[:job_id]} AND state = 'recommended'")
-    end
-    if params[:sort].present?
-      @deliveries = @deliveries.order("#{params[:sort]} #{params[:direction]}")
+      @job = Job.find(params[:job_id])
+      @deliveries = @job.deliveries
+      @approved_deliveries = @deliveries.after_approved
+      @recommended_deliveries = @deliveries.recommended
     else
-      @deliveries = @deliveries.order_by_state.order("created_at DESC")
+      @deliveries = Delivery.all
+      if params[:state] == "submitted"
+        @deliveries = @deliveries.recommended
+      elsif params[:state] == "approved"
+        @deliveries = @deliveries.after_approved
+      end
+      @deliveries = @deliveries.paginate(page: params[:page], per_page: Settings.pagination.page_size)
     end
-    @deliveries = @deliveries.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def edit
-    @delivery = Delivery.find(params[:id])
+    @job = Job.find(params[:job_id])
+    @delivery = @job.deliveries.find(params[:id])
   end
 
   def update
-    @delivery = Delivery.find(params[:id])
+    @job = Job.find(params[:job_id])
+    @delivery = @job.deliveries.find(params[:id])
     if @delivery.update_attributes(delivery_params)
       @delivery.approve!
+      flash[:success] = "审核完成！"
     end
-    redirect_to admins_deliveries_path(:job_id => @delivery.job)
+    redirect_to admins_job_deliveries_path(:job_id => @delivery.job)
   end
 
   private
