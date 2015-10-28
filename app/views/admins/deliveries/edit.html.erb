@@ -1,6 +1,7 @@
 <ol class="breadcrumb">
   <li><%= link_to "职位列表", admins_jobs_path(:state => "in_hiring") %></li>
-  <li><%= link_to "为【#{@delivery.job.title}】审核推荐", admins_deliveries_path(:job_id => @delivery.job) %></li>
+  <li><%= link_to "为【#{@delivery.job.title}】审核推荐", admins_job_deliveries_path(:job_id => @delivery.job) %></li>
+  <li><%= @delivery.resume_candidate_name %></li>
 </ol>
 
 <div class="col-md-5">
@@ -12,6 +13,16 @@
   </p>
   <p>
     <%= simple_format  @delivery.job_description %>
+  </p>
+  <hr>
+  <H2>
+    <%= @delivery.job.company.name %>
+  </H2 >
+  <p>
+    <%= @delivery.job.company.mobile %>
+  </p >
+  <p>
+    <%= simple_format @delivery.job.company.description %>
   </p>
 </div>
 <div class="col-md-5 col-md-offset-1">
@@ -29,7 +40,7 @@
 </div>
 <div class="col-md-6">
   <hr>
-  <%= form_for @delivery, url: admins_delivery_path, method: 'PUT' do |f| %>
+  <%= form_for @delivery, url: admins_job_delivery_path, method: 'PUT' do |f| %>
     <p>
       <%= f.text_area :message, class: "form-control", placeholder: "候选人简介", rows: 2 %>
     </p>

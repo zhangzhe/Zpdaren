@@ -30,7 +30,7 @@ class Admins::JobsController < Admins::BaseController
       flash[:error] = @job.errors.full_messages.first
       render 'edit' and return
     end
-    redirect_to admins_jobs_path
+    redirect_to admins_job_path(@job)
   end
 
   private

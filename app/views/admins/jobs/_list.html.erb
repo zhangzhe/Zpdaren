@@ -3,8 +3,7 @@
     <thead>
       <tr>
         <th>职位名称</th>
-        <th>联系方式</th>
-        <th>红包金额</th>
+        <th>发布时间</th>
         <th>简历推荐</th>
         <% if params[:state] == "in_hiring" %><th>今日简历推荐</th><% end %>
         <th>操作/状态</th>
@@ -13,14 +12,14 @@
     <tbody>
       <% jobs.each do |job| %>
         <tr>
-          <td><%= link_to "【#{job.company_name}】#{job.title}", edit_admins_job_path(job.id) %></td>
-          <td><%= job.company.mobile %></td>
-          <td><%= job.bonus %></td>
+          <td><%= link_to "【#{job.company_name}】#{job.title}", admins_job_path(job.id) %></td>
+          <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
           <td><span class="label label-primary label-as-badge"><%= job.deliveries.after_approved.count %> / <%= job.deliveries.count %></span></td>
-
           <% if job.in_hiring? %>
             <% flag = job.finished_approve_today? ? "label-success" : "label-danger" %>
-            <td><span class="label <%= flag %> label-as-badge"><%= job.deliveries.approved_today.count %>/8 </span>&nbsp;<%= link_to "审核推荐", admins_deliveries_path(:job_id => job), class: "btn btn-primary" unless job.finished_approve_today? %></td>
+            <% if params[:state] == "in_hiring" %>
+              <td><span class="label <%= flag %> label-as-badge"><%= job.deliveries.approved_today.count %>/8 </span>&nbsp;<%= link_to "审核推荐", admins_job_deliveries_path(:job_id => job), class: "btn btn-primary" unless job.finished_approve_today? %></td>
+            <% end %>
           <% end %>
           <td>
             <%= Recruiters::JobsHelper::state_show(job) %>

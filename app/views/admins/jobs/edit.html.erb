@@ -1,24 +1,36 @@
-<div class="row">
-  <%= link_to "职位列表", admins_jobs_path(:state => "in_hiring") %>/修改职位
+
+<ol class="breadcrumb">
+  <li>
+    <% if @job.in_hiring? %>
+    <%= link_to '进行中的招聘', admins_jobs_path(:state => "in_hiring") %>
+    <% else %>
+    <%= link_to '已完成的招聘', admins_jobs_path(:state => "un_hiring") %>
+    <% end %>
+  </li>
+  <li>
+    修改职位信息
+  </li>
+</ol>
+
+<div>
+  <%= form_for @job, url: admins_job_path do |f| %>
   <p>
-    <%= form_for @job, url: admins_job_path do |f| %>
-      <p>
-        <%= f.text_field :title, class: "form-control", placeholder: "职位名称" %>
-      </p>
-      <p>
-        <%= f.text_area :description, class: "form-control", placeholder: "职位描述", rows: 10 %>
-      </p>
-      <p>
-        <%= render '/shared/tag' %>
-      </p>
-      <p>
-        <%= f.text_field :tag_list, value: @job.tag_list.to_s, class: 'form-control auto-tags' %>
-      </p>
-      <p>
-        <% if @job.editable? %>
-          <%= f.submit "修改并通知用户", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
-        <% end %>
-      </p>
+    <%= f.text_field :title, class: "form-control", placeholder: "职位名称" %>
+  </p>
+  <p>
+    <%= f.text_area :description, class: "form-control", placeholder: "职位描述", rows: 10 %>
+  </p>
+  <p>
+    <%= render '/shared/tag' %>
+  </p>
+  <p>
+    <%= f.text_field :tag_list, value: @job.tag_list.to_s, class: 'form-control auto-tags' %>
+  </p>
+  <p>
+    <% if @job.editable? %>
+    <%= f.submit "修改并通知用户", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
     <% end %>
   </p>
+  <% end %>
 </div>
+
