@@ -6,13 +6,19 @@ class Suppliers::DeliveriesController < Suppliers::BaseController
 
   def new
     @job = Job.find(params[:job_id])
-    @resumes = current_supplier.resumes
+    @resume = Resume.find(params[:resume_id])
+    @delivery = Delivery.new
   end
 
   def create
-    resume = Resume.find(params[:delivery][:resume_id])
     begin
-      delivery = Delivery.create!(delivery_params)
+      @delivery = Delivery.new(delivery_params)
+      unless @delivery.save
+        @job = Job.find(delivery_params[:job_id])
+        @resume = Resume.find(delivery_params[:resume_id])
+        flash[:error] = @delivery.errors.full_messages.first
+        render 'new' and return
+      end
     rescue ActiveRecord::RecordNotUnique
     end
     flash[:success] = "操作完成！"
@@ -21,6 +27,6 @@ class Suppliers::DeliveriesController < Suppliers::BaseController
 
   private
   def delivery_params
-    params.require(:delivery).permit(:job_id, :resume_id)
+    params.require(:delivery).permit(:job_id, :resume_id, :message)
   end
 end

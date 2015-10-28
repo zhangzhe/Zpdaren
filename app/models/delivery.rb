@@ -8,6 +8,8 @@ class Delivery < ActiveRecord::Base
   delegate :id, :title, :user_id, :bonus, :description, :tag_list, to: :job, prefix: true
   delegate :reason, :other, to: :rejection, prefix: true
 
+  validates_length_of :message, maximum: 50
+
   scope :paid, -> { where(state: 'paid') }
   scope :recommended, -> { where(state: 'recommended') }
   scope :waiting_approved, -> { where(state: 'recommended') }

@@ -277,6 +277,10 @@ zh-CN:
         description: '职位描述及薪资范围'
         bonus: '红包'
         tag_list: '职位标签'
+      deliveries:
+        message: '给招聘方的留言'
+      delivery:
+        message: '给招聘方的留言'
     errors:
       models:
         user:
@@ -297,7 +301,7 @@ zh-CN:
               blank: "不能为空"
             bonus:
               blank: "不能为空"
-              greater_than_or_equal_to: 必须大于或等于 %{count}
+              greater_than_or_equal_to: 必须大于或等于%{count}
               not_a_number: "必须是数字"
             tag_list:
               blank: "不能为空"
@@ -316,4 +320,8 @@ zh-CN:
               blank: "不能为空"
             tag_list:
               blank: "不能为空"
+        delivery:
+          attributes:
+            message:
+              too_long: 长度超过了%{count}字
 

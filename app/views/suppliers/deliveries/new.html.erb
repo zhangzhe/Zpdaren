@@ -1,28 +1,49 @@
-<div class="table-responsive">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>被推荐人</th>
-        <th>标签</th>
-        <th>简历原件</th>
-        <th>状态</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @resumes.each do |resume| %>
-        <tr>
-          <td><%= resume.candidate_name %></td>
-          <td><%= resume.tag_list %></td>
-          <td><%= resume.attachment.file.file.split('/')[-1] %></td>
-          <td>
-            <% if resume.deliveried?(@job) %>
-              已推荐
-            <% else %>
-              <%= link_to '推荐', suppliers_deliveries_path(delivery: { job_id: params[:job_id], resume_id: resume.id }), method: :post, class: 'btn btn-primary active' %>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<ol class="breadcrumb">
+  <li><%= link_to "我收到的职位", suppliers_jobs_path %></li>
+  <li><%= link_to "为【#{@job.company_name}--#{@job.title}】推荐", suppliers_job_path(@job) %></li>
+</ol>
+
+<div class="col-md-5">
+  <H2>
+    <%= @job.title %>
+  </H2 >
+  <p>
+    <i class="fa fa-tags"></i>
+    <%= @job.tag_list.each{|tag|}.join(' ') %>
+  </p>
+  <p>
+    <%= simple_format  @job.description %>
+  </p>
+</div>
+<div class="col-md-5 col-md-offset-1">
+  <H2>
+    <%= @resume.candidate_name %>
+  </H2 >
+  <p>
+    <i class="fa fa-tags"></i>
+    <%= @resume.tag_list.each{|tag|}.join(' ') %>
+  </p>
+  <p>
+
+    <% if @resume.description.present? %>
+      <%= simple_format @resume.description %>
+    <% else %>
+      <%= link_to '下载简历原件', download_suppliers_resume_path(@resume) %>
+    <% end %>
+  </p>
+</div>
+<div class="col-md-10">
+</div>
+<div class="col-md-6">
+  <hr>
+  <%= form_for @delivery, url: suppliers_deliveries_path, method: 'POST' do |f| %>
+    <%= hidden_field_tag 'delivery[job_id]', params[:job_id] || params[:delivery][:job_id] %>
+    <%= hidden_field_tag 'delivery[resume_id]', params[:resume_id] || params[:delivery][:resume_id] %>
+    <p>
+      <%= f.text_field :message, class: "form-control", placeholder: "给招聘方留言...(选填，50字内)" %>
+    </p>
+    <p>
+      <%= f.submit "确认", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
+    </p>
+  <% end %>
 </div>

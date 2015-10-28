@@ -89,6 +89,9 @@ Rails.application.routes.draw do
   namespace :suppliers do
     resources :jobs, only: [:index, :show]
     resources :resumes, only: [:index, :new, :create] do
+      collection do
+        get :select_list
+      end
       member do
         get :download
       end
