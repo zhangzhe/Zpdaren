@@ -1,13 +1,13 @@
 <ul class="nav nav-tabs">
-  <% active = (params[:state] == "in_hiring") ? "active" : "" %>
+  <% active = (params[:state] == "uncompleted") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
     <%= link_to '待完善', admins_resumes_path(:state => "uncompleted") %>
   </li>
-  <% active = (params[:state] == "un_hiring") ? "active" : "" %>
+  <% active = (params[:state] == "completed") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
     <%= link_to '已完善', admins_resumes_path(:state => "completed") %>
   </li>
-</ul>
+</ul><br>
 
 <%= render 'admins/shared/search', url: admins_resumes_path, placeholder: '输入简历标签' %>
 <%= render 'list', resumes: @resumes %>

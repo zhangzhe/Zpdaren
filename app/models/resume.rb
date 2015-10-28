@@ -8,13 +8,11 @@ class Resume < ActiveRecord::Base
   validates_uniqueness_of :mobile, message: '系统中已经存在，请您选择其他候选人'
   after_create :auto_deliver
   default_scope { order("created_at DESC") }
-  # only for the badge show
-  scope :waiting_approved, -> { where('description in (?)', [nil, ''])}
-  scope :uncompleted, -> { where('description in (?)', [nil, ''])}
-  scope :completed, ->{ where.not(description: '').where.not(description: nil)  }
+  scope :completed, ->{ where.not(:description => nil) }
+  scope :uncompleted, ->{ where(:description => nil) }
+  scope :waiting_approved, ->{ where(:description => nil) }
 
   accepts_nested_attributes_for :deliveries
-
   include SimilarEntity
   acts_as_taggable
   acts_as_taggable_on :skills, :interests

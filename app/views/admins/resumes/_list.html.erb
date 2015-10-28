@@ -4,27 +4,23 @@
       <tr>
         <th>被推荐人</th>
         <th>标签</th>
-        <th>
-          <%= sortable '推荐时间', 'created_at' %>
-          <% if sort_column == 'created_at' %>
-            <% if sort_direction == 'DESC' %>
-              <i class="fa fa-caret-down"></i>
-            <% else %>
-              <i class="fa fa-caret-up"></i>
-            <% end %>
-          <% end %>
-        </th>
-        <th>状态/操作</th>
+        <th>已推荐</th>
+        <th>推荐时间</th>
+        <th>操作</th>
       </tr>
     </thead>
     <tbody>
       <% resumes.each do |resume| %>
         <tr>
-          <td><%= resume.candidate_name %></td>
+          <td><%= resume.candidate_name %>&nbsp;<%= link_to "下载简历", download_admins_resume_path(resume[:id]) %></td>
           <td><%= resume.tag_list %></td>
-          <td><%= resume.created_at.localtime.to_s(:db) %></td>
           <td>
-            <%= link_to "下载", download_admins_resume_path(resume[:id]) %>&nbsp;
+            <% resume.jobs.each do |job| %>
+              <%= link_to (job.company_name + " : " + job.title), admins_job_path(job) %><br>
+            <% end %>
+          </td>
+          <td><%= resume.created_at.localtime.to_date.to_s(:db) %></td>
+          <td>
             <% if resume.description.blank? %>
               <%= link_to '完善简历', edit_admins_resume_path(resume), class: 'btn btn-primary btn-sm' %>
             <% end %>

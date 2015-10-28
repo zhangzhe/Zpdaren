@@ -1,0 +1,35 @@
+<ol class="breadcrumb">
+  <li><%= link_to '简历列表', admins_resume_path(@resume) %></li>
+  <li>
+    完善简历信息
+  </li>
+</ol>
+
+<div>
+  <%= form_for @resume, url: admins_resume_path do |f| %>
+  <p>
+    <%= f.text_field :candidate_name, class: "form-control", placeholder: "被推荐人" %>
+  </p>
+  <p>
+    <%= f.text_field :mobile, class: "form-control", placeholder: "电话" %>
+  </p>
+
+  <p>
+    <%= f.text_field :email, class: "form-control", placeholder: "邮箱" %>
+  </p>
+  <p>
+    <%= f.text_area :description, class: "form-control", placeholder: "简历描述", rows: 10 %>
+  </p>
+  <p>
+    <%= render '/shared/tag' %>
+  </p>
+  <p>
+    <%= f.text_field :tag_list, value: @resume.tag_list.to_s, class: 'form-control auto-tags' %>
+  </p>
+  <p>
+    <%= f.submit "确定", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
+    &nbsp;
+    <%= link_to "下载原件", download_admins_resume_path(@resume) %>
+  </p>
+  <% end %>
+</div>
