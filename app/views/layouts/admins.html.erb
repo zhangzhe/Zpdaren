@@ -16,13 +16,8 @@
             <li class="<%= active %>"><%= link_to "退款申请#{badge_for_admin(RefundRequest)}".html_safe, admins_refund_requests_path %></li> -->
             <% active = active_for?(Admins::MoneyTransfersController) %>
             <li class="<%= active %>"><%= link_to "存款/提现确认#{badge_for_admin(MoneyTransfer)}".html_safe, deposits_admins_money_transfers_path %></li>
-
-            <% active = active_for?(Admins::CompaniesController) %>
-            <li class="<%= active %>"><%= link_to "招聘方列表#{badge_for_admin_for_all(Company.active)}".html_safe, admins_companies_path %></li>
-            <% active = active_for?(Admins::SuppliersController) %>
-            <li class="<%= active %>"><%= link_to "推荐方列表#{badge_for_admin_for_all(Supplier)}".html_safe, admins_suppliers_path %></li>
-            <% active = active_for?(Admins::UsersController) %>
-            <li class="<%= active %>"><%= link_to "用户列表#{badge_for_admin_for_all(User)}".html_safe, admins_users_path %></li>
+            <% active = active_for?(Admins::UsersController) + " #{active_for?(Admins::CompaniesController)}" %>
+            <li class="<%= active %>"><%= link_to "用户列表#{badge_for_admin_for_all(User)}".html_safe, admins_users_path(type: 'Recruiter') %></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
