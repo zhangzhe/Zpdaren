@@ -1,6 +1,5 @@
 class Recruiters::DeliveriesController < Recruiters::BaseController
   def index
-    @deliveries = []
     if params[:job_id]
       @job = Job.find(params[:job_id])
       @deliveries = @job.deliveries.order("created_at DESC")
@@ -8,6 +7,8 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
       job_ids = current_recruiter.jobs.map(&:id)
       @deliveries = Delivery.includes(:job).where("job_id in (?)", job_ids).order("created_at DESC")
     end
+    @deliveries = @deliveries.recruiter_watchable
+    @deliveries = @deliveries.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def show

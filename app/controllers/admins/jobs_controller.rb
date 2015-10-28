@@ -1,10 +1,5 @@
 class Admins::JobsController < Admins::BaseController
   def index
-    # if params[:key].present?
-    #   @jobs = Job.where("title ilike ?", "%#{params[:key]}%")
-    # else
-    #   @jobs = Job.all
-    # end
     if params[:state] == "in_hiring"
       @jobs = Job.in_hiring
     elsif params[:state] == "un_hiring"

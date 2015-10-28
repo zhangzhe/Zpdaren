@@ -3,6 +3,7 @@ class Recruiters::FinalPaymentsController < Recruiters::BaseController
     flash.now[:info] = "请选择一份简历作为支付目标"
     @job = Job.find(params[:job_id])
     @deliveries = @job.deliveries
+    @deliveries = @deliveries.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def new

@@ -8,8 +8,6 @@
   <% unless @approved_deliveries.blank? %>
     <%= render 'list', deliveries: @approved_deliveries %>
   <% end %>
-
-
 <% else %>
   <ul class="nav nav-tabs">
     <% active = (params[:state] == "submitted") ? "active" : "" %>
@@ -25,7 +23,5 @@
 
   <%= render 'list', deliveries: @deliveries %>
 
-  <div class='text-center'>
-    <%= will_paginate @deliveries, renderer: BootstrapPagination::Rails, previous_label: '上一页', next_label: '下一页' %>
-  </div>
+  <%= render 'shared/paginate', objs: @deliveries %>
 <% end %>

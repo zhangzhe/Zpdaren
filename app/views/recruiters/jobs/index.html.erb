@@ -43,3 +43,4 @@
 <p>
   <%= link_to "发布新的职位", new_recruiters_job_path, class: "btn btn-primary btn-lg active", role: "button" %>
 </p>
+<%= render 'shared/paginate', objs: @jobs %>
