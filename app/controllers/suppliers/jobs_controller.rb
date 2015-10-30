@@ -17,9 +17,8 @@ class Suppliers::JobsController < Suppliers::BaseController
 
   private
   def select_show_page
-    if cookies["supplier_#{current_user.id}"].blank?
+    if (current_user.sign_in_count == 1) and (Time.now - current_user.current_sign_in_at <= 10)
       @ticket = Weixin.qr_code_ticket(current_user.id)
-      cookies["supplier_#{current_user.id}"] = Time.now
       render 'welcome'
     else
       render 'index'
