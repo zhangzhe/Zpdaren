@@ -1,9 +1,10 @@
 <%#= render 'admins/shared/search', url: admins_jobs_path, placeholder: '输入职位名称' %>
-<br>
+<%= render 'shared/page_title', title: '职位列表' %>
+
 <ul class="nav nav-tabs">
   <% active = (params[:state] == "in_hiring") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to '进行中招聘', admins_jobs_path(:state => "in_hiring") %>
+    <%= link_to '进行中的招聘', admins_jobs_path(:state => "in_hiring") %>
   </li>
   <% active = (params[:state] == "un_hiring") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">

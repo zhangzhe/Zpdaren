@@ -1,5 +1,8 @@
-
+<br>
 <ol class="breadcrumb">
+  <li>
+    <%= link_to '职位列表', admins_jobs_path() %>
+  </li>
   <li>
     <% if @job.in_hiring? %>
     <%= link_to '进行中的招聘', admins_jobs_path(:state => "in_hiring") %>
@@ -11,7 +14,7 @@
     修改职位信息
   </li>
 </ol>
-
+<%= render 'shared/page_title', title: @job.title %>
 <div>
   <%= form_for @job, url: admins_job_path do |f| %>
   <p>

@@ -1,10 +1,12 @@
 <ol class="breadcrumb">
   <li><%= link_to "职位列表", admins_jobs_path(:state => "in_hiring") %></li>
-  <li><%= link_to "为【#{@delivery.job.title}】审核推荐", admins_job_deliveries_path(:job_id => @delivery.job) %></li>
+  <li><%= link_to @delivery.job.title, admins_job_path(@delivery.job) %></li>
+  <li><%= link_to "推荐列表", admins_job_deliveries_path(:job_id => @delivery.job) %></li>
   <li><%= @delivery.resume_candidate_name %></li>
 </ol>
 
-<div class="col-md-5">
+<div class="col-md-5 default-bgc">
+  <%= render 'shared/page_title', title: '职位' %>
   <H2>
     <%= @delivery.job_title %>
   </H2 >
@@ -25,7 +27,8 @@
     <%= simple_format @delivery.job.company.description %>
   </p>
 </div>
-<div class="col-md-5 col-md-offset-1">
+<div class="col-md-5 col-md-offset-1 default-bgc">
+  <%= render 'shared/page_title', title: '推荐' %>
   <H2>
     <%= @delivery.resume_candidate_name %>
   </H2 >
