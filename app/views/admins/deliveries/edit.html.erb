@@ -11,7 +11,10 @@
     <%= @delivery.job_title %>
   </H2 >
   <p>
-    <%= @delivery.job_tag_list %>
+    <% @delivery.job_tag_list.each do |tag| %>
+      <i class="fa fa-tags"></i>
+      <span class='gray-light'><%= tag %></span>
+    <% end %>
   </p>
   <p>
     <%= simple_format  @delivery.job_description %>
@@ -20,11 +23,19 @@
   <H2>
     <%= @delivery.job.company.name %>
   </H2 >
-  <p>
+  <p class='gray-light'>
+    联系方式：
     <%= @delivery.job.company.mobile %>
   </p >
+  <p class='blockquote14'>
+    <strong>
+      职位描述
+    </strong>
+  </p>
   <p>
-    <%= simple_format @delivery.job.company.description %>
+    <div class='gray-light'>
+      <%= simple_format @delivery.job.company.description %>
+    </div>
   </p>
 </div>
 <div class="col-md-5 col-md-offset-1 default-bgc">
@@ -33,10 +44,28 @@
     <%= @delivery.resume_candidate_name %>
   </H2 >
   <p>
-    <%= @delivery.resume_tag_list %>
+    <% @delivery.resume_tag_list.each do |tag| %>
+      <i class="fa fa-tags"></i>
+      <span class='gray-light'><%= tag %></span>
+    <% end %>
+  </p>
+  <p class='blockquote14'>
+    <strong>
+      简历描述
+    </strong>
   </p>
   <p>
-    <%= simple_format @delivery.resume.description %>
+    <% if @delivery.resume.description.present? %>
+      <%= simple_format @delivery.resume.description %>
+    <% else %>
+      <br>
+      <br>
+      <div class='text-center gray-light'>
+        简历描述还是空的，快去简历列表完善吧！
+      </div>
+      <br>
+      <br>
+    <% end %>
   </p>
 </div>
 <div class="col-md-10">
@@ -45,10 +74,11 @@
   <hr>
   <%= form_for @delivery, url: admins_job_delivery_path, method: 'PUT' do |f| %>
     <p>
-      <%= f.text_area :message, class: "form-control", placeholder: "给招聘方留言...(选填，50字内)", rows: 2 %>
+      <%= f.label :message, '给招聘方留言...(选填，50字内)' %>
+      <%= f.text_area :message, class: "form-control", rows: 2 %>
     </p>
     <p>
-      <%= f.submit "确认", class: "btn btn-primary" %>
+      <%= f.submit "确认", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
     </p>
   <% end %>
 </div>

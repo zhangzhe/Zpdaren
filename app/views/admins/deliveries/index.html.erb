@@ -1,16 +1,16 @@
-<%= render 'shared/page_title', title: '推荐列表' %>
-
 <% if params[:job_id] %>
   <ol class="breadcrumb">
     <li><%= link_to "职位列表", admins_jobs_path(:state => "in_hiring") %></li>
     <li>审核【<%= Job.find(params[:job_id]).title %>】的推荐</li>
   </ol>
+  <%= render 'shared/page_title', title: '推荐列表' %>
   <%= render 'list', deliveries: @recommended_deliveries %>
 
   <% unless @approved_deliveries.blank? %>
     <%= render 'list', deliveries: @approved_deliveries %>
   <% end %>
 <% else %>
+  <%= render 'shared/page_title', title: '推荐列表' %>
   <ul class="nav nav-tabs">
     <% active = (params[:state] == "submitted") ? "active" : "" %>
     <li role="presentation" class="<%= active %>">
