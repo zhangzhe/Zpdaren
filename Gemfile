@@ -63,3 +63,4 @@ gem "faraday"
 gem 'certified'
 gem 'config'
 gem 'will_paginate-bootstrap', '~> 1.0.1'
+gem 'strip_attributes'

@@ -17,6 +17,7 @@ class Resume < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :skills, :interests
   mount_uploader :attachment, FileUploader
+  strip_attributes
 
   def resumes_from(supplier)
     self.resumes.where(:supplier_id => supplier.id)
