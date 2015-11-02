@@ -1,4 +1,5 @@
 <% if params[:recruiter_id] %>
+  <br>
   <ol class="breadcrumb">
     <li>
       <%= link_to '我收到的职位', suppliers_jobs_path %>
@@ -6,6 +7,7 @@
     <li class="active"><%= @jobs.first.company_name %></li>
   </ol>
 <% end %>
+<%= render 'shared/page_title', title: '我收到的职位' %>
 <%= render 'suppliers/shared/search', url: suppliers_jobs_path, placeholder: '输入职位名称' %>
 <%= render 'list', jobs: @jobs %>
 <%= render 'shared/paginate', objs: @jobs %>
