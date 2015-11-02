@@ -1,7 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 Bundler.require(*Rails.groups)
-require_relative '../lib/trimmer'
 
 module Epin
   class Application < Rails::Application
@@ -13,7 +12,6 @@ module Epin
     config.middleware.insert_after ActionDispatch::ParamsParser, ActionDispatch::XmlParamsParser
     config.autoload_paths += %W(#{config.root}/app/models/money_transfers)
     config.autoload_paths += %W(#{config.root}/app/models/users)
-    config.middleware.use Trimmer
   end
 end
 
