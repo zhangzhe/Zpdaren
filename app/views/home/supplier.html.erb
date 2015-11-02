@@ -1,9 +1,9 @@
 <div class="front_image_supplier">
-  <br><br><br><br>
+  <br><br><br><br><br><br>
   <div class="col-md-offset-1 col-md-5">
     <div class="">
       <H1>
-        <p class="text-white"><b>众聘达人<b></p>
+        <p class="text-white" style="font-size:52px;"><b>众聘达人<b></p>
       </H1 >
       <H2>
         <p class="text-white">招聘领域的&nbsp;滴滴</p>
@@ -19,58 +19,8 @@
       </H4>
     </div>
   </div>
-
-  <div class="col-md-5 col-md-offset-1">
-    <% resource = Recruiter.new %>
-    <% resource_name = "recruiter" %>
-
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form-signin"}) do |f| %>
-      <h2 class=""><p class="text-white text-center">推荐方注册</p></h2>
-      <br>
-
-      <%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "邮箱" %>
-      <br>
-      <% if @validatable %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %>
-
-      <%= f.password_field :password, autocomplete: "off", :class => "form-control input-lg", :placeholder => "密码" %>
-
-      <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control input-lg", :placeholder => "密码确认" %>
-
-      <%= f.submit "确定", :class => "btn btn-primary btn-lg btn-block" %>
-    <% end %>
-  </div>
+  <% @resource = Recruiter.new %>
+  <% @resource_name = "recruiter" %>
+  <%= render "register" %>
 </div>
-
-<div class="container pt48 pb48">
-  <div class="text-center fs18">合作伙伴</div>
-  <p>
-    <div class="col-md-2 col-md-offset-2 text-center partner-logo">
-      <%= image_tag 'kr_space' %>
-    </div>
-    <div class="col-md-2 col-md-offset-0 text-center partner-logo">
-      <%= image_tag 'spaceyun' %>
-    </div>
-    <div class="col-md-2 col-md-offset-0 text-center partner-logo">
-      <%= image_tag 'tusstar' %>
-    </div>
-    <div class="col-md-2 col-md-offset-0 text-center partner-logo">
-      <%= image_tag 'octopus_school' %>
-    </div>
-  </p>
-</div>
-<hr>
-
-<div class="container">
-  <p>
-    <div class="col-md-4 col-md-offset-2">
-      联系我们<br>
-      地址: 中关村东路1号清华园科技大厦D座启迪之星孵化器<br>
-      电话: 13061101022<br>
-      邮箱: wade.song@foxmail.com<br>
-      网址: www.zpdaren.com<br>
-    </div>
-  </p>
-</div>
-<br>
+<%= render "common_help" %>
