@@ -5,8 +5,8 @@ class Admins::DeliveriesController < Admins::BaseController
     if params[:job_id]
       @job = Job.find(params[:job_id])
       @deliveries = @job.deliveries
-      @approved_deliveries = @deliveries.after_approved
-      @recommended_deliveries = @deliveries.recommended
+      @approved_deliveries = @deliveries.after_approved.order("created_at DESC")
+      @recommended_deliveries = @deliveries.recommended.order("created_at DESC")
     else
       @deliveries = Delivery.all
       if params[:state] == "submitted"
@@ -14,7 +14,7 @@ class Admins::DeliveriesController < Admins::BaseController
       elsif params[:state] == "approved"
         @deliveries = @deliveries.after_approved
       end
-      @deliveries = @deliveries.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+      @deliveries = @deliveries.order("created_at DESC").paginate(page: params[:page], per_page: Settings.pagination.page_size)
     end
   end
 
