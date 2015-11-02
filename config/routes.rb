@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   get 'qr_codes/:id' => "qr_codes#show", :as => "qr_code"
 
   root :to => 'passthrough#index'
-  get 'home' => 'home#index'
+  get 'home' => 'home#supplier'
+  get 'home/recruiter' => 'home#recruiter'
 
   # remove later
   match 'check_signature' => 'home#check_signature', via: [:get, :post]

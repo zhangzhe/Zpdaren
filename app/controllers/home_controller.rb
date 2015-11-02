@@ -1,7 +1,10 @@
 class HomeController < ApplicationController
   protect_from_forgery :except => [:check_signature, :weixin_callback]
 
-  def index
+  def supplier
+  end
+
+  def recruiter
   end
 
   require 'digest/sha1'

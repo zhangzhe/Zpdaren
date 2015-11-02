@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/home"><%= image_tag "logo", height: '20px' %></a>
+      <a class="navbar-brand" href="/home"><%= image_tag "logo", height: '24px' %></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <% if current_user %>
@@ -26,19 +26,30 @@
         <% if current_user %>
           <li><%= link_to "退出", destroy_admin_session_path, :method => "DELETE" %></li>
         <% else %>
-          <li>
+          <!-- <li>
             <a href="#" data-toggle="modal" data-target="#ModalRecruiter">
-              我要招聘
+             我要招聘
             </a>
-          </li>
+          </li> -->
+            <li>
+              <a href="#" data-toggle="modal" data-target="#ModalSupplier">
+                <span class='nav-text'><i class="fa fa-user"></i> &nbsp;登录</span>
+              </a>
+            </li>
           <li>
-            <a href="#" data-toggle="modal" data-target="#ModalSupplier">
-              我要推荐
-            </a>
+            <% if params[:controller] == "home" && params[:action] == "supplier" %>
+              <a href="/home/recruiter">
+                <span class='nav-text'><i class="fa fa-child"></i> &nbsp;我要招聘</span>
+              </a>
+            <% elsif params[:controller] == "home" && params[:action] == "recruiter" %>
+              <a href="/home">
+                <span class='nav-text'><i class="fa fa-child"></i> &nbsp;我要推荐</span>
+              </a>
+            <% end %>
           </li>
-          <li>
+          <!-- <li>
             <%= link_to '管理员登录', new_admin_session_path unless Rails.env == "production" %>
-          </li>
+          </li> -->
         <% end %>
       </ul>
     </div><!--/.nav-collapse -->
