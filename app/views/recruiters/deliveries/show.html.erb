@@ -7,23 +7,27 @@
       <%= @delivery.resume_candidate_name %>
     </li>
   </ol>
-  <p class="lead"><%= @delivery.resume_candidate_name %></p>
+  <%= render 'shared/page_title', title: @delivery.resume_candidate_name %>
   <p>
-    <i class="fa fa-tags"></i>
-    <%= @delivery.resume_tag_list.each{|tag|}.join(' ') %>
+    <% @delivery.resume_tag_list.each do |tag| %>
+      <i class="fa fa-tags"></i>
+      <span class='gray-light'><%= tag %></span>
+    <% end %>
   </p>
   <p>
     <span class="label label-info"><%= "推荐者留言：#{@delivery.message}" %></span>
   </p>
   <hr>
-  <p><%= simple_format @delivery.description %></p>
+  <p>
+    <div class="gray-light"><%= simple_format @delivery.description %></div>
+  </p>
   <hr>
   <p>
     <h3>联系方式 </h3>
     <% if ['deposit_paid_confirmed', 'final_payment_paid', 'finished'].include?(@delivery.job.state) %>
       <% if @delivery.ever_paid_or_final_payment_paid_or_finished? %>
-        <p><%= @delivery.resume_mobile %></p>
-        <p><%= @delivery.resume_email %></p>
+        <p><strong>手机号：</strong><%= @delivery.resume_mobile %></p>
+        <p><strong>邮箱：</strong><%= @delivery.resume_email %></p>
       <% elsif !@delivery.refused? %>
         付费<%= @delivery.job.bonus_for_each_resume %>元后可看
         <% if @delivery.approved? %>

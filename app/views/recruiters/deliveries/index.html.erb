@@ -1,5 +1,6 @@
 <div class="table-responsive">
   <% if params[:job_id] %>
+    <br>
     <ol class="breadcrumb">
       <li>
         <%= link_to '职位列表', recruiters_jobs_path %>
@@ -10,6 +11,7 @@
       <li class="active">推荐列表</li>
     </ol>
   <% end %>
+  <%= render 'shared/page_title', title: '推荐给我的简历' %>
   <table class="table table-striped">
     <thead>
       <tr>

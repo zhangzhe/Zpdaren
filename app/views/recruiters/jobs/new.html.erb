@@ -1,10 +1,12 @@
+<br>
 <div class="row">
   <ol class="breadcrumb">
     <li>
       <%= link_to "职位列表", recruiters_jobs_path %>
     </li>
-    <li class="active">添加职位信息</li>
+    <li class="active">发布新职位</li>
   </ol>
+  <%= render 'shared/page_title', title: '发布新职位' %>
   <p>
     <%= form_for @job, url: recruiters_jobs_path, method: "POST" do |f| %>
       <p>
