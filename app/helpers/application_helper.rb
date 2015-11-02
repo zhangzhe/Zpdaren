@@ -10,8 +10,8 @@ module ApplicationHelper
     end
   end
 
-  def active_for?(current_controller)
-    controller.class == current_controller ? "active" : ""
+  def active_for?(current_controllers)
+    current_controllers.include?(controller.class) ? "active" : ""
   end
 
   def badge_for_admin(entity)

@@ -15,7 +15,7 @@ class WithdrawsController < ApplicationController
       redirect_to redirect_path
     end
   rescue ActiveRecord::RecordInvalid => e
-    flash[:error] = "输入有误，请从新输入!"
+    flash[:error] = "输入有误，请确认支付宝帐号、提现金额和手机号是否填写!"
     redirect_to :back
   end
 

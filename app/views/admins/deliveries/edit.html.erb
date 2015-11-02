@@ -1,7 +1,5 @@
 <br>
 <ol class="breadcrumb">
-  <li><%= link_to "职位列表", admins_jobs_path(:state => "in_hiring") %></li>
-  <li><%= link_to @delivery.job.title, admins_job_path(@delivery.job) %></li>
   <li><%= link_to "推荐列表", admins_job_deliveries_path(:job_id => @delivery.job) %></li>
   <li><%= @delivery.resume_candidate_name %></li>
 </ol>

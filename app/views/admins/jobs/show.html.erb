@@ -1,7 +1,7 @@
 <br>
 <ol class="breadcrumb">
   <li>
-    <%= link_to '职位列表', admins_jobs_path() %>
+    <%= link_to '职位列表', admins_jobs_path(:state => "in_hiring") %>
   </li>
   <li>
     <% if @job.in_hiring? %>

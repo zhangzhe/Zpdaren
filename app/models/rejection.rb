@@ -12,6 +12,6 @@ class Rejection < ActiveRecord::Base
   end
 
   def other_is_empty?
-    self.other.empty?
+     self.other.nil?
   end
 end
