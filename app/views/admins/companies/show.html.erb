@@ -1,10 +1,20 @@
+<br>
 <ol class="breadcrumb">
   <li><%= link_to "用户列表", admins_users_path(type: "Recruiter") %></li>
   <li><%= link_to "招聘方", admins_users_path(type: "Recruiter") %></li>
   <li><%= @company.name %></li>
 </ol>
 <div>
-  <p class="lead"><%= @company.name %></p>
-  <p><%= @company.mobile %></p>
-  <p><%= simple_format @company.description %></p>
+  <%= render 'shared/page_title', title: @company.name %>
+  <p class='gray-light'>联系方式：<%= @company.mobile %></p>
+  <p class='blockquote14'>
+    <strong>
+      公司描述
+    </strong>
+  </p>
+  <p>
+    <div class='gray-light'>
+      <%= simple_format @company.description %>
+    </div>
+  </p>
 </div>

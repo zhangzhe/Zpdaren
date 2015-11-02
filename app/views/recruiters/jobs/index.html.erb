@@ -1,3 +1,4 @@
+<%= render 'shared/page_title', title: '我发布的职位' %>
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
@@ -41,6 +42,6 @@
 </div>
 
 <p>
-  <%= link_to "发布新的职位", new_recruiters_job_path, class: "btn btn-primary btn-lg active", role: "button" %>
+  <%= link_to "发布新职位", new_recruiters_job_path, class: "btn btn-primary btn-lg active", role: "button" %>
 </p>
 <%= render 'shared/paginate', objs: @jobs %>

@@ -28,3 +28,12 @@
 .h180{
   height: 180px;
 }
+.default-bgc{
+  background-color: #fafafa;
+}
+.ti2{
+  text-indent: 2em;
+}
+.word-break{
+  word-break:break-all;
+}

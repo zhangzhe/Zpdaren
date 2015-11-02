@@ -1,15 +1,19 @@
 <% content_for :job_info do %>
+  <%= render 'shared/page_title', title: @job.title %>
   <div style="word-break:break-all;">
-    <h2 class="blog-post-title"><%= @job.title %></h2>
     <p>
-      <i class="fa fa-tags"></i>
-      <%= @job.tag_list.each{|tag|}.join(' ') %>
+      <% @job.tag_list.each do |tag| %>
+        <i class="fa fa-tags"></i>
+        <span class='gray-light'><%= tag %></span>
+      <% end %>
     </p>
     <p class="blog-post-meta"><%= @job.company_name %>提供<%= @job.bonus_for_entry %>元招聘红包</p>
     <p><%= simple_format @job.description %></p>
     <hr>
-    <h2 class="blog-post-title">关于<%= @job.company_name %></h2>
-    <blockquote><%= @job.company_description %></blockquote>
+    <h2>关于<%= @job.company_name %></h2>
+    <blockquote>
+      <%= simple_format @job.company_description %>
+    </blockquote>
   </div>
 <% end %>
 

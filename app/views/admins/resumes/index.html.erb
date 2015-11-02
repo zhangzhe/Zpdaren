@@ -1,3 +1,5 @@
+<%= render 'shared/page_title', title: '简历列表' %>
+
 <ul class="nav nav-tabs">
   <% active = (params[:state] == "uncompleted") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">

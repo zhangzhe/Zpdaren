@@ -1,7 +1,17 @@
 <ol class="breadcrumb">
-  <li>
-    <%= link_to '我的简历', suppliers_resumes_path %>
-  </li>
+  <% if params[:job_id].present? %>
+    <li>
+      <%= link_to '职位列表', suppliers_jobs_path %>
+    </li>
+    <li>
+      <%= link_to @job.title, suppliers_job_path(@job) %>
+    </li>
+  <% else %>
+    <li>
+      <%= link_to '我的简历', suppliers_resumes_path %>
+    </li>
+  <% end %>
   <li class="active">上传简历</li>
 </ol>
+<%= render 'shared/page_title', title: '上传简历' %>
 <%= render 'form', resume: @resume, job_id: params[:job_id] %>
