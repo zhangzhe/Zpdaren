@@ -3,8 +3,6 @@ class MoneyTransfer < ActiveRecord::Base
   default_scope { order('created_at DESC') }
   scope :waiting_approved, -> { where('state' => 'submitted')}
 
-  validates_presence_of :mobile, :amount
-
   strip_attributes
   include AASM
 
