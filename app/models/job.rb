@@ -28,6 +28,7 @@ class Job < ActiveRecord::Base
   default_scope { order(created_at: :desc) }
 
 
+  strip_attributes
   include SimilarEntity
   include AASM
 

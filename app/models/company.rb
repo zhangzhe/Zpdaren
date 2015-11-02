@@ -7,4 +7,6 @@ class Company < ActiveRecord::Base
 
   scope :active, -> { where.not('name' => nil) }
   default_scope { order('created_at DESC') }
+
+  strip_attributes
 end
