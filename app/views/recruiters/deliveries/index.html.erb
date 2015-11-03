@@ -10,8 +10,10 @@
       </li>
       <li class="active">推荐列表</li>
     </ol>
+    <%= render 'shared/page_title', title: '推荐给我的简历' %>
+  <% else %>
+    <%= render 'recruiters/shared/search', title: '推荐给我的简历', url: recruiters_deliveries_path, placeholder: '输入投递职位' %>
   <% end %>
-  <%= render 'shared/page_title', title: '推荐给我的简历' %>
   <table class="table table-striped">
     <thead>
       <tr>

@@ -7,6 +7,7 @@ class Admins::JobsController < Admins::BaseController
     else
       @jobs = Job.all
     end
+    @jobs = @jobs.where("title like ?", "%#{params[:key]}%") if params[:key].present?
     @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 

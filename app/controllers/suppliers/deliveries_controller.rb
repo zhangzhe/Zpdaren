@@ -1,7 +1,12 @@
 class Suppliers::DeliveriesController < Suppliers::BaseController
 
   def index
-    @deliveries = current_supplier.deliveries.order("#{params[:sort]} #{params[:direction]}")
+    @deliveries = current_supplier.deliveries.joins(:job)
+    if params[:key]
+      recruiter_ids = Company.where("name like ?", "%#{params[:key]}%").map(&:user_id)
+      @deliveries = @deliveries.where("user_id in (?)", recruiter_ids)
+    end
+    @deliveries = @deliveries.order("#{params[:sort]} #{params[:direction]}")
     @deliveries = @deliveries.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 

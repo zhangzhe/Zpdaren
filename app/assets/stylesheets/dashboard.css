@@ -208,3 +208,19 @@ body {
   font-weight: normal;
   text-align: right;
 }
+/*********************/
+
+/*page title*/
+  .title{
+    height: 80px;
+  }
+  .title input{
+    height: 40px;
+  }
+  .title button{
+    height: 40px;
+  }
+  .title .search{
+    margin-top: 20px;
+  }
+/***********************/
