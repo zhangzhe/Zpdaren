@@ -1,4 +1,4 @@
-<%= render 'shared/page_title', title: '简历列表' %>
+<%= render 'admins/shared/search', title: '简历列表', url: admins_resumes_path, placeholder: '输入简历标签' %>
 
 <ul class="nav nav-tabs">
   <% active = (params[:state] == "uncompleted") ? "active" : "" %>
@@ -9,8 +9,7 @@
   <li role="presentation" class="<%= active %>">
     <%= link_to '已完善', admins_resumes_path(:state => "completed") %>
   </li>
-</ul><br>
-
-<%= render 'admins/shared/search', url: admins_resumes_path, placeholder: '输入简历标签' %>
+</ul>
+<br>
 <%= render 'list', resumes: @resumes %>
 <%= render 'shared/paginate', objs: @resumes %>

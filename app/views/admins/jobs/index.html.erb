@@ -1,5 +1,4 @@
-<%#= render 'admins/shared/search', url: admins_jobs_path, placeholder: '输入职位名称' %>
-<%= render 'shared/page_title', title: '职位列表' %>
+<%= render 'admins/shared/search', title: '职位列表', url: admins_jobs_path, placeholder: '输入职位名称' %>
 
 <ul class="nav nav-tabs">
   <% active = (params[:state] == "in_hiring") ? "active" : "" %>

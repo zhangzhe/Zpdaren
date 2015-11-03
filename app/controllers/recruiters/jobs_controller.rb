@@ -5,7 +5,9 @@ class Recruiters::JobsController < Recruiters::BaseController
       flash[:notice] = "请先完善公司信息，然后再发布职位"
       redirect_to edit_recruiters_company_path(current_recruiter.company)
     else
-      @jobs = current_recruiter.jobs.order('created_at DESC')
+      @jobs = current_recruiter.jobs
+      @jobs = @jobs.where("title like ?", "%#{params[:key]}%") if params[:key].present?
+      @jobs = @jobs.order('created_at DESC')
       @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
     end
   end

@@ -8,7 +8,11 @@ class Admins::DeliveriesController < Admins::BaseController
       @approved_deliveries = @deliveries.after_approved.order("created_at DESC")
       @recommended_deliveries = @deliveries.recommended.order("created_at DESC")
     else
-      @deliveries = Delivery.all
+      @deliveries = Delivery.joins(:job)
+      if params[:key]
+        recruiter_ids = Company.where("name like ?", "%#{params[:key]}%").map(&:user_id)
+        @deliveries = @deliveries.where("user_id in (?)", recruiter_ids)
+      end
       if params[:state] == "submitted"
         @deliveries = @deliveries.recommended
       elsif params[:state] == "approved"

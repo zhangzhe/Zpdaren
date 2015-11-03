@@ -16,9 +16,9 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>金额</th>
-        <th>来自</th>
+        <th>提现人</th>
         <th>支付宝账号</th>
+        <th>金额</th>
         <th>申请时间</th>
         <th>状态/操作</th>
       </tr>
@@ -26,9 +26,9 @@
     <tbody>
       <% @withdraws.each do |withdraw| %>
         <tr>
-          <td><%= withdraw.amount %></td>
           <td><%= withdraw.wallet.user.email %></td>
           <td><%= withdraw.zhifubao_account %></td>
+          <td><%= withdraw.amount %></td>
           <td><%= withdraw.created_at.localtime.to_s(:db) %></td>
           <td><%= withdraw.state_show %>&nbsp;&nbsp;<%= link_to "已转账", admins_money_transfer_path(withdraw), class: "btn btn-primary", method: :put if withdraw.submitted? %></td>
           <td></td>

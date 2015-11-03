@@ -16,9 +16,10 @@
   <table class="table table-striped">
     <thead>
       <tr>
+        <th>公司</th>
+        <th>职位:简历</th>
+        <th>操作帐号</th>
         <th>金额</th>
-        <th>来自</th>
-        <th>来自职位</th>
         <th>转账时间</th>
         <th>状态/操作</th>
       </tr>
@@ -26,9 +27,10 @@
     <tbody>
       <% @final_payments.each do |final_payment| %>
         <tr>
-          <td><%= final_payment.amount %></td>
-          <td><%= final_payment.wallet.user.email %></td>
+          <td><%= final_payment.delivery.job.company.name %></td>
           <td><%= final_payment.try(:delivery).try(:job).try(:title) %>:<%= final_payment.delivery.try(:resume).try(:candidate_name) %>的简历</td>
+          <td><%= final_payment.wallet.user.email %></td>
+          <td><%= final_payment.amount %></td>
           <td><%= final_payment.created_at.localtime.to_s(:db) %></td>
           <td>
             <% if final_payment.submitted? %>

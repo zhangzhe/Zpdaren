@@ -1,15 +1,13 @@
 class Admins::ResumesController < Admins::BaseController
   def index
-    if params[:key].present?
-      @resumes = Resume.tagged_with([params[:key]], any: true, wild: true)
+    if params[:state] == "uncompleted"
+      @resumes = Resume.uncompleted
+    elsif params[:state] == "completed"
+      @resumes = Resume.completed
     else
       @resumes = Resume.all
     end
-    if params[:state] == "uncompleted"
-      @resumes = @resumes.uncompleted
-    elsif params[:state] == "completed"
-      @resumes = @resumes.completed
-    end
+    @resumes = @resumes.tagged_with([params[:key]], any: true, wild: true) if params[:key].present?
     @resumes = @resumes.order("#{params[:sort]} #{params[:direction]}")
     @resumes = @resumes.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
