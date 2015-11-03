@@ -7,6 +7,28 @@ body {
   padding-top: 50px;
 }
 
+.front_image {
+  background: url(/assets/front_image.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 600px;
+}
+
+.front_image_supplier {
+  background: url(/assets/front_image_supplier.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 600px;
+}
+
+.text-white {
+  color: #FFFFFF;
+}
+
+.nav-text {
+    font-size: large;
+    font-weight: bold;
+}
 
 /*
  * Global add-ons

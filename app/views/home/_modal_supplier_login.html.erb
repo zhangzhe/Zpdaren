@@ -1,0 +1,20 @@
+<div class="modal fade" id="ModalSupplierLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">登录众聘达人</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for(@resource, as: @resource_name, url: session_path(@resource_name)) do |f| %>
+        <p class="form-control-static"><%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "邮箱" %></p>
+        <p class="form-control-static"><%= f.password_field :password, autocomplete: "off", :class => "form-control input-lg", :placeholder => "密码" %></p>
+        <%= f.submit "推荐方登录", :class => "btn btn-primary btn-lg btn-block" %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>

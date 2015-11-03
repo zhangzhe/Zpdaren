@@ -1,0 +1,18 @@
+<div class="container">
+  <br>
+  <%= bootstrap_flash %>
+  <div class="col-sm-6 col-md-6 col-md-offset-3">
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <h2 class="text-center">请输入新的密码</h2>
+      <%= devise_error_messages! %>
+      <%= f.hidden_field :reset_password_token %>
+      <div class="form-group">
+        <%= f.password_field :password, autofocus: true, autocomplete: "off", class: "form-control input-lg", placeholder: "新密码" %>
+      </div>
+      <div class="form-group">
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control input-lg", placeholder: "新密码确认" %>
+      </div>
+      <%= f.submit "确认重置", :class => "btn btn-primary btn-lg btn-block" %>
+    <% end %>
+    </div>
+</div>
