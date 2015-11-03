@@ -40,3 +40,7 @@
 .word-break{
   word-break:break-all;
 }
+.red-star{
+  color: red;
+  vertical-align: text-top;
+}

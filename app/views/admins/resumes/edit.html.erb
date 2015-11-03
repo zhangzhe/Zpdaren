@@ -11,22 +11,32 @@
     <%= f.hidden_field :job_id, value: params[:job_id] if params[:job_id] %>
     <%= f.hidden_field :delivery_id, value: params[:delivery_id] if params[:delivery_id] %>
     <p>
-      <%= f.text_field :candidate_name, class: "form-control", placeholder: "被推荐人" %>
+      <%= f.label :candidate_name, '被推荐人' %>
+      <span class='red-star'>*</span>
+      <%= f.text_field :candidate_name, class: "form-control" %>
     </p>
     <p>
-      <%= f.text_field :mobile, class: "form-control", placeholder: "电话" %>
+      <%= f.label :mobile, '电话' %>
+      <span class='red-star'>*</span>
+      <%= f.text_field :mobile, class: "form-control" %>
     </p>
 
     <p>
-      <%= f.text_field :email, class: "form-control", placeholder: "邮箱" %>
+      <%= f.label :email, '邮箱' %>
+      <span class='red-star'>*</span>
+      <%= f.text_field :email, class: "form-control" %>
     </p>
     <p>
-      <%= f.text_area :description, class: "form-control", placeholder: "简历描述", rows: 10 %>
+      <%= f.label :description, '简历描述' %>
+      <span class='red-star'>*</span>
+      <%= f.text_area :description, class: "form-control", rows: 10 %>
     </p>
     <p>
       <%= render '/shared/tag' %>
     </p>
     <p>
+      <%= f.label :tag_list, '简历标签' %>
+      <span class='red-star'>*</span>
       <%= f.text_field :tag_list, value: @resume.tag_list.to_s, class: 'form-control auto-tags' %>
     </p>
     <p>
