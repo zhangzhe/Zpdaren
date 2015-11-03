@@ -1,15 +1,21 @@
 <%= form_for resume, url: suppliers_resumes_path do |f| %>
   <%= hidden_field_tag 'job_id', params[:job_id] if params[:job_id] %>
   <p>
-    <%= f.text_field 'candidate_name', class: "form-control", :placeholder => "候选人姓名(必填)" %>
+    <%= f.label :candidate_name, '候选人姓名' %>
+    <span class='red-star'>*</span>
+    <%= f.text_field 'candidate_name', class: "form-control" %>
   </p>
   <p>
-    <%= f.text_field 'mobile', class: 'form-control', :placeholder => '候选人手机号码(必填)' %>
+    <%= f.label :mobile, '候选人手机号码' %>
+    <span class='red-star'>*</span>
+    <%= f.text_field 'mobile', class: 'form-control' %>
   </p>
   <p>
     <%= render '/shared/tag' %>
   </p>
   <p>
+    <%= f.label :tag_list, '简历标签' %>
+    <span class='red-star'>*</span>
     <%= f.text_field :tag_list, value: resume.tag_list.to_s, class: 'form-control auto-tags' %>
   </p>
   <div class="checkbox">
