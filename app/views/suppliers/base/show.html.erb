@@ -1,6 +1,8 @@
+<%= render 'shared/page_title', title: '账户管理' %>
 <div>
-<h3>账户余额</h3>
-  <%= current_supplier.wallet.money %>元
+  <h3>账户余额</h3>
+  <p class='ti2'><%= current_supplier.wallet.money %>元</p>
+  <br>
   <p>
     <%= link_to "提现到支付宝", new_withdraw_path, :class => "btn btn-primary" if current_supplier.wallet.money > 0 %>
   </p>

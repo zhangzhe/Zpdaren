@@ -8,11 +8,11 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <% active = active_for?(Recruiters::JobsController) %>
+            <% active = active_for?([Recruiters::JobsController, Recruiters::FinalPaymentsController, Recruiters::DepositsController]) %>
             <li class="<%= active %>"><%= link_to "我发布的职位#{badge_for_recruiter_jobs(current_recruiter)}".html_safe, recruiters_jobs_path %></li>
-            <% active = active_for?(Recruiters::DeliveriesController) %>
+            <% active = active_for?([Recruiters::DeliveriesController]) %>
             <li class="<%= active %>"><%= link_to "推荐给我的简历#{badge_for_recruiter_resumes(current_recruiter)}".html_safe, recruiters_deliveries_path %></li>
-            <% active = active_for?(Recruiters::BaseController) %>
+            <% active = active_for?([Recruiters::BaseController, Recruiters::CompaniesController]) %>
             <li class="<%= active %>"><%= link_to "账户管理", recruiters_path %></li>
           </ul>
         </div>

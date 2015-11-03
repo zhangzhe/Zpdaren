@@ -1,15 +1,17 @@
 <div class="table-responsive">
   <% if params[:job_id] %>
+    <br>
     <ol class="breadcrumb">
       <li>
-        <%= link_to '职位列表', recruiters_jobs_path %>
+        <%= link_to '我发布的职位', recruiters_jobs_path %>
       </li>
       <li>
         <%= link_to truncate(@job.title), recruiters_job_path(@job) %>
       </li>
-      <li class="active">支付尾款</li>
+      <li class="active">推荐人</li>
     </ol>
   <% end %>
+  <%= render 'shared/page_title', title: '推荐人列表' %>
   <table class="table table-striped">
     <thead>
       <tr>

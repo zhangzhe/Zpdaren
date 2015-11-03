@@ -1,13 +1,11 @@
+<br>
 <ol class="breadcrumb">
   <li>
     <%= link_to '我发布的职位', recruiters_jobs_path %>
   </li>
-  <li>
-    <%= link_to @job.title, recruiters_jobs_path(@job.id) %>
-  </li>
   <li class="active">预付订金</li>
 </ol>
-
+<%= render 'shared/page_title', title: @job.title %>
 <div>
   <%= form_for @job, url: recruiters_deposits_path, method: 'POST' do |f| %>
     <%= f.hidden_field :id, value: @job.id %>

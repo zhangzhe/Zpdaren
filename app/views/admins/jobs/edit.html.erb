@@ -1,5 +1,8 @@
-
+<br>
 <ol class="breadcrumb">
+  <li>
+    <%= link_to '职位列表', admins_jobs_path() %>
+  </li>
   <li>
     <% if @job.in_hiring? %>
     <%= link_to '进行中的招聘', admins_jobs_path(:state => "in_hiring") %>
@@ -11,19 +14,25 @@
     修改职位信息
   </li>
 </ol>
-
+<%= render 'shared/page_title', title: @job.title %>
 <div>
   <%= form_for @job, url: admins_job_path do |f| %>
   <p>
-    <%= f.text_field :title, class: "form-control", placeholder: "职位名称" %>
+    <%= f.label :title, '职位名称' %>
+    <span class='red-star'>*</span>
+    <%= f.text_field :title, class: "form-control" %>
   </p>
   <p>
-    <%= f.text_area :description, class: "form-control", placeholder: "职位描述", rows: 10 %>
+    <%= f.label :description, '职位描述' %>
+    <span class='red-star'>*</span>
+    <%= f.text_area :description, class: "form-control", rows: 10 %>
   </p>
   <p>
     <%= render '/shared/tag' %>
   </p>
   <p>
+    <%= f.label :tag_list, '职位标签' %>
+    <span class='red-star'>*</span>
     <%= f.text_field :tag_list, value: @job.tag_list.to_s, class: 'form-control auto-tags' %>
   </p>
   <p>

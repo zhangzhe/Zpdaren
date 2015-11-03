@@ -1,8 +1,18 @@
+<%= render 'shared/page_title', title: '账户管理' %>
+<h3>基本信息</h3>
 <div>
   <div>
-    <h3><%= current_recruiter.company.name %></h3>
-    <p><%= current_recruiter.company.mobile %></p>
-    <p><%= simple_format current_recruiter.company.description %></p>
+    <p class="ti2">公司名称：<%= current_recruiter.company.name %></p>
+    <p class="ti2">联系方式：<%= current_recruiter.company.mobile %></p>
+    <p class='blockquote14 ml2em'>
+      <strong>
+        公司描述
+      </strong>
+    </p>
+    <p>
+      <div class='ml2em'><%= simple_format current_recruiter.company.description %></div>
+    </p>
+    <br>
     <p>
       <%= link_to "修改公司信息", edit_recruiters_company_path(current_recruiter.company), :class => "btn btn-primary" %>
     </p>
@@ -13,7 +23,8 @@
 
 <div>
   <h3>公司账户</h3>
-  <%= current_recruiter.wallet.money %>元
+  <p class="ti2">账户余额：<%= current_recruiter.wallet.money %>元</p>
+  <br>
   <p>
     <%= link_to "提现到支付宝", new_withdraw_path, :class => "btn btn-primary" if current_recruiter.wallet.money > 0 %>
   </p>

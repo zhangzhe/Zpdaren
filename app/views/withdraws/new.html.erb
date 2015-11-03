@@ -1,9 +1,11 @@
+<br>
 <ol class="breadcrumb">
   <li>
     <%= link_to '账户管理', recruiters_path %>
   </li>
   <li class="active">提现到支付宝</li>
 </ol>
+<%= render 'shared/page_title', title: '提现到支付宝' %>
 <div>
   <%= form_for @withdraw, html: {class: "form-inline"} do |f| %>
     <div class="form-group">

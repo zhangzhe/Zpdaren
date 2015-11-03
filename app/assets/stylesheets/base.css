@@ -16,6 +16,9 @@
 .mb20{
   margin-bottom: 20px;
 }
+.ml2em{
+  margin-left: 2em;
+}
 .pt48{
   padding-top: 48px;
 }
@@ -27,4 +30,17 @@
 }
 .h180{
   height: 180px;
+}
+.default-bgc{
+  background-color: #fafafa;
+}
+.ti2{
+  text-indent: 2em;
+}
+.word-break{
+  word-break:break-all;
+}
+.red-star{
+  color: red;
+  vertical-align: text-top;
 }

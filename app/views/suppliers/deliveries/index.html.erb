@@ -1,3 +1,4 @@
+<%= render 'shared/page_title', title: '我的推荐' %>
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
@@ -11,7 +12,7 @@
     <tbody>
       <% @deliveries.each do |delivery| %>
         <tr>
-          <td><%= link_to truncate(delivery.job_title), suppliers_job_path(delivery.job), :target => "_blank" %></td>
+          <td><%= link_to truncate(delivery.job_title), suppliers_job_path(delivery.job) %></td>
           <td><%= delivery.resume_candidate_name %></td>
           <td><%= delivery.created_at.localtime.to_date.to_s(:db) %></td>
           <td>

@@ -6,8 +6,8 @@ class Recruiters::JobsController < Recruiters::BaseController
       redirect_to edit_recruiters_company_path(current_recruiter.company)
     else
       @jobs = current_recruiter.jobs.order('created_at DESC')
+      @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
     end
-    @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def new

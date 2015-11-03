@@ -1,35 +1,48 @@
+<br>
 <ol class="breadcrumb">
-  <li><%= link_to '简历列表', admins_resume_path(@resume) %></li>
+  <li><%= link_to '简历列表', admins_resumes_path() %></li>
   <li>
-    完善简历信息
+    完善简历
   </li>
 </ol>
-
+<%= render 'shared/page_title', title: @resume.candidate_name %>
 <div>
   <%= form_for @resume, url: admins_resume_path do |f| %>
-  <p>
-    <%= f.text_field :candidate_name, class: "form-control", placeholder: "被推荐人" %>
-  </p>
-  <p>
-    <%= f.text_field :mobile, class: "form-control", placeholder: "电话" %>
-  </p>
+    <%= f.hidden_field :job_id, value: params[:job_id] if params[:job_id] %>
+    <%= f.hidden_field :delivery_id, value: params[:delivery_id] if params[:delivery_id] %>
+    <p>
+      <%= f.label :candidate_name, '被推荐人' %>
+      <span class='red-star'>*</span>
+      <%= f.text_field :candidate_name, class: "form-control" %>
+    </p>
+    <p>
+      <%= f.label :mobile, '电话' %>
+      <span class='red-star'>*</span>
+      <%= f.text_field :mobile, class: "form-control" %>
+    </p>
 
-  <p>
-    <%= f.text_field :email, class: "form-control", placeholder: "邮箱" %>
-  </p>
-  <p>
-    <%= f.text_area :description, class: "form-control", placeholder: "简历描述", rows: 10 %>
-  </p>
-  <p>
-    <%= render '/shared/tag' %>
-  </p>
-  <p>
-    <%= f.text_field :tag_list, value: @resume.tag_list.to_s, class: 'form-control auto-tags' %>
-  </p>
-  <p>
-    <%= f.submit "确定", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
-    &nbsp;
-    <%= link_to "下载原件", download_admins_resume_path(@resume) %>
-  </p>
+    <p>
+      <%= f.label :email, '邮箱' %>
+      <span class='red-star'>*</span>
+      <%= f.text_field :email, class: "form-control" %>
+    </p>
+    <p>
+      <%= f.label :description, '简历描述' %>
+      <span class='red-star'>*</span>
+      <%= f.text_area :description, class: "form-control", rows: 10 %>
+    </p>
+    <p>
+      <%= render '/shared/tag' %>
+    </p>
+    <p>
+      <%= f.label :tag_list, '简历标签' %>
+      <span class='red-star'>*</span>
+      <%= f.text_field :tag_list, value: @resume.tag_list.to_s, class: 'form-control auto-tags' %>
+    </p>
+    <p>
+      <%= f.submit "确定", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
+      &nbsp;
+      <%= link_to "下载原件", download_admins_resume_path(@resume) %>
+    </p>
   <% end %>
 </div>

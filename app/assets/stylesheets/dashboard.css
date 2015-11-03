@@ -189,3 +189,48 @@ body {
     font-size: 60px;
   }
 /**********************/
+
+.blockquote17{
+  padding: 6px;
+  margin: 0 0 20px;
+  font-size: 17.5px;
+  border-left: 5px solid #eee;
+}
+.blockquote14{
+  padding: 2px;
+  margin: 20 0 0 0px;
+  font-size: 14px;
+  border-left: 5px solid #eee;
+}
+
+.gray-light{
+  color: #777;
+}
+
+/*admin job show page*/
+.admin-job-detail .label{
+  position: absolute;
+  top: -10px;
+  font-size: 28px;
+  border-radius: 0px;
+  background-color: #428bca;
+}
+.admin-job-detail em{
+  width: 0;
+  height: 0;
+  border-bottom: 8px solid #285e8e;
+  border-left: 8px solid transparent;
+  position: absolute;
+  top: -10px;
+  left: 12px;
+}
+
+.admin-job-detail .label .jt{
+  font-size: 30px;
+  text-align: left;
+}
+.admin-job-detail .label .cn{
+  font-size: 14px;
+  font-weight: normal;
+  text-align: right;
+}

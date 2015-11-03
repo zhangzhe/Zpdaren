@@ -1,4 +1,8 @@
+<br>
 <ol class="breadcrumb">
+  <li>
+    <%= link_to '职位列表', admins_jobs_path(:state => "in_hiring") %>
+  </li>
   <li>
     <% if @job.in_hiring? %>
       <%= link_to '进行中的招聘', admins_jobs_path(:state => "in_hiring") %>
@@ -7,36 +11,62 @@
     <% end %>
   </li>
   <li>
-    查看职位信息
+    <%= @job.title %>
   </li>
 </ol>
-
+<br>
 <div>
-  <div class="col-md-5">
-    <H2>
-      <%= @job.title %>
-    </H2 >
+  <div class="col-md-8 admin-job-detail default-bgc" style="padding: 20px;">
+    <em></em>
+    <span class="label label-info">
+      <p class="jt"><%= @job.title %></p>
+      <p class="cn"><%= @job.company_name %></p>
+    </span>
+    <br>
+    <br>
+    <br>
+    <br>
     <p>
-      <%= @job.bonus %>元
+      <% @job.tag_list.each do |tag| %>
+        <i class="fa fa-tags"></i>
+        <span class='gray-light'><%= tag %></span>
+      <% end %>
+    </p>
+    <p class='gray-light'>
+      <strong>职位红包：</strong> <%= @job.bonus %>元
+    </p>
+    <hr>
+    <p class='blockquote17'>
+      <strong>
+        职位描述
+      </strong>
     </p>
     <p>
-      <%= @job.tag_list %>
+      <div class='gray-light'>
+        <%= simple_format @job.description %>
+      </div>
     </p>
-    <p>
-      <%= simple_format @job.description %>
-    </p>
+    <br>
     <%= link_to "修改职位信息", edit_admins_job_path(@job), class: "btn btn-primary" %>
   </div>
 
-  <div class="col-md-5 col-md-offset-1">
+  <div class="col-md-3 col-md-offset-1">
     <H2>
       <%= @job.company.name %>
     </H2 >
     <p>
+      联系方式：
       <%= @job.company.mobile %>
     </p >
+    <p class='blockquote14'>
+      <strong>
+        公司描述
+      </strong>
+    </p>
     <p>
-      <%= simple_format @job.company.description %>
+      <div class='gray-light'>
+        <%= simple_format @job.company.description %>
+      </div>
     </p>
   </div>
 </div>
