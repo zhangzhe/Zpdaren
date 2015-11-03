@@ -5,5 +5,10 @@
     <%= f.password_field :password, autocomplete: "off", :class => "form-control input-lg persent-80-width", :placeholder => "密码" %>
     <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control input-lg persent-80-width", :placeholder => "密码确认" %>
     <%= f.submit "注册", :class => "btn btn-primary btn-lg persent-80-width" %>
+    <br><br>
+    <a href="#" data-toggle="modal" data-target="#ModalForgetPassword">
+       <span style="color:azure">忘记密码?</span>
+    </a>
+    <%= render "/home/modal_forget_password" %>
   <% end %>
 </div>
