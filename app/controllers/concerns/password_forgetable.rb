@@ -5,12 +5,13 @@ module PasswordForgetable
     if successfully_sent?(resource)
       respond_with({}, location: after_sending_reset_password_instructions_path_for(resource_name))
     else
-      flash[:alert] = '请输入正确的邮箱地址'
-      redirect_to :back
+      flash[:alert] = '邮箱输入有误，请从新输入'
+      redirect_path = eval("new_#{resource_name}_password_path")
+      redirect_to redirect_path
     end
   end
 
   def after_sending_reset_password_instructions_path_for(resource_name)
-    home_path
+    eval("new_#{resource_name}_session_path")
   end
 end

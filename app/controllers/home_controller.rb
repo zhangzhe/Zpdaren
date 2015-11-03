@@ -2,9 +2,13 @@ class HomeController < ApplicationController
   protect_from_forgery :except => [:check_signature, :weixin_callback]
 
   def supplier
+    @resource = Recruiter.new
+    @resource_name = "supplier"
   end
 
   def recruiter
+    @resource = Recruiter.new
+    @resource_name = "recruiter"
   end
 
   require 'digest/sha1'

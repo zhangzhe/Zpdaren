@@ -1,14 +1,12 @@
 <div class="modal fade" id="ModalRecruiterLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <% resource = Recruiter.new %>
-      <% resource_name = "recruiter" %>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">登录众聘达人</h4>
       </div>
       <div class="modal-body">
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= form_for(@resource, as: @resource_name, url: session_path(@resource_name)) do |f| %>
         <p class="form-control-static"><%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "登录邮箱" %></p>
 
         <p class="form-control-static"><%= f.password_field :password, autocomplete: "off", :class => "form-control input-lg", :placeholder => "密码" %></p>
