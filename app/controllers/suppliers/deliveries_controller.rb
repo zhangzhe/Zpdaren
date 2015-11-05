@@ -17,15 +17,11 @@ class Suppliers::DeliveriesController < Suppliers::BaseController
   end
 
   def create
-    begin
-      @delivery = Delivery.new(delivery_params)
-      unless @delivery.save
-        @job = Job.find(delivery_params[:job_id])
-        @resume = Resume.find(delivery_params[:resume_id])
-        flash[:error] = @delivery.errors.full_messages.first
-        render 'new' and return
-      end
-    rescue ActiveRecord::RecordNotUnique
+    unless Delivery.find_by_resume_id_and_job_id(delivery_params[:resume_id], delivery_params[:job_id])
+      @delivery = Delivery.create(delivery_params)
+    else
+      flash[:error] = '该简历已被推荐，请选择其他简历！'
+      redirect_to select_list_suppliers_resumes_path(job_id: delivery_params[:job_id]) and return
     end
     flash[:success] = "操作完成！"
     redirect_to suppliers_job_path(id: params[:delivery][:job_id])
