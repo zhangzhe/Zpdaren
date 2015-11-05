@@ -125,10 +125,7 @@ class Job < ActiveRecord::Base
   end
 
   def delivery!(resume)
-    begin
-      Delivery.create(:resume_id => resume.id, :job_id => self.id)
-    rescue ActiveRecord::RecordNotUnique
-    end
+    Delivery.create(:resume_id => resume.id, :job_id => self.id) unless Delivery.find_by_resume_id_and_job_id(resume.id, self.id)
   end
 
   def watched_by?(supplier)
