@@ -58,10 +58,10 @@ class Recruiters::JobsController < Recruiters::BaseController
 
   private
   def job_params
-    params[:job].permit(:title, :description, :bonus, :tag_list)
+    params[:job].permit(:title, :salary_min, :salary_max, :description, :bonus, :tag_list)
   end
 
   def job_params_edit
-    params[:job].permit(:title, :description, :tag_list)
+    params[:job].permit(:title, :salary_min, :salary_max, :description, :tag_list)
   end
 end

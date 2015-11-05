@@ -246,3 +246,10 @@ body {
     margin-top: 20px;
   }
 /***********************/
+
+/*recruiter job page*/
+  .salary_range input{
+    width: 10%;
+    display: inline-block;
+  }
+/***********************/

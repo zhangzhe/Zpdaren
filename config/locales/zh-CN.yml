@@ -274,8 +274,10 @@ zh-CN:
         description: '工作经历、教育背景等描述'
       job:
         title: '职位名称'
-        description: '职位描述及薪资范围'
-        bonus: '红包'
+        salary_min: '最低月薪'
+        salary_max: '最高月薪'
+        description: '职位描述'
+        bonus: '入职佣金'
         tag_list: '职位标签'
       deliveries:
         message: '给招聘方的留言'
@@ -298,12 +300,24 @@ zh-CN:
           attributes:
             title:
               blank: "不能为空"
+            salary_min:
+              blank: "不能为空"
+              not_a_number: "必须是数字"
+              not_an_integer: '必须是整数'
+              greater_than: 必须大于%{count}
+              less_than: 必须小于最高月薪
+            salary_max:
+              blank: "不能为空"
+              not_a_number: "必须是数字"
+              not_an_integer: '必须是整数'
+              greater_than: 必须大于%{count}
             description:
               blank: "不能为空"
             bonus:
               blank: "不能为空"
-              greater_than_or_equal_to: 必须大于或等于%{count}
               not_a_number: "必须是数字"
+              not_an_integer: '必须是整数'
+              greater_than_or_equal_to: 必须大于或等于%{count}
             tag_list:
               blank: "不能为空"
         company:

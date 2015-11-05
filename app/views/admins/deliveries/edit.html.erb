@@ -16,6 +16,27 @@
     <% end %>
   </p>
   <p>
+    <strong>薪资范围：</strong>
+    <span class='gray-light'>
+      <% if (@delivery.job.salary_min == 0) || (@delivery.job.salary_max == 0) %>
+        暂未提供
+      <% else %>
+        <%= @job.salary_min %>K-<%= @job.salary_max %>K
+      <% end %>
+    </span>
+  </p>
+  <p>
+    <strong>职位佣金：</strong>
+    <span class='gray-light'>
+      <%= @delivery.job.bonus %>元
+    </span>
+  </p>
+  <p class='blockquote14'>
+    <strong>
+      职位描述
+    </strong>
+  </p>
+  <p>
     <%= simple_format  @delivery.job_description %>
   </p>
   <hr>
@@ -28,7 +49,7 @@
   </p >
   <p class='blockquote14'>
     <strong>
-      职位描述
+      公司描述
     </strong>
   </p>
   <p>
