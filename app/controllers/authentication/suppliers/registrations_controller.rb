@@ -17,10 +17,10 @@ class Authentication::Suppliers::RegistrationsController < Devise::Registrations
         redirect_to new_supplier_session_path
       end
     else
+      flash[:alert] = resource.errors.full_messages.first
       redirect_to new_supplier_registration_path
     end
   end
-
 
   protected
   def after_inactive_sign_up_path_for(resource)

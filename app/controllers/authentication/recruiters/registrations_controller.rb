@@ -17,6 +17,7 @@ class Authentication::Recruiters::RegistrationsController < Devise::Registration
         redirect_to new_recruiter_session_path
       end
     else
+      flash[:alert] = resource.errors.full_messages.first
       redirect_to new_recruiter_registration_path
     end
   end
