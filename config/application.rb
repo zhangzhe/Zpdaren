@@ -12,6 +12,9 @@ module Epin
     config.middleware.insert_after ActionDispatch::ParamsParser, ActionDispatch::XmlParamsParser
     config.autoload_paths += %W(#{config.root}/app/models/money_transfers)
     config.autoload_paths += %W(#{config.root}/app/models/users)
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance|
+      html_tag
+    }
   end
 end
 

@@ -1,33 +1,45 @@
-<div class="row">
-  <ol class="breadcrumb">
-    <li><%= link_to "我发布的职位", recruiters_jobs_path %></li>
-    <li><%= link_to @job.title, recruiters_job_path %></li>
-    <li>编辑</li>
-  </ol>
-  <%= render 'shared/page_title', title: @job.title %>
-  <p>
-    <%= form_for @job, url: recruiters_job_path, method: "put" do |f| %>
+
+<ol class="breadcrumb">
+  <li><%= link_to "我发布的职位", recruiters_jobs_path %></li>
+  <li><%= link_to @job.title, recruiters_job_path %></li>
+  <li>编辑</li>
+</ol>
+<%= render 'shared/page_title', title: @job.title %>
+<p>
+  <%= form_for @job, url: recruiters_job_path, method: "put" do |f| %>
+    <p>
+      <%= f.label :title, '职位名称' %>
+      <span class='red-star'>*</span>
+      <%= f.text_field :title, class: "form-control" %>
+    </p>
+    <div class='salary_range'>
+      <label>月薪范围</label>
+      <span class='red-star'>*</span>
       <p>
-        <%= f.label :title, '职位名称' %>
-        <span class='red-star'>*</span>
-        <%= f.text_field :title, class: "form-control" %>
+        <span>最低月薪：</span>
+        <%= f.text_field :salary_min, class: "form-control" %>
+        <span>K</span>
+        &nbsp;&nbsp;
+        <span>最高月薪：</span>
+        <%= f.text_field :salary_max, class: "form-control" %>
+        <span>K</span>
       </p>
-      <p>
-        <%= f.label :description, '职位描述及薪资范围' %>
-        <span class='red-star'>*</span>
-        <%= f.text_area :description, class: "form-control", rows: 10 %>
-      </p>
-      <p>
-        <%= render '/shared/tag' %>
-      </p>
-      <p>
-        <%= f.label :tag_list, '职位标签' %>
-        <span class='red-star'>*</span>
-        <%= f.text_field :tag_list, value: @job.tag_list.to_s, class: 'form-control auto-tags' %>
-      </p>
-      <p>
-        <%= f.submit "发布", class: "btn btn-primary" %>
-      </p>
-    <% end %>
-  </p>
-</div>
+    </div>
+    <p>
+      <%= f.label :description, '职位描述' %>
+      <span class='red-star'>*</span>
+      <%= f.text_area :description, class: "form-control", rows: 10 %>
+    </p>
+    <p>
+      <%= render '/shared/tag' %>
+    </p>
+    <p>
+      <%= f.label :tag_list, '职位标签' %>
+      <span class='red-star'>*</span>
+      <%= f.text_field :tag_list, value: @job.tag_list.to_s, class: 'form-control auto-tags' %>
+    </p>
+    <p>
+      <%= f.submit "发布", class: "btn btn-primary" %>
+    </p>
+  <% end %>
+</p>

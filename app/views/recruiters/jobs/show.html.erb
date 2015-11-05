@@ -12,7 +12,22 @@
       <span class='gray-light'><%= tag %></span>
     <% end %>
   </p>
-  <p><strong>职位佣金：</strong><%= @job.bonus %></p>
+  <p>
+    <strong>薪资范围：</strong>
+    <span class='gray-light'>
+      <% if (@job.salary_min == 0) || (@job.salary_max == 0) %>
+        暂未提供
+      <% else %>
+        <%= @job.salary_min %>K-<%= @job.salary_max %>K
+      <% end %>
+    </span>
+  </p>
+  <p>
+    <strong>职位佣金：</strong>
+    <span class='gray-light'>
+      <%= @job.bonus %>元
+    </span>
+  </p>
   <p class='blockquote17'>
     <strong>
       职位描述
