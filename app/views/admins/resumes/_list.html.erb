@@ -12,7 +12,7 @@
     <tbody>
       <% resumes.each do |resume| %>
         <tr>
-          <td><%= resume.candidate_name %>&nbsp;<%= link_to "下载简历", download_admins_resume_path(resume[:id]) %></td>
+          <td><%= link_to resume.candidate_name, admins_resume_path(resume.id) %></td>
           <td><%= resume.tag_list %></td>
           <td>
             <% resume.jobs.each do |job| %>
