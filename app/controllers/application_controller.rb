@@ -31,4 +31,18 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+
+  helper_method :forget_password_path_for, :register_path_for, :login_path_for
+  def forget_password_path_for(resource_name)
+    eval("new_#{resource_name}_password_path")
+  end
+
+  def register_path_for(resource_name)
+    eval("new_#{resource_name}_registration_path")
+  end
+
+  def login_path_for(resource_name)
+    eval("new_#{resource_name}_session_path")
+  end
 end

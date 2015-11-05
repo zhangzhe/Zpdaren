@@ -4,13 +4,17 @@
   <div class="col-sm-6 col-md-6 col-md-offset-3">
     <div class="account-wall">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <h2 class="text-center">推荐方登录</h2>
+      <% name = (resource_name.to_s == "recruiter") ? "招聘方" : "推荐方" %>
+      <h2 class="text-center"><%= name %>登录</h2>
       <br>
       <%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "邮箱" %><br>
 
       <%= f.password_field :password, autocomplete: "off", :class => "form-control input-lg", :placeholder => "密码" %>
       <br>
       <%= f.submit "登录", :class => "btn btn-default btn-lg btn-block btn-primary" %>
+      <br>
+      <%= link_to "忘记密码?", forget_password_path_for(resource_name) %>&nbsp;&nbsp;|&nbsp;&nbsp;
+      还没有账号？<%= link_to "注册", register_path_for(resource_name) %>
     <% end %>
     </div>
   </div>
