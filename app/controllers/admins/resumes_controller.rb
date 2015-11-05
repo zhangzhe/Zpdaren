@@ -14,6 +14,10 @@ class Admins::ResumesController < Admins::BaseController
     @resumes = @resumes.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
+  def show
+    @resume = Resume.find(params[:id])
+  end
+
   def edit
     @resume = Resume.find(params[:id])
   end
@@ -35,6 +39,6 @@ class Admins::ResumesController < Admins::BaseController
 
   private
   def resume_params
-    params[:resume].permit(:candidate_name, :tag_list, :description, :mobile)
+    params[:resume].permit(:candidate_name, :tag_list, :description, :mobile, :email)
   end
 end
