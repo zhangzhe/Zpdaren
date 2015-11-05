@@ -305,11 +305,12 @@ zh-CN:
               not_a_number: "必须是数字"
               not_an_integer: '必须是整数'
               greater_than: 必须大于%{count}
+              less_than: 必须小于最高月薪
             salary_max:
               blank: "不能为空"
               not_a_number: "必须是数字"
               not_an_integer: '必须是整数'
-              greater_than: 必须大于最低月薪
+              greater_than: 必须大于%{count}
             description:
               blank: "不能为空"
             bonus:

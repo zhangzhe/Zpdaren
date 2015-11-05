@@ -1,5 +1,4 @@
 class Recruiters::JobsController < Recruiters::BaseController
-  before_action :set_salary_default_value, only: [:create, :update]
 
   def index
     if current_recruiter.company.description.blank?
@@ -64,10 +63,5 @@ class Recruiters::JobsController < Recruiters::BaseController
 
   def job_params_edit
     params[:job].permit(:title, :salary_min, :salary_max, :description, :tag_list)
-  end
-
-  def set_salary_default_value
-    params[:job][:salary_min] = 0 if params[:job][:salary_min].blank?
-    params[:job][:salary_max] = 0 if params[:job][:salary_max].blank?
   end
 end

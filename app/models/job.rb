@@ -17,7 +17,8 @@ class Job < ActiveRecord::Base
   validates_presence_of :title, :salary_min, :salary_max, :description, :bonus, :tag_list
   validates_length_of :title, maximum: 50
   validates_numericality_of :salary_min, greater_than: 0, only_integer: true
-  validates_numericality_of :salary_max, greater_than: :salary_min, only_integer: true
+  validates_numericality_of :salary_max, greater_than: 0, only_integer: true
+  validates_numericality_of :salary_min, less_than: :salary_max
   validates_numericality_of :bonus, greater_than_or_equal_to: 1000, only_integer: true
 
   delegate :name, :id, to: :company, prefix: true
