@@ -5,13 +5,14 @@
     <div class="account-wall">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <% name = (resource_name.to_s == "recruiter") ? "招聘方" : "推荐方" %>
+      <% name = "管理员" if (resource_name.to_s == "admin") %>
       <h2 class="text-center"><%= name %>登录</h2>
       <br>
-      <%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "邮箱" %><br>
+      <%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "#{name}邮箱" %><br>
 
-      <%= f.password_field :password, autocomplete: "off", :class => "form-control input-lg", :placeholder => "密码" %>
+      <%= f.password_field :password, autocomplete: "off", :class => "form-control input-lg", :placeholder => "#{name}密码" %>
       <br>
-      <%= f.submit "登录", :class => "btn btn-default btn-lg btn-block btn-primary" %>
+      <%= f.submit "#{name}登录", :class => "btn btn-default btn-lg btn-block btn-primary" %>
       <% unless resource_name.to_s == "admin" %>
         <br>
         <%= link_to "忘记密码?", forget_password_path_for(resource_name) %>&nbsp;&nbsp;|&nbsp;&nbsp;

@@ -4,19 +4,19 @@
   <div class="col-sm-6 col-md-6 col-md-offset-3">
     <div class="account-wall">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <% name = (resource_name == "recruiter") ? "招聘方" : "推荐方" %>
+        <% name = (resource_name.to_s == "recruiter") ? "招聘方" : "推荐方" %>
         <h2 class="text-center"><%= name %>注册</h2>
         <br>
         <%= devise_error_messages! %>
-        <%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "邮箱" %>
+        <%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "#{name}邮箱" %>
         <br>
         <% if @validatable %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
         <% end %>
-        <%= f.password_field :password, autocomplete: "off", :class => "form-control input-lg", :placeholder => "密码" %><br>
-        <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control input-lg", :placeholder => "密码确认" %>
+        <%= f.password_field :password, autocomplete: "off", :class => "form-control input-lg", :placeholder => "#{name}密码" %><br>
+        <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control input-lg", :placeholder => "#{name}密码确认" %>
         <br>
-        <%= f.submit "注册", :class => "btn btn-primary btn-lg btn-block" %>
+        <%= f.submit "#{name}注册", :class => "btn btn-primary btn-lg btn-block" %>
         <br>
         已有账号？<%= link_to "登录", login_path_for(resource_name) %>&nbsp;&nbsp;|&nbsp;&nbsp;
         <%= link_to "忘记密码", forget_password_path_for(resource_name) %>
