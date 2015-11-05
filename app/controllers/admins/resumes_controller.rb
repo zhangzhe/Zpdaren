@@ -7,6 +7,8 @@ class Admins::ResumesController < Admins::BaseController
     else
       @resumes = Resume.all
     end
+
+    @resumes = @resumes.where(:supplier_id => params[:supplier_id]) if params[:supplier_id]
     @resumes = @resumes.tagged_with([params[:key]], any: true, wild: true) if params[:key].present?
     @resumes = @resumes.order("#{params[:sort]} #{params[:direction]}")
     @resumes = @resumes.paginate(page: params[:page], per_page: Settings.pagination.page_size)

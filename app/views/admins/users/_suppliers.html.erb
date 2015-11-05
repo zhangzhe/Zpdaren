@@ -11,8 +11,8 @@
       <% suppliers.each do |supplier| %>
         <tr>
           <td><%= supplier.email %></td>
-          <td><%= supplier.resumes.count %></td>
-          <td><%= supplier.deliveries.count %></td>
+          <td><%= link_to supplier.resumes.count, admins_resumes_path(:supplier_id => supplier) %></td>
+          <td><%= link_to supplier.deliveries.count, admins_deliveries_path(:supplier_id => supplier) %></td>
         </tr>
       <% end %>
     </tbody>

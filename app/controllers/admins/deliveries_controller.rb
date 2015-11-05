@@ -9,6 +9,10 @@ class Admins::DeliveriesController < Admins::BaseController
       @recommended_deliveries = @deliveries.recommended.order("created_at DESC")
     else
       @deliveries = Delivery.joins(:job)
+      if params[:supplier_id]
+        supplier = Supplier.find(params[:supplier_id])
+        @deliveries = supplier.deliveries
+      end
       if params[:key]
         recruiter_ids = Company.where("name like ?", "%#{params[:key]}%").map(&:user_id)
         @deliveries = @deliveries.where("user_id in (?)", recruiter_ids)
