@@ -10,10 +10,10 @@
     <p>
       <strong>薪资范围：</strong>
       <span class='gray-light'>
-        <% if (@job.salary_min == 0) || (@job.salary_max == 0) %>
-          暂未提供
-        <% else %>
+        <% if @job.is_show_salary? %>
           <%= @job.salary_min %>K-<%= @job.salary_max %>K
+        <% else %>
+          面议
         <% end %>
       </span>
     </p>
