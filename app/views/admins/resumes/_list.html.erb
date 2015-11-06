@@ -21,7 +21,7 @@
           </td>
           <td><%= resume.created_at.localtime.to_date.to_s(:db) %></td>
           <td>
-            <% if resume.description.blank? %>
+            <% if resume.description.nil? %>
               <%= link_to '完善简历', edit_admins_resume_path(resume), class: 'btn btn-primary btn-sm' %>
             <% end %>
           </td>

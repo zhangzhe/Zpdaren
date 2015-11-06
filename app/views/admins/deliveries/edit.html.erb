@@ -61,8 +61,11 @@
 <div class="col-md-5 col-md-offset-1 default-bgc">
   <%= render 'shared/page_title', title: '推荐' %>
   <H2>
-    <%= @delivery.resume_candidate_name %>
+    <%= @delivery.resume_candidate_name %><%= "(暂时不找工作)" unless @delivery.resume.available? %>
   </H2 >
+  <p>
+    <%= @delivery.resume_mobile %>
+  </p >
   <p>
     <% @delivery.resume_tag_list.each do |tag| %>
       <i class="fa fa-tags"></i>
