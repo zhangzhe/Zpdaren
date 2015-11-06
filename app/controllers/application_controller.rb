@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include DeviseHelper
   before_filter :authorize
-  include Mobylette::RespondToMobileRequests
 
   # 3 roles: admins, recruiters, suppliers, the function under these 3 roles would be only used by the role
   def authorize
