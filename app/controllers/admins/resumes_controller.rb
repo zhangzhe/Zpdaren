@@ -6,6 +6,8 @@ class Admins::ResumesController < Admins::BaseController
       @resumes = Resume.completed
     elsif params[:state] == "unavailable"
       @resumes = Resume.unavailable
+    elsif params[:state] == "available"
+      @resumes = Resume.available
     else
       @resumes = Resume.all
     end
