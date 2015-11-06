@@ -9,6 +9,10 @@
   <li role="presentation" class="<%= active %>">
     <%= link_to '已完善', admins_resumes_path(:state => "completed") %>
   </li>
+  <% active = (params[:state] == "unavailable") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to '（已完善）暂时不找工作', admins_resumes_path(:state => "unavailable") %>
+  </li>
 </ul>
 <br>
 <%= render 'list', resumes: @resumes %>

@@ -4,6 +4,8 @@ class Admins::ResumesController < Admins::BaseController
       @resumes = Resume.uncompleted
     elsif params[:state] == "completed"
       @resumes = Resume.completed
+    elsif params[:state] == "unavailable"
+      @resumes = Resume.unavailable
     else
       @resumes = Resume.all
     end
@@ -39,6 +41,6 @@ class Admins::ResumesController < Admins::BaseController
 
   private
   def resume_params
-    params[:resume].permit(:candidate_name, :tag_list, :description, :mobile, :email)
+    params[:resume].permit(:candidate_name, :tag_list, :description, :mobile, :email, :available)
   end
 end
