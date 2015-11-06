@@ -12,6 +12,8 @@ class Resume < ActiveRecord::Base
   scope :uncompleted, ->{ where(:description => nil) }
   scope :waiting_approved, ->{ where(:description => nil) }
   scope :unavailable, ->{ where(:available => false) }
+  scope :available, ->{ where(:available => true) }
+
 
   accepts_nested_attributes_for :deliveries
   include SimilarEntity
