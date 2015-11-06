@@ -14,11 +14,8 @@ class Job < ActiveRecord::Base
   has_many :suppliers, through: :watchings
   has_many :refund_requests
 
-  validates_presence_of :title, :salary_min, :salary_max, :description, :bonus, :tag_list
+  validates_presence_of :title, :description, :bonus, :tag_list
   validates_length_of :title, maximum: 50
-  validates_numericality_of :salary_min, greater_than: 0, only_integer: true
-  validates_numericality_of :salary_max, greater_than: 0, only_integer: true
-  validates_numericality_of :salary_min, less_than: :salary_max
   validates_numericality_of :bonus, greater_than_or_equal_to: 1000, only_integer: true
 
   delegate :name, :id, to: :company, prefix: true
@@ -161,6 +158,10 @@ class Job < ActiveRecord::Base
   def available_for_final_payment?
     self.deposit_paid_confirmed? && self.deliveries.any_available_for_final_payment?
   end
+
+  def is_show_salary?
+    self.salary_min.present? and self.salary_max.present? and self.salary_min > 0 and self.salary_max > 0
+   end
 
   private
   def notify_recruiter_and_deliver_matching_resumes

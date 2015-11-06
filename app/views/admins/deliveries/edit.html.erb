@@ -18,10 +18,10 @@
   <p>
     <strong>薪资范围：</strong>
     <span class='gray-light'>
-      <% if (@delivery.job.salary_min == 0) || (@delivery.job.salary_max == 0) %>
-        暂未提供
+      <% if @job.is_show_salary? %>
+        <%= @delivery.job.salary_min %>K-<%= @delivery.job.salary_max %>K
       <% else %>
-        <%= @job.salary_min %>K-<%= @job.salary_max %>K
+        面议
       <% end %>
     </span>
   </p>

@@ -31,7 +31,7 @@ class Suppliers::ResumesController < Suppliers::BaseController
   end
 
   def download
-    resume = Resume.find(params[:id])
+    resume = current_supplier.resumes.find(params[:id])
     send_file resume.attachment.file.file
   end
 
