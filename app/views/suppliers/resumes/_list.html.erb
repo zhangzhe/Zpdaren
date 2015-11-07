@@ -16,12 +16,12 @@
           <td><%= resume.tag_list %></td>
           <td>
           <% resume.deliveries.map(&:job).each do |job| %>
-            <%= link_to truncate("#{job.company_name}: #{job.title}"), suppliers_job_path(job)%> &nbsp;<br>
+            <%= link_to truncate("#{job.company_name}: #{job.title}"), suppliers_job_path(job) if job %> &nbsp;<br>
           <% end %>
           </td>
           <td>
             <% resume.deliveries.each do |delivery| %>
-            <% if delivery.money_earned %>
+            <% if delivery.job and delivery.money_earned %>
               获得红包<%= delivery.money_earned %>元&nbsp;
             <% end %>
               <br>

@@ -8,7 +8,7 @@ class Rejection < ActiveRecord::Base
 
   private
   def notify_supplier
-    Weixin.send_resume_refused_notification(self.delivery)
+    Weixin.send_resume_refused_notification(self.delivery) if self.delivery.supplier.weixin
   end
 
   def other_is_empty?
