@@ -14,7 +14,7 @@ class Authentication::Recruiters::RegistrationsController < Devise::Registration
       else
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
         expire_data_after_sign_in!
-        redirect_to new_recruiter_session_path
+        redirect_to signup_redirection_path
       end
     else
       flash[:alert] = resource.errors.full_messages.first
