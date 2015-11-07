@@ -11,5 +11,10 @@
   </li>
 </ul>
 <br>
-<%= render 'list', jobs: @jobs %>
+<% if params[:state] == "un_hiring" %>
+  <%= render 'un_hiring_list', jobs: @jobs %>
+<% else %>
+  <%= render 'in_hiring_list', jobs: @jobs %>
+<% end %>
+
 <%= render 'shared/paginate', objs: @jobs %>

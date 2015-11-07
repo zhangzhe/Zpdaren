@@ -19,6 +19,7 @@ class Delivery < ActiveRecord::Base
   scope :recruiter_watchable, -> { where("state != 'recommended'") }
   scope :after_approved, -> { where.not(state: 'recommended') }
   scope :approved_today, -> { where('DATE(updated_at) = ? and state = ?', Date.today, 'approved') }
+  scope :after_paid, -> { where("deliveries.state in ('paid', 'final_payment_paid', 'finished')") }
 
   include AASM
   aasm.attribute_name :state

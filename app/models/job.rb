@@ -66,7 +66,7 @@ class Job < ActiveRecord::Base
   end
 
   def editable?
-     ["submitted", "deposit_paid", "deposit_paid_confirmed"].include?(self.state)
+    ["submitted", "deposit_paid", "deposit_paid_confirmed"].include?(self.state)
   end
 
   def in_hiring?
@@ -161,7 +161,11 @@ class Job < ActiveRecord::Base
 
   def is_show_salary?
     self.salary_min.present? and self.salary_max.present? and self.salary_min > 0 and self.salary_max > 0
-   end
+  end
+
+  def resume_status
+    "#{deliveries.after_paid.count} / #{deliveries.after_approved.count} / #{deliveries.count}"
+  end
 
   private
   def notify_recruiter_and_deliver_matching_resumes
