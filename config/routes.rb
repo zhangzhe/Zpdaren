@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'recruiters' => 'recruiters/base#show'
   get 'suppliers' => 'suppliers/base#show'
   get 'admins' => 'admins/base#show'
+  get 'signup_redirection' => 'home#signup_redirection'
 
   devise_for :recruiters, controllers: {
     sessions: 'authentication/recruiters/sessions',

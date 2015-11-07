@@ -11,6 +11,10 @@ class HomeController < ApplicationController
     @resource_name = "recruiter"
   end
 
+  def signup_redirection
+
+  end
+
   require 'digest/sha1'
   SIGNATURE_TOKEN = "12345qwert"
   def weixin_callback
