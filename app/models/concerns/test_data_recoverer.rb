@@ -9,6 +9,8 @@ module TestDataRecoverer
         RefundRequest.where("job_id = ?", job.id).delete_all
         Watching.where("job_id = ?", job.id).delete_all
         Deposit.where('job_id = ?', job.id).delete_all
+        deliveries = Delivery.where("job_id = ?", job.id)
+        recover_deliveries(deliveries)
       end
       jobs.delete_all
       if wallet = Wallet.find_by_user_id(recruiter.id)
@@ -25,15 +27,7 @@ module TestDataRecoverer
       resumes = Resume.where("supplier_id = ?", supplier.id)
       resumes.each do |resume|
         deliveries = Delivery.where("resume_id = ?", resume.id)
-        deliveries.each do |delivery|
-          if rejection = Rejection.find_by_delivery_id(delivery.id)
-            rejection.delete
-          end
-          if final_payment = FinalPayment.find_by_id(delivery.final_payment_id)
-            final_payment.delete
-          end
-        end
-        deliveries.delete_all
+        recover_deliveries(deliveries)
       end
       resumes.delete_all
       if wallet = Wallet.find_by_user_id(supplier.id)
@@ -61,5 +55,17 @@ module TestDataRecoverer
         admin.pay(job.bonus_for_each_resume / 2) if ['paid', 'final_payment_paid', 'finished'].include?(delivery.state)
       end
     end
+  end
+
+  def recover_deliveries(deliveries)
+    deliveries.each do |delivery|
+      if rejection = Rejection.find_by_delivery_id(delivery.id)
+        rejection.delete
+      end
+      if final_payment = FinalPayment.find_by_id(delivery.final_payment_id)
+        final_payment.delete
+      end
+    end
+    deliveries.delete_all
   end
 end
