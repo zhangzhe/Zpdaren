@@ -6,6 +6,8 @@ class Recruiter < User
   has_many :deliveries, through: :jobs
   after_create :init_blank_comapny
 
+  include TestDataRecoverer
+
   def jobs_count
     self.jobs.available.count > 100 ? '99+' : self.jobs.count
   end

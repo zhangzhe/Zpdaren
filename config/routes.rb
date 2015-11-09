@@ -54,7 +54,7 @@ Rails.application.routes.draw do
         get :withdraws
       end
     end
-    resources :users, only: [:index]
+    resources :users, only: [:index, :destroy]
     resources :companies, only: [:show]
     resources :refund_requests, only: [:index, :show] do
       member do

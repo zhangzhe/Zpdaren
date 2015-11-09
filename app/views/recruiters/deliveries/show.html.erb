@@ -16,7 +16,7 @@
     <% end %>
   </p>
   <p>
-    <span class="label label-info"><%= "推荐者留言：#{@delivery.message}" %></span>
+    <span class="label label-info"><%= "推荐者留言：#{@delivery.message}" if @delivery.message.present? %></span>
   </p>
   <hr>
   <p>
@@ -30,10 +30,10 @@
         <p><strong>手机号：</strong><%= @delivery.resume_mobile %></p>
         <p><strong>邮箱：</strong><%= @delivery.resume_email %></p>
       <% elsif !@delivery.refused? %>
-        付费<%= @delivery.job.bonus_for_each_resume %>元后可看
         <% if @delivery.approved? %>
-          <%= link_to "从订金中扣除#{@delivery.job.bonus_for_each_resume}元", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary active", role: "button", method: :put, data: { disable_with: '提交中...' } %>
+          <%= link_to "查看联系方式", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary active", role: "button", method: :put, data: { disable_with: '提交中...' } %>
           <%= link_to "拒绝", new_recruiters_rejection_path(delivery_id: @delivery.id), class: "btn btn-primary active", role: "button" %>
+          <p class='fs12 mt20 gray-light'>备注：点击【查看联系方式】，该职位可查看简历数减1。</p>
         <% end %>
       <% end %>
     <% elsif @delivery.job.deposit_paid? %>

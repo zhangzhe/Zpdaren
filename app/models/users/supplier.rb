@@ -4,4 +4,6 @@ class Supplier < User
   has_many :deliveries, through: :resumes
   has_many :watchings
   delegate :money, to: :wallet, prefix: true
+
+  include TestDataRecoverer
 end
