@@ -8,14 +8,7 @@
       <% end %>
     </p>
     <p>
-      <strong>薪资范围：</strong>
-      <span class='gray-light'>
-        <% if @job.is_show_salary? %>
-          <%= @job.salary_min %>K-<%= @job.salary_max %>K
-        <% else %>
-          面议
-        <% end %>
-      </span>
+      <%= render 'shared/salary_show', job: @job %>
     </p>
     <p class="blog-post-meta"><%= @job.company_name %>提供<%= @job.bonus_for_entry %>元招聘红包</p>
     <p><%= simple_format @job.description %></p>

@@ -16,14 +16,7 @@
     <% end %>
   </p>
   <p>
-    <strong>薪资范围：</strong>
-    <span class='gray-light'>
-      <% if @job.is_show_salary? %>
-        <%= @delivery.job.salary_min %>K-<%= @delivery.job.salary_max %>K
-      <% else %>
-        面议
-      <% end %>
-    </span>
+    <%= render 'shared/salary_show', job: @delivery.job %>
   </p>
   <p>
     <strong>职位佣金：</strong>

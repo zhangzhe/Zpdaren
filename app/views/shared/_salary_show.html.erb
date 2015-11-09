@@ -1,0 +1,8 @@
+<strong>薪资范围：</strong>
+<span class='gray-light'>
+  <% if job.is_show_salary? %>
+    <%= job.salary_min %>K-<%= job.salary_max %>K
+  <% else %>
+    面议
+  <% end %>
+</span>
