@@ -110,6 +110,10 @@ class Job < ActiveRecord::Base
     (bonus.to_i * DEPOSIT_RATE).to_i
   end
 
+  def visible_resume_count
+    self.deposit / self.bonus_for_each_resume
+  end
+
   def company
     recruiter.company
   end
