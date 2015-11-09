@@ -6,7 +6,7 @@
 </ol>
 <%= render 'shared/page_title', title: @job.title %>
 <p>
-  <%= form_for @job, url: recruiters_job_path, method: "put" do |f| %>
+  <%= form_for @job, url: recruiters_job_path, method: "put", html: { onsubmit: "return salaryValidate()" } do |f| %>
     <p>
       <%= f.label :title, '职位名称' %>
       <span class='red-star'>*</span>
