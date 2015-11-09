@@ -32,7 +32,7 @@
       <% elsif !@delivery.refused? %>
         付费<%= @delivery.job.bonus_for_each_resume %>元后可看
         <% if @delivery.approved? %>
-          <%= link_to "从订金中扣除#{@delivery.job.bonus_for_each_resume}元", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary active", role: "button", method: :put %>
+          <%= link_to "从订金中扣除#{@delivery.job.bonus_for_each_resume}元", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary active", role: "button", method: :put, data: { disable_with: '提交中...' } %>
           <%= link_to "拒绝", new_recruiters_rejection_path(delivery_id: @delivery.id), class: "btn btn-primary active", role: "button" %>
         <% end %>
       <% end %>
