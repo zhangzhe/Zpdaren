@@ -26,6 +26,7 @@ class Suppliers::ResumesController < Suppliers::BaseController
       redirect_to params[:job_id] ? suppliers_job_path(params[:job_id]) : suppliers_resumes_path and return
     else
       flash[:error] = @resume.errors.full_messages.first
+      @job = Job.find(params[:job_id])
       render 'new' and return
     end
   end
