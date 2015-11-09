@@ -5,6 +5,7 @@
       <tr>
         <th>职位名称</th>
         <th>未查看的简历/收到的简历</th>
+        <th>可查看简历数</th>
         <th>红包/订金</th>
         <th>创建时间</th>
         <th>状态/操作</th>
@@ -24,6 +25,7 @@
           <td>
             <%= link_to "#{job.unprocess_deliveries.count}/#{job.recruiter_watchable_deliveries.count}", recruiters_deliveries_path(:job_id => job) %>
           </td>
+          <td><%= job.visible_resume_count %></td>
           <td><%= job.bonus %> / <%= job.original_deposit %></td>
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
           <td>
