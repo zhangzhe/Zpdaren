@@ -20,7 +20,7 @@
             <% if resume.deliveried?(@job) %>
               已推荐
             <% else %>
-              <%= link_to '推荐', new_suppliers_delivery_path(job_id: params[:job_id], resume_id: resume.id), class: 'btn btn-primary active' %>
+              <%= link_to '推荐', new_suppliers_delivery_path(job_id: params[:job_id], resume_id: resume.id), class: 'btn btn-primary btn-sm' %>
             <% end %>
           </td>
         </tr>

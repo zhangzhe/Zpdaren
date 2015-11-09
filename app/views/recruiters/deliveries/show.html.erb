@@ -31,8 +31,8 @@
         <p><strong>邮箱：</strong><%= @delivery.resume_email %></p>
       <% elsif !@delivery.refused? %>
         <% if @delivery.approved? %>
-          <%= link_to "查看联系方式", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary active", role: "button", method: :put, data: { disable_with: '提交中...' } %>
-          <%= link_to "拒绝", new_recruiters_rejection_path(delivery_id: @delivery.id), class: "btn btn-primary active", role: "button" %>
+          <%= link_to "查看联系方式", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary", role: "button", method: :put, data: { disable_with: '提交中...' } %>
+          <%= link_to "拒绝", new_recruiters_rejection_path(delivery_id: @delivery.id), class: "btn btn-primary", role: "button" %>
           <p class='fs12 mt20 gray-light'>备注：点击【查看联系方式】，该职位可查看简历数减1。</p>
         <% end %>
       <% end %>

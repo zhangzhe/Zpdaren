@@ -17,7 +17,7 @@
           <td><%= company.recruiter.email %></td>
           <td><%= truncate(company.description, length: 30) %></td>
           <td>
-            <%= link_to '删除', admins_user_path(company.recruiter), method: :delete, data: { confirm: "是否删除招聘方#{company.name}？", disable_with: '提交中...'}, class: "btn btn-primary" %>
+            <%= link_to '删除', admins_user_path(company.recruiter), method: :delete, data: { confirm: "是否删除招聘方#{company.name}？", disable_with: '提交中...'}, class: "btn btn-danger btn-sm" %>
           </td>
         </tr>
       <% end %>

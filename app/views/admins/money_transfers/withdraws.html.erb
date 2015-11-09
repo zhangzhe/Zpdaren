@@ -30,7 +30,7 @@
           <td><%= withdraw.zhifubao_account %></td>
           <td><%= withdraw.amount %></td>
           <td><%= withdraw.created_at.localtime.to_s(:db) %></td>
-          <td><%= withdraw.state_show %>&nbsp;&nbsp;<%= link_to "已转账", admins_money_transfer_path(withdraw), class: "btn btn-primary", method: :put, data: { disable_with: '提交中...' } if withdraw.submitted? %></td>
+          <td><%= withdraw.state_show %>&nbsp;&nbsp;<%= link_to "已转账", admins_money_transfer_path(withdraw), class: "btn btn-primary btn-sm", method: :put, data: { disable_with: '提交中...' } if withdraw.submitted? %></td>
           <td></td>
         </tr>
       <% end %>

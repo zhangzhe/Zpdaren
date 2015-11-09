@@ -111,7 +111,7 @@ class Job < ActiveRecord::Base
   end
 
   def visible_resume_count
-    self.deposit / self.bonus_for_each_resume
+    self.deposit.present? ? self.deposit / self.bonus_for_each_resume : 0
   end
 
   def company
