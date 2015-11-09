@@ -27,9 +27,9 @@
     <tbody>
       <% @final_payments.each do |final_payment| %>
         <tr>
-          <td><%= final_payment.try(:delivery).try(:job).try(:company).try(:name) %></td>
+          <td><%= final_payment.delivery.job.company.name %></td>
           <td><%= final_payment.try(:delivery).try(:job).try(:title) %>:<%= final_payment.delivery.try(:resume).try(:candidate_name) %>的简历</td>
-          <td><%= final_payment.try(:wallet).try(:user).try(:email) %></td>
+          <td><%= final_payment.wallet.user.email %></td>
           <td><%= final_payment.amount %></td>
           <td><%= final_payment.created_at.localtime.to_s(:db) %></td>
           <td>
