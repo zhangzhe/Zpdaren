@@ -3,16 +3,20 @@
     <thead>
       <tr>
         <th>被推荐人</th>
+        <th>推荐人</th>
         <th>标签</th>
         <th>已推荐</th>
         <th>推荐时间</th>
-        <th>操作</th>
+        <% if params[:state] == "uncompleted" %>
+          <th>操作</th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
       <% resumes.each do |resume| %>
         <tr>
           <td><%= link_to resume.candidate_name, admins_resume_path(resume.id) %></td>
+          <td><%= resume.supplier.email %></td>
           <td><%= resume.tag_list %></td>
           <td>
             <% resume.jobs.each do |job| %>
