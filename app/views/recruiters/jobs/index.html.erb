@@ -34,8 +34,6 @@
             <%= link_to '预付订金', new_recruiters_deposit_path(job_id: job.id), class: "btn btn-primary btn-sm" if job.submitted? %>
             <%= link_to '支付尾款', deliveries_list_recruiters_final_payments_path(job_id: job.id), class: "btn btn-primary btn-sm" if job.available_for_final_payment? %>
             <%#= link_to '退款', new_recruiters_refund_request_path(job_id: job.id), class: "btn btn-danger" if job.may_refund? %>
-            <%#= link_to '下架', freeze_recruiters_job_path(job), class: "btn btn-primary", method: :put if job.submitted? %>
-            <%#= link_to '上架', active_recruiters_job_path(job), class: "btn btn-primary", method: :put if job.freezing? %>
           </td>
         </tr>
       <% end %>

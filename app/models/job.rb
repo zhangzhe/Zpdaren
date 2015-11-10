@@ -48,14 +48,6 @@ class Job < ActiveRecord::Base
       transitions :from => :submitted, :to => :deposit_paid
     end
 
-    event :freeze do
-      transitions :from => [:submitted, :deposit_paid, :deposit_paid_confirmed], :to => :freezing
-    end
-
-    event :active do
-      transitions :from => :freezing, :to => :submitted
-    end
-
     event :confirm_deposit_paid, :after => :notify_recruiter_and_deliver_matching_resumes do
       transitions :from => :deposit_paid, :to => :deposit_paid_confirmed
     end

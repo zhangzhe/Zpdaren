@@ -44,18 +44,6 @@ class Recruiters::JobsController < Recruiters::BaseController
     redirect_to recruiters_jobs_path
   end
 
-  def freeze
-    job = Job.find(params[:id])
-    job.freeze! if job.submitted? && job.may_freeze?
-    redirect_to :back
-  end
-
-  def active
-    job = Job.find(params[:id])
-    job.active! if job.freezing? && job.may_active?
-    redirect_to :back
-  end
-
   private
   def job_params
     params[:job].permit(:title, :salary_min, :salary_max, :description, :bonus, :tag_list)
