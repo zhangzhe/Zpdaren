@@ -23,8 +23,8 @@ class Job < ActiveRecord::Base
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
   scope :deposit_paid_confirmed, -> { where('state' => 'deposit_paid_confirmed')}
   scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'deposit_paid_confirmed']) }
-  scope :in_hiring, -> { where.not('state in (?)', ['freezing', 'finished', 'final_payment_paid']) }
-  scope :un_hiring, -> { where('state in (?)', ['final_payment_paid', 'freezing', 'finished']) }
+  scope :in_hiring, -> { where.not('state in (?)', ['finished', 'final_payment_paid']) }
+  scope :un_hiring, -> { where('state in (?)', ['final_payment_paid', 'finished']) }
   default_scope { order(created_at: :desc) }
 
 
@@ -42,7 +42,6 @@ class Job < ActiveRecord::Base
     state :deposit_paid_confirmed
     state :final_payment_paid
     state :finished
-    state :freezing
 
     event :pay do
       transitions :from => :submitted, :to => :deposit_paid
@@ -62,7 +61,7 @@ class Job < ActiveRecord::Base
   end
 
   def in_hiring?
-    !['freezing', 'finished', 'final_payment_paid'].include?(self.state)
+    !['finished', 'final_payment_paid'].include?(self.state)
   end
 
   def unprocess_deliveries
