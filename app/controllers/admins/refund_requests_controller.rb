@@ -11,7 +11,6 @@ class Admins::RefundRequestsController < Admins::BaseController
   def agree
     refund_request = RefundRequest.find(params[:id])
     refund_request.agree!
-    refund_request.job.freeze!
     redirect_to admins_refund_requests_path
   end
 

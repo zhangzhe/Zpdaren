@@ -65,12 +65,7 @@ Rails.application.routes.draw do
   end
 
   namespace :recruiters do
-    resources :jobs, except: [:destroy] do
-      member do
-        put :freeze
-        put :active
-      end
-    end
+    resources :jobs, except: [:destroy]
     resources :companies, only: [:edit, :update]
     resources :deliveries, only: [:index, :show] do
       member do
