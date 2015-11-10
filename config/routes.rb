@@ -42,7 +42,7 @@ Rails.application.routes.draw do
         get :download
       end
     end
-    resources :jobs, only: [:index, :show, :edit, :update] do
+    resources :jobs, only: [:index, :show, :edit, :update, :destroy] do
       resources :deliveries, only: [:index, :edit, :update]
     end
     match 'deliveries' => 'deliveries#index', :via => :get, :as => "deliveries"

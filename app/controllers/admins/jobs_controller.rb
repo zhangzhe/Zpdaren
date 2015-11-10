@@ -4,6 +4,8 @@ class Admins::JobsController < Admins::BaseController
       @jobs = Job.in_hiring
     elsif params[:state] == "un_hiring"
       @jobs = Job.un_hiring
+    elsif params[:state] == "deleted"
+      @jobs = Job.only_deleted
     else
       @jobs = Job.all
     end
@@ -27,6 +29,17 @@ class Admins::JobsController < Admins::BaseController
       render 'edit' and return
     end
     redirect_to admins_job_path(@job)
+  end
+
+  def destroy
+    job = Job.find(params[:id])
+    if job.destroy
+      flash[:success] = '职位删除成功。'
+      redirect_to admins_jobs_path(state: 'in_hiring')
+    else
+      flash[:error] = '程序异常，删除失败。'
+      redirect_to admins_jobs_path(state: 'in_hiring')
+    end
   end
 
   private
