@@ -16,7 +16,7 @@
           <td><%= refund_request.job_created_at.localtime.to_date.to_s(:db) %></td>
           <td>
             <% if refund_request.submitted? %>
-              <%= link_to "操作", admins_refund_request_path(refund_request), class: 'btn btn-success' %>
+              <%= link_to "操作", admins_refund_request_path(refund_request), class: 'btn btn-primary' %>
             <% else %>
               <%= refund_request.state_show %>
             <% end %>

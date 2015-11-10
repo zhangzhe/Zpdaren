@@ -34,7 +34,7 @@
           <td><%= deposit.created_at.localtime.to_s(:db) %></td>
           <td>
             <% if deposit.submitted? %>
-            <%= link_to "已收到", admins_money_transfer_path(deposit), class: "btn btn-primary", method: :put, data: { disable_with: '提交中...' } %>
+            <%= link_to "已收到", admins_money_transfer_path(deposit), class: "btn btn-primary btn-sm", method: :put, data: { disable_with: '提交中...' } %>
             <% else %>
               <%= deposit.state_show %>
             <% end %>

@@ -1,4 +1,4 @@
 <%= render 'suppliers/shared/search', title: '我的简历', url: suppliers_resumes_path, placeholder: '输入简历标签' %>
 <%= render 'list', resumes: @resumes %>
 <%= render 'shared/paginate', objs: @resumes %>
-<%= link_to '上传简历', new_suppliers_resume_path, class: 'btn btn-primary btn-lg active' %>
+<%= link_to '上传简历', new_suppliers_resume_path, class: 'btn btn-primary' %>

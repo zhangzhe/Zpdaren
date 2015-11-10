@@ -1,9 +1,9 @@
 <div class="sidebar-module sidebar-module-inset">
   <h4>为他推荐简历</h4>
   <p>
-    <%= link_to '本地上传简历', new_suppliers_resume_path(job_id: job.id), class: 'btn btn-primary active' %>
+    <%= link_to '本地上传简历', new_suppliers_resume_path(job_id: job.id), class: 'btn btn-primary' %>
   </p>
   <p>
-    <%= link_to '从简历库推荐', select_list_suppliers_resumes_path(job_id: job.id), class: 'btn btn-primary active' %>
+    <%= link_to '从简历库推荐', select_list_suppliers_resumes_path(job_id: job.id), class: 'btn btn-primary' %>
   </p>
 </div>
