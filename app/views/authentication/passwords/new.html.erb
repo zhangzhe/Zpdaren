@@ -12,8 +12,8 @@
         <p class="help-block">请输入您的注册邮箱地址，我们会发给您重置密码链接.</p>
         <%= f.submit "发送确认邮件", :class => "btn btn-primary btn-lg btn-block" %>
         <br>
-        <%= link_to "登录", login_path_for(resource_name) %>&nbsp;&nbsp;|&nbsp;&nbsp;
-        还没有账号？<%= link_to "注册", register_path_for(resource_name) %>
+        <%= link_to "登录", login_path_for("user") %>&nbsp;&nbsp;|&nbsp;&nbsp;
+        还没有账号？<%= link_to "注册", home_path %>
       <% end %>
     </div>
   </div>

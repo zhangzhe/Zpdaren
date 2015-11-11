@@ -22,9 +22,4 @@ class Authentication::Recruiters::RegistrationsController < Devise::Registration
     end
   end
 
-
-  protected
-  def after_inactive_sign_up_path_for(resource)
-    new_recruiter_session_path
-  end
 end
