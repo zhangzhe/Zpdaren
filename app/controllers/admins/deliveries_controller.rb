@@ -34,6 +34,10 @@ class Admins::DeliveriesController < Admins::BaseController
   def update
     @job = Job.find(params[:job_id])
     @delivery = @job.deliveries.find(params[:id])
+    if @delivery.resume.may_improve?
+      flash[:error] = "简历信息不完整，先去简历列表完善简历吧！"
+      render 'edit' and return
+    end
     if @delivery.update_attributes(delivery_params)
       @delivery.approve!
       flash[:success] = "审核完成！"

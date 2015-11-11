@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     resources :resumes, only: [:index, :show, :edit, :update] do
       member do
         get :download
+        get :pdf_download
       end
     end
     resources :jobs, only: [:index, :show, :edit, :update] do
@@ -67,6 +68,11 @@ Rails.application.routes.draw do
   namespace :recruiters do
     resources :jobs, except: [:destroy]
     resources :companies, only: [:edit, :update]
+    resources :resumes, only: [:download] do
+      member do
+        get :download
+      end
+    end
     resources :deliveries, only: [:index, :show] do
       member do
         put :pay

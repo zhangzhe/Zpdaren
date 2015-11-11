@@ -51,7 +51,7 @@
     </div>
   </p>
 </div>
-<div class="col-md-5 col-md-offset-1 default-bgc">
+<div class="col-md-6 col-md-offset-1 default-bgc">
   <%= render 'shared/page_title', title: '推荐' %>
   <H2>
     <%= @delivery.resume_candidate_name %><%= "(暂时不找工作)" unless @delivery.resume.available? %>
@@ -71,16 +71,30 @@
     </strong>
   </p>
   <p>
-    <% if @delivery.resume.description.present? %>
-      <%= simple_format @delivery.resume.description %>
+    <% if @delivery.resume.is_pdf? %>
+      <% if @delivery.resume.pdf_attachment.present? %>
+        <%= render 'shared/show_pdf', pdf_url: pdf_download_admins_resume_path(@delivery.resume) %>
+      <% else %>
+        <br>
+        <br>
+        <div class='text-center gray-light'>
+          简历描述还是空的，快去简历列表完善吧！
+        </div>
+        <br>
+        <br>
+      <% end %>
     <% else %>
-      <br>
-      <br>
-      <div class='text-center gray-light'>
-        简历描述还是空的，快去简历列表完善吧！
-      </div>
-      <br>
-      <br>
+      <% if @delivery.resume.description.present? %>
+        <%= simple_format @delivery.resume.description %>
+      <% else %>
+        <br>
+        <br>
+        <div class='text-center gray-light'>
+          简历描述还是空的，快去简历列表完善吧！
+        </div>
+        <br>
+        <br>
+      <% end %>
     <% end %>
   </p>
 </div>

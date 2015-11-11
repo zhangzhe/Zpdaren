@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106040621) do
+ActiveRecord::Schema.define(version: 20151111072944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20151106040621) do
     t.string   "state"
     t.integer  "salary_min",  default: 0
     t.integer  "salary_max",  default: 0
+    t.datetime "deleted_at"
   end
 
   add_index "jobs", ["user_id"], name: "index_jobs_on_user_id", using: :btree
@@ -100,6 +101,7 @@ ActiveRecord::Schema.define(version: 20151106040621) do
     t.integer  "supplier_id"
     t.boolean  "auto_delivery"
     t.boolean  "available"
+    t.text     "pdf_attachment"
   end
 
   create_table "taggings", force: :cascade do |t|

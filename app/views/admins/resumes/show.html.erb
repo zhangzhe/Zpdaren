@@ -31,7 +31,11 @@
     </strong>
   </p>
   <p>
-    <div class="gray-light"><%= simple_format @resume.description.present? ? @resume.description : '简历详情还没有内容，赶快去完善吧！' %></div>
+    <% if @resume.is_pdf? %>
+      <%= render 'shared/show_pdf', pdf_url: (@resume.pdf_attachment.present? ? pdf_download_admins_resume_path(@resume) : download_admins_resume_path(@resume)) %>
+    <% else %>
+      <div class="gray-light"><%= simple_format @resume.description.present? ? @resume.description : '简历详情还没有内容，赶快去完善吧！' %></div>
+    <% end %>
   </p>
   <hr>
   <p>
