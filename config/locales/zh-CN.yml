@@ -265,6 +265,7 @@ zh-CN:
         email: '邮箱'
         password: '密码'
         password_confirmation: '密码确认'
+        reset_password_token: '重置密码'
       resume:
         candidate_name: '候选人姓名'
         mobile: '手机号'
@@ -296,6 +297,8 @@ zh-CN:
               too_long: "太长，密码长度不能超过72位"
             password_confirmation:
               confirmation: "与密码不一致"
+            reset_password_token:
+              invalid: "这不是有效的请求，请联系管理员"
         job:
           attributes:
             title:
@@ -339,3 +342,5 @@ zh-CN:
           attributes:
             message:
               too_long: 长度超过了%{count}字
+
+
