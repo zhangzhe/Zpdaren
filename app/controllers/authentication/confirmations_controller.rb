@@ -1,17 +1,4 @@
 class Authentication::ConfirmationsController < Devise::ConfirmationsController
-  def create
-    debugger
-    self.resource = User.send_confirmation_instructions(resource_params)
-    yield resource if block_given?
-
-    if successfully_sent?(resource)
-      respond_with({}, location: after_resending_confirmation_instructions_path_for("user"))
-    else
-      respond_with(resource)
-    end
-  end
-
-
   def show
     if self.resource = User.find_by_confirmation_token(params[:confirmation_token]).confirmed_at.present?
       flash[:success] = '已经确认，请重新登录.'
