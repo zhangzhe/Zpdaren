@@ -29,6 +29,7 @@ class Job < ActiveRecord::Base
 
 
   strip_attributes
+  acts_as_paranoid
   include SimilarEntity
   include AASM
 
@@ -102,7 +103,7 @@ class Job < ActiveRecord::Base
   end
 
   def visible_resume_count
-    self.deposit.present? ? self.deposit / self.bonus_for_each_resume : 0
+    self.deposit.present? ? (self.deposit / self.bonus_for_each_resume) : 0
   end
 
   def company

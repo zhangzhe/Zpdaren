@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   protect_from_forgery :except => [:check_signature, :weixin_callback]
+  before_action :detect_browser, :only => [:supplier, :recruiter]
 
   def supplier
     @resource = Recruiter.new
@@ -53,5 +54,22 @@ class HomeController < ApplicationController
 
   def signature_condition
     params["echostr"]
+  end
+
+  def detect_browser
+    case request.user_agent
+    when /iPad/i
+      request.variant = :tablet
+    when /iPhone/i
+      request.variant = :phone
+    when /Android/i && /mobile/i
+      request.variant = :phone
+    when /Android/i
+      request.variant = :tablet
+    when /Windows Phone/i
+      request.variant = :phone
+    else
+      request.variant = :desktop
+    end
   end
 end

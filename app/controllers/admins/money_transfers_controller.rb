@@ -1,6 +1,6 @@
 class Admins::MoneyTransfersController < Admins::BaseController
   def deposits
-    @deposits = Deposit.all.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @deposits = Deposit.joins(:job).all.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def final_payments

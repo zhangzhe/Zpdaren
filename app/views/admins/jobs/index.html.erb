@@ -9,12 +9,18 @@
   <li role="presentation" class="<%= active %>">
     <%= link_to '已完成的招聘', admins_jobs_path(:state => "un_hiring") %>
   </li>
+  <% active = (params[:state] == "deleted") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to '已删除的招聘', admins_jobs_path(:state => "deleted") %>
+  </li>
 </ul>
 <br>
 <% if params[:state] == "un_hiring" %>
   <%= render 'un_hiring_list', jobs: @jobs %>
-<% else %>
+<% elsif params[:state] == "in_hiring" %>
   <%= render 'in_hiring_list', jobs: @jobs %>
+<% else %>
+  <%= render 'deleted_list', jobs: @jobs %>
 <% end %>
 
 <%= render 'shared/paginate', objs: @jobs %>

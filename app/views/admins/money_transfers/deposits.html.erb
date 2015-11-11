@@ -28,7 +28,7 @@
       <% @deposits.each do |deposit| %>
         <tr>
           <td><%= deposit.job.company.name %></td>
-          <td><%= deposit.job.try(:title) %></td>
+          <td><%= deposit.job.title %></td>
           <td><%= deposit.wallet.user.email %></td>
           <td><%= deposit.amount %></td>
           <td><%= deposit.created_at.localtime.to_s(:db) %></td>
