@@ -6,24 +6,19 @@
         <th>公司名称</th>
         <th>发布时间</th>
         <th>简历推荐</th>
-        <th>今日简历推荐</th>
         <th>操作/状态</th>
       </tr>
     </thead>
     <tbody>
       <% jobs.each do |job| %>
         <tr>
-          <td><%= link_to job.title, admins_job_path(job.id) %></td>
+          <td><s class="gray-light"><%= job.title %></s></td>
           <td><%= link_to job.company_name, admins_company_path(job.company) %></td>
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
           <td><%= job.resume_status %></td>
           <% flag = job.finished_approve_today? ? "label-success" : "label-danger" %>
           <td>
-            <span class="label <%= flag %> label-as-badge"><%= job.deliveries.approved_today.count %>/8 </span>&nbsp;<%= link_to "审核推荐", admins_job_deliveries_path(:job_id => job), class: "btn btn-primary btn-sm" unless job.finished_approve_today? %>
-          </td>
-          <td>
             <%= Recruiters::JobsHelper::state_show(job) %>
-            <%= link_to '删除', admins_job_path(job), method: :delete, data: { confirm: "是否删除职位#{job.title}？", disable_with: '提交中...'}, class: "btn btn-danger btn-sm" %>
           </td>
         </tr>
       <% end %>
