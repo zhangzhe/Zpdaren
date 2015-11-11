@@ -1,5 +1,5 @@
 class Supplier < User
-  devise :database_authenticatable, :registerable, :trackable, :recoverable, :confirmable
+  devise :registerable
   has_many :resumes
   has_many :deliveries, through: :resumes
   has_many :watchings

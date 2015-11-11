@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   resources :tags, only: [:index]
   resources :withdraws, only: [:new, :create]
 
@@ -18,19 +19,21 @@ Rails.application.routes.draw do
   get 'signup_redirection' => 'home#signup_redirection'
   get 'forget_password_redirection' => 'home#forget_password_redirection'
 
+  get "/suppliers/sign_in", to: redirect("users/sign_in")
+  get "recruiters/sign_in", to: redirect("users/sign_in")
+
   devise_for :recruiters, controllers: {
     registrations: 'authentication/recruiters/registrations',
-    confirmations: 'authentication/recruiters/confirmations'
   }
 
   devise_for :suppliers, controllers: {
     registrations: 'authentication/suppliers/registrations',
-
   }
 
   devise_for :users, controllers: {
     sessions: 'authentication/sessions',
     passwords: 'authentication/passwords',
+    confirmations: 'authentication/confirmations'
   }
 
   namespace :admins do
@@ -92,4 +95,6 @@ Rails.application.routes.draw do
     resources :watchings, only: [:create]
     resources :deliveries, only: [:index, :new, :create]
   end
+
+
 end
