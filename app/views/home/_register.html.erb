@@ -1,7 +1,7 @@
 <div class="col-md-4 col-md-offset-2">
   <%= form_for(@resource, as: @resource_name, url: registration_path(@resource_name), html: {class: "form-signin"}) do |f| %>
     <% name = (@resource_name.to_s == "recruiter") ? "招聘方" : "推荐方" %>
-    <%= f.email_field :email, autofocus: true, :class => "form-control input-lg ", :placeholder => "#{name}邮箱" %>
+    <%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "#{name}邮箱" %>
     <br>
     <%= f.password_field :password, autocomplete: "off", :class => "form-control input-lg ", :placeholder => "#{name}密码" %>
     <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control input-lg ", :placeholder => "#{name}密码确认" %>

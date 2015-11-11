@@ -1,6 +1,5 @@
 <div class="front_image">
-  <br><br><br><br><br><br>
-
+  <br>
   <div class="col-md-offset-1 col-md-5">
     <div class="">
       <H1>
@@ -10,18 +9,13 @@
         <p class="text-white">助您<b><span style="font-size:40px;">&nbsp;挖&nbsp;</span></b>到最优秀的人才</p>
       </H2 >
       <br>
-      <H3>
-        <p class="text-primary">在众聘达人发布招聘信息，您可以极速获得：</p>
-      </H3>
-      <br>
-      </H4>
-        <p class="text-white"><i class="fa fa-check"></i>别家公司的闲置候选人简历</p>
-        <p class="text-white"><i class="fa fa-check"></i>猎头精挑细选的候选人简历</p>
-        <p class="text-white"><i class="fa fa-check"></i>行业资深人士的权威推荐</p>
-      </H4>
     </div>
   </div>
   <%= render "register" %>
+  <br>
+  <div class="col-md-4 col-md-offset-2">
+    <%= link_to "我要推荐", home_supplier_path, :class => "btn btn-success btn-lg" %>
+  </div>
 </div>
 <%= render "how_to_use" %>
 <%= render "customer_examples" %>

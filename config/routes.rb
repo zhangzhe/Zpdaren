@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root :to => 'passthrough#index'
   get 'home' => 'home#supplier'
   get 'home/recruiter' => 'home#recruiter'
+  get 'home/supplier' => 'home#supplier'
 
   # remove later
   match 'check_signature' => 'home#check_signature', via: [:get, :post]
