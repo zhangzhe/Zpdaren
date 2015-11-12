@@ -24,13 +24,16 @@ class Admins::ResumesController < Admins::BaseController
 
   def edit
     @resume = Resume.find(params[:id])
+    if @resume.is_pdf?
+      render 'edit_pdf' and return
+    end
   end
 
   def update
     @resume = Resume.update(params[:id], resume_params)
     if @resume.errors.any?
       flash[:error] = @resume.errors.full_messages.first
-      render 'edit' and return
+      render (@resume.is_pdf? ? 'edit_pdf' : 'edit') and return
     end
     flash[:success] = '完善成功'
     redirect_to admins_resumes_path(:state => "uncompleted")
@@ -41,8 +44,13 @@ class Admins::ResumesController < Admins::BaseController
     send_file resume.attachment.file.file
   end
 
+  def pdf_download
+    resume = Resume.find(params[:id])
+    send_file resume.pdf_attachment.file.file
+  end
+
   private
   def resume_params
-    params[:resume].permit(:candidate_name, :tag_list, :description, :mobile, :email, :available)
+    params[:resume].permit(:candidate_name, :tag_list, :description, :mobile, :email, :available, :pdf_attachment)
   end
 end

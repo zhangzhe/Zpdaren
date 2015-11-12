@@ -8,9 +8,9 @@ class Resume < ActiveRecord::Base
   validates_uniqueness_of :mobile, message: '系统中已经存在，请您选择其他候选人'
   after_create :auto_deliver
   default_scope { order("created_at DESC") }
-  scope :completed, ->{ where.not(:description => nil) }
-  scope :uncompleted, ->{ where(:description => nil) }
-  scope :waiting_approved, ->{ where(:description => nil) }
+  scope :completed, ->{ where("description is not null or pdf_attachment is not null") }
+  scope :uncompleted, ->{ where("description is null and pdf_attachment is null") }
+  scope :waiting_approved, ->{ where("description is null and pdf_attachment is null") }
   scope :unavailable, ->{ where(:available => false) }
   scope :available, ->{ where(:available => true) }
 
@@ -20,6 +20,7 @@ class Resume < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :skills, :interests
   mount_uploader :attachment, FileUploader
+  mount_uploader :pdf_attachment, FileUploader
   strip_attributes
 
   def resumes_from(supplier)
@@ -28,6 +29,14 @@ class Resume < ActiveRecord::Base
 
   def deliveried?(job)
     jobs.include?(job)
+  end
+
+  def is_pdf?
+    self.attachment.file.file.end_with?('pdf')
+  end
+
+  def may_improve?
+    self.description.blank? and self.pdf_attachment.blank?
   end
 
   private

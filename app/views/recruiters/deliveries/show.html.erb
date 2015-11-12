@@ -18,23 +18,15 @@
   <p>
     <span class="label label-info"><%= "推荐者留言：#{@delivery.message}" if @delivery.message.present? %></span>
   </p>
-  <hr>
-  <p>
-    <div class="gray-light"><%= simple_format @delivery.description %></div>
-  </p>
-  <hr>
   <p>
     <h3>联系方式 </h3>
     <% if ['deposit_paid_confirmed', 'final_payment_paid', 'finished'].include?(@delivery.job.state) %>
       <% if @delivery.ever_paid_or_final_payment_paid_or_finished? %>
         <p><strong>手机号：</strong><%= @delivery.resume_mobile %></p>
         <p><strong>邮箱：</strong><%= @delivery.resume_email %></p>
-      <% elsif !@delivery.refused? %>
-        <% if @delivery.approved? %>
-          <%= link_to "查看联系方式", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary", role: "button", method: :put, data: { disable_with: '提交中...' } %>
-          <%= link_to "拒绝", new_recruiters_rejection_path(delivery_id: @delivery.id), class: "btn btn-primary", role: "button" %>
-          <p class='fs12 mt20 gray-light'>备注：点击【查看联系方式】，该职位可查看简历数减1。</p>
-        <% end %>
+      <% elsif @delivery.approved? %>
+        <p><strong>手机号：</strong>*********</p>
+        <p><strong>邮箱：</strong>*********</p>
       <% end %>
     <% elsif @delivery.job.deposit_paid? %>
       <div class="alert alert-info" role="alert">订金确认中，请等待</div>
@@ -42,4 +34,28 @@
       <div class="alert alert-info" role="alert">请进入职位&nbsp;<b><%= link_to @delivery.job_title, recruiters_job_path(@delivery.job) %></b>&nbsp;并支付订金即可查看联系方式</div>
     <% end %>
   </p>
+  <hr>
+  <p>
+    <% if @delivery.resume.is_pdf? %>
+      <iframe src="/pdfjs/web/viewer.html?file=<%= download_recruiters_resume_path(@delivery.resume) %>" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
+    <% else %>
+      <div class="gray-light"><%= simple_format @delivery.description %></div>
+    <% end %>
+  </p>
 </div>
+<br>
+<hr>
+<br>
+<div>
+  <% if @delivery.approved? %>
+    <%= link_to "查看联系方式", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary", role: "button", method: :put, data: { disable_with: '提交中...' } %>
+    <%= link_to "拒绝", new_recruiters_rejection_path(delivery_id: @delivery.id), class: "btn btn-primary", role: "button" %>
+    <p class='fs12 mt20 gray-light'>备注：点击【查看联系方式】，该职位可查看简历数减1。</p>
+  <% end %>
+</div>
+<br>
+<br>
+<br>
+<br>
+
+

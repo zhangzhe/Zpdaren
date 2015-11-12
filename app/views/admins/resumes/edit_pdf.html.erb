@@ -1,0 +1,58 @@
+<br>
+<ol class="breadcrumb">
+  <li><%= link_to '简历列表', admins_resumes_path() %></li>
+  <li>
+    完善简历
+  </li>
+</ol>
+<div class="col-md-6">
+  <%= render 'shared/page_title', title: @resume.candidate_name %>
+  <%= form_for @resume, url: admins_resume_path do |f| %>
+    <%= f.hidden_field :job_id, value: params[:job_id] if params[:job_id] %>
+    <%= f.hidden_field :delivery_id, value: params[:delivery_id] if params[:delivery_id] %>
+    <p>
+      <%= f.label :candidate_name, '被推荐人' %>
+      <span class='red-star'>*</span>
+      <%= f.text_field :candidate_name, class: "form-control" %>
+    </p>
+    <p>
+      <%= f.label :mobile, '电话' %>
+      <span class='red-star'>*</span>
+      <%= f.text_field :mobile, class: "form-control" %>
+    </p>
+    <p>
+      <%= f.label :mobile, '求职意向' %>
+      <span class='red-star'>*</span>
+      <%= f.select :available, [["求职中", true], ["暂时不找工作", false]], {}, {class: "form-control"} %>
+    </p>
+    <p>
+      <%= f.label :email, '邮箱' %>
+      <%= f.text_field :email, class: "form-control" %>
+    </p>
+    <p>
+      <%= f.label :pdf_attachment, '上传删除联系方式后的简历' %>
+      <span class='red-star'>*</span>
+    </p>
+    <p>
+      <%= f.file_field 'pdf_attachment', style: "display:inline;width:160px;float:left;" %><span style="color:red;font-size:12px;">只能上传pdf格式的简历</span>
+    </p>
+    <p>
+      <%= render '/shared/tag' %>
+    </p>
+    <p>
+      <%= f.label :tag_list, '简历标签' %>
+      <span class='red-star'>*</span>
+      <%= f.text_field :tag_list, value: @resume.tag_list.to_s, class: 'form-control auto-tags' %>
+    </p>
+    <p>
+      <%= f.submit "确定", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
+      &nbsp;
+      <%= link_to "下载原件", download_admins_resume_path(@resume) %>
+    </p>
+  <% end %>
+</div>
+
+<div class="col-md-6">
+  <%= render 'shared/page_title', title: '简历预览' %>
+  <%= render 'shared/show_pdf', pdf_url: download_admins_resume_path(@resume) %>
+</div>
