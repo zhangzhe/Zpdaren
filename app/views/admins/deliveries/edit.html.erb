@@ -4,7 +4,7 @@
   <li><%= @delivery.resume_candidate_name %></li>
 </ol>
 
-<div class="col-md-5 default-bgc">
+<div class="col-md-6">
   <%= render 'shared/page_title', title: '职位' %>
   <H2>
     <%= @delivery.job_title %>
@@ -51,7 +51,7 @@
     </div>
   </p>
 </div>
-<div class="col-md-6 col-md-offset-1 default-bgc">
+<div class="col-md-6">
   <%= render 'shared/page_title', title: '推荐' %>
   <H2>
     <%= @delivery.resume_candidate_name %><%= "(暂时不找工作)" unless @delivery.resume.available? %>
