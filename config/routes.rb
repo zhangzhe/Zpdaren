@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get 'forget_password_redirection' => 'home#forget_password_redirection'
 
   get "/suppliers/sign_in", to: redirect("users/sign_in")
-  get "recruiters/sign_in", to: redirect("users/sign_in")
+  get "/recruiters/sign_in", to: redirect("users/sign_in")
 
   devise_for :recruiters, controllers: {
     registrations: 'authentication/recruiters/registrations',
