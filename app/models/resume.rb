@@ -39,6 +39,10 @@ class Resume < ActiveRecord::Base
     self.description.blank? and self.pdf_attachment.blank?
   end
 
+  def recent_delivery_message
+    self.deliveries.last.message if self.deliveries.try(:last)
+  end
+
   private
   def auto_deliver
     matching_jobs.each do |job|
