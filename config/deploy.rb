@@ -14,7 +14,7 @@ set :use_sudo, false
 set :tmp_dir, '/data/Epin/shared/tmp'
 set :rails_env, "production"
 set :linked_files, fetch(:linked_files, []).push('config/database.yml')
-set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps uploads public/pdfjs}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps uploads}
 
 # after 'deploy:publishing', 'deploy:start'
 
