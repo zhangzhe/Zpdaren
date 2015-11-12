@@ -24,7 +24,7 @@
           <li><%= link_to current_user.email, current_user_account_path %></li>
         <% end %>
         <% if current_user %>
-          <li><%= link_to "退出", destroy_admin_session_path, :method => "DELETE" %></li>
+          <li><%= link_to "退出", destroy_user_session_path, :method => "DELETE" %></li>
         <% else %>
           <% if params[:controller] == "home" && params[:action] == "supplier" %>
             <li>
@@ -49,9 +49,6 @@
               </a>
             </li>
           <% end %>
-          <li>
-            <%= link_to '管理员登录', new_admin_session_path, :class => 'nav-text' unless Rails.env == "production" %>
-          </li>
         <% end %>
       </ul>
     </div><!--/.nav-collapse -->

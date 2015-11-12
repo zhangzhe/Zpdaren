@@ -12,7 +12,15 @@ module DeviseHelper
     html.html_safe
   end
 
-  def current_user
-    current_admin || current_recruiter || current_supplier
+  def current_admin
+    current_user if current_user.is_a?(Admin)
+  end
+
+  def  current_recruiter
+    current_user if current_user.is_a?(Recruiter)
+  end
+
+  def  current_supplier
+    current_user if current_user.is_a?(Supplier)
   end
 end

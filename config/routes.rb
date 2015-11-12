@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   resources :tags, only: [:index]
   resources :withdraws, only: [:new, :create]
 
@@ -10,31 +11,29 @@ Rails.application.routes.draw do
   get 'home/recruiter' => 'home#recruiter'
   get 'home/supplier' => 'home#supplier'
 
-  # remove later
-  match 'check_signature' => 'home#check_signature', via: [:get, :post]
   match 'weixin_callback' => 'home#weixin_callback', via: [:get, :post]
 
   get 'recruiters' => 'recruiters/base#show'
   get 'suppliers' => 'suppliers/base#show'
   get 'admins' => 'admins/base#show'
   get 'signup_redirection' => 'home#signup_redirection'
+  get 'forget_password_redirection' => 'home#forget_password_redirection'
+
+  get "/suppliers/sign_in", to: redirect("users/sign_in")
+  get "recruiters/sign_in", to: redirect("users/sign_in")
 
   devise_for :recruiters, controllers: {
-    sessions: 'authentication/recruiters/sessions',
     registrations: 'authentication/recruiters/registrations',
-    passwords: 'authentication/recruiters/passwords',
-    confirmations: 'authentication/recruiters/confirmations'
   }
 
   devise_for :suppliers, controllers: {
-    sessions: 'authentication/suppliers/sessions',
     registrations: 'authentication/suppliers/registrations',
-    passwords: 'authentication/suppliers/passwords',
-    confirmations: 'authentication/suppliers/confirmations'
   }
 
-  devise_for :admins, controllers: {
-    sessions: 'authentication/admins/sessions',
+  devise_for :users, controllers: {
+    sessions: 'authentication/sessions',
+    passwords: 'authentication/passwords',
+    confirmations: 'authentication/confirmations'
   }
 
   namespace :admins do
@@ -96,4 +95,6 @@ Rails.application.routes.draw do
     resources :watchings, only: [:create]
     resources :deliveries, only: [:index, :new, :create]
   end
+
+
 end

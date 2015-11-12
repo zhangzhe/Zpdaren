@@ -6,10 +6,10 @@
         <h4 class="modal-title" id="myModalLabel">登录众聘达人</h4>
       </div>
       <div class="modal-body">
-        <%= form_for(@resource, as: @resource_name, url: session_path(@resource_name)) do |f| %>
+        <%= form_for(User.new, as: "user", url: session_path("user")) do |f| %>
         <p class="form-control-static"><%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "邮箱" %></p>
         <p class="form-control-static"><%= f.password_field :password, autocomplete: "off", :class => "form-control input-lg", :placeholder => "密码" %></p>
-        <%= f.submit "推荐方登录", :class => "btn btn-primary btn-lg btn-block" %>
+        <%= f.submit "登录", :class => "btn btn-primary btn-lg btn-block" %>
         <% end %>
       </div>
       <div class="modal-footer">

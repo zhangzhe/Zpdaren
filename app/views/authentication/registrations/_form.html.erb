@@ -19,7 +19,7 @@
         <%= f.submit "#{name}注册", :class => "btn btn-primary btn-lg btn-block" %>
         <br>
         已有账号？<%= link_to "登录", login_path_for(resource_name) %>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <%= link_to "忘记密码", forget_password_path_for(resource_name) %>
+        <%= link_to "忘记密码", forget_password_path_for("user") %>
       <% end %>
     </div>
   </div>

@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  protect_from_forgery :except => [:check_signature, :weixin_callback]
+  protect_from_forgery :except => [:weixin_callback]
   before_action :detect_browser, :only => [:supplier, :recruiter]
 
   def supplier
@@ -13,6 +13,10 @@ class HomeController < ApplicationController
   end
 
   def signup_redirection
+
+  end
+
+  def forget_password_redirection
 
   end
 
