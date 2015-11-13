@@ -3,7 +3,7 @@
   <li><%= link_to "为【#{@job.company_name}--#{@job.title}】推荐", suppliers_job_path(@job) %></li>
 </ol>
 
-<div class="col-md-5">
+<div class="col-md-6">
   <H2>
     <%= @job.title %>
   </H2 >
@@ -18,7 +18,7 @@
     <%= simple_format  @job.description %>
   </p>
 </div>
-<div class="col-md-5 col-md-offset-1">
+<div class="col-md-6">
   <H2>
     <%= @resume.candidate_name %>
   </H2 >
@@ -27,11 +27,14 @@
     <%= @resume.tag_list.each{|tag|}.join(' ') %>
   </p>
   <p>
-
-    <% if @resume.description.present? %>
-      <%= simple_format @resume.description %>
+    <% if @resume.is_pdf? %>
+      <%= render 'shared/show_pdf', pdf_url: download_suppliers_resume_path(@resume) %>
     <% else %>
-      <%= link_to '下载简历原件', download_suppliers_resume_path(@resume) %>
+      <% if @resume.description.present? %>
+        <%= simple_format @resume.description %>
+      <% else %>
+        <%= link_to '下载简历原件', download_suppliers_resume_path(@resume) %>
+      <% end %>
     <% end %>
   </p>
 </div>
