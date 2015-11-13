@@ -20,6 +20,7 @@ class Job < ActiveRecord::Base
 
   delegate :name, :id, to: :company, prefix: true
 
+  scope :submitted, -> { where('state' => 'submitted')}
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
   scope :deposit_paid_confirmed, -> { where('state' => 'deposit_paid_confirmed')}
   scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'deposit_paid_confirmed']) }
