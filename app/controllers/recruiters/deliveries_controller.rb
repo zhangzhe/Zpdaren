@@ -1,7 +1,7 @@
 class Recruiters::DeliveriesController < Recruiters::BaseController
   def index
     if params[:job_id]
-      @job = Job.find(params[:job_id])
+      @job = current_recruiter.jobs.find(params[:job_id])
       @deliveries = @job.deliveries.order("created_at DESC")
     else
       @jobs = current_recruiter.jobs
@@ -14,7 +14,7 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
   end
 
   def show
-    @delivery = Delivery.find(params[:id])
+    @delivery = current_recruiter.deliveries.find(params[:id])
     if @delivery.job.deposit_paid_confirmed?
       if @delivery.unread?
         @delivery.read!
@@ -24,7 +24,7 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
   end
 
   def pay
-    delivery = Delivery.find(params[:id])
+    delivery = current_recruiter.deliveries.find(params[:id])
     if delivery.approved?
       delivery.pay!
       flash[:success] = "支付成功，您现在可以查看候选人联系方式。"

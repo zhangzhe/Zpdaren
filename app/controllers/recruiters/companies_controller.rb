@@ -4,12 +4,12 @@ class Recruiters::CompaniesController < Recruiters::BaseController
   end
 
   def update
-    @company = Company.update(params[:id], company_params)
-    if @company.errors.any?
+    @company = current_recruiter.company
+    if @company.update_attributes(company_params)
+      redirect_to recruiters_jobs_path
+    else
       flash[:error] = @company.errors.messages.values.first.first
       render 'edit' and return
-    else
-      redirect_to recruiters_jobs_path
     end
   end
 

@@ -27,21 +27,22 @@ class Recruiters::JobsController < Recruiters::BaseController
   end
 
   def show
-    @job = Job.find(params[:id])
+    @job = current_recruiter.jobs.find(params[:id])
   end
 
   def edit
-    @job = Job.find(params[:id])
+    @job = current_recruiter.jobs.find(params[:id])
   end
 
   def update
-    @job = Job.update(params[:id], job_params_edit)
-    if @job.errors.any?
-      flash[:error] = @job.errors.full_messages.first
+    @job = current_recruiter.jobs.find(params[:id])
+    if @job.update_attributes(job_params_edit)
+      flash[:success] = "修改完成！"
+      redirect_to recruiters_jobs_path
+    else
+      flash[:error] = @job.errors.messages.values.first.first
       render 'edit' and return
     end
-    flash[:success] = "修改完成！"
-    redirect_to recruiters_jobs_path
   end
 
   private
