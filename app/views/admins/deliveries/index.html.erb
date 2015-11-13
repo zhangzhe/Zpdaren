@@ -21,6 +21,15 @@
     <li role="presentation" class="<%= active %>">
       <%= link_to '已审核', admins_deliveries_path(:state => "approved") %>
     </li>
+
+    <% active = (params[:state] == "paid") ? "active" : "" %>
+    <li role="presentation" class="<%= active %>">
+      <%= link_to '已付费', admins_deliveries_path(:state => "paid") %>
+    </li>
+    <% active = (params[:state] == "final_paid") ? "active" : "" %>
+    <li role="presentation" class="<%= active %>">
+      <%= link_to '已支付尾款', admins_deliveries_path(:state => "final_paid") %>
+    </li>
   </ul>
   <br>
 
