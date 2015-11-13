@@ -33,9 +33,16 @@
       <%= f.label :pdf_attachment, '上传删除联系方式后的简历' %>
       <span class='red-star'>*</span>
     </p>
-    <p>
-      <%= f.file_field 'pdf_attachment', style: "display:inline;width:160px;float:left;" %><span style="color:red;font-size:12px;">只能上传pdf格式的简历</span>
-    </p>
+    <div class="checkbox">
+      <label>
+        <%= f.check_box :reuse_attachment, {checked: false} %> 是否使用简历原件（如果简历原件中没有联系方式，可以直接使用，不用再次上传）
+      </label>
+    </div>
+    <div class="pdfAttachment">
+      <p>
+        <%= f.file_field 'pdf_attachment', style: "display:inline;width:160px;float:left;" %><span style="color:red;font-size:12px;">只能上传pdf格式的简历</span>
+      </p>
+    </div>
     <p>
       <%= render '/shared/tag' %>
     </p>
@@ -56,3 +63,16 @@
   <%= render 'shared/page_title', title: '简历预览' %>
   <%= render 'shared/show_pdf', pdf_url: download_admins_resume_path(@resume) %>
 </div>
+<script type="text/javascript">
+  $(function(){
+    var checkBox = $('.checkbox').find("input[type='checkbox']")
+    $(checkBox).click(function(){
+      if ($(checkBox).is(':checked')) {
+        $('.pdfAttachment').hide();
+      }else{
+        $('.pdfAttachment').show();
+      }
+    });
+  });
+</script>
+

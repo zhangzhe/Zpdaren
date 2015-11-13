@@ -23,6 +23,10 @@ class Resume < ActiveRecord::Base
   mount_uploader :pdf_attachment, FileUploader
   strip_attributes
 
+  def set_attachment_to_pdf_attachment(reuse_attachment)
+    self.update_attribute(:pdf_attachment, self.attachment) if reuse_attachment == '1'
+  end
+
   def resumes_from(supplier)
     self.resumes.where(:supplier_id => supplier.id)
   end
