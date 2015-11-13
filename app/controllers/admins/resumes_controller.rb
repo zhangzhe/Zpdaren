@@ -31,6 +31,7 @@ class Admins::ResumesController < Admins::BaseController
 
   def update
     @resume = Resume.update(params[:id], resume_params)
+    @resume.set_attachment_to_pdf_attachment(params[:resume][:reuse_attachment])
     if @resume.errors.any?
       flash[:error] = @resume.errors.full_messages.first
       render (@resume.is_pdf? ? 'edit_pdf' : 'edit') and return
