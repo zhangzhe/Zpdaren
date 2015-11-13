@@ -5,7 +5,8 @@ class Recruiters::DepositsController < Recruiters::BaseController
 
   def create
     ActiveRecord::Base.transaction do
-      job = Job.update(params[:job][:id], deposit_params)
+      job = current_recruiter.jobs.find(params[:job][:id])
+      job.update_attributes(deposit_params)
       admin = Admin.admin
       admin.receive(job.deposit)
       job.pay!

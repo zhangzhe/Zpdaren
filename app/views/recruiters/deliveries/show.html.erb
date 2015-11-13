@@ -37,7 +37,7 @@
   <hr>
   <p>
     <% if @delivery.resume.is_pdf? %>
-      <iframe src="/pdfjs/web/viewer.html?file=<%= download_recruiters_resume_path(@delivery.resume) %>" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
+      <%= render 'shared/show_pdf', pdf_url: download_recruiters_resume_path(@delivery.resume) %>
     <% else %>
       <div class="gray-light"><%= simple_format @delivery.description %></div>
     <% end %>

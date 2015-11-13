@@ -1,7 +1,7 @@
 class Recruiters::RejectionsController < Recruiters::BaseController
 
   def new
-    @delivery = Delivery.find(params[:delivery_id])
+    @delivery = current_recruiter.deliveries.find(params[:delivery_id])
   end
 
   def create
