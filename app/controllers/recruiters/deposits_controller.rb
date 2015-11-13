@@ -1,6 +1,6 @@
 class Recruiters::DepositsController < Recruiters::BaseController
   def new
-    @job = Job.find(params[:job_id])
+    @job = current_recruiter.jobs.submitted.find(params[:job_id])
   end
 
   def create
