@@ -18,7 +18,7 @@ class Job < ActiveRecord::Base
   validates_length_of :title, maximum: 50
   validates_numericality_of :bonus, greater_than_or_equal_to: 1000, only_integer: true
 
-  delegate :name, :id, to: :company, prefix: true
+  delegate :name, :id, :address, to: :company, prefix: true
 
   scope :submitted, -> { where('state' => 'submitted')}
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}

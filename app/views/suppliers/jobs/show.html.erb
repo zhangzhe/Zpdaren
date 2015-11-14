@@ -17,6 +17,7 @@
     <blockquote>
       <%= simple_format @job.company_description %>
     </blockquote>
+    <p>地址：<%= @job.company_address.present? ? @job.company_address : '暂未提供' %></p>
   </div>
 <% end %>
 

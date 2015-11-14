@@ -12,6 +12,9 @@
     <p>
       <div class='ml2em'><%= simple_format current_recruiter.company.description %></div>
     </p>
+    <p class='ml2em'>
+      地址：<%= current_recruiter.company.address.present? ? current_recruiter.company.address : '暂未提供' %>
+    </p>
     <br>
     <p>
       <%= link_to "修改公司信息", edit_recruiters_company_path(current_recruiter.company), :class => "btn btn-primary" %>

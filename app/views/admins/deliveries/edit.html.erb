@@ -50,6 +50,7 @@
       <%= simple_format @delivery.job.company.description %>
     </div>
   </p>
+  <p class='gray-light'>地址：<%= @delivery.job.company.address.present? ? @delivery.job.company.address : '暂未提供' %></p>
 </div>
 <div class="col-md-6">
   <%= render 'shared/page_title', title: '推荐' %>

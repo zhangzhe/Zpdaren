@@ -17,4 +17,5 @@
       <%= simple_format @company.description %>
     </div>
   </p>
+  <p class='gray-light'>地址：<%= @company.address.present? ? @company.address : '暂未提供' %></p>
 </div>

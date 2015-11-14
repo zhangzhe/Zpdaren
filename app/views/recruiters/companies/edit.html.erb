@@ -25,6 +25,10 @@
     <%= f.text_field :mobile, class: 'form-control' %>
   </p>
   <p>
+    <%= f.label :address, "公司地址" %>
+    <%= f.text_field :address, class: 'form-control' %>
+  </p>
+  <p>
     <%= f.submit "确定", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
   </p>
 <% end %>
