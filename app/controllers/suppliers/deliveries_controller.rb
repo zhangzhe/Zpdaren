@@ -19,6 +19,10 @@ class Suppliers::DeliveriesController < Suppliers::BaseController
   def create
     unless Delivery.find_by_resume_id_and_job_id(delivery_params[:resume_id], delivery_params[:job_id])
       @delivery = Delivery.create(delivery_params)
+      if @delivery.errors.any?
+        flash[:error] = @delivery.errors.full_messages.first
+        redirect_to :back and return
+      end
     else
       flash[:error] = '该简历已被推荐，请选择其他简历！'
       redirect_to select_list_suppliers_resumes_path(job_id: delivery_params[:job_id]) and return

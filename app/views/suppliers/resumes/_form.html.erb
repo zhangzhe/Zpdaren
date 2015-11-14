@@ -30,7 +30,8 @@
     <p>
       <%= f.fields_for :deliveries do |deliveries_form| %>
         <%= hidden_field_tag 'resume[deliveries_attributes][0][job_id]', params[:job_id] %>
-        <%= deliveries_form.text_field 'message', class: 'form-control', :placeholder => '给招聘方留言...(选填，50字内)' %>
+        <%= deliveries_form.label :message, '给招聘方留言...(选填，50字内)' %>
+        <%= deliveries_form.text_field 'message', class: 'form-control', :placeholder => '给招聘方留言...(选填，50字内)', maxlength: 50 %>
       <% end %>
     </p>
   <% end %>

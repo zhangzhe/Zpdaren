@@ -47,7 +47,7 @@
     <%= hidden_field_tag 'delivery[resume_id]', params[:resume_id] || params[:delivery][:resume_id] %>
     <p>
       <%= f.label :message, '给招聘方留言...(选填，50字内)' %>
-      <%= f.text_field :message, class: "form-control", :value => @resume.recent_delivery_message %>
+      <%= f.text_field :message, class: "form-control", :value => @resume.recent_delivery_message, maxlength: 50 %>
     </p>
     <p>
       <%= f.submit "确认", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
