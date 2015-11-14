@@ -14,7 +14,6 @@ class Resume < ActiveRecord::Base
   scope :unavailable, ->{ where(:available => false) }
   scope :available, ->{ where(:available => true) }
 
-
   accepts_nested_attributes_for :deliveries
   include SimilarEntity
   acts_as_taggable
@@ -45,6 +44,10 @@ class Resume < ActiveRecord::Base
 
   def recent_delivery_message
     self.deliveries.last.message if self.deliveries.try(:last)
+  end
+
+  def unavailable?
+    available == false
   end
 
   private
