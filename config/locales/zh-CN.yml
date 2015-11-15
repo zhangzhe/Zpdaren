@@ -306,15 +306,15 @@ zh-CN:
               blank: "不能为空"
             salary_min:
               blank: "不能为空"
+              greater_than_or_equal_to: 必须大于等于%{count}
               not_a_number: "必须是数字"
               not_an_integer: '必须是整数'
-              greater_than: 必须大于%{count}
-              less_than: 必须小于最高月薪
             salary_max:
               blank: "不能为空"
+              greater_than_or_equal_to: 必须大于等于%{count}
               not_a_number: "必须是数字"
               not_an_integer: '必须是整数'
-              greater_than: 必须大于%{count}
+              greater_than_or_equal_to: 必须大于等于最低工资
             description:
               blank: "不能为空"
             bonus:

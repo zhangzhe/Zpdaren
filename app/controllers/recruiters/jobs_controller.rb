@@ -40,7 +40,7 @@ class Recruiters::JobsController < Recruiters::BaseController
       flash[:success] = "修改完成！"
       redirect_to recruiters_jobs_path
     else
-      flash[:error] = @job.errors.messages.values.first.first
+      flash[:error] = @job.errors.full_messages.first
       render 'edit' and return
     end
   end
