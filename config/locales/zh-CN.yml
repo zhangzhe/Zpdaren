@@ -332,6 +332,7 @@ zh-CN:
           attributes:
             candidate_name:
               blank: "不能为空"
+              too_long: 不能超过%{count}个字符
             mobile:
               blank: "不能为空"
               wrong_length: "格式不对，请从新输入"
