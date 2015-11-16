@@ -15,6 +15,6 @@ class Recruiters::CompaniesController < Recruiters::BaseController
 
   private
   def company_params
-    params[:company].permit(:name, :description, :mobile)
+    params[:company].permit(:name, :description, :mobile, :address)
   end
 end
