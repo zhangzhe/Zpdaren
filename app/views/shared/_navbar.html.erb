@@ -9,16 +9,25 @@
           <li class="<%= active_for?([Admins::JobsController, Recruiters::JobsController, Suppliers::JobsController]) %>"><a href="/">首页</a></li>
         </ul>
       <% elsif front_page? %>
-        <form class="navbar-form navbar-right">
+        <%= form_for(User.new, as: "user", url: session_path("user"), html: {class: "navbar-form navbar-right"}) do |f| %>
           <div class="form-group">
-            <input type="text" placeholder="邮箱" class="form-control">
+            <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder => "邮箱" %><br>
           </div>
           <div class="form-group">
-            <input type="password" placeholder="密码" class="form-control">
+            <%= f.password_field :password, autocomplete: "off", :class => "form-control", :placeholder => "密码" %>
           </div>
-          <button type="submit" class="btn btn-success">登录</button>
-        </form>
+          <%= f.submit "登录", :class => "btn btn-success" %>
+        <% end %>
       <% end %>
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_admin %>
+          <li><%= link_to current_user.wallet.money.to_i, "" %></li>
+        <% end %>
+        <% if current_user %>
+          <li><%= link_to current_user.email, current_user_account_path %></li>
+          <li><%= link_to "退出", destroy_user_session_path, :method => "DELETE" %></li>
+        <% end %>
+      </ul>
     </div><!--/.nav-collapse -->
   </div>
 </nav>
