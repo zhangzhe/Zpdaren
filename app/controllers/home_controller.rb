@@ -1,23 +1,14 @@
 class HomeController < ApplicationController
   protect_from_forgery :except => [:weixin_callback]
-  before_action :detect_browser, :only => [:supplier, :recruiter]
+  before_action :detect_browser, :only => [:index]
 
-  def supplier
-    @resource = Recruiter.new
-    @resource_name = "supplier"
-  end
-
-  def recruiter
-    @resource = Recruiter.new
-    @resource_name = "recruiter"
+  def index
   end
 
   def signup_redirection
-
   end
 
   def forget_password_redirection
-
   end
 
   require 'digest/sha1'

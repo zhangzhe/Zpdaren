@@ -1,114 +1,28 @@
 <div class="col-md-4 col-md-offset-1">
-  <!-- <%= form_for(@resource, as: @resource_name, url: registration_path(@resource_name), html: {class: "form-signin"}) do |f| %>
-    <% name = (@resource_name.to_s == "recruiter") ? "招聘方" : "推荐方" %>
-    <%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "#{name}邮箱" %>
-    <br>
-    <%= f.password_field :password, autocomplete: "off", :class => "form-control input-lg ", :placeholder => "#{name}密码" %>
-    <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control input-lg ", :placeholder => "#{name}密码确认" %>
-    <p>
-      <input type="checkbox" name="" value="1" checked/>&nbsp;<span style="color:azure">我已阅读并同意<a href="#">《用户服务协议》</a></span>
-    </p>
-    <%= f.submit "#{name}注册", :class => "btn btn-primary btn-lg btn-block" %>
-  <% end %>
-  <br>
-
-<br><br><br><br><br> -->
 <div>
-  <!-- Nav tabs -->
   <ul class="nav nav-tabs nav-justified" role="tablist">
-    <li role="presentation" class="active"><a style="font-size:19px;" class="text-primary" href="#home" aria-controls="home" role="tab" data-toggle="tab">招聘方注册</a></li>
-    <li role="presentation" class=""><a style="font-size:19px;" class="text-primary" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">推荐方注册</a></li>
+    <li role="presentation" class="active"><a style="font-size:19px;" class="text-primary" href="#supplier" aria-controls="supplier" role="tab" data-toggle="tab">推荐方注册</a></li>
+    <li role="presentation" class=""><a style="font-size:19px;" class="text-primary" href="#recruiter" aria-controls="recruiter" role="tab" data-toggle="tab">招聘方注册</a></li>
   </ul>
   <br>
-
-  <!-- Tab panes -->
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active fade in" id="home">
-      <%= form_for(@resource, as: @resource_name, url: registration_path(@resource_name), html: {class: "form-horizontal"}) do |f| %>
-        <% name = (@resource_name.to_s == "recruiter") ? "招聘方" : "推荐方" %>
-
-        <div class="form-group">
-          <div class="col-sm-12">
-
-        <%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "#{name}邮箱" %>
-      </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-12">
-        <%= f.password_field :password, autocomplete: "off", :class => "form-control input-lg ", :placeholder => "#{name}密码" %>
-        </div>
-        </div>
-        <!-- <div class="form-group">
-          <div class="col-sm-12">
-        <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control input-lg ", :placeholder => "#{name}密码确认" %>
-        </div>
-        </div> -->
-        <div class="form-group">
-          <div class="col-sm-12">
-
-          <input type="checkbox" name="" value="1" checked/>&nbsp;<span style="color:azure">我已阅读并同意<a href="#">《用户服务协议》</a></span>
-        </div>
-        </div>
-        <%= f.submit "#{name}注册", :class => "btn btn-primary btn-lg btn-block" %>
-      <% end %>
+    <div role="tabpanel" class="tab-pane active fade in" id="supplier">
+      <% @resource = Supplier.new; @resource_name = "supplier" %>
+      <%= render "signup" %>
     </div>
-    <div role="tabpanel" class="tab-pane fade" id="profile">
-      <%= form_for(@resource, as: @resource_name, url: registration_path(@resource_name), html: {class: "form-signin"}) do |f| %>
-        <% name = (@resource_name.to_s == "recruiter") ? "招聘方" : "推荐方" %>
-        <%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "#{name}邮箱" %>
-        <br>
-        <%= f.password_field :password, autocomplete: "off", :class => "form-control input-lg ", :placeholder => "#{name}密码" %>
-        <p>
-          <input type="checkbox" name="" value="1" checked/>&nbsp;<span style="color:azure">我已阅读并同意<a href="#">《用户服务协议》</a></span>
-        </p>
-        <%= f.submit "#{name}注册", :class => "btn btn-primary btn-lg btn-block" %>
-      <% end %>
+    <div role="tabpanel" class="tab-pane fade" id="recruiter">
+      <% @resource = Recruiter.new; @resource_name = "recruiter" %>
+      <%= render "signup" %>
     </div>
   </div>
-</div>
   <br>
   <p>
     <a href="#" data-toggle="modal" data-target="#ModalForgetPassword">
       <span style="color:azure">忘记密码?</span>
     </a>
   </p>
+
   <%= render "/home/modal_forget_password" %>
   <br>
-
-  <% if current_admin %>
-    <li><%= link_to current_user.wallet.money.to_i, "" %></li>
-  <% end %>
-
-  <% if current_user %>
-    <li><%= link_to current_user.email, current_user_account_path %></li>
-  <% end %>
-  <% if current_user %>
-    <li><%= link_to "退出", destroy_user_session_path, :method => "DELETE" %></li>
-  <% else %>
-    <% if params[:controller] == "home" && params[:action] == "supplier" %>
-      <!-- <li>
-        <a href="#" data-toggle="modal" data-target="#ModalSupplierLogin">
-          <span class='nav-text'><i class="fa fa-user"></i> &nbsp;登录</span>
-        </a>
-      </li> -->
-      <!-- <li>
-        <a href="/home/recruiter">
-          <span class='nav-text'><i class="fa fa-child"></i> &nbsp;我要招聘</span>
-        </a>
-      </li> -->
-    <% elsif params[:controller] == "home" && params[:action] == "recruiter" %>
-    <li>
-      <!-- <a href="#" data-toggle="modal" data-target="#ModalRecruiterLogin">
-        <span class='nav-text'><i class="fa fa-user"></i> &nbsp;登录</span>
-      </a> -->
-    </li>
-      <!-- <li>
-        <a href="/home">
-          <span class='nav-text'><i class="fa fa-child"></i> &nbsp;我要推荐</span>
-        </a>
-      </li> -->
-    <% end %>
-  <% end %>
 </div>
-
-
+<br><br><br><br><br><br>
