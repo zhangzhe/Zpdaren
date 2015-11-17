@@ -1,15 +1,28 @@
-<div class="col-md-4 col-md-offset-2">
-  <%= form_for(@resource, as: @resource_name, url: registration_path(@resource_name), html: {class: "form-signin"}) do |f| %>
-    <% name = (@resource_name.to_s == "recruiter") ? "招聘方" : "推荐方" %>
-    <%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "#{name}邮箱" %>
-    <br>
-    <%= f.password_field :password, autocomplete: "off", :class => "form-control input-lg ", :placeholder => "#{name}密码" %>
-    <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control input-lg ", :placeholder => "#{name}密码确认" %>
-    <%= f.submit "#{name}注册", :class => "btn btn-primary btn-lg btn-block" %>
-  <% end %>
+<div class="col-md-5 col-md-offset-2">
+<div>
+  <ul class="nav nav-tabs nav-justified" role="tablist">
+    <li role="presentation" class="active"><a style="font-size:19px;" class="text-primary" href="#supplier" aria-controls="supplier" role="tab" data-toggle="tab">推荐方注册</a></li>
+    <li role="presentation" class=""><a style="font-size:19px;" class="text-primary" href="#recruiter" aria-controls="recruiter" role="tab" data-toggle="tab">招聘方注册</a></li>
+  </ul>
   <br>
-  <a href="#" data-toggle="modal" data-target="#ModalForgetPassword">
-     <span style="color:azure">忘记密码?</span>
-  </a>
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active fade in" id="supplier">
+      <% @resource = Supplier.new; @resource_name = "supplier" %>
+      <%= render "signup" %>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="recruiter">
+      <% @resource = Recruiter.new; @resource_name = "recruiter" %>
+      <%= render "signup" %>
+    </div>
+  </div>
+  <br>
+  <p>
+    <a href="#" data-toggle="modal" data-target="#ModalForgetPassword">
+      <span style="color:azure">忘记密码?</span>
+    </a>
+  </p>
+
   <%= render "/home/modal_forget_password" %>
+  <br>
 </div>
+<br><br><br><br><br><br>

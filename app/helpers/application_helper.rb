@@ -10,6 +10,10 @@ module ApplicationHelper
     end
   end
 
+  def front_page?
+    params[:controller] == "home" && params[:action] == "index"
+  end
+
   def active_for?(current_controllers)
     current_controllers.include?(controller.class) ? "active" : ""
   end

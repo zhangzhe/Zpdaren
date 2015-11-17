@@ -1,12 +1,6 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
       <a class="navbar-brand" href="/"><%= image_tag "logo", height: '24px' %></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -14,41 +8,24 @@
         <ul class="nav navbar-nav">
           <li class="<%= active_for?([Admins::JobsController, Recruiters::JobsController, Suppliers::JobsController]) %>"><a href="/">首页</a></li>
         </ul>
+      <% elsif front_page? %>
+        <%= form_for(User.new, as: "user", url: session_path("user"), html: {class: "navbar-form navbar-right"}) do |f| %>
+          <div class="form-group">
+            <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder => "邮箱" %><br>
+          </div>
+          <div class="form-group">
+            <%= f.password_field :password, autocomplete: "off", :class => "form-control", :placeholder => "密码" %>
+          </div>
+          <%= f.submit "登录", :class => "btn btn-success" %>
+        <% end %>
       <% end %>
       <ul class="nav navbar-nav navbar-right">
         <% if current_admin %>
           <li><%= link_to current_user.wallet.money.to_i, "" %></li>
         <% end %>
-
         <% if current_user %>
           <li><%= link_to current_user.email, current_user_account_path %></li>
-        <% end %>
-        <% if current_user %>
           <li><%= link_to "退出", destroy_user_session_path, :method => "DELETE" %></li>
-        <% else %>
-          <% if params[:controller] == "home" && params[:action] == "supplier" %>
-            <li>
-              <a href="#" data-toggle="modal" data-target="#ModalSupplierLogin">
-                <span class='nav-text'><i class="fa fa-user"></i> &nbsp;登录</span>
-              </a>
-            </li>
-            <li>
-              <a href="/home/recruiter">
-                <span class='nav-text'><i class="fa fa-child"></i> &nbsp;我要招聘</span>
-              </a>
-            </li>
-          <% elsif params[:controller] == "home" && params[:action] == "recruiter" %>
-          <li>
-            <a href="#" data-toggle="modal" data-target="#ModalRecruiterLogin">
-              <span class='nav-text'><i class="fa fa-user"></i> &nbsp;登录</span>
-            </a>
-          </li>
-            <li>
-              <a href="/home">
-                <span class='nav-text'><i class="fa fa-child"></i> &nbsp;我要推荐</span>
-              </a>
-            </li>
-          <% end %>
         <% end %>
       </ul>
     </div><!--/.nav-collapse -->

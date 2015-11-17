@@ -1,0 +1,19 @@
+<%= form_for(@resource, as: @resource_name, url: registration_path(@resource_name), html: {class: "form-horizontal"}) do |f| %>
+  <% name = (@resource_name.to_s == "recruiter") ? "招聘方" : "推荐方" %>
+  <div class="form-group">
+    <div class="col-sm-12">
+      <%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "#{name}邮箱" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-12">
+      <%= f.password_field :password, autocomplete: "off", :class => "form-control input-lg ", :placeholder => "#{name}密码" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-12">
+    <input type="checkbox" name="" value="1" checked/>&nbsp;<span style="color:azure">我已阅读并同意<a href="#">《用户服务协议》</a></span>
+  </div>
+  </div>
+  <%= f.submit "#{name}注册", :class => "btn btn-primary btn-lg btn-block" %>
+<% end %>
