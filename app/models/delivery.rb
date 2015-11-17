@@ -22,7 +22,7 @@ class Delivery < ActiveRecord::Base
   scope :after_paid, -> { where("deliveries.state in ('paid', 'final_payment_paid', 'finished')") }
   scope :final_paid, -> { where("deliveries.state in ('final_payment_paid', 'finished')") }
 
-
+  acts_as_paranoid
   include AASM
   aasm.attribute_name :state
   aasm do

@@ -5,6 +5,7 @@ class RefundRequest < ActiveRecord::Base
   scope :waiting_approved, -> { where('state' => 'submitted')}
 
   strip_attributes
+  acts_as_paranoid
   include AASM
   aasm.attribute_name :state
 
