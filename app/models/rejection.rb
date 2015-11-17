@@ -5,6 +5,7 @@ class Rejection < ActiveRecord::Base
   after_create :notify_supplier
 
   strip_attributes
+  acts_as_paranoid
 
   private
   def notify_supplier

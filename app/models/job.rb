@@ -30,10 +30,12 @@ class Job < ActiveRecord::Base
   scope :un_hiring, -> { where('state in (?)', ['final_payment_paid', 'finished']) }
   default_scope { order(created_at: :desc) }
 
+  before_destroy :destroy_all_association_entities
 
   strip_attributes
   acts_as_paranoid
   include SimilarEntity
+  include DataRecoverer
   include AASM
 
   acts_as_taggable
@@ -170,5 +172,9 @@ class Job < ActiveRecord::Base
   def notify_recruiter_and_deliver_matching_resumes
     RecruiterMailer.job_approved(recruiter, self).deliver_now
     deliver_matching_resumes
+  end
+
+  def destroy_all_association_entities
+    self.job_recover
   end
 end

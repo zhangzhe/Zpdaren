@@ -12,12 +12,11 @@ class Admins::UsersController < Admins::BaseController
 
   def destroy
     user = User.find(params[:id])
-    if user.is_a?(Supplier)
-      user.recover_supplier
-    elsif user.is_a?(Recruiter)
-      user.recover_recruiter
+    if user.destroy
+      flash[:success] = '删除成功！'
+    else
+      flash[:error] = '程序异常，删除失败。'
     end
-    flash[:success] = '删除成功！'
     redirect_to admins_users_path(type: user.type)
   end
 end

@@ -5,8 +5,9 @@ class Recruiter < User
   has_many :jobs, :foreign_key => :user_id
   has_many :deliveries, through: :jobs
   after_create :init_blank_comapny
+  before_destroy :destroy_all_association_entities
 
-  include TestDataRecoverer
+  include DataRecoverer
 
   def jobs_count
     self.jobs.available.count > 100 ? '99+' : self.jobs.count
@@ -41,5 +42,9 @@ class Recruiter < User
   def init_blank_comapny
     company = Company.create(:user_id => self.id)
     company.save(:validate => false)
+  end
+
+  def destroy_all_association_entities
+    self.recruiter_recover
   end
 end

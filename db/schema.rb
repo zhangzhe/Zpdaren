@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151114045825) do
+ActiveRecord::Schema.define(version: 20151117033439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20151114045825) do
     t.datetime "read_at"
     t.integer  "final_payment_id"
     t.string   "message"
+    t.datetime "deleted_at"
   end
 
   add_index "deliveries", ["resume_id", "job_id"], name: "index_deliveries_on_resume_id_and_job_id", unique: true, using: :btree
@@ -67,6 +68,7 @@ ActiveRecord::Schema.define(version: 20151114045825) do
     t.datetime "updated_at",       null: false
     t.string   "mobile"
     t.integer  "job_id"
+    t.datetime "deleted_at"
   end
 
   add_index "money_transfers", ["wallet_id"], name: "index_money_transfers_on_wallet_id", using: :btree
@@ -77,6 +79,7 @@ ActiveRecord::Schema.define(version: 20151114045825) do
     t.string   "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
   end
 
   add_index "refund_requests", ["job_id"], name: "index_refund_requests_on_job_id", using: :btree
@@ -87,6 +90,7 @@ ActiveRecord::Schema.define(version: 20151114045825) do
     t.text     "other"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "deleted_at"
   end
 
   add_index "rejections", ["delivery_id"], name: "index_rejections_on_delivery_id", using: :btree
@@ -162,6 +166,7 @@ ActiveRecord::Schema.define(version: 20151114045825) do
     t.integer  "job_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "deleted_at"
   end
 
   add_index "watchings", ["job_id"], name: "index_watchings_on_job_id", using: :btree
