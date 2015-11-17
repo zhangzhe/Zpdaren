@@ -15,7 +15,7 @@ body {
 }
 
 .front_image_supplier {
-  background: url(/assets/front_image_supplier.jpg);
+  background: url(/assets/front_image.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   height: 600px;
@@ -117,9 +117,6 @@ body {
 .placeholder img {
   display: inline-block;
   border-radius: 50%;
-}
-.carousel{
-  margin-top: 11px;
 }
 
 /*首页招聘方和推荐方*/

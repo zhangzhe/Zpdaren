@@ -8,8 +8,6 @@ Rails.application.routes.draw do
 
   root :to => 'passthrough#index'
   get 'home' => 'home#supplier'
-  get 'home/recruiter' => 'home#recruiter'
-  get 'home/supplier' => 'home#supplier'
 
   match 'weixin_callback' => 'home#weixin_callback', via: [:get, :post]
 

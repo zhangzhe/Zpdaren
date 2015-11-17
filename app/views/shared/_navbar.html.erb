@@ -14,43 +14,17 @@
         <ul class="nav navbar-nav">
           <li class="<%= active_for?([Admins::JobsController, Recruiters::JobsController, Suppliers::JobsController]) %>"><a href="/">首页</a></li>
         </ul>
+      <% else %>
+        <form class="navbar-form navbar-right">
+          <div class="form-group">
+            <input type="text" placeholder="邮箱" class="form-control">
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="密码" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-success">登录</button>
+        </form>
       <% end %>
-      <ul class="nav navbar-nav navbar-right">
-        <% if current_admin %>
-          <li><%= link_to current_user.wallet.money.to_i, "" %></li>
-        <% end %>
-
-        <% if current_user %>
-          <li><%= link_to current_user.email, current_user_account_path %></li>
-        <% end %>
-        <% if current_user %>
-          <li><%= link_to "退出", destroy_user_session_path, :method => "DELETE" %></li>
-        <% else %>
-          <% if params[:controller] == "home" && params[:action] == "supplier" %>
-            <li>
-              <a href="#" data-toggle="modal" data-target="#ModalSupplierLogin">
-                <span class='nav-text'><i class="fa fa-user"></i> &nbsp;登录</span>
-              </a>
-            </li>
-            <li>
-              <a href="/home/recruiter">
-                <span class='nav-text'><i class="fa fa-child"></i> &nbsp;我要招聘</span>
-              </a>
-            </li>
-          <% elsif params[:controller] == "home" && params[:action] == "recruiter" %>
-          <li>
-            <a href="#" data-toggle="modal" data-target="#ModalRecruiterLogin">
-              <span class='nav-text'><i class="fa fa-user"></i> &nbsp;登录</span>
-            </a>
-          </li>
-            <li>
-              <a href="/home">
-                <span class='nav-text'><i class="fa fa-child"></i> &nbsp;我要推荐</span>
-              </a>
-            </li>
-          <% end %>
-        <% end %>
-      </ul>
     </div><!--/.nav-collapse -->
   </div>
 </nav>
