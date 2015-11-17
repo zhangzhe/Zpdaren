@@ -14,7 +14,7 @@
         <ul class="nav navbar-nav">
           <li class="<%= active_for?([Admins::JobsController, Recruiters::JobsController, Suppliers::JobsController]) %>"><a href="/">首页</a></li>
         </ul>
-      <% else %>
+      <% elsif front_page? %>
         <form class="navbar-form navbar-right">
           <div class="form-group">
             <input type="text" placeholder="邮箱" class="form-control">
