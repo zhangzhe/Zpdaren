@@ -54,6 +54,7 @@
     </p>
     <br>
     <%= link_to "修改职位信息", edit_admins_job_path(@job), class: "btn btn-primary" %>
+    <%= button_to '删除', admins_job_path(@job), method: :delete, data: { confirm: "是否删除职位【#{@job.title}】？删除后不可恢复!", disable_with: '提交中...'}, class: "btn btn-danger" %>
   </div>
 
   <div class="col-md-3 col-md-offset-1">

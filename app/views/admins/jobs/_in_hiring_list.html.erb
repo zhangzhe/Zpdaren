@@ -7,7 +7,7 @@
         <th>发布时间</th>
         <th>简历推荐</th>
         <th>今日简历推荐</th>
-        <th>操作/状态</th>
+        <th>状态</th>
       </tr>
     </thead>
     <tbody>
@@ -23,7 +23,6 @@
           </td>
           <td>
             <%= Recruiters::JobsHelper::state_show(job) %>
-            <%= button_to '删除', admins_job_path(job), method: :delete, data: { confirm: "是否删除职位#{job.title}？", disable_with: '提交中...'}, class: "btn btn-danger btn-sm" %>
           </td>
         </tr>
       <% end %>
