@@ -7,6 +7,7 @@ class Supplier < User
   before_destroy :destroy_all_association_entities
 
   include DataRecoverer
+  extend Statistics
 
   private
   def destroy_all_association_entities

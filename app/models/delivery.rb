@@ -21,6 +21,11 @@ class Delivery < ActiveRecord::Base
   scope :approved_today, -> { where('DATE(updated_at) = ? and state = ?', Date.today, 'approved') }
   scope :after_paid, -> { where("deliveries.state in ('paid', 'final_payment_paid', 'finished')") }
   scope :final_paid, -> { where("deliveries.state in ('final_payment_paid', 'finished')") }
+  scope :paid_today, -> { where('DATE(updated_at) = ? and state = ?', Date.today, 'paid') }
+  scope :paid_yesterday, -> { where('DATE(updated_at) = ? and state = ?', 1.day.ago.to_date, 'paid') }
+  scope :paid_the_day_before_yesterday, -> { where('DATE(updated_at) = ? and state = ?', 2.day.ago.to_date, 'paid') }
+
+  extend Statistics
 
   acts_as_paranoid
   include AASM
@@ -181,4 +186,5 @@ class Delivery < ActiveRecord::Base
     RecruiterMailer.resume_recommended(recruiter, self).deliver_now
     Weixin.notify_resume_approved(self) if self.resume.supplier.weixin
   end
+
 end

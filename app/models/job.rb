@@ -32,6 +32,8 @@ class Job < ActiveRecord::Base
 
   before_destroy :destroy_all_association_entities
 
+  extend Statistics
+
   strip_attributes
   acts_as_paranoid
   include SimilarEntity
@@ -166,6 +168,16 @@ class Job < ActiveRecord::Base
 
   def resume_status
     "#{deliveries.after_paid.count} / #{deliveries.after_approved.count} / #{deliveries.count}"
+  end
+
+  def self.has_good_delivery
+    jobs = []
+    Job.all.each do |job|
+      if job.deliveries.approved.size > 0
+        jobs << job
+      end
+    end
+    jobs
   end
 
   private

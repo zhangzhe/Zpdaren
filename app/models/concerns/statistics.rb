@@ -1,0 +1,22 @@
+module Statistics
+  def today_added_count
+    data_count(Date.today)
+  end
+
+  def yesterday_added_count
+    data_count(1.day.ago)
+  end
+
+  def the_day_before_yesterday_added_count
+    data_count(2.day.ago)
+  end
+
+  def Statistics.delivery_rate
+     Job.has_good_delivery.count.to_f/Job.count
+  end
+
+  private
+  def data_count(date)
+    self.where(:created_at => (date.beginning_of_day..date.end_of_day)).count
+  end
+end
