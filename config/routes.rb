@@ -55,6 +55,7 @@ Rails.application.routes.draw do
     end
     resources :users, only: [:index, :destroy]
     resources :companies, only: [:show]
+    resources :suppliers, only: [:show]
     resources :refund_requests, only: [:index, :show] do
       member do
         put :agree

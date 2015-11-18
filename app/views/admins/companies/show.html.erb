@@ -19,3 +19,4 @@
   </p>
   <p class='gray-light'>地址：<%= @company.address.present? ? @company.address : '暂未提供' %></p>
 </div>
+<%= button_to '删除', admins_user_path(@company.recruiter), method: :delete, data: { confirm: "是否删除招聘方#{@company.name}？", disable_with: '提交中...'}, class: "btn btn-danger" %>

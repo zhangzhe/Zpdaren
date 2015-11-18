@@ -1,0 +1,18 @@
+<br>
+<ol class="breadcrumb">
+  <li><%= link_to "用户列表", admins_users_path(type: "Supplier") %></li>
+  <li><%= link_to "推荐方", admins_users_path(type: "Supplier") %></li>
+  <li><%= @supplier.email %></li>
+</ol>
+<div>
+  <%= render 'shared/page_title', title: @supplier.email %>
+</div>
+
+<p>注册时间：<%= @supplier.created_at.localtime.to_date.to_s(:db) %></p>
+<p>最后一次登录时间：<%= @supplier.last_sign_in_at.localtime.to_date.to_s(:db) %></p>
+<p>登录次数：<%= @supplier.sign_in_count %></p>
+<p>总推荐数：<%= @supplier.deliveries.count %></p>
+<p>成功总推荐数：<%= @supplier.deliveries.after_paid.count %></p>
+<hr>
+
+<%= button_to '删除', admins_user_path(@supplier), method: :delete, data: { confirm: "是否删除推荐方#{@supplier.email}？", disable_with: '提交中...'}, class: "btn btn-danger" %>
