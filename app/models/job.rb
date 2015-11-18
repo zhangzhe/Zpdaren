@@ -9,6 +9,14 @@ class Job < ActiveRecord::Base
       end
       return false
     end
+
+    def any_paid?
+      self.each do |delivery|
+        return true if delivery.paid?
+      end
+      return false
+    end
+
   end
   has_many :watchings
   has_many :suppliers, through: :watchings
@@ -31,6 +39,8 @@ class Job < ActiveRecord::Base
   default_scope { order(created_at: :desc) }
 
   before_destroy :destroy_all_association_entities
+
+  extend Statistics
 
   strip_attributes
   acts_as_paranoid
@@ -168,7 +178,6 @@ class Job < ActiveRecord::Base
     "#{deliveries.after_paid.count} / #{deliveries.after_approved.count} / #{deliveries.count}"
   end
 
-  private
   def notify_recruiter_and_deliver_matching_resumes
     RecruiterMailer.job_approved(recruiter, self).deliver_now
     deliver_matching_resumes
@@ -176,5 +185,15 @@ class Job < ActiveRecord::Base
 
   def destroy_all_association_entities
     self.job_recover
+  end
+
+  def self.has_good_delivery
+    jobs = []
+    Job.all.each do |job|
+      if job.deliveries.approved.size > 0
+        jobs << job
+      end
+    end
+    jobs
   end
 end

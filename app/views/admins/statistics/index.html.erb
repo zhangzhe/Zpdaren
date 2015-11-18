@@ -1,0 +1,88 @@
+<br>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>指标\数量</th>
+        <th>总数</th>
+        <th>今天新增</th>
+        <th>昨天新增</th>
+        <th>前天新增</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>职位数</th>
+        <td>
+          <%= Job.count %>
+        </td>
+        <td>
+          <%= Job.today_added_count %>
+        </td>
+        <td>
+          <%= Job.yesterday_added_count %>
+        </td>
+        <td>
+          <%= Job.the_day_before_yesterday_added_count %>
+        </td>
+      </tr>
+      <tr>
+        <th>推荐数</th>
+        <td>
+          <%= Delivery.count %>
+        </td>
+        <td>
+          <%= Delivery.today_added_count %>
+        </td>
+        <td>
+          <%= Delivery.yesterday_added_count %>
+        </td>
+        <td>
+          <%= Delivery.the_day_before_yesterday_added_count %>
+        </td>
+      </tr>
+      <tr>
+        <th>推荐方</th>
+        <td>
+          <%= Supplier.count %>
+        </td>
+        <td>
+          <%= Supplier.today_added_count %>
+        </td>
+        <td>
+          <%= Supplier.yesterday_added_count %>
+        </td>
+        <td>
+          <%= Supplier.the_day_before_yesterday_added_count %>
+        </td>
+      </tr>
+      <tr>
+        <th>成功推荐</th>
+        <td>
+          <%= Delivery.after_paid.count %>
+        </td>
+        <td>
+          <%= Delivery.paid_today.count %>
+        </td>
+        <td>
+          <%= Delivery.paid_yesterday.count %>
+        </td>
+        <td>
+          <%= Delivery.paid_the_day_before_yesterday.count %>
+        </td>
+      </tr>
+      <tr>
+        <th>成功入职</th>
+        <td>
+          <%= Delivery.final_paid.count %>
+        </td>
+      </tr>
+      <tr>
+        <th>推荐率</th>
+        <td>
+          <%= Statistics.delivery_rate %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

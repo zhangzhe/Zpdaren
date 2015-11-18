@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   resources :tags, only: [:index]
   resources :withdraws, only: [:new, :create]
 
@@ -35,6 +34,7 @@ Rails.application.routes.draw do
   }
 
   namespace :admins do
+    get 'statistics' => 'statistics#index'
     resources :resumes, only: [:index, :show, :edit, :update] do
       member do
         get :download
