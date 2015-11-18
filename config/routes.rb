@@ -100,5 +100,6 @@ Rails.application.routes.draw do
     resources :deliveries, only: [:index, :new, :create]
   end
 
-
+  get 'good_job_description' => 'home#good_job_description'
+  get 'custom_agreement' => 'home#custom_agreement'
 end
