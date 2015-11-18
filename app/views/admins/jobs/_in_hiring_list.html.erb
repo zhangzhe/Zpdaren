@@ -23,7 +23,7 @@
           </td>
           <td>
             <%= Recruiters::JobsHelper::state_show(job) %>
-            <%= link_to '删除', admins_job_path(job), method: :delete, data: { confirm: "是否删除职位#{job.title}？", disable_with: '提交中...'}, class: "btn btn-danger btn-sm" %>
+            <%= button_to '删除', admins_job_path(job), method: :delete, data: { confirm: "是否删除职位#{job.title}？", disable_with: '提交中...'}, class: "btn btn-danger btn-sm" %>
           </td>
         </tr>
       <% end %>

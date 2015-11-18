@@ -15,7 +15,7 @@
           <td><%= link_to supplier.resumes.count, admins_resumes_path(:supplier_id => supplier) %></td>
           <td><%= link_to supplier.deliveries.count, admins_deliveries_path(:supplier_id => supplier) %></td>
           <td>
-            <%= link_to '删除', admins_user_path(supplier), method: :delete, data: { confirm: "是否删除推荐方#{supplier.email}？", disable_with: '提交中...'}, class: "btn btn-danger btn-sm" %>
+            <%= button_to '删除', admins_user_path(supplier), method: :delete, data: { confirm: "是否删除推荐方#{supplier.email}？", disable_with: '提交中...'}, class: "btn btn-danger btn-sm" %>
           </td>
         </tr>
       <% end %>
