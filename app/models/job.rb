@@ -9,14 +9,6 @@ class Job < ActiveRecord::Base
       end
       return false
     end
-
-    def any_paid?
-      self.each do |delivery|
-        return true if delivery.paid?
-      end
-      return false
-    end
-
   end
   has_many :watchings
   has_many :suppliers, through: :watchings
@@ -178,15 +170,6 @@ class Job < ActiveRecord::Base
     "#{deliveries.after_paid.count} / #{deliveries.after_approved.count} / #{deliveries.count}"
   end
 
-  def notify_recruiter_and_deliver_matching_resumes
-    RecruiterMailer.job_approved(recruiter, self).deliver_now
-    deliver_matching_resumes
-  end
-
-  def destroy_all_association_entities
-    self.job_recover
-  end
-
   def self.has_good_delivery
     jobs = []
     Job.all.each do |job|
@@ -195,5 +178,15 @@ class Job < ActiveRecord::Base
       end
     end
     jobs
+  end
+
+  private
+  def notify_recruiter_and_deliver_matching_resumes
+    RecruiterMailer.job_approved(recruiter, self).deliver_now
+    deliver_matching_resumes
+  end
+
+  def destroy_all_association_entities
+    self.job_recover
   end
 end
