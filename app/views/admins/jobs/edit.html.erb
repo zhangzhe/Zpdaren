@@ -25,7 +25,7 @@
   <p>
     <%= f.label :description, '职位描述' %>
     <span class='red-star'>*</span>
-    <%= link_to "《职位描述规范》", '/good_job_description.pdf', target: '_blank' %>
+    <%= link_to "《职位描述规范》", good_job_description_path, target: '_blank' %>
     <%= f.text_area :description, class: "form-control", rows: 10 %>
   </p>
   <p>
