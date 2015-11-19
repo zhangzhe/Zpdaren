@@ -1,0 +1,26 @@
+<br>
+<ol class="breadcrumb">
+  <li><%= link_to '我的简历', suppliers_resumes_path %></li>
+  <li class="active"><%= @resume.candidate_name %></li>
+</ol>
+
+<div>
+  <%= render 'shared/page_title', title: @resume.candidate_name %>
+  <p>手机号码：<%= @resume.mobile %></p>
+  <p>
+    简历标签：
+    <% @resume.tag_list.each do |tag| %>
+      <i class="fa fa-tags"></i>
+      <span class='gray-light'><%= tag %></span>
+    <% end %>
+  </p>
+  <% if @resume.is_pdf? %>
+    <%= render 'shared/show_pdf', pdf_url: download_suppliers_resume_path(@resume) %>
+  <% else %>
+    <p><%= link_to '简历原件', download_suppliers_resume_path(@resume) %></p>
+  <% end %>
+  <hr>
+  <p>
+    <%= button_to '删除', suppliers_resume_path, method: :delete, data: { confirm: "是否删除简历【#{@resume.candidate_name}】？删除后不可恢复!", disable_with: '提交中...'}, class: "btn btn-danger" %>
+  </p>
+</div>
