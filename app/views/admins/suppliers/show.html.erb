@@ -9,7 +9,7 @@
 </div>
 
 <p>注册时间：<%= @supplier.created_at.localtime.to_date.to_s(:db) %></p>
-<p>最后一次登录时间：<%= @supplier.last_sign_in_at.localtime.to_date.to_s(:db) %></p>
+<p>最后一次登录时间：<%= @supplier.last_sign_in_at.present? ? @supplier.last_sign_in_at.localtime.to_date.to_s(:db) : '未曾登录过' %></p>
 <p>登录次数：<%= @supplier.sign_in_count %></p>
 <p>总推荐数：<%= @supplier.deliveries.count %></p>
 <p>成功总推荐数：<%= @supplier.deliveries.after_paid.count %></p>
