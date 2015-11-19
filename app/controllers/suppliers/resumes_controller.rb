@@ -17,6 +17,10 @@ class Suppliers::ResumesController < Suppliers::BaseController
     end
   end
 
+  def show
+    @resume = current_supplier.resumes.find(params[:id])
+  end
+
   def create
     @resume = Resume.new(resume_params)
     if @resume.save
@@ -44,6 +48,22 @@ class Suppliers::ResumesController < Suppliers::BaseController
       @resumes = current_supplier.resumes
     end
     @resumes = @resumes.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+  end
+
+  def destroy
+    resume = current_supplier.resumes.find(params[:id])
+    unless resume.has_any_after_paid_deliveries?
+      if resume.resume_recover
+        flash[:success] = '简历删除成功。'
+        redirect_to suppliers_resumes_path
+      else
+        flash[:error] = '程序异常，删除失败。'
+        redirect_to suppliers_resumes_path
+      end
+    else
+      flash[:error] = '该简历已被招聘方付费，不能删除。'
+      redirect_to :back
+    end
   end
 
   private
