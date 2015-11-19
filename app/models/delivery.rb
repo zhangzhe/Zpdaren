@@ -25,6 +25,8 @@ class Delivery < ActiveRecord::Base
   scope :paid_yesterday, -> { where('DATE(updated_at) = ? and state = ?', 1.day.ago.to_date, 'paid') }
   scope :paid_the_day_before_yesterday, -> { where('DATE(updated_at) = ? and state = ?', 2.day.ago.to_date, 'paid') }
 
+  scope :improper, -> { joins(:resume).merge(Resume.improper) }
+
   extend Statistics
 
   acts_as_paranoid
@@ -136,6 +138,10 @@ class Delivery < ActiveRecord::Base
 
   def self.order_by_state
     select("deliveries.*, case when state='recommended' then 1 else 0 end as state_level").order("state_level desc")
+  end
+
+  def improper_reason
+    resume.improper_reason
   end
 
   private
