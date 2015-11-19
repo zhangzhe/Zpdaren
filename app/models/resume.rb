@@ -13,6 +13,8 @@ class Resume < ActiveRecord::Base
   scope :waiting_approved, ->{ where("description is null and pdf_attachment is null") }
   scope :unavailable, ->{ where(:available => false) }
   scope :available, ->{ where(:available => true) }
+  scope :problemed, ->{ where("problem is not null") }
+
 
   accepts_nested_attributes_for :deliveries
   include SimilarEntity
@@ -39,7 +41,7 @@ class Resume < ActiveRecord::Base
   end
 
   def may_improve?
-    self.description.blank? and self.pdf_attachment.blank?
+    self.description.blank? and self.pdf_attachment.blank? and self.available == nil
   end
 
   def recent_delivery_message

@@ -3,15 +3,19 @@
 <ul class="nav nav-tabs">
   <% active = (params[:state] == "in_hiring") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to '进行中的招聘', admins_jobs_path(:state => "in_hiring") %>
+    <%= link_to "进行中的招聘<span class='badge'>#{Job.in_hiring.count}</span>".html_safe, admins_jobs_path(:state => "in_hiring") %>
+  </li>
+  <% active = (params[:state] == "not_paid") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "未付定金的招聘<span class='badge'>#{Job.submitted.count}</span>".html_safe, admins_jobs_path(:state => "not_paid") %>
   </li>
   <% active = (params[:state] == "un_hiring") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to '已完成的招聘', admins_jobs_path(:state => "un_hiring") %>
+    <%= link_to "已完成的招聘<span class='badge'>#{Job.un_hiring.count}</span>".html_safe, admins_jobs_path(:state => "un_hiring") %>
   </li>
   <% active = (params[:state] == "deleted") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to '已删除的招聘', admins_jobs_path(:state => "deleted") %>
+    <%= link_to "已删除的招聘<span class='badge'>#{Job.only_deleted.count}</span>".html_safe, admins_jobs_path(:state => "deleted") %>
   </li>
 </ul>
 <br>
@@ -19,8 +23,10 @@
   <%= render 'un_hiring_list', jobs: @jobs %>
 <% elsif params[:state] == "in_hiring" %>
   <%= render 'in_hiring_list', jobs: @jobs %>
-<% else %>
+<% elsif params[:state] == "deleted" %>
   <%= render 'deleted_list', jobs: @jobs %>
+<% elsif params[:state] == "not_paid" %>
+  <%= render 'not_paid_list', jobs: @jobs %>
 <% end %>
 
 <%= render 'shared/paginate', objs: @jobs %>
