@@ -1,15 +1,5 @@
 <%= render 'shared/page_title', title: '存款/提现确认' %>
-<ul class="nav nav-tabs">
-  <li role="presentation" class="active">
-    <%= link_to '订金确认', deposits_admins_money_transfers_path %>
-  </li>
-  <li role="presentation">
-    <%= link_to '尾款确认', final_payments_admins_money_transfers_path %>
-  </li>
-  <li role="presentation">
-    <%= link_to '提现申请', withdraws_admins_money_transfers_path %>
-  </li>
-</ul>
+<%= render 'tab' %>
 <br>
 
 <div class="table-responsive">

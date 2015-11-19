@@ -3,15 +3,15 @@
 <ul class="nav nav-tabs">
   <% active = (params[:type] == "Recruiter") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to '招聘方', admins_users_path(:type => "Recruiter") %>
+    <%= link_to "招聘方<span class='badge'>#{Company.active.count}</span>".html_safe, admins_users_path(:type => "Recruiter") %>
   </li>
   <% active = (params[:type] == "Supplier") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to '推荐方', admins_users_path(:type => "Supplier") %>
+    <%= link_to "推荐方<span class='badge'>#{Supplier.count}</span>".html_safe, admins_users_path(:type => "Supplier") %>
   </li>
   <% active = params[:type].nil? ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to '所有用户', admins_users_path() %>
+    <%= link_to "所有用户<span class='badge'>#{User.count}</span>".html_safe, admins_users_path() %>
   </li>
 </ul>
 <br>
