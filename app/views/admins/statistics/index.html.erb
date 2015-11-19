@@ -80,7 +80,13 @@
       <tr>
         <th>推荐率</th>
         <td>
-          <%= Statistics.delivery_rate %>
+          <%= number_to_percentage Statistics.delivery_rate*100 %>
+        </td>
+      </tr>
+      <tr>
+        <th>成功推荐率</th>
+        <td>
+          <%= number_to_percentage Statistics.success_delivery_rate*100 %>
         </td>
       </tr>
     </tbody>
