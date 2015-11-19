@@ -13,9 +13,9 @@
     <tbody>
       <% deliveries.each do |delivery| %>
         <tr>
-          <td><%= delivery.resume_candidate_name %></td>
+          <td><%= link_to delivery.resume_candidate_name, 'javascript:void(0);', "data-toggle" => "popover", "data-trigger" => "focus", "data-placement" => "bottom", "data-content" => delivery.resume_tag_list %></td>
           <td><%= delivery.supplier.email %></td>
-          <td><%= "【#{delivery.job.company_name}】#{delivery.job_title}" %></td>
+          <td><%= link_to "【#{delivery.job.company_name}】#{delivery.job_title}", 'javascript:void(0);', "data-toggle" => "popover", "data-trigger" => "focus", "data-placement" => "bottom", "data-content" => delivery.job_description %></td>
           </td>
           <td><%= delivery.updated_at.localtime.to_date.to_s(:db) %></td>
           <% if params[:state].nil? || (params[:state] == "submitted") %>

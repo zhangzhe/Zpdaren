@@ -14,5 +14,4 @@
 <p>总推荐数：<%= @supplier.deliveries.count %></p>
 <p>成功总推荐数：<%= @supplier.deliveries.after_paid.count %></p>
 <hr>
-
 <%= button_to '删除', admins_user_path(@supplier), method: :delete, data: { confirm: "是否删除推荐方#{@supplier.email}？", disable_with: '提交中...'}, class: "btn btn-danger" %>
