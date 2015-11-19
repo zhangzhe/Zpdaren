@@ -12,11 +12,11 @@ module Statistics
   end
 
   def Statistics.delivery_rate
-     Job.has_approved_delivery.count.to_f/Job.count
+     (Job.count == 0) ? 0 : Job.has_approved_delivery.count.to_f/Job.count
   end
 
   def Statistics.success_delivery_rate
-    Delivery.after_paid.count.to_f/Delivery.count
+    (Delivery.count == 0) ? 0 : Delivery.after_paid.count.to_f/Delivery.count
   end
 
   private
