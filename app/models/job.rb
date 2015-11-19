@@ -26,7 +26,7 @@ class Job < ActiveRecord::Base
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
   scope :deposit_paid_confirmed, -> { where('state' => 'deposit_paid_confirmed')}
   scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'deposit_paid_confirmed']) }
-  scope :in_hiring, -> { where.not('state in (?)', ['finished', 'final_payment_paid']) }
+  scope :in_hiring, -> { where.not('state in (?)', ['submitted', 'finished', 'final_payment_paid']) }
   scope :un_hiring, -> { where('state in (?)', ['final_payment_paid', 'finished']) }
   default_scope { order(created_at: :desc) }
 

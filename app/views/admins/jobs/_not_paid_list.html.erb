@@ -1,0 +1,20 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>职位名称</th>
+        <th>公司名称</th>
+        <th>发布时间</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% jobs.each do |job| %>
+        <tr>
+          <td><%= link_to job.title, admins_job_path(job.id) %></td>
+          <td><%= link_to job.company_name, admins_company_path(job.company) %></td>
+          <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
