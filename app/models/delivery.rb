@@ -25,6 +25,9 @@ class Delivery < ActiveRecord::Base
   scope :paid_yesterday, -> { where('DATE(updated_at) = ? and state = ?', 1.day.ago.to_date, 'paid') }
   scope :paid_the_day_before_yesterday, -> { where('DATE(updated_at) = ? and state = ?', 2.day.ago.to_date, 'paid') }
 
+  scope :improper, -> { joins(:resume).merge(Resume.improper) }
+  scope :proper, -> { joins(:resume).merge(Resume.proper) }
+
   extend Statistics
 
   acts_as_paranoid
