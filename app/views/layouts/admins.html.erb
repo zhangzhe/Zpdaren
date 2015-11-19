@@ -9,9 +9,9 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <% active = active_for?([Admins::JobsController]) %>
-            <li class="<%= active %>"><%= link_to "职位列表#{badge_for_admin_for_all(Job.with_deleted)}".html_safe, admins_jobs_path(:state => "in_hiring") %></li>
+            <li class="<%= active %>"><%= link_to "职位列表#{badge_for_admin(Job.with_deleted)}".html_safe, admins_jobs_path(:state => "in_hiring") %></li>
             <% active = active_for?([Admins::DeliveriesController]) %>
-            <li class="<%= active %>"><%= link_to "推荐列表#{badge_for_admin(Delivery)}".html_safe, admins_deliveries_path(:state => "submitted") %></li>
+            <li class="<%= active %>"><%= link_to "推荐列表#{badge_for_admin(Delivery.with_deleted)}".html_safe, admins_deliveries_path(:state => "submitted") %></li>
             <% active = active_for?([Admins::ResumesController]) %>
             <li class="<%= active %>"><%= link_to "简历列表#{badge_for_admin(Resume)}".html_safe, admins_resumes_path(:state => "uncompleted") %></li>
             <!-- <% active = active_for?([Admins::RefundRequestsController]) %>
@@ -19,7 +19,7 @@
             <% active = active_for?([Admins::MoneyTransfersController]) %>
             <li class="<%= active %>"><%= link_to "存款/提现确认#{badge_for_admin(MoneyTransfer)}".html_safe, deposits_admins_money_transfers_path %></li>
             <% active = active_for?([Admins::UsersController, Admins::CompaniesController]) %>
-            <li class="<%= active %>"><%= link_to "用户列表#{badge_for_admin_for_all(User)}".html_safe, admins_users_path(type: 'Recruiter') %></li>
+            <li class="<%= active %>"><%= link_to "用户列表#{badge_for_admin(User)}".html_safe, admins_users_path(type: 'Recruiter') %></li>
             <% active = active_for?([Admins::StatisticsController]) %>
             <li class="<%= active %>"><%= link_to "统计", admins_statistics_path %></li>
           </ul>
