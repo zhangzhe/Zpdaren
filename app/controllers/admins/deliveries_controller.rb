@@ -18,7 +18,7 @@ class Admins::DeliveriesController < Admins::BaseController
         @deliveries = @deliveries.where("user_id in (?)", recruiter_ids)
       end
       if params[:state] == "submitted"
-        @deliveries = @deliveries.recommended
+        @deliveries = @deliveries.recommended.proper
       elsif params[:state] == "approved"
         @deliveries = @deliveries.approved
       elsif params[:state] == "paid"

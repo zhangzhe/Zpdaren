@@ -15,6 +15,7 @@ class Resume < ActiveRecord::Base
   scope :available, ->{ where(:available => true) }
   scope :problemed, ->{ where("problem is not null") }
   scope :improper, ->{ where("problem is not null or available is false") }
+  scope :proper, ->{ where("problem is null and available is true") }
 
   accepts_nested_attributes_for :deliveries
   include SimilarEntity
@@ -60,8 +61,8 @@ class Resume < ActiveRecord::Base
 
   def improper_reason
     reason = ""
-    reason << "暂时不找工作" unless self.available?
-    reason << ", 简历#{self.problem}" if self.problem
+    reason << "暂时不找工作:" if self.unavailable?
+    reason << ":简历#{self.problem}" if self.problem
     reason
   end
 

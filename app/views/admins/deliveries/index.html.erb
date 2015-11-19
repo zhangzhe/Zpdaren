@@ -15,7 +15,7 @@
   <ul class="nav nav-tabs">
     <% active = (params[:state] == "submitted") ? "active" : "" %>
     <li role="presentation" class="<%= active %>">
-      <%= link_to "未审核<span class='badge'>#{Delivery.recommended.count}</span>".html_safe, admins_deliveries_path(:state => "submitted") %>
+      <%= link_to "未审核<span class='badge'>#{Delivery.recommended.proper.count}</span>".html_safe, admins_deliveries_path(:state => "submitted") %>
     </li>
     <% active = (params[:state] == "approved") ? "active" : "" %>
     <li role="presentation" class="<%= active %>">
