@@ -7,6 +7,7 @@
         <th>应聘职位</th>
         <th>操作时间</th>
         <% if params[:state].nil? || params[:state] == "submitted" %><th>状态/操作</th><% end %>
+        <% if params[:state] == "improper" %><th>原因</th><% end %>
       </tr>
     </thead>
     <tbody>
@@ -25,6 +26,9 @@
                 已审核
               <% end %>
             </td>
+          <% end %>
+          <% if params[:state] == "improper" %>
+            <td><%= delivery.improper_reason %></td>
           <% end %>
         </tr>
       <% end %>
