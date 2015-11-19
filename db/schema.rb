@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 20151119061553) do
     t.boolean  "available"
     t.text     "pdf_attachment"
     t.text     "problem"
+    t.datetime "deleted_at"
   end
 
   create_table "taggings", force: :cascade do |t|

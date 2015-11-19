@@ -18,11 +18,13 @@ class Resume < ActiveRecord::Base
 
   accepts_nested_attributes_for :deliveries
   include SimilarEntity
+  include DataRecoverer
   acts_as_taggable
   acts_as_taggable_on :skills, :interests
   mount_uploader :attachment, FileUploader
   mount_uploader :pdf_attachment, FileUploader
   strip_attributes
+  acts_as_paranoid
 
   def set_attachment_to_pdf_attachment(reuse_attachment)
     self.update_attribute(:pdf_attachment, self.attachment) if reuse_attachment == '1'
@@ -50,6 +52,10 @@ class Resume < ActiveRecord::Base
 
   def unavailable?
     available == false
+  end
+
+  def has_any_after_paid_deliveries?
+    self.deliveries.after_paid.present?
   end
 
   private

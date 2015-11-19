@@ -170,7 +170,7 @@ class Job < ActiveRecord::Base
     "#{deliveries.after_paid.count} / #{deliveries.after_approved.count} / #{deliveries.count}"
   end
 
-  def self.has_good_delivery
+  def self.has_approved_delivery
     jobs = []
     Job.all.each do |job|
       if job.deliveries.approved.size > 0
