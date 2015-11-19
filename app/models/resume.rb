@@ -13,20 +13,19 @@ class Resume < ActiveRecord::Base
   scope :waiting_approved, ->{ where("description is null and pdf_attachment is null") }
   scope :unavailable, ->{ where(:available => false) }
   scope :available, ->{ where(:available => true) }
-<<<<<<< Updated upstream
-=======
   scope :problemed, ->{ where("problem is not null") }
   scope :improper, ->{ where("problem is not null or available is false") }
   scope :proper, ->{ where("problem is null and available is true") }
->>>>>>> Stashed changes
 
   accepts_nested_attributes_for :deliveries
   include SimilarEntity
+  include DataRecoverer
   acts_as_taggable
   acts_as_taggable_on :skills, :interests
   mount_uploader :attachment, FileUploader
   mount_uploader :pdf_attachment, FileUploader
   strip_attributes
+  acts_as_paranoid
 
   def set_attachment_to_pdf_attachment(reuse_attachment)
     self.update_attribute(:pdf_attachment, self.attachment) if reuse_attachment == '1'
@@ -45,7 +44,7 @@ class Resume < ActiveRecord::Base
   end
 
   def may_improve?
-    self.description.blank? and self.pdf_attachment.blank?
+    self.description.blank? and self.pdf_attachment.blank? and self.available == nil
   end
 
   def recent_delivery_message

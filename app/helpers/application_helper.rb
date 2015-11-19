@@ -19,10 +19,6 @@ module ApplicationHelper
   end
 
   def badge_for_admin(entity)
-    " <span class=\"badge\">#{entity.waiting_approved.count}/#{entity.count}</span>"
-  end
-
-  def badge_for_admin_for_all(entity)
     " <span class=\"badge\">#{entity.count}</span>"
   end
 

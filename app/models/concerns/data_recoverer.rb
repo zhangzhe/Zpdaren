@@ -54,6 +54,17 @@ module DataRecoverer
     deliveries_recover(deliveries)
   end
 
+  def resume_recover
+    ActiveRecord::Base.transaction do
+      self.deliveries.each do |delivery|
+        delivery.rejection.delete if delivery.rejection
+        delivery.delete
+      end
+      self.delete
+    end
+    return true
+  end
+
   private
 
   def deliveries_recover(deliveries)

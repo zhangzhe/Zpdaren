@@ -7,14 +7,15 @@
         <th>应聘职位</th>
         <th>操作时间</th>
         <% if params[:state].nil? || params[:state] == "submitted" %><th>状态/操作</th><% end %>
+        <% if params[:state] == "improper" %><th>原因</th><% end %>
       </tr>
     </thead>
     <tbody>
       <% deliveries.each do |delivery| %>
         <tr>
-          <td><%= delivery.resume_candidate_name %></td>
+          <td><%= link_to delivery.resume_candidate_name, 'javascript:void(0);', "data-toggle" => "popover", "data-trigger" => "focus", "data-placement" => "bottom", "data-content" => delivery.resume_tag_list %></td>
           <td><%= delivery.supplier.email %></td>
-          <td><%= "【#{delivery.job.company_name}】#{delivery.job_title}" %></td>
+          <td><%= link_to "【#{delivery.job.company_name}】#{delivery.job_title}", 'javascript:void(0);', "data-toggle" => "popover", "data-trigger" => "focus", "data-placement" => "bottom", "data-content" => delivery.job_description %></td>
           </td>
           <td><%= delivery.updated_at.localtime.to_date.to_s(:db) %></td>
           <% if params[:state].nil? || (params[:state] == "submitted") %>
@@ -25,6 +26,9 @@
                 已审核
               <% end %>
             </td>
+          <% end %>
+          <% if params[:state] == "improper" %>
+            <td><%= delivery.improper_reason %></td>
           <% end %>
         </tr>
       <% end %>

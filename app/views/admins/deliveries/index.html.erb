@@ -15,20 +15,27 @@
   <ul class="nav nav-tabs">
     <% active = (params[:state] == "submitted") ? "active" : "" %>
     <li role="presentation" class="<%= active %>">
+<<<<<<< HEAD
       <%= link_to "未审核<span class='badge'>#{Delivery.recommended.proper.count}</span>".html_safe, admins_deliveries_path(:state => "submitted") %>
+=======
+      <%= link_to "未审核<span class='badge'>#{Delivery.recommended.count}</span>".html_safe, admins_deliveries_path(:state => "submitted") %>
+>>>>>>> e7a6f8febaf92388d7d3762815dd44c0697920f7
     </li>
     <% active = (params[:state] == "approved") ? "active" : "" %>
     <li role="presentation" class="<%= active %>">
-      <%= link_to '已审核', admins_deliveries_path(:state => "approved") %>
+      <%= link_to "待查看<span class='badge'>#{Delivery.approved.count}</span>".html_safe, admins_deliveries_path(:state => "approved") %>
     </li>
-
     <% active = (params[:state] == "paid") ? "active" : "" %>
     <li role="presentation" class="<%= active %>">
-      <%= link_to '已付费', admins_deliveries_path(:state => "paid") %>
+      <%= link_to "已付费查看<span class='badge'>#{Delivery.paid.count}</span>".html_safe, admins_deliveries_path(:state => "paid") %>
     </li>
     <% active = (params[:state] == "final_paid") ? "active" : "" %>
     <li role="presentation" class="<%= active %>">
-      <%= link_to '已支付尾款', admins_deliveries_path(:state => "final_paid") %>
+      <%= link_to "已支付尾款<span class='badge'>#{Delivery.final_paid.count}</span>".html_safe, admins_deliveries_path(:state => "final_paid") %>
+    </li>
+    <% active = (params[:state] == "improper") ? "active" : "" %>
+    <li role="presentation" class="<%= active %>">
+      <%= link_to "不合适推荐<span class='badge'>#{Delivery.improper.count}</span>".html_safe, admins_deliveries_path(:state => "improper") %>
     </li>
   </ul>
   <br>
@@ -37,3 +44,4 @@
 
   <%= render 'shared/paginate', objs: @deliveries %>
 <% end %>
+<%= render 'shared/popover' %>

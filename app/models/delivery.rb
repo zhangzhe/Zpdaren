@@ -141,6 +141,10 @@ class Delivery < ActiveRecord::Base
     select("deliveries.*, case when state='recommended' then 1 else 0 end as state_level").order("state_level desc")
   end
 
+  def improper_reason
+    resume.improper_reason
+  end
+
   private
   def sync_job
     job.state = self.state

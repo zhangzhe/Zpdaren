@@ -3,21 +3,22 @@
 <ul class="nav nav-tabs">
   <% active = (params[:state] == "uncompleted") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to '待完善', admins_resumes_path(:state => "uncompleted") %>
-  </li>
-  <% active = (params[:state] == "completed") ? "active" : "" %>
-  <li role="presentation" class="<%= active %>">
-    <%= link_to '已完善', admins_resumes_path(:state => "completed") %>
+    <%= link_to "待完善<span class='badge'>#{Resume.uncompleted.count}</span>".html_safe, admins_resumes_path(:state => "uncompleted") %>
   </li>
   <% active = (params[:state] == "available") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to '（已完善）求职中', admins_resumes_path(:state => "available") %>
+    <%= link_to "已完善(求职中)<span class='badge'>#{Resume.available.count}</span>".html_safe, admins_resumes_path(:state => "available") %>
   </li>
   <% active = (params[:state] == "unavailable") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to '（已完善）暂时不找工作', admins_resumes_path(:state => "unavailable") %>
+    <%= link_to "已完善(暂时不找工作)<span class='badge'>#{Resume.unavailable.count}</span>".html_safe, admins_resumes_path(:state => "unavailable") %>
+  </li>
+  <% active = (params[:state] == "problemed") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "问题简历<span class='badge'>#{Resume.problemed.count}</span>".html_safe, admins_resumes_path(:state => "problemed") %>
   </li>
 </ul>
 <br>
 <%= render 'list', resumes: @resumes %>
 <%= render 'shared/paginate', objs: @resumes %>
+<%= render 'shared/popover' %>

@@ -6,6 +6,8 @@ class Admins::JobsController < Admins::BaseController
       @jobs = Job.un_hiring
     elsif params[:state] == "deleted"
       @jobs = Job.only_deleted
+    elsif params[:state] == "not_paid"
+      @jobs = Job.submitted
     else
       @jobs = Job.all
     end

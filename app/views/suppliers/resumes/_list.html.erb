@@ -12,7 +12,7 @@
     <tbody>
       <% resumes.each do |resume| %>
         <tr>
-          <td><%= resume.candidate_name %></td>
+          <td><%= link_to resume.candidate_name, suppliers_resume_path(resume) %></td>
           <td><%= resume.tag_list %></td>
           <td>
           <% resume.deliveries.map(&:job).compact.each do |job| %>

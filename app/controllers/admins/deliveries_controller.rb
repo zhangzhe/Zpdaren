@@ -20,11 +20,13 @@ class Admins::DeliveriesController < Admins::BaseController
       if params[:state] == "submitted"
         @deliveries = @deliveries.recommended.proper
       elsif params[:state] == "approved"
-        @deliveries = @deliveries.after_approved
+        @deliveries = @deliveries.approved
       elsif params[:state] == "paid"
-        @deliveries = @deliveries.after_paid
+        @deliveries = @deliveries.paid
       elsif params[:state] == "final_paid"
         @deliveries = @deliveries.final_paid
+      elsif params[:state] == "improper"
+        @deliveries = Delivery.improper
       end
       @deliveries = @deliveries.order("created_at DESC").paginate(page: params[:page], per_page: Settings.pagination.page_size)
     end

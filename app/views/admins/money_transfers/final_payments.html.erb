@@ -1,15 +1,5 @@
 <%= render 'shared/page_title', title: '存款/提现确认' %>
-<ul class="nav nav-tabs">
-  <li role="presentation">
-    <%= link_to '订金确认', deposits_admins_money_transfers_path %>
-  </li>
-  <li role="presentation" class="active">
-    <%= link_to '尾款确认', final_payments_admins_money_transfers_path %>
-  </li>
-  <li role="presentation">
-    <%= link_to '提现申请', withdraws_admins_money_transfers_path %>
-  </li>
-</ul>
+<%= render 'tab' %>
 <br>
 
 <div class="table-responsive">
@@ -27,7 +17,7 @@
     <tbody>
       <% @final_payments.each do |final_payment| %>
         <tr>
-          <td><%= final_payment.delivery.job.company.name %></td>
+          <td><%= link_to final_payment.delivery.job.company_name, 'javascript:void(0);', "data-toggle" => "popover", "data-trigger" => "focus", "data-placement" => "bottom", "data-content" => final_payment.delivery.job.company_description %></td>
           <td><%= final_payment.try(:delivery).try(:job).try(:title) %>:<%= final_payment.delivery.try(:resume).try(:candidate_name) %>的简历</td>
           <td><%= final_payment.wallet.user.email %></td>
           <td><%= final_payment.amount %></td>
@@ -44,3 +34,4 @@
   </table>
 </div>
 <%= render 'shared/paginate', objs: @final_payments %>
+<%= render 'shared/popover' %>

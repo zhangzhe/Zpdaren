@@ -5,21 +5,14 @@
         <th>职位名称</th>
         <th>公司名称</th>
         <th>发布时间</th>
-        <th>简历推荐</th>
-        <th>操作/状态</th>
       </tr>
     </thead>
     <tbody>
       <% jobs.each do |job| %>
         <tr>
-          <td><s class="gray-light"><%= job.title %></s></td>
+          <td><%= link_to job.title, admins_job_path(job.id) %></td>
           <td><%= link_to job.company_name, 'javascript:void(0);', "data-toggle" => "popover", "data-trigger" => "focus", "data-placement" => "bottom", "data-content" => job.company_description %></td>
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
-          <td><%= job.resume_status %></td>
-          <% flag = job.finished_approve_today? ? "label-success" : "label-danger" %>
-          <td>
-            <%= Recruiters::JobsHelper::state_show(job) %>
-          </td>
         </tr>
       <% end %>
     </tbody>
