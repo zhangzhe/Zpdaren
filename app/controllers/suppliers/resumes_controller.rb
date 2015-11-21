@@ -68,6 +68,6 @@ class Suppliers::ResumesController < Suppliers::BaseController
 
   private
   def resume_params
-    params[:resume].permit(:candidate_name, :tag_list, :attachment, :mobile, :auto_delivery, deliveries_attributes: [:message, :job_id])
+    params[:resume].permit(:candidate_name, :tag_list, :attachment, :mobile, :auto_delivery, :remark, deliveries_attributes: [:message, :job_id])
   end
 end

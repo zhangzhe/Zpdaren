@@ -98,6 +98,9 @@
       <% end %>
     <% end %>
   </p>
+  <p>
+    <%= sanitize("<strong>备注：</strong>#{@delivery.resume.remark}") if @delivery.resume.remark.present? %>
+  </p>
 </div>
 <div class="col-md-10">
 </div>

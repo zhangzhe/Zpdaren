@@ -54,6 +54,6 @@ class Admins::ResumesController < Admins::BaseController
 
   private
   def resume_params
-    params[:resume].permit(:candidate_name, :tag_list, :description, :mobile, :email, :available, :pdf_attachment, :problem)
+    params[:resume].permit(:candidate_name, :tag_list, :description, :mobile, :email, :available, :pdf_attachment, :problem, :remark)
   end
 end
