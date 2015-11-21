@@ -14,6 +14,9 @@
       <span class='gray-light'><%= tag %></span>
     <% end %>
   </p>
+  <p>
+    备注：<%= @resume.remark %>
+  </p>
   <% if @resume.is_pdf? %>
     <%= render 'shared/show_pdf', pdf_url: download_suppliers_resume_path(@resume) %>
   <% else %>

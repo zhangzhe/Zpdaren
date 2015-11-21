@@ -36,6 +36,10 @@
     </p>
   <% end %>
   <p>
+    <%= f.label :remark, '备注' %>
+    <%= f.text_field :remark, class: 'form-control' %>
+  </p>
+  <p>
     <%= f.submit '上传', class: "btn btn-primary", data: { disable_with: '提交中...' } %>
   </p>
 <% end %>
