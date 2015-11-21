@@ -54,7 +54,7 @@ Rails.application.routes.draw do
       end
     end
     resources :users, only: [:index, :destroy]
-    resources :companies, only: [:show]
+    resources :companies, only: [:show, :edit, :update]
     resources :suppliers, only: [:show]
     resources :refund_requests, only: [:index, :show] do
       member do

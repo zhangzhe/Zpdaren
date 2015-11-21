@@ -1,0 +1,33 @@
+<br>
+<ol class="breadcrumb">
+  <li><%= link_to "用户列表", admins_users_path(type: "Recruiter") %></li>
+  <li><%= link_to "招聘方", admins_users_path(type: "Recruiter") %></li>
+  <li class="active">修改公司信息</li>
+</ol>
+
+<%= render 'shared/page_title', title: @company.name %>
+
+<%= form_for @company, url: admins_company_path do |f| %>
+  <p>
+    <%= f.label :name, "公司名称" %>
+    <span class='red-star'>*</span>
+    <%= f.text_field :name, class: "form-control" %>
+  </p>
+  <p>
+    <%= f.label :description, "公司描述" %>
+    <span class='red-star'>*</span>
+    <%= f.text_area :description, class: "form-control", rows: 20 %>
+  </p>
+  <p>
+    <%= f.label :mobile, "联系方式" %>
+    <span class='red-star'>*</span>
+    <%= f.text_field :mobile, class: 'form-control' %>
+  </p>
+  <p>
+    <%= f.label :address, "公司地址" %>
+    <%= f.text_field :address, class: 'form-control' %>
+  </p>
+  <p>
+    <%= f.submit "确定", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
+  </p>
+<% end %>
