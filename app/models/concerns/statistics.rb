@@ -19,6 +19,10 @@ module Statistics
     (Delivery.count == 0) ? 0 : Delivery.after_paid.count.to_f/Delivery.count
   end
 
+  def Statistics.active_supplier_rate
+    (Supplier.count == 0) ? 0 : (Resume.active_suppliers_count.to_f / Supplier.count)
+  end
+
   private
   def data_count(date)
     self.where(:created_at => (date.beginning_of_day..date.end_of_day)).count
