@@ -167,7 +167,7 @@ class Job < ActiveRecord::Base
   end
 
   def resume_status
-    "#{deliveries.after_paid.count} / #{deliveries.after_approved.count} / #{deliveries.count}"
+    "#{deliveries.with_deleted.after_paid.count} / #{deliveries.with_deleted.after_approved.count} / #{deliveries.with_deleted.count}"
   end
 
   def self.has_approved_delivery

@@ -66,6 +66,10 @@ class Resume < ActiveRecord::Base
     reason
   end
 
+  def self.active_suppliers_count
+    Resume.all.map(&:supplier_id).uniq.count
+  end
+
   private
   def auto_deliver
     matching_jobs.each do |job|
