@@ -1,0 +1,105 @@
+<br>
+<ol class="breadcrumb">
+  <li><%= link_to "推荐列表", admins_job_deliveries_path(:job_id => @delivery.job) %></li>
+  <li><%= @delivery.resume_candidate_name %></li>
+</ol>
+
+<div class="col-md-6">
+  <%= render 'shared/page_title', title: '职位' %>
+  <H2>
+    <%= @delivery.job_title %>
+  </H2 >
+  <p>
+    <% @delivery.job_tag_list.each do |tag| %>
+      <i class="fa fa-tags"></i>
+      <span class='gray-light'><%= tag %></span>
+    <% end %>
+  </p>
+  <p>
+    <%= render 'shared/salary_show', job: @delivery.job %>
+  </p>
+  <p>
+    <strong>职位佣金：</strong>
+    <span class='gray-light'>
+      <%= @delivery.job.bonus %>元
+    </span>
+  </p>
+  <p class='blockquote14'>
+    <strong>
+      职位描述
+    </strong>
+  </p>
+  <p>
+    <%= simple_format  @delivery.job_description %>
+  </p>
+  <hr>
+  <H2>
+    <%= @delivery.job.company.name %>
+  </H2 >
+  <p class='gray-light'>
+    联系方式：
+    <%= @delivery.job.company.mobile %>
+  </p >
+  <p class='blockquote14'>
+    <strong>
+      公司描述
+    </strong>
+  </p>
+  <p>
+    <div class='gray-light'>
+      <%= simple_format @delivery.job.company.description %>
+    </div>
+  </p>
+  <p class='gray-light'>地址：<%= @delivery.job.company.address.present? ? @delivery.job.company.address : '暂未提供' %></p>
+  <p><%= "给招聘方的留言：#{@delivery.message}" if @delivery.message.present? %></p>
+</div>
+<div class="col-md-6">
+  <%= render 'shared/page_title', title: '推荐' %>
+  <H2>
+    <%= @delivery.resume_candidate_name %><%= "(请先完善简历)" if @delivery.resume.may_improve? %><%= "(暂时不找工作)" if @delivery.resume.unavailable? %>
+  </H2 >
+  <p>
+    <%= @delivery.resume_mobile %>
+  </p >
+  <p>
+    <% @delivery.resume_tag_list.each do |tag| %>
+      <i class="fa fa-tags"></i>
+      <span class='gray-light'><%= tag %></span>
+    <% end %>
+  </p>
+  <p class='blockquote14'>
+    <strong>
+      简历描述
+    </strong>
+  </p>
+  <p>
+    <% if @delivery.resume.is_pdf? %>
+      <% if @delivery.resume.pdf_attachment.present? %>
+        <%= render 'shared/show_pdf', pdf_url: pdf_download_admins_resume_path(@delivery.resume) %>
+      <% else %>
+        <br>
+        <br>
+        <div class='text-center gray-light'>
+          简历描述还是空的，快去简历列表完善吧！
+        </div>
+        <br>
+        <br>
+      <% end %>
+    <% else %>
+      <% if @delivery.resume.description.present? %>
+        <%= simple_format @delivery.resume.description %>
+      <% else %>
+        <br>
+        <br>
+        <div class='text-center gray-light'>
+          简历描述还是空的，快去简历列表完善吧！
+        </div>
+        <br>
+        <br>
+      <% end %>
+    <% end %>
+  </p>
+  <p>
+    <%= sanitize("<strong>备注：</strong>#{@delivery.resume.remark}") if @delivery.resume.remark.present? %>
+  </p>
+</div>

@@ -32,6 +32,11 @@ class Admins::DeliveriesController < Admins::BaseController
     end
   end
 
+  def show
+    @delivery = Delivery.find(params[:id])
+    @job = @delivery.job
+  end
+
   def edit
     @job = Job.find(params[:job_id])
     @delivery = @job.deliveries.find(params[:id])
