@@ -12,11 +12,15 @@ module Statistics
   end
 
   def Statistics.delivery_rate
-     (Job.count == 0) ? 0 : Job.has_approved_delivery.count.to_f/Job.count
+     (Job.count == 0) ? 0 : (Job.has_approved_delivery.count.to_f / Job.count)
   end
 
   def Statistics.success_delivery_rate
-    (Delivery.count == 0) ? 0 : Delivery.after_paid.count.to_f/Delivery.count
+    (Delivery.count == 0) ? 0 : (Delivery.after_paid.count.to_f / Delivery.count)
+  end
+
+  def self.supplier_attent_weixin_rate
+    (Supplier.count == 0) ? 0 : (Weixin.joins(:user).count.to_f / Supplier.count)
   end
 
   def Statistics.active_supplier_rate
