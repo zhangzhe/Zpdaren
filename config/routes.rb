@@ -42,7 +42,7 @@ Rails.application.routes.draw do
       end
     end
     resources :jobs, only: [:index, :show, :edit, :update, :destroy] do
-      resources :deliveries, only: [:index, :edit, :update]
+      resources :deliveries, except: [:new, :create, :destroy]
     end
     match 'deliveries' => 'deliveries#index', :via => :get, :as => "deliveries"
 
