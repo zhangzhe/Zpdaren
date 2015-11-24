@@ -15,4 +15,5 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+//= require_tree ./admins
 //= require_tree ./suppliers

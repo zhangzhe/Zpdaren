@@ -28,6 +28,7 @@ class Job < ActiveRecord::Base
   scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'deposit_paid_confirmed']) }
   scope :in_hiring, -> { where.not('state in (?)', ['submitted', 'finished', 'final_payment_paid']) }
   scope :un_hiring, -> { where('state in (?)', ['final_payment_paid', 'finished']) }
+  scope :max_priority, -> { where('priority = 1') }
   default_scope { order(created_at: :desc) }
 
   before_destroy :destroy_all_association_entities

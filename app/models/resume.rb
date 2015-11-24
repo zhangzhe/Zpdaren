@@ -16,6 +16,7 @@ class Resume < ActiveRecord::Base
   scope :problemed, ->{ where("problem is not null") }
   scope :improper, ->{ where("problem is not null or available is false") }
   scope :proper, ->{ where("problem is null and available is true") }
+  scope :max_priority , -> { where("id in (?)", Delivery.max_priority.map(&:resume_id)) }
 
   accepts_nested_attributes_for :deliveries
   include SimilarEntity

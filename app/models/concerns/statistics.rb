@@ -11,20 +11,37 @@ module Statistics
     data_count(2.day.ago)
   end
 
-  def Statistics.delivery_rate
-     (Job.count == 0) ? 0 : (Job.has_approved_delivery.count.to_f / Job.count)
+  def Statistics.delivery_rate(scope = 'all')
+    if scope == 'all'
+      (Job.count == 0) ? 0 : (Job.has_approved_delivery.count.to_f / Job.count)
+    else
+      (Job.max_priority.count == 0) ? 0 : (Job.max_priority.has_approved_delivery.count.to_f / Job.max_priority.count)
+    end
   end
 
-  def Statistics.success_delivery_rate
-    (Delivery.count == 0) ? 0 : (Delivery.after_paid.count.to_f / Delivery.count)
+  def Statistics.success_delivery_rate(scope = 'all')
+    if scope == 'all'
+      (Delivery.count == 0) ? 0 : (Delivery.after_paid.count.to_f / Delivery.count)
+    else
+      (Delivery.max_priority.count == 0) ? 0 : (Delivery.max_priority.after_paid.count.to_f / Delivery.max_priority.count)
+    end
+
   end
 
-  def self.supplier_attent_weixin_rate
-    (Supplier.count == 0) ? 0 : (Weixin.joins(:user).count.to_f / Supplier.count)
+  def self.supplier_attent_weixin_rate(scope = 'all')
+    if scope == 'all'
+      (Supplier.count == 0) ? 0 : (Weixin.joins(:user).count.to_f / Supplier.count)
+    else
+      (Supplier.max_priority.count == 0) ? 0 : (Weixin.max_priority.count.to_f / Supplier.max_priority.count)
+    end
   end
 
-  def Statistics.active_supplier_rate
-    (Supplier.count == 0) ? 0 : (Resume.active_suppliers_count.to_f / Supplier.count)
+  def Statistics.active_supplier_rate(scope = 'all')
+    if scope == 'all'
+      (Supplier.count == 0) ? 0 : (Resume.active_suppliers_count.to_f / Supplier.count)
+    else
+      (Supplier.max_priority.count == 0) ? 0 : (Resume.max_priority.active_suppliers_count.to_f / Supplier.max_priority.count)
+    end
   end
 
   private

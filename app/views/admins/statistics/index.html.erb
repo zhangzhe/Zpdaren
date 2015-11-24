@@ -1,4 +1,4 @@
-<br>
+<%= render 'shared/page_title', title: '数据统计' %>
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
@@ -99,6 +99,114 @@
         <th>有效推荐方率</th>
         <td>
           <%= number_to_percentage Statistics.active_supplier_rate*100 %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+<%= render 'shared/page_title', title: '最高优先级统计数据' %>
+<br>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>指标\数量</th>
+        <th>总数</th>
+        <th>今天新增</th>
+        <th>昨天新增</th>
+        <th>前天新增</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>职位数</th>
+        <td>
+          <%= Job.max_priority.count %>
+        </td>
+        <td>
+          <%= Job.max_priority.today_added_count %>
+        </td>
+        <td>
+          <%= Job.max_priority.yesterday_added_count %>
+        </td>
+        <td>
+          <%= Job.max_priority.the_day_before_yesterday_added_count %>
+        </td>
+      </tr>
+      <tr>
+        <th>推荐数</th>
+        <td>
+          <%= Delivery.max_priority.count %>
+        </td>
+        <td>
+          <%= Delivery.max_priority.today_added_count %>
+        </td>
+        <td>
+          <%= Delivery.max_priority.yesterday_added_count %>
+        </td>
+        <td>
+          <%= Delivery.max_priority.the_day_before_yesterday_added_count %>
+        </td>
+      </tr>
+      <tr>
+        <th>推荐方</th>
+        <td>
+          <%= Supplier.max_priority.count %>
+        </td>
+        <td>
+          <%= Supplier.max_priority.today_added_count %>
+        </td>
+        <td>
+          <%= Supplier.max_priority.yesterday_added_count %>
+        </td>
+        <td>
+          <%= Supplier.max_priority.the_day_before_yesterday_added_count %>
+        </td>
+      </tr>
+      <tr>
+        <th>成功推荐</th>
+        <td>
+          <%= Delivery.max_priority.after_paid.count %>
+        </td>
+        <td>
+          <%= Delivery.max_priority.paid_today.count %>
+        </td>
+        <td>
+          <%= Delivery.max_priority.paid_yesterday.count %>
+        </td>
+        <td>
+          <%= Delivery.max_priority.paid_the_day_before_yesterday.count %>
+        </td>
+      </tr>
+      <tr>
+        <th>成功入职</th>
+        <td>
+          <%= Delivery.max_priority.final_paid.count %>
+        </td>
+      </tr>
+      <tr>
+        <th>推荐率</th>
+        <td>
+          <%= number_to_percentage Statistics.delivery_rate('max_priority')*100 %>
+        </td>
+      </tr>
+      <tr>
+        <th>成功推荐率</th>
+        <td>
+          <%= number_to_percentage Statistics.success_delivery_rate('max_priority')*100 %>
+        </td>
+      </tr>
+      <tr>
+        <th>推荐方关注微信率</th>
+        <td>
+          <%= number_to_percentage Statistics.supplier_attent_weixin_rate('max_priority')*100 %>
+        </td>
+      </tr>
+      <tr>
+        <th>有效推荐方率</th>
+        <td>
+          <%= number_to_percentage Statistics.active_supplier_rate('max_priority')*100 %>
         </td>
       </tr>
     </tbody>
