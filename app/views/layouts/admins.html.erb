@@ -9,7 +9,7 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <% active = active_for?([Admins::JobsController]) %>
-            <li class="<%= active %>"><%= link_to "职位列表#{badge_for_admin(Job.with_deleted)}".html_safe, admins_jobs_path(:state => "in_hiring") %></li>
+            <li class="<%= active %>"><%= link_to "职位列表#{badge_for_admin(Job.with_deleted)}".html_safe, admins_jobs_path(:state => "max_priority") %></li>
             <% active = active_for?([Admins::DeliveriesController]) %>
             <li class="<%= active %>"><%= link_to "推荐列表#{badge_for_admin(Delivery.with_deleted)}".html_safe, admins_deliveries_path(:state => "submitted") %></li>
             <% active = active_for?([Admins::ResumesController]) %>

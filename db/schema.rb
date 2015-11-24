@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151121034138) do
+ActiveRecord::Schema.define(version: 20151124025627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20151121034138) do
     t.integer  "salary_min",  default: 0
     t.integer  "salary_max",  default: 0
     t.datetime "deleted_at"
+    t.integer  "priority"
   end
 
   add_index "jobs", ["user_id"], name: "index_jobs_on_user_id", using: :btree

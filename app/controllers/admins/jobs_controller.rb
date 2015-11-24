@@ -8,6 +8,8 @@ class Admins::JobsController < Admins::BaseController
       @jobs = Job.only_deleted
     elsif params[:state] == "not_paid"
       @jobs = Job.submitted
+    elsif params[:state] == 'max_priority'
+      @jobs = Job.max_priority
     else
       @jobs = Job.all
     end
@@ -31,6 +33,16 @@ class Admins::JobsController < Admins::BaseController
       render 'edit' and return
     end
     redirect_to admins_job_path(@job)
+  end
+
+  def priority_update
+    job = Job.find(params[:id])
+    job.priority = params[:priority]
+    if job.save
+      render json: { status: 200 }
+    else
+      render json: { status: 500 }
+    end
   end
 
   def destroy

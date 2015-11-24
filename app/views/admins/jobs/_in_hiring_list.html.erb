@@ -13,7 +13,13 @@
     <tbody>
       <% jobs.each do |job| %>
         <tr>
-          <td><%= link_to job.title, admins_job_path(job.id) %></td>
+          <td>
+            <% if job.priority == 1 %>
+              <i class="fa fa-fire hot-fire"></i>
+            <% end %>
+            <%= link_to job.title, admins_job_path(job.id) %>
+            <%= select_tag "job_priority", options_for_select([['高优先级', 1], ['中优先级', 2], ['低优先级', 3]], job.priority || 3), class: 'job-priority-sel', id: job.id, onchange: 'changePriority(this);' %>
+          </td>
           <td><%= link_to job.company_name, 'javascript:void(0);', "data-toggle" => "popover", "data-trigger" => "focus", "data-placement" => "bottom", "data-content" => job.company_description %></td>
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
           <td><%= job.resume_status %></td>
@@ -29,3 +35,25 @@
     </tbody>
   </table>
 </div>
+<script>
+  function changePriority(sel){
+    var id = $(sel).attr('id');
+    var priority = $(sel).val();
+    $.ajax({
+      type: 'PUT',
+      url: '/admins/jobs/' + id + '/priority_update',
+      data: { priority: priority },
+      success: function(response){
+        if (response['status'] == 200) {
+          location.reload();
+        }else{
+          alert('程序异常，设置失败。');
+        }
+      },
+      error: function(){
+        alert('程序异常，设置失败。');
+      }
+    });
+  }
+</script>
+

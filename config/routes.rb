@@ -43,6 +43,9 @@ Rails.application.routes.draw do
     end
     resources :jobs, only: [:index, :show, :edit, :update, :destroy] do
       resources :deliveries, except: [:new, :create, :destroy]
+      member do
+        put :priority_update
+      end
     end
     match 'deliveries' => 'deliveries#index', :via => :get, :as => "deliveries"
 
