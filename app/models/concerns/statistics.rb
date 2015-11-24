@@ -29,19 +29,11 @@ module Statistics
   end
 
   def self.supplier_attent_weixin_rate(scope = 'all')
-    if scope == 'all'
-      (Supplier.count == 0) ? 0 : (Weixin.joins(:user).count.to_f / Supplier.count)
-    else
-      (Supplier.max_priority.count == 0) ? 0 : (Weixin.max_priority.count.to_f / Supplier.max_priority.count)
-    end
+    (Supplier.count == 0) ? 0 : (Weixin.joins(:user).count.to_f / Supplier.count)
   end
 
   def Statistics.active_supplier_rate(scope = 'all')
-    if scope == 'all'
-      (Supplier.count == 0) ? 0 : (Resume.active_suppliers_count.to_f / Supplier.count)
-    else
-      (Supplier.max_priority.count == 0) ? 0 : (Resume.max_priority.active_suppliers_count.to_f / Supplier.max_priority.count)
-    end
+    (Supplier.count == 0) ? 0 : (Resume.active_suppliers_count.to_f / Supplier.count)
   end
 
   private
