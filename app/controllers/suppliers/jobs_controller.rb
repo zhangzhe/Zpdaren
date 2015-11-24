@@ -3,6 +3,7 @@ class Suppliers::JobsController < Suppliers::BaseController
 
   def index
     @jobs = Job.available
+    @jobs = @jobs.max_priority if params[:state] == 'max_priority'
     @jobs = @jobs.where("user_id = ? ", params[:recruiter_id]) if params[:recruiter_id]
     @jobs = @jobs.where("title ilike ?", "%#{params[:key]}%") if params[:key].present?
     @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)

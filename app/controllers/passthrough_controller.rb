@@ -8,7 +8,7 @@ class PassthroughController < ApplicationController
     when Recruiter
       recruiters_jobs_path
     when Supplier
-      suppliers_jobs_path
+      suppliers_jobs_path(:state => "max_priority")
     else
       home_path
     end
