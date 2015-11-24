@@ -13,7 +13,12 @@
     <tbody>
       <% jobs.each do |job| %>
         <tr>
-          <td><%= link_to truncate(job.title), suppliers_job_path(job) %></td>
+          <td>
+            <% if job.priority == 1 %>
+              <i class="fa fa-fire hot-fire"></i>
+            <% end %>
+            <%= link_to truncate(job.title), suppliers_job_path(job) %>
+          </td>
           <td><%= link_to "#{job.company_name}", suppliers_jobs_path(recruiter_id: job.recruiter.id) %></td>
           <td><%= job.bonus_for_entry %>/<%= job.bonus_for_each_resume %></td>
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
