@@ -14,7 +14,7 @@
     <tbody>
       <% deliveries.each do |delivery| %>
         <tr>
-          <td><%= link_to delivery.resume_candidate_name, admins_job_delivery_path(:job_id => delivery.job, :id => delivery) %></td>
+          <td><%= link_to delivery.resume_candidate_name, admins_job_delivery_path(:job_id => delivery.job, :id => delivery), target: '_blank' %></td>
           <td><%= delivery.supplier.email %></td>
           <td><%= link_to delivery.job_title, admins_job_path(delivery.job), target: '_blank' %></td>
           </td>
@@ -23,7 +23,7 @@
           <% if params[:state].nil? || (params[:state] == "submitted") %>
             <td>
               <% if delivery.recommended? %>
-                <%= link_to '审核', edit_admins_job_delivery_path(:job_id => delivery.job, :id => delivery), class: 'btn btn-primary btn-sm' %>
+                <%= link_to '审核', edit_admins_job_delivery_path(:job_id => delivery.job, :id => delivery), class: 'btn btn-primary btn-sm', target: '_blank' %>
               <% else %>
                 已审核
               <% end %>

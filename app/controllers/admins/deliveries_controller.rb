@@ -6,7 +6,7 @@ class Admins::DeliveriesController < Admins::BaseController
       @job = Job.find(params[:job_id])
       @deliveries = @job.deliveries
       @approved_deliveries = @deliveries.after_approved.order("created_at DESC")
-      @recommended_deliveries = @deliveries.recommended.order("created_at DESC")
+      @recommended_deliveries = @deliveries.recommended.proper.order("created_at DESC")
     else
       @deliveries = Delivery.joins(:job)
       if params[:supplier_id]
