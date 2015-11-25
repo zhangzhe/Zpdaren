@@ -25,7 +25,7 @@
           <td><%= job.resume_status %></td>
           <% flag = job.finished_approve_today? ? "label-success" : "label-danger" %>
           <td>
-            <span class="label <%= flag %> label-as-badge"><%= job.deliveries.approved_today.count %>/8 </span>&nbsp;<%= link_to "审核推荐", admins_job_deliveries_path(:job_id => job), class: "btn btn-primary btn-sm" if (!job.finished_approve_today? && (job.deliveries.recommended.size > 0) ) %>
+            <span class="label <%= flag %> label-as-badge"><%= job.deliveries.approved_today.count %>/8 </span>&nbsp;<%= link_to "审核推荐", admins_job_deliveries_path(:job_id => job, :state => 'submitted'), class: "btn btn-primary btn-sm", target: '_blank' if job.may_approve? %>
           </td>
           <td>
             <%= Recruiters::JobsHelper::state_show(job) %>

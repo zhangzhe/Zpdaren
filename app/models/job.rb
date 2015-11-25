@@ -181,6 +181,10 @@ class Job < ActiveRecord::Base
     jobs
   end
 
+  def may_approve?
+    !self.finished_approve_today? && (self.deliveries.recommended.proper.size > 0)
+  end
+
   private
   def notify_recruiter_and_deliver_matching_resumes
     RecruiterMailer.job_approved(recruiter, self).deliver_now

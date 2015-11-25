@@ -1,43 +1,6 @@
 <% if params[:job_id] %>
-  <br>
-  <ol class="breadcrumb">
-    <li><%= link_to "职位列表", admins_jobs_path(:state => "in_hiring") %></li>
-    <li>审核【<%= Job.find(params[:job_id]).title %>】的推荐</li>
-  </ol>
-  <%= render 'shared/page_title', title: '推荐列表' %>
-  <%= render 'list', deliveries: @recommended_deliveries %>
-
-  <% unless @approved_deliveries.blank? %>
-    <%= render 'list', deliveries: @approved_deliveries %>
-  <% end %>
+  <%= render 'job', recommended_deliveries: @recommended_deliveries, approved_deliveries: @approved_deliveries %>
 <% else %>
-  <%= render 'admins/shared/search', title: '推荐列表', url: admins_deliveries_path, placeholder: '输入公司名称' %>
-  <ul class="nav nav-tabs">
-    <% active = (params[:state] == "submitted") ? "active" : "" %>
-    <li role="presentation" class="<%= active %>">
-      <%= link_to "未审核<span class='badge'>#{Delivery.recommended.proper.count}</span>".html_safe, admins_deliveries_path(:state => "submitted") %>
-    </li>
-    <% active = (params[:state] == "approved") ? "active" : "" %>
-    <li role="presentation" class="<%= active %>">
-      <%= link_to "待查看<span class='badge'>#{Delivery.approved.count}</span>".html_safe, admins_deliveries_path(:state => "approved") %>
-    </li>
-    <% active = (params[:state] == "paid") ? "active" : "" %>
-    <li role="presentation" class="<%= active %>">
-      <%= link_to "已付费查看<span class='badge'>#{Delivery.paid.count}</span>".html_safe, admins_deliveries_path(:state => "paid") %>
-    </li>
-    <% active = (params[:state] == "final_paid") ? "active" : "" %>
-    <li role="presentation" class="<%= active %>">
-      <%= link_to "已支付尾款<span class='badge'>#{Delivery.final_paid.count}</span>".html_safe, admins_deliveries_path(:state => "final_paid") %>
-    </li>
-    <% active = (params[:state] == "improper") ? "active" : "" %>
-    <li role="presentation" class="<%= active %>">
-      <%= link_to "不合适推荐<span class='badge'>#{Delivery.improper.count}</span>".html_safe, admins_deliveries_path(:state => "improper") %>
-    </li>
-  </ul>
-  <br>
-
-  <%= render 'list', deliveries: @deliveries %>
-
-  <%= render 'shared/paginate', objs: @deliveries %>
+  <%= render 'all', deliveries: @deliveries %>
 <% end %>
 <%= render 'shared/popover' %>
