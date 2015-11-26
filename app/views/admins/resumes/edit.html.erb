@@ -34,10 +34,14 @@
       <%= f.text_field :email, class: "form-control" %>
     </p>
     <p>
-      <%= f.label :description, '简历描述' %>
+      <%= f.label :pdf_attachment, '上传pdf格式的简历' %>
       <span class='red-star'>*</span>
-      <%= f.text_area :description, class: "form-control", rows: 10 %>
     </p>
+    <div>
+      <p>
+        <%= f.file_field 'pdf_attachment', style: "display:inline;width:160px;float:left;" %><span style="color:red;font-size:12px;">只能上传pdf格式的简历</span>
+      </p>
+    </div>
     <p>
       <%= render '/shared/tag' %>
     </p>

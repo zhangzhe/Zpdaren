@@ -73,31 +73,7 @@
     </strong>
   </p>
   <p>
-    <% if @delivery.resume.is_pdf? %>
-      <% if @delivery.resume.pdf_attachment.present? %>
-        <%= render 'shared/show_pdf', pdf_url: pdf_download_admins_resume_path(@delivery.resume) %>
-      <% else %>
-        <br>
-        <br>
-        <div class='text-center gray-light'>
-          简历描述还是空的，快去简历列表完善吧！
-        </div>
-        <br>
-        <br>
-      <% end %>
-    <% else %>
-      <% if @delivery.resume.description.present? %>
-        <%= simple_format @delivery.resume.description %>
-      <% else %>
-        <br>
-        <br>
-        <div class='text-center gray-light'>
-          简历描述还是空的，快去简历列表完善吧！
-        </div>
-        <br>
-        <br>
-      <% end %>
-    <% end %>
+    <%= render 'shared/resume_show', resume: @delivery.resume, pdf_url: pdf_download_admins_resume_path(@delivery.resume), default: 'prompt' %>
   </p>
   <p>
     <%= sanitize("<strong>备注：</strong>#{@delivery.resume.remark}") if @delivery.resume.remark.present? %>

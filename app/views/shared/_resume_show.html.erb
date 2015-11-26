@@ -1,0 +1,18 @@
+<% if resume.pdf_attachment.present? %>
+  <%= render 'shared/show_pdf', pdf_url: pdf_url %>
+<% else %>
+    <% if resume.description.present? %>
+    <div class="gray-light">
+      <%= simple_format resume.description %>
+    </div>
+    <% else %>
+      <% if default == 'link' %>
+        <%= link_to '下载简历原件', pdf_url %>
+      <% elsif default == 'prompt' %>
+        <div class="gray-light">
+          简历详情还没有内容，赶快去完善吧！
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

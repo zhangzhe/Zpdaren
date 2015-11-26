@@ -36,11 +36,7 @@
   </p>
   <hr>
   <p>
-    <% if @delivery.resume.is_pdf? %>
-      <%= render 'shared/show_pdf', pdf_url: download_recruiters_resume_path(@delivery.resume) %>
-    <% else %>
-      <div class="gray-light"><%= simple_format @delivery.description %></div>
-    <% end %>
+    <%= render 'shared/resume_show', resume: @delivery.resume, pdf_url: download_recruiters_resume_path(@delivery.resume), default: nil %>
   </p>
 </div>
 <br>
