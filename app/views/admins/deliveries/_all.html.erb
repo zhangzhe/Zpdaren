@@ -1,4 +1,4 @@
-<%= render 'admins/shared/search', title: '推荐列表', url: admins_deliveries_path, placeholder: '输入公司名称' %>
+<%= render 'admins/shared/search', title: '推荐列表', url: admins_deliveries_path, placeholder: '被推荐人' %>
 <ul class="nav nav-tabs">
   <% active = (params[:state] == "submitted") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">

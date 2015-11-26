@@ -14,8 +14,8 @@ class Admins::DeliveriesController < Admins::BaseController
         @deliveries = supplier.deliveries
       end
       if params[:key]
-        recruiter_ids = Company.where("name like ?", "%#{params[:key]}%").map(&:user_id)
-        @deliveries = @deliveries.where("user_id in (?)", recruiter_ids)
+        resume_ids = Resume.where("candidate_name like ?", "%#{params[:key]}%").map(&:id)
+        @deliveries = @deliveries.where("resume_id in (?)", resume_ids)
       end
       if params[:state] == "submitted"
         @deliveries = @deliveries.recommended.proper

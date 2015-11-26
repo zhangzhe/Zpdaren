@@ -15,7 +15,7 @@ class Admins::ResumesController < Admins::BaseController
     end
 
     @resumes = @resumes.where(:supplier_id => params[:supplier_id]) if params[:supplier_id]
-    @resumes = @resumes.tagged_with([params[:key]], any: true, wild: true) if params[:key].present?
+    @resumes = @resumes.where("candidate_name like ?", "%#{params[:key]}%") if params[:key].present?
     @resumes = @resumes.order("#{params[:sort]} #{params[:direction]}")
     @resumes = @resumes.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
