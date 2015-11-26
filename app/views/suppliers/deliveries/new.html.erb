@@ -27,15 +27,7 @@
     <%= @resume.tag_list.each{|tag|}.join(' ') %>
   </p>
   <p>
-    <% if @resume.is_pdf? %>
-      <%= render 'shared/show_pdf', pdf_url: download_suppliers_resume_path(@resume) %>
-    <% else %>
-      <% if @resume.description.present? %>
-        <%= simple_format @resume.description %>
-      <% else %>
-        <%= link_to '下载简历原件', download_suppliers_resume_path(@resume) %>
-      <% end %>
-    <% end %>
+    <%= render 'suppliers/shared/resume_show', resume: @resume %>
   </p>
 </div>
 <div class="col-md-10">

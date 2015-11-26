@@ -38,15 +38,7 @@
     </strong>
   </p>
   <p>
-    <% if @resume.is_pdf? %>
-      <% if @resume.pdf_attachment.present? %>
-       <%= render 'shared/show_pdf', pdf_url: pdf_download_admins_resume_path(@resume) %>
-      <% else %>
-        <div class="gray-light">简历详情还没有内容，赶快去完善吧！</div>
-      <% end %>
-    <% else %>
-      <div class="gray-light"><%= simple_format @resume.description.present? ? @resume.description : '简历详情还没有内容，赶快去完善吧！' %></div>
-    <% end %>
+    <%= render 'shared/resume_show', resume: @resume, pdf_url: pdf_download_admins_resume_path(@resume), default: 'prompt' %>
   </p>
   <hr>
   <p>

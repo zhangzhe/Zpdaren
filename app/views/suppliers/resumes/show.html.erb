@@ -17,11 +17,7 @@
   <p>
     备注：<%= @resume.remark %>
   </p>
-  <% if @resume.is_pdf? %>
-    <%= render 'shared/show_pdf', pdf_url: download_suppliers_resume_path(@resume) %>
-  <% else %>
-    <p><%= link_to '简历原件', download_suppliers_resume_path(@resume) %></p>
-  <% end %>
+  <%= render 'suppliers/shared/resume_show', resume: @resume %>
   <hr>
   <p>
     <%= button_to '删除', suppliers_resume_path, method: :delete, data: { confirm: "是否删除简历【#{@resume.candidate_name}】？删除后不可恢复!", disable_with: '提交中...'}, class: "btn btn-danger" %>

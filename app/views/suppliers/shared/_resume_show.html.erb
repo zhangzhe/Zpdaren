@@ -1,0 +1,15 @@
+<% if resume.is_pdf? %>
+  <p>简历原件</p>
+  <%= render 'shared/show_pdf', pdf_url: download_suppliers_resume_path(resume) %>
+<% else %>
+  <% if resume.description.present? %>
+    <p class='blockquote14'>
+      <strong>
+        简历详情
+      </strong>
+    </p>
+    <%= simple_format resume.description %>
+  <% else %>
+    <p><%= link_to '简历原件', download_suppliers_resume_path(resume) %></p>
+  <% end %>
+<% end %>

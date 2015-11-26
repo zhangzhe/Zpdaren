@@ -32,14 +32,28 @@ class Admins::ResumesController < Admins::BaseController
   end
 
   def update
-    @resume = Resume.update(params[:id], resume_params)
-    @resume.set_attachment_to_pdf_attachment(params[:resume][:reuse_attachment])
-    if @resume.errors.any?
+    @resume = Resume.find(params[:id])
+    if @resume.is_pdf?
+      if !is_reuse? && !is_pdf?
+        flash[:error] = '请上传pdf格式的简历'
+        render (@resume.is_pdf? ? 'edit_pdf' : 'edit') and return
+      end
+      @resume.pdf_attachment = @resume.attachment
+    else
+      if !is_pdf?
+        flash[:error] = '请上传pdf格式的简历'
+        render (@resume.is_pdf? ? 'edit_pdf' : 'edit') and return
+      end
+    end
+    @resume.attributes = resume_params
+
+    if @resume.save
+      flash[:success] = '完善成功'
+      redirect_to admins_resumes_path(:state => "uncompleted") and return
+    else
       flash[:error] = @resume.errors.full_messages.first
       render (@resume.is_pdf? ? 'edit_pdf' : 'edit') and return
     end
-    flash[:success] = '完善成功'
-    redirect_to admins_resumes_path(:state => "uncompleted")
   end
 
   def download
@@ -54,6 +68,14 @@ class Admins::ResumesController < Admins::BaseController
 
   private
   def resume_params
-    params[:resume].permit(:candidate_name, :tag_list, :description, :mobile, :email, :available, :pdf_attachment, :problem, :remark)
+    params[:resume].permit(:candidate_name, :tag_list, :mobile, :email, :available, :pdf_attachment, :problem, :remark)
+  end
+
+  def is_reuse?
+   (params[:resume][:reuse_attachment] and (params[:resume][:reuse_attachment] == '1')) ? true : false
+  end
+
+  def is_pdf?
+    (resume_params[:pdf_attachment] and resume_params[:pdf_attachment].original_filename.end_with?('pdf')) ? true : false
   end
 end
