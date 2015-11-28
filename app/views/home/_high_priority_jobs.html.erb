@@ -5,7 +5,7 @@
     <% Job.high_priority_samples.each do |job| %>
     <div class="col-xs-6 col-md-4">
       <blockquote>
-        <p><%= job.title_show_in_front_page %></p>
+        <p><%= truncate("#{job.title}", length: 16) %></p>
         <%= job.company_name %>
         <p><footer>入职红包: <%= job.bonus %></footer></p>
         <p><a class="btn btn-primary btn-sm" href="/suppliers/sign_up">为他推荐 &raquo;</a></p>
