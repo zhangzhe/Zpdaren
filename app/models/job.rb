@@ -61,6 +61,10 @@ class Job < ActiveRecord::Base
     end
   end
 
+  def self.high_priority_samples
+    self.max_priority.shuffle[0..5]
+  end
+
   def finished_approve_today?
     self.deliveries.approved_today.count >= 8
   end
