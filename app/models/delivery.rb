@@ -56,7 +56,7 @@ class Delivery < ActiveRecord::Base
 
     event :refuse do
       after do
-        notify_supplier
+        notify_supplier_refused
       end
       transitions :from => [:recommended, :approved], :to => :refused
     end
@@ -194,7 +194,7 @@ class Delivery < ActiveRecord::Base
     Weixin.notify_resume_approved(self) if self.resume.supplier.weixin
   end
 
-  def notify_supplier
-    Weixin.send_resume_refused_notification(self) if self.supplier.weixin
+  def notify_supplier_refused
+    Weixin.send_resume_refused_notification(self) if self.resume.supplier.weixin
   end
 end

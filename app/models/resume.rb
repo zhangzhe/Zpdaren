@@ -16,8 +16,6 @@ class Resume < ActiveRecord::Base
   scope :problemed, ->{ where("problem is not null") }
   scope :max_priority , -> { where("id in (?)", Delivery.max_priority.map(&:resume_id)) }
 
-  after_update :sync_deliveries
-
   accepts_nested_attributes_for :deliveries
   include SimilarEntity
   include DataRecoverer
