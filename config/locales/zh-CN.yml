@@ -285,6 +285,8 @@ zh-CN:
         message: '给招聘方的留言'
       delivery:
         message: '给招聘方的留言'
+      rejection:
+        reason: '拒绝原因'
     errors:
       models:
         user:
@@ -348,5 +350,9 @@ zh-CN:
           attributes:
             message:
               too_long: 长度超过了%{count}字
+        rejection:
+          attributes:
+            reason:
+              blank: '不能为空'
 
 

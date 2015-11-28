@@ -8,7 +8,7 @@
         <th>公司</th>
         <th>操作时间</th>
         <% if params[:state].nil? || params[:state] == "submitted" %><th>状态/操作</th><% end %>
-        <% if params[:state] == "improper" %><th>原因</th><% end %>
+        <% if params[:state] == "refused" %><th>原因</th><% end %>
       </tr>
     </thead>
     <tbody>
@@ -29,8 +29,8 @@
               <% end %>
             </td>
           <% end %>
-          <% if params[:state] == "improper" %>
-            <td><%= delivery.improper_reason %></td>
+          <% if params[:state] == "refused" %>
+            <td><%= (delivery.rejection_reason || []).push(delivery.rejection_other).each {|reason| p reason }.join(',') %></td>
           <% end %>
         </tr>
       <% end %>

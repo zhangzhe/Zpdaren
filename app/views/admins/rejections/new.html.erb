@@ -1,0 +1,29 @@
+<br>
+<ol class="breadcrumb">
+  <li><%= link_to "推荐列表", admins_job_deliveries_path(:job_id => @delivery.job, :state => 'recommended') %></li>
+  <li><%= link_to @delivery.resume_candidate_name, edit_admins_job_delivery_path(:job_id => @delivery.job, :id => @delivery) %></li>
+  <li>拒绝推荐</li>
+</ol>
+
+<%= form_for Rejection.new, url: admins_rejections_path do |f| %>
+  <%= hidden_field_tag 'rejection[delivery_id]', @delivery.id %>
+  <p>
+    拒绝原因：
+  </p>
+  <p>
+    <%= check_box_tag 'rejection[reason][]',  "工作经验不足" %>工作经验不足
+  </p>
+  <p>
+    <%= check_box_tag 'rejection[reason][]', "专业不对口" %>专业不对口
+  </p>
+  <p>
+    <%= check_box_tag 'rejection[reason][]', "年龄太大" %>年龄太大
+  </p>
+  <p>
+    其他：
+  </p>
+  <p>
+    <%= f.text_area :other, class: "form-control", rows: 10 %>
+  </p>
+  <%= f.submit "提交", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
+<% end %>

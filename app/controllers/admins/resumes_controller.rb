@@ -48,6 +48,7 @@ class Admins::ResumesController < Admins::BaseController
     @resume.attributes = resume_params
 
     if @resume.save
+      @resume.sync_deliveries
       flash[:success] = '完善成功'
       redirect_to admins_resumes_path(:state => "uncompleted") and return
     else

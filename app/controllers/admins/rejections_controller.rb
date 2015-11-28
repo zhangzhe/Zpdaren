@@ -1,7 +1,6 @@
-class Recruiters::RejectionsController < Recruiters::BaseController
-
+class Admins::RejectionsController < Admins::BaseController
   def new
-    @delivery = current_recruiter.deliveries.find(params[:delivery_id])
+    @delivery = Delivery.find(params[:delivery_id])
   end
 
   def create
@@ -12,7 +11,8 @@ class Recruiters::RejectionsController < Recruiters::BaseController
     end
     delivery = rejection.delivery
     delivery.refuse!
-    redirect_to recruiters_delivery_path(delivery)
+    flash[:success] = '操作成功！'
+    redirect_to admins_job_deliveries_path(:job_id => delivery.job.id, :state => 'submitted')
   end
 
   private
