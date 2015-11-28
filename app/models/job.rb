@@ -61,8 +61,22 @@ class Job < ActiveRecord::Base
     end
   end
 
+  def self.high_priority_samples
+    self.max_priority.shuffle[0..5]
+  end
+
   def finished_approve_today?
     self.deliveries.approved_today.count >= 8
+  end
+
+
+  include ActionView::Helpers::TextHelper
+  def title_show_in_front_page
+    truncate("#{title}", length: 16)
+  end
+
+  def description_show_in_front_page
+    truncate(description, length: 80)
   end
 
   def editable?
