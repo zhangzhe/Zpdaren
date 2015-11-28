@@ -16,17 +16,15 @@ class Delivery < ActiveRecord::Base
 
   scope :process, -> { where("deliveries.state in ('paid', 'refused', 'final_payment_paid', 'finished')") }
   scope :approved, -> { where('deliveries.state' => 'approved') }
-  scope :recruiter_watchable, -> { where("deliveries.state != 'recommended'") }
   scope :after_approved, -> { where.not(state: 'recommended') }
+  scope :recruiter_watchable, -> { after_approved }
   scope :approved_today, -> { where('DATE(deliveries.updated_at) = ? and deliveries.state = ?', Date.today, 'approved') }
   scope :after_paid, -> { where("deliveries.state in ('paid', 'final_payment_paid', 'finished')") }
   scope :final_paid, -> { where("deliveries.state in ('final_payment_paid', 'finished')") }
   scope :paid_today, -> { where('DATE(deliveries.updated_at) = ? and deliveries.state = ?', Date.today, 'paid') }
   scope :paid_yesterday, -> { where('DATE(deliveries.updated_at) = ? and deliveries.state = ?', 1.day.ago.to_date, 'paid') }
   scope :paid_the_day_before_yesterday, -> { where('DATE(deliveries.updated_at) = ? and deliveries.state = ?', 2.day.ago.to_date, 'paid') }
-
-  scope :improper, -> { joins(:resume).merge(Resume.improper) }
-  scope :proper, -> { joins(:resume).merge(Resume.proper) }
+  scope :refused, -> { where(state: 'refused') }
   scope :max_priority, -> { joins(:job).where("jobs.priority = 1") }
 
   extend Statistics
@@ -55,7 +53,10 @@ class Delivery < ActiveRecord::Base
     end
 
     event :refuse do
-      transitions :from => :approved, :to => :refused
+      after do
+        notify_supplier
+      end
+      transitions :from => [:recommended, :approved], :to => :refused
     end
 
     event :pay_final_payment do
@@ -142,10 +143,6 @@ class Delivery < ActiveRecord::Base
     select("deliveries.*, case when state='recommended' then 1 else 0 end as state_level").order("state_level desc")
   end
 
-  def improper_reason
-    resume.improper_reason
-  end
-
   private
   def sync_job
     job.state = self.state
@@ -195,4 +192,7 @@ class Delivery < ActiveRecord::Base
     Weixin.notify_resume_approved(self) if self.resume.supplier.weixin
   end
 
+  def notify_supplier
+    Weixin.send_resume_refused_notification(self) if self.supplier.weixin
+  end
 end

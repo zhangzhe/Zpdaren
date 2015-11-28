@@ -65,6 +65,7 @@ Rails.application.routes.draw do
         put :refuse
       end
     end
+    resources :rejections, only: [:new, :create]
   end
 
   namespace :recruiters do

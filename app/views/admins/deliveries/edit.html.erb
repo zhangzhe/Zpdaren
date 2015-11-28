@@ -1,6 +1,6 @@
 <br>
 <ol class="breadcrumb">
-  <li><%= link_to "推荐列表", admins_job_deliveries_path(:job_id => @delivery.job) %></li>
+  <li><%= link_to "推荐列表", admins_job_deliveries_path(:job_id => @delivery.job, :state => 'recommended') %></li>
   <li><%= @delivery.resume_candidate_name %></li>
 </ol>
 
@@ -89,6 +89,7 @@
     </p>
     <p>
       <%= f.submit "确认", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
+      <%= link_to '拒绝', new_admins_rejection_path(:delivery_id => @delivery.id), class: "btn btn-danger", target: '_blank' %>
     </p>
   <% end %>
 </div>
