@@ -17,7 +17,7 @@ class Delivery < ActiveRecord::Base
   scope :process, -> { where("deliveries.state in ('paid', 'refused', 'final_payment_paid', 'finished')") }
   scope :approved, -> { where('deliveries.state' => 'approved') }
   scope :after_approved, -> { where.not(state: 'recommended') }
-  scope :recruiter_watchable, -> { after_approved }
+  scope :recruiter_watchable, -> { where("deliveries.state not in ('recommended', 'refused') or (deliveries.state = 'refused' and deliveries.read_at is not null)") }
   scope :approved_today, -> { where('DATE(deliveries.updated_at) = ? and deliveries.state = ?', Date.today, 'approved') }
   scope :after_paid, -> { where("deliveries.state in ('paid', 'final_payment_paid', 'finished')") }
   scope :final_paid, -> { where("deliveries.state in ('final_payment_paid', 'finished')") }
@@ -26,6 +26,8 @@ class Delivery < ActiveRecord::Base
   scope :paid_the_day_before_yesterday, -> { where('DATE(deliveries.updated_at) = ? and deliveries.state = ?', 2.day.ago.to_date, 'paid') }
   scope :refused, -> { where(state: 'refused') }
   scope :max_priority, -> { joins(:job).where("jobs.priority = 1") }
+
+  default_scope { order('updated_at DESC') }
 
   extend Statistics
 

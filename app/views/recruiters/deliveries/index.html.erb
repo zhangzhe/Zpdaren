@@ -24,30 +24,28 @@
     </thead>
     <tbody>
       <% @deliveries.each do |delivery| %>
-        <% unless delivery.recommended? %>
-          <tr>
-            <td>
-              <% if delivery.refused? %>
-                <s>
-              <% end %>
-              <% link_to_resume = link_to(delivery.resume_candidate_name, recruiters_delivery_path(delivery)) %>
-              <% if delivery.unread? %>
-                <strong><%= link_to_resume %></strong>
-              <% else %>
-                <%= link_to_resume %>
-              <% end %>
-              <% if delivery.refused? %>
-                </s>
-              <% end %>
-            <td>
-              <%= link_to delivery.job_title, recruiters_job_path(delivery.job) %>
-            </td>
-            <td>
-              <%= link_to '查看简历', recruiters_delivery_path(delivery), class: 'btn btn-primary btn-sm' if (delivery.ever_paid_or_final_payment_paid_or_finished? && delivery.unread?) || (delivery.approved? && !delivery.ever_paid_or_final_payment_paid_or_finished?) %>
-              <%= Recruiters::DeliveriesHelper.state_show(delivery)%>
-            </td>
-          </tr>
-        <% end %>
+        <tr>
+          <td>
+            <% if delivery.refused? %>
+              <s>
+            <% end %>
+            <% link_to_resume = link_to(delivery.resume_candidate_name, recruiters_delivery_path(delivery)) %>
+            <% if delivery.unread? %>
+              <strong><%= link_to_resume %></strong>
+            <% else %>
+              <%= link_to_resume %>
+            <% end %>
+            <% if delivery.refused? %>
+              </s>
+            <% end %>
+          <td>
+            <%= link_to delivery.job_title, recruiters_job_path(delivery.job) %>
+          </td>
+          <td>
+            <%= link_to '查看简历', recruiters_delivery_path(delivery), class: 'btn btn-primary btn-sm' if (delivery.ever_paid_or_final_payment_paid_or_finished? && delivery.unread?) || (delivery.approved? && !delivery.ever_paid_or_final_payment_paid_or_finished?) %>
+            <%= Recruiters::DeliveriesHelper.state_show(delivery)%>
+          </td>
+        </tr>
       <% end %>
     </tbody>
   </table>

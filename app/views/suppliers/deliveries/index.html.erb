@@ -25,7 +25,7 @@
               <% end %>
             </p>
             <p>
-              <%= delivery.read_at.strftime("%Y-%m-%d %H:%m") if delivery.read? %>
+              <%= delivery.updated_at.strftime("%Y-%m-%d %H:%m") %>
             </p>
           </td>
         </tr>
