@@ -245,20 +245,6 @@ body {
   }
 /***********************/
 
-/*home page*/
-  .dingyuehao{
-    display: inline-block;
-    width: 10%;
-    position: fixed;
-    bottom: 6%;
-    right: 6%;
-    background-color: #fff;
-  }
-  .dingyuehao img{
-    width: 100%;
-  }
-/**********************/
-
 /*admin job list*/
   .hot-fire{
     font-size: 20px;
