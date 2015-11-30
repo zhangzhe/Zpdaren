@@ -4,6 +4,6 @@
     <%= link_to '本地上传简历', new_suppliers_resume_path(job_id: job.id), class: 'btn btn-primary' %>
   </p>
   <p>
-    <%= link_to '从简历库推荐', select_list_suppliers_resumes_path(job_id: job.id), class: 'btn btn-primary' %>
+    <%= link_to '从简历库推荐', select_list_suppliers_resumes_path(job_id: job.id), class: 'btn btn-primary' unless current_supplier.resumes.blank? %>
   </p>
 </div>
