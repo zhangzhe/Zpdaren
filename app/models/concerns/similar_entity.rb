@@ -5,7 +5,7 @@ module SimilarEntity
       entities = entity.tagged_with(tags)
       result << entities unless entities.blank?
     end
-    result.flatten.uniq
+    result.flatten.uniq - [self]
   end
 
   def tag_group

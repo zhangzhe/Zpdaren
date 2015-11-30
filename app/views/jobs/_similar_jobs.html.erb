@@ -1,0 +1,8 @@
+<% if similar_jobs.size > 0 %>
+  <h4>更多类似职位需求</h4>
+  <ol class="list-unstyled">
+    <% similar_jobs.each do |job| %>
+    <li><%= link_to job.title, job_path(job) %></a></li>
+    <% end %>
+  </ol>
+<% end %>
