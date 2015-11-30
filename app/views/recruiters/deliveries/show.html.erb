@@ -44,7 +44,7 @@
 <hr>
 <br>
 <div>
-  <% if ('deposit_paid_confirmed' == @delivery.job.state) and !@delivery.ever_paid_or_final_payment_paid_or_finished? and !@delivery.refused? %>
+  <% if @delivery.may_pay_or_refuse? %>
     <%= button_to "查看联系方式", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary", role: "button", method: :put, data: { disable_with: '提交中...' } %>
     <%= link_to "拒绝", new_recruiters_rejection_path(delivery_id: @delivery.id), class: "btn btn-primary", role: "button" %>
     <p class='fs12 mt20 gray-light'>备注：点击【查看联系方式】，该职位可查看简历数减1。</p>

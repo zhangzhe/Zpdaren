@@ -145,6 +145,10 @@ class Delivery < ActiveRecord::Base
     select("deliveries.*, case when state='recommended' then 1 else 0 end as state_level").order("state_level desc")
   end
 
+  def may_pay_or_refuse?
+    self.job.deposit_paid_confirmed? and !self.ever_paid_or_final_payment_paid_or_finished? and !self.refused?
+  end
+
   private
   def sync_job
     job.state = self.state
