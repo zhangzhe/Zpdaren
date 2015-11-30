@@ -79,6 +79,12 @@ class Delivery < ActiveRecord::Base
     end
   end
 
+  class << self
+    def order_by_state
+      select("deliveries.*, case when state='recommended' then 1 else 0 end as state_level").order("state_level desc")
+    end
+  end
+
   def read!
     self.update_attribute(:read_at, Time.now)
   end
@@ -139,10 +145,6 @@ class Delivery < ActiveRecord::Base
     elsif self.finished?
        return (self.job.bonus_for_each_resume/2 + job.bonus_for_entry)
     end
-  end
-
-  def self.order_by_state
-    select("deliveries.*, case when state='recommended' then 1 else 0 end as state_level").order("state_level desc")
   end
 
   def may_pay_or_refuse?

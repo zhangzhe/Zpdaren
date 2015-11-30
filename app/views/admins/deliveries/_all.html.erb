@@ -1,8 +1,8 @@
 <%= render 'admins/shared/search', title: '推荐列表', url: admins_deliveries_path, placeholder: '被推荐人' %>
 <ul class="nav nav-tabs">
-  <% active = (params[:state] == "submitted") ? "active" : "" %>
+  <% active = (params[:state] == "recommended") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "未审核<span class='badge'>#{Delivery.recommended.count}</span>".html_safe, admins_deliveries_path(:state => "submitted") %>
+    <%= link_to "未审核<span class='badge'>#{Delivery.recommended.count}</span>".html_safe, admins_deliveries_path(:state => "recommended") %>
   </li>
   <% active = (params[:state] == "approved") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
