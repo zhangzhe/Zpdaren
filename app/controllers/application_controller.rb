@@ -22,16 +22,12 @@ class ApplicationController < ActionController::Base
           redirect_to root_url
         end
       else
+        session[:previous_url] = request.fullpath
         flash[:alert] ||= '请先登录！'
-        if request.referer.present?
-          redirect_to request.referer.end_with?('/sign_in') ? :back : home_url
-        else
-          redirect_to home_url
-        end
+        redirect_to new_user_session_path
       end
     end
   end
-
 
   helper_method :forget_password_path_for, :register_path_for, :login_path_for
   def forget_password_path_for(resource_name)
