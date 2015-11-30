@@ -7,7 +7,7 @@
         <th>应聘职位</th>
         <th>公司</th>
         <th>操作时间</th>
-        <% if params[:state].nil? || params[:state] == "submitted" %><th>状态/操作</th><% end %>
+        <% if params[:state].nil? || params[:state] == "recommended" %><th>状态/操作</th><% end %>
         <% if params[:state] == "refused" %><th>原因</th><% end %>
       </tr>
     </thead>
@@ -20,7 +20,7 @@
           </td>
           <td><%= link_to delivery.job.company_name, admins_company_path(delivery.job.company_id), target: '_blank' %></td>
           <td><%= delivery.updated_at.localtime.to_date.to_s(:db) %></td>
-          <% if params[:state].nil? || (params[:state] == "submitted") %>
+          <% if params[:state].nil? || (params[:state] == "recommended") %>
             <td>
               <% if delivery.recommended? %>
                 <%= link_to '审核', edit_admins_job_delivery_path(:job_id => delivery.job, :id => delivery), class: 'btn btn-primary btn-sm', target: '_blank' %>

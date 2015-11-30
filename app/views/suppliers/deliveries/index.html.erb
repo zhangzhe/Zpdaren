@@ -1,4 +1,27 @@
 <%= render 'suppliers/shared/search', title: '我的推荐', url: suppliers_deliveries_path, placeholder: '输入公司名称' %>
+<ul class="nav nav-tabs">
+  <% active = (params[:state] == "recommended") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "已提交<span class='badge'>#{current_supplier.deliveries.recommended.count}</span>".html_safe, suppliers_deliveries_path(:state => "recommended") %>
+  </li>
+  <% active = (params[:state] == "approved") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "已审核通过<span class='badge'>#{current_supplier.deliveries.approved.count}</span>".html_safe, suppliers_deliveries_path(:state => "approved") %>
+  </li>
+  <% active = (params[:state] == "paid") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "已收到推荐红包<span class='badge'>#{current_supplier.deliveries.paid.count}</span>".html_safe, suppliers_deliveries_path(:state => "paid") %>
+  </li>
+  <% active = (params[:state] == "final_paid") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "已收到入职奖励<span class='badge'>#{current_supplier.deliveries.final_paid.count}</span>".html_safe, suppliers_deliveries_path(:state => "final_paid") %>
+  </li>
+  <% active = (params[:state] == "refused") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "不合适推荐<span class='badge'>#{current_supplier.deliveries.refused.count}</span>".html_safe, suppliers_deliveries_path(:state => "refused") %>
+  </li>
+</ul>
+<br>
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>

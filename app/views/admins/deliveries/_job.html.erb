@@ -5,9 +5,9 @@
 </ol>
 <%= render 'shared/page_title', title: '推荐列表' %>
 <ul class="nav nav-tabs">
-  <% active = (params[:state] == "submitted") ? "active" : "" %>
+  <% active = (params[:state] == "recommended") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "未审核<span class='badge'>#{recommended_deliveries.count}</span>".html_safe, admins_job_deliveries_path(:job_id => params[:job_id], :state => 'submitted') %>
+    <%= link_to "未审核<span class='badge'>#{recommended_deliveries.count}</span>".html_safe, admins_job_deliveries_path(:job_id => params[:job_id], :state => 'recommended') %>
   </li>
   <% active = (params[:state] == "approved") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
@@ -15,7 +15,7 @@
   </li>
 </ul>
 <br>
-<% if params[:state] == 'submitted' %>
+<% if params[:state] == 'recommended' %>
   <%= render 'list', deliveries: recommended_deliveries %>
 <% else %>
   <%= render 'list', deliveries: approved_deliveries %>

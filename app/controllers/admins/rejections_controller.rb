@@ -12,7 +12,7 @@ class Admins::RejectionsController < Admins::BaseController
     delivery = rejection.delivery
     delivery.refuse!
     flash[:success] = '操作成功！'
-    redirect_to admins_job_deliveries_path(:job_id => delivery.job.id, :state => 'submitted')
+    redirect_to admins_job_deliveries_path(:job_id => delivery.job.id, :state => 'recommended')
   end
 
   private

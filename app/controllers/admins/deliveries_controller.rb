@@ -17,17 +17,7 @@ class Admins::DeliveriesController < Admins::BaseController
         resume_ids = Resume.where("candidate_name like ?", "%#{params[:key]}%").map(&:id)
         @deliveries = @deliveries.where("resume_id in (?)", resume_ids)
       end
-      if params[:state] == "submitted"
-        @deliveries = @deliveries.recommended
-      elsif params[:state] == "approved"
-        @deliveries = @deliveries.approved
-      elsif params[:state] == "paid"
-        @deliveries = @deliveries.paid
-      elsif params[:state] == "final_paid"
-        @deliveries = @deliveries.final_paid
-      elsif params[:state] == "refused"
-        @deliveries = @deliveries.refused
-      end
+      @deliveries = @deliveries.send(params[:state])
       @deliveries = @deliveries.order("created_at DESC").paginate(page: params[:page], per_page: Settings.pagination.page_size)
     end
   end
@@ -53,7 +43,7 @@ class Admins::DeliveriesController < Admins::BaseController
       @delivery.approve!
       flash[:success] = "审核完成！"
     end
-    redirect_to admins_job_deliveries_path(:job_id => @delivery.job, :state => 'submitted')
+    redirect_to admins_job_deliveries_path(:job_id => @delivery.job, :state => 'recommended')
   end
 
   private
