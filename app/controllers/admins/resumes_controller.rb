@@ -33,16 +33,18 @@ class Admins::ResumesController < Admins::BaseController
 
   def update
     @resume = Resume.find(params[:id])
-    if @resume.is_pdf?
-      if !is_reuse? && !is_pdf?
-        flash[:error] = '请上传pdf格式的简历'
-        render (@resume.is_pdf? ? 'edit_pdf' : 'edit') and return
-      end
-      @resume.pdf_attachment = @resume.attachment
-    else
-      if !is_pdf?
-        flash[:error] = '请上传pdf格式的简历'
-        render (@resume.is_pdf? ? 'edit_pdf' : 'edit') and return
+    unless has_problem?
+      if @resume.is_pdf?
+        if !is_reuse? && !is_pdf?
+          flash[:error] = '请上传pdf格式的简历'
+          render (@resume.is_pdf? ? 'edit_pdf' : 'edit') and return
+        end
+        @resume.pdf_attachment = @resume.attachment
+      else
+        if !is_pdf?
+          flash[:error] = '请上传pdf格式的简历'
+          render (@resume.is_pdf? ? 'edit_pdf' : 'edit') and return
+        end
       end
     end
     @resume.attributes = resume_params
@@ -78,5 +80,9 @@ class Admins::ResumesController < Admins::BaseController
 
   def is_pdf?
     (resume_params[:pdf_attachment] and resume_params[:pdf_attachment].original_filename.end_with?('pdf')) ? true : false
+  end
+
+  def has_problem?
+    resume_params[:problem].present?
   end
 end

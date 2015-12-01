@@ -23,7 +23,8 @@
     <p>
       <%= f.label :mobile, '求职意向' %>
       <span class='red-star'>*</span>
-      <%= f.select :available, [["求职中", true], ["暂时不找工作", false]], {}, {class: "form-control"} %>
+      <% available =  (params.try(:[], :resume).try(:[], :available) == 'false') ? false : true %>
+      <%= f.select :available, options_for_select([["求职中", true], ["暂时不找工作", false]], available ?  ["求职中", true] : ["暂时不找工作", false]), {}, {class: "form-control"} %>
     </p>
     <p>
       <%= f.label :problem, '简历有问题？' %>

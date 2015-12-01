@@ -9,7 +9,7 @@ class Resume < ActiveRecord::Base
   after_create :auto_deliver
   default_scope { order("created_at DESC") }
   scope :completed, ->{ where("description is not null or pdf_attachment is not null") }
-  scope :uncompleted, ->{ where("description is null and pdf_attachment is null") }
+  scope :uncompleted, ->{ where("description is null and pdf_attachment is null and problem is null") }
   scope :waiting_approved, ->{ where("description is null and pdf_attachment is null") }
   scope :unavailable, ->{ where(:available => false) }
   scope :available, ->{ where(:available => true) }
@@ -59,7 +59,7 @@ class Resume < ActiveRecord::Base
   end
 
   def sync_deliveries
-    unless self.available
+    if !self.available || self.problem.present?
       self.deliveries.each do |delivery|
         if delivery.recommended? && delivery.may_refuse?
           Rejection.create(:delivery_id => delivery.id, :other => (self.problem.present? ? self.problem : '暂时不找工作'))
