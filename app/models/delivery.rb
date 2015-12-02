@@ -151,6 +151,10 @@ class Delivery < ActiveRecord::Base
     self.job.deposit_paid_confirmed? and !self.ever_paid_or_final_payment_paid_or_finished? and !self.refused?
   end
 
+  def rejection_reasons
+    (self.rejection_reason || []).push(self.rejection_other).compact.each {|reason| reason }.join(',')
+  end
+
   private
   def sync_job
     job.state = self.state
