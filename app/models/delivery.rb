@@ -158,13 +158,11 @@ class Delivery < ActiveRecord::Base
   end
 
   def external_credential
-    data = "#{self.job.recruiter.id}_#{self.id}"
-    EpinCipher.aes128_encrypt(data)
+    EpinCipher.aes128_encrypt(original_data)
   end
 
   def external_credential_valid?(external_credential)
-    data = "#{self.job.recruiter.id}_#{self.id}"
-    data == EpinCipher.aes128_decrypt(external_credential)
+    original_data == EpinCipher.aes128_decrypt(external_credential)
   end
 
   private
@@ -218,5 +216,9 @@ class Delivery < ActiveRecord::Base
 
   def notify_supplier_refused
     Weixin.send_resume_refused_notification(self) if self.resume.supplier.weixin
+  end
+
+  def original_data
+    "#{self.job.recruiter.id}_#{self.id}"
   end
 end
