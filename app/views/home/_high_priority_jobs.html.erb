@@ -4,12 +4,13 @@
   <div class="row">
     <% Job.high_priority_samples.each do |job| %>
     <div class="col-xs-6 col-md-4">
-      <blockquote>
-        <p><%= truncate("#{job.title}", length: 16) %></p>
-        <%= job.company_name %>
-        <p><footer>入职红包: <%= job.bonus %></footer></p>
-        <p><a class="btn btn-primary btn-sm" href="/suppliers/sign_up">为他推荐 &raquo;</a></p>
-      </blockquote>
+        <div class="text-center">
+          <p><%= truncate("#{job.title}", length: 16) %></p>
+          <small><p><%= job.company_name %></p></small>
+          <p>入职红包: <%= job.bonus %></p>
+          <p><%= link_to "为他推荐", job_path(job), class: "btn btn-primary btn-sm" %></p>
+          <br>
+        </div>
     </div>
     <% end %>
   </div>
