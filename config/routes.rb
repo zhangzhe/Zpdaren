@@ -32,7 +32,9 @@ Rails.application.routes.draw do
     passwords: 'authentication/passwords',
     confirmations: 'authentication/confirmations'
   }
+
   resources :jobs, only: [:show, :index]
+  resources :deliveries, only: [:show]
 
   namespace :admins do
     get 'statistics' => 'statistics#index'
