@@ -33,6 +33,11 @@ Rails.application.routes.draw do
     confirmations: 'authentication/confirmations'
   }
   resources :jobs, only: [:show]
+  resources :deliveries, only: [] do
+    member do
+      get :view
+    end
+  end
 
   namespace :admins do
     get 'statistics' => 'statistics#index'

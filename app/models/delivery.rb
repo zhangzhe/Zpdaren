@@ -1,3 +1,5 @@
+require 'epin_cipher'
+
 class Delivery < ActiveRecord::Base
   belongs_to :job
   belongs_to :resume
@@ -153,6 +155,16 @@ class Delivery < ActiveRecord::Base
 
   def rejection_reasons
     (self.rejection_reason || []).push(self.rejection_other).compact.each {|reason| reason }.join(',')
+  end
+
+  def external_credential
+    data = "#{self.job.recruiter.id}_#{self.id}"
+    EpinCipher.aes128_encrypt(data)
+  end
+
+  def external_credential_valid?(external_credential)
+    data = "#{self.job.recruiter.id}_#{self.id}"
+    data == EpinCipher.aes128_decrypt(external_credential)
   end
 
   private

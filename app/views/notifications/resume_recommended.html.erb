@@ -7,4 +7,13 @@
   <br> 在不付费的情况下您可以看到候选人的基本信息，点击购买后，可以看到候选人的联系方式，购买金额将从订金中扣除。
   <br> 相信您可以轻松hold住候选人，并为他/她开启一段新的职场之路。候选人接受offer后别忘记来我们平台完成尾款支付噢！
 </p>
+<p>
+  <% if @delivery.resume.pdf_attachment.present? %>
+    <embed src="<%= ROOT_URL %>/deliveries/<%= @delivery.id %>/view?external_credential=<%= @delivery.external_credential %>", width='100%', height='600px', type="application/pdf" />
+  <% else %>
+    <h2>简历详情</h2>
+    <%= simple_format @delivery.resume.description %>
+  <% end %>
+</p>
+<hr>
 <%= render "/shared/mail_footer" %>
