@@ -141,7 +141,7 @@ module WeixinConnection
     \"color\":\"#173177\"
     },
     \"keyword4\":{
-    \"value\":\"#{delivery.job.bonus_for_each_resume/2}元\",
+    \"value\":\"#{delivery.job.bonus_for_each_resume_for_supplier}元\",
     \"color\":\"#173177\"
     },
     \"keyword5\":{

@@ -1,0 +1,31 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>职位名称</th>
+        <th>公司名称</th>
+        <th>入职红包/简历红包</th>
+        <th>发布时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% jobs.each do |job| %>
+        <tr>
+          <td>
+            <% if job.priority == 1 %>
+              <i class="fa fa-fire hot-fire"></i>
+            <% end %>
+            <%= link_to truncate(job.title), job %>
+          </td>
+          <td><%= link_to "#{job.company_name}", job %></td>
+          <td><%= job.bonus_for_entry %>/<%= job.bonus_for_each_resume_for_supplier %></td>
+          <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
+          <td>
+            <%= link_to "为他推荐", job, class: "btn btn-primary btn-sm", role: "button" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
