@@ -1,3 +1,4 @@
+<% content_for :title, "#{@job.title} - #{@job.company_name}" %>
 <% content_for :job_info do %>
   <%= render 'shared/page_title', title: @job.title %>
   <div style="word-break:break-all;">
@@ -10,10 +11,8 @@
     <p>
       <%= render 'shared/salary_show', job: @job %>
     </p>
-
     <h4><%= @job.company_name %>提供&nbsp;<b><%= @job.bonus_for_entry %></b>&nbsp;元招聘红包</h4>
     <hr>
-
     <p><%= simple_format @job.description %></p>
     <hr>
     <h2>关于<%= @job.company_name %></h2>

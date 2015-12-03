@@ -99,11 +99,15 @@ class Job < ActiveRecord::Base
     self.deliveries.where("resume_id in (?)", supplier.resumes.map {|resume| resume.id })
   end
 
-  BONUS_RATE_FOR_EACH_RESUME = 0.005
+  BONUS_RATE_FOR_EACH_RESUME = 0.01
   BONUS_RATE_FOR_ENTRY = 0.8
   DEPOSIT_RATE = 0.2
   def bonus_for_each_resume
     (BONUS_RATE_FOR_EACH_RESUME * bonus.to_i).to_i
+  end
+
+  def bonus_for_each_resume_for_supplier
+    bonus_for_each_resume/2
   end
 
   def bonus_for_entry
