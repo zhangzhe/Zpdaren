@@ -3,13 +3,16 @@
     <div class="container">
       <br>
       <div class="col-md-offset-1 col-md-5">
-        <div class="">
-          <H1>
-            <p class="text-white" style="font-size:52px;"><b>众聘达人<b></p>
-          </H1 >
-          <H2>
-            <p class="text-white">招聘领域的<b><span style="font-size:40px;">&nbsp;滴滴&nbsp;</span></b></p>
-          </H2 >
+        <div>
+          <h1>
+            众聘达人
+          </h1>
+          <h2>
+            推荐优质<span style="font-size:36px;">&nbsp;简历&nbsp;</span>
+          </h2>
+          <h2>
+            <p class="text-primary">获得企业<span style="font-size:36px;">&nbsp;悬赏</span></p>
+          </h2>
           <br>
         </div>
       </div>
@@ -17,7 +20,7 @@
       <div>
         <ul class="nav nav-tabs" role="tablist">
           <li role="presentation" class="active"><a style="font-size:19px;" class="text-primary" href="#supplier" aria-controls="supplier" role="tab" data-toggle="tab">我要推荐简历</a></li>
-          <li role="presentation" class=""><a style="font-size:19px;" class="text-primary" href="#recruiter" aria-controls="recruiter" role="tab" data-toggle="tab">我要悬赏招聘</a></li>
+          <li role="presentation" class=""><a style="font-size:19px;" class="text-primary" href="#recruiter" aria-controls="recruiter" role="tab" data-toggle="tab">悬赏招聘</a></li>
         </ul>
         <br>
         <div class="tab-content">
@@ -30,12 +33,11 @@
             <%= render "signup" %>
           </div>
         </div>
-        <br><br>
-        <div class="text-white">已有账号？<%= link_to "直接登录", "users/sign_in", :class => "btn btn-success btn-lg" %></div>
+        <br>
+        <div class="text-white"><%= link_to "直接登录", "users/sign_in", :class => "btn btn-success btn-lg" %></div>
         <br><br>
         <br>
       </div>
-      <br>
     </div>
   </div>
   <%= render "customer_examples" %>

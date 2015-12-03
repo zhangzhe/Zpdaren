@@ -6,7 +6,7 @@ class Admins::DeliveriesController < Admins::BaseController
       @job = Job.find(params[:job_id])
       @deliveries = @job.deliveries
       @approved_deliveries = @deliveries.after_approved.order("created_at DESC")
-      @recommended_deliveries = @deliveries.recommended.proper.order("created_at DESC")
+      @recommended_deliveries = @deliveries.recommended.order("created_at DESC")
     else
       @deliveries = Delivery.joins(:job)
       if params[:supplier_id]
@@ -17,17 +17,7 @@ class Admins::DeliveriesController < Admins::BaseController
         resume_ids = Resume.where("candidate_name like ?", "%#{params[:key]}%").map(&:id)
         @deliveries = @deliveries.where("resume_id in (?)", resume_ids)
       end
-      if params[:state] == "submitted"
-        @deliveries = @deliveries.recommended.proper
-      elsif params[:state] == "approved"
-        @deliveries = @deliveries.approved
-      elsif params[:state] == "paid"
-        @deliveries = @deliveries.paid
-      elsif params[:state] == "final_paid"
-        @deliveries = @deliveries.final_paid
-      elsif params[:state] == "improper"
-        @deliveries = Delivery.improper
-      end
+      @deliveries = @deliveries.send(params[:state])
       @deliveries = @deliveries.order("created_at DESC").paginate(page: params[:page], per_page: Settings.pagination.page_size)
     end
   end
@@ -53,7 +43,7 @@ class Admins::DeliveriesController < Admins::BaseController
       @delivery.approve!
       flash[:success] = "审核完成！"
     end
-    redirect_to admins_job_deliveries_path(:job_id => @delivery.job)
+    redirect_to admins_job_deliveries_path(:job_id => @delivery.job, :state => 'recommended')
   end
 
   private
@@ -62,6 +52,6 @@ class Admins::DeliveriesController < Admins::BaseController
   end
 
   def delivery_params
-    params.require(:delivery).permit(:message)
+    params.require(:delivery).permit(:message, :reason)
   end
 end

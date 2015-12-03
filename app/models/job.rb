@@ -186,7 +186,7 @@ class Job < ActiveRecord::Base
   end
 
   def may_approve?
-    !self.finished_approve_today? && (self.deliveries.recommended.proper.size > 0)
+    !self.finished_approve_today? && (self.deliveries.recommended.size > 0)
   end
 
   private

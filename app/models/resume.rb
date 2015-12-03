@@ -9,13 +9,11 @@ class Resume < ActiveRecord::Base
   after_create :auto_deliver
   default_scope { order("created_at DESC") }
   scope :completed, ->{ where("description is not null or pdf_attachment is not null") }
-  scope :uncompleted, ->{ where("description is null and pdf_attachment is null") }
+  scope :uncompleted, ->{ where("description is null and pdf_attachment is null and problem is null") }
   scope :waiting_approved, ->{ where("description is null and pdf_attachment is null") }
   scope :unavailable, ->{ where(:available => false) }
   scope :available, ->{ where(:available => true) }
   scope :problemed, ->{ where("problem is not null") }
-  scope :improper, ->{ where("problem is not null or available is false") }
-  scope :proper, ->{ where("problem is null and available is true") }
   scope :max_priority , -> { where("id in (?)", Delivery.max_priority.map(&:resume_id)) }
 
   accepts_nested_attributes_for :deliveries
@@ -56,15 +54,19 @@ class Resume < ActiveRecord::Base
     self.deliveries.after_paid.present?
   end
 
-  def improper_reason
-    reason = ""
-    reason << "暂时不找工作:" if self.unavailable?
-    reason << ":简历#{self.problem}" if self.problem
-    reason
-  end
-
   def self.active_suppliers_count
     Resume.all.map(&:supplier_id).uniq.count
+  end
+
+  def sync_deliveries
+    if !self.available || self.problem.present?
+      self.deliveries.each do |delivery|
+        if delivery.recommended? && delivery.may_refuse?
+          Rejection.create(:delivery_id => delivery.id, :other => (self.problem.present? ? self.problem : '暂时不找工作'))
+          delivery.refuse!
+        end
+      end
+    end
   end
 
   private

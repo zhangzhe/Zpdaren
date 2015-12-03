@@ -1,6 +1,6 @@
 <br>
 <ol class="breadcrumb">
-  <li><%= link_to "推荐列表", admins_job_deliveries_path(:job_id => @delivery.job) %></li>
+  <li><%= link_to "推荐列表", admins_job_deliveries_path(:job_id => @delivery.job, :state => 'recommended') %></li>
   <li><%= @delivery.resume_candidate_name %></li>
 </ol>
 
@@ -67,6 +67,12 @@
       <span class='gray-light'><%= tag %></span>
     <% end %>
   </p>
+  <p>
+    <%= sanitize("<div class='alert alert-info' role='alert'><strong>不合适原因：</strong>#{@delivery.rejection_reasons}</div>") if @delivery.refused? %>
+  </p>
+  <p>
+    <%= sanitize("<strong>备注：</strong>#{@delivery.resume.remark}") if @delivery.resume.remark.present? %>
+  </p>
   <p class='blockquote14'>
     <strong>
       简历描述
@@ -74,8 +80,5 @@
   </p>
   <p>
     <%= render 'shared/resume_show', resume: @delivery.resume, pdf_url: pdf_download_admins_resume_path(@delivery.resume), default: 'prompt' %>
-  </p>
-  <p>
-    <%= sanitize("<strong>备注：</strong>#{@delivery.resume.remark}") if @delivery.resume.remark.present? %>
   </p>
 </div>

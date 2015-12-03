@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     passwords: 'authentication/passwords',
     confirmations: 'authentication/confirmations'
   }
+  resources :jobs, only: [:show]
 
   namespace :admins do
     get 'statistics' => 'statistics#index'
@@ -65,6 +66,7 @@ Rails.application.routes.draw do
         put :refuse
       end
     end
+    resources :rejections, only: [:new, :create]
   end
 
   namespace :recruiters do
