@@ -1,6 +1,6 @@
 <% content_for :title, "#{@job.title} - #{@job.company_name}" %>
 <% content_for :job_info do %>
-  <%= render 'shared/page_title', title: @job.title %>
+  <%= render 'shared/page_title', title: "#{@job.title} - #{@job.company_name}" %>
   <div style="word-break:break-all;">
     <p>
       <% @job.tag_list.each do |tag| %>
