@@ -1,6 +1,6 @@
 <% content_for :title, "#{@job.title} - #{@job.company_name}" %>
 <% content_for :job_info do %>
-  <%= render 'shared/page_title', title: "#{@job.title} - #{@job.company_name}" %>
+  <%= render 'shared/page_title', title: "招聘#{@job.title}" %>
   <div style="word-break:break-all;">
     <p>
       <% @job.tag_list.each do |tag| %>
@@ -15,7 +15,7 @@
     <hr>
     <p><%= simple_format @job.description %></p>
     <hr>
-    <h2>关于<%= @job.company_name %></h2>
+    <h1 class='text-primary'><%= @job.company_name %></h1>
     <blockquote>
       <%= simple_format @job.company_description %>
     </blockquote>
@@ -26,9 +26,9 @@
 <% content_for :other_job_info do %>
   <p>
     <div class="sidebar-module sidebar-module-inset">
-      <h4>推荐简历，赢取红包</h4><br>
+      <h3>推荐简历，赢取红包</h3><br>
       <p>
-        <%= link_to '上传简历', new_suppliers_resume_path(job_id: @job), class: 'btn btn-primary' %>
+        <%= link_to '推荐简历', new_suppliers_resume_path(job_id: @job), class: 'btn btn-primary' %>
       </p>
     </div>
   </p>

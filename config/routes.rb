@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :blogs, only: [:show, :index]
   resources :tags, only: [:index]
   resources :withdraws, only: [:new, :create]
 
@@ -68,6 +69,7 @@ Rails.application.routes.draw do
       end
     end
     resources :rejections, only: [:new, :create]
+    resources :blogs, except: [:show]
   end
 
   namespace :recruiters do
