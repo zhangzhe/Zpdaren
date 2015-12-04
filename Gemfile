@@ -66,3 +66,4 @@ gem 'will_paginate-bootstrap', '~> 1.0.1'
 gem 'strip_attributes'
 gem 'acts_as_paranoid', github: 'ActsAsParanoid/acts_as_paranoid'
 gem 'pdfjs_rails'
+gem "wysiwyg-rails"
