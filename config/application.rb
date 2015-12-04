@@ -18,4 +18,4 @@ module Epin
   end
 end
 
-ROOT_URL = "https://#{Settings.domain.host}:#{Settings.domain.port}"
+ROOT_URL = "https://#{Settings.domain.host}"
