@@ -34,8 +34,7 @@
 
 <div id='bigQrcode' class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 </div>
-
-<% if current_user && current_user.weixin_subscribable? %>
+<% if current_user && current_user.weixin_subscribable? && params[:controller] != 'suppliers/qr_codes' %>
   <div class="tittle-qrcode">
     <a href="<%= qr_code_path(current_user.id) %>" data-remote=true >
       <i class="fa fa-qrcode"></i>

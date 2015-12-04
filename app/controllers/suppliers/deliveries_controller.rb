@@ -29,7 +29,7 @@ class Suppliers::DeliveriesController < Suppliers::BaseController
       redirect_to select_list_suppliers_resumes_path(job_id: delivery_params[:job_id]) and return
     end
     flash[:success] = "操作完成！"
-    redirect_to suppliers_job_path(id: params[:delivery][:job_id])
+    redirect_to current_supplier.weixin ? suppliers_job_path(id: params[:delivery][:job_id]) : suppliers_qr_code_path(@delivery, job_id: params[:delivery][:job_id])
   end
 
   private
