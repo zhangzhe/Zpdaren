@@ -5,8 +5,7 @@ Rails.application.routes.draw do
 
   get 'qr_codes/:id' => "qr_codes#show", :as => "qr_code"
 
-  root :to => 'passthrough#index'
-  get 'home' => 'home#index'
+  root :to => 'home#index'
 
   match 'weixin_callback' => 'home#weixin_callback', via: [:get, :post]
 
@@ -32,7 +31,9 @@ Rails.application.routes.draw do
     passwords: 'authentication/passwords',
     confirmations: 'authentication/confirmations'
   }
+
   resources :jobs, only: [:show, :index]
+  resources :deliveries, only: [:show]
 
   namespace :admins do
     get 'statistics' => 'statistics#index'

@@ -3,6 +3,17 @@ class HomeController < ApplicationController
   before_action :detect_browser, :only => [:index]
 
   def index
+    if current_user
+      redirect_path = case current_user
+      when Admin
+        admins_jobs_path(:state => "max_priority")
+      when Recruiter
+        recruiters_jobs_path
+      when Supplier
+        suppliers_jobs_path(:state => "max_priority")
+      end
+      redirect_to redirect_path
+    end
   end
 
   def signup_redirection

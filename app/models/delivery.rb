@@ -1,3 +1,5 @@
+require 'epin_cipher'
+
 class Delivery < ActiveRecord::Base
   belongs_to :job
   belongs_to :resume
@@ -155,6 +157,14 @@ class Delivery < ActiveRecord::Base
     (self.rejection_reason || []).push(self.rejection_other).compact.each {|reason| reason }.join(',')
   end
 
+  def external_credential
+    EpinCipher.aes128_encrypt(original_data)
+  end
+
+  def external_credential_valid?(external_credential)
+    original_data == EpinCipher.aes128_decrypt(external_credential)
+  end
+
   private
   def sync_job
     job.state = self.state
@@ -206,5 +216,9 @@ class Delivery < ActiveRecord::Base
 
   def notify_supplier_refused
     Weixin.send_resume_refused_notification(self) if self.resume.supplier.weixin
+  end
+
+  def original_data
+    "#{self.job.recruiter.id}_#{self.id}"
   end
 end
