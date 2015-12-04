@@ -105,6 +105,7 @@ Rails.application.routes.draw do
     end
     resources :watchings, only: [:create]
     resources :deliveries, only: [:index, :new, :create]
+    resources :qr_codes, only: [:show]
   end
 
   get 'good_job_description' => 'home#good_job_description'

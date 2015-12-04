@@ -1,0 +1,11 @@
+<div class="jumbotron">
+  <p class="lead">
+    关注众聘达人，当您获得获得红包奖励时，我们会实时给您发送通知。
+  </p>
+  <p>
+    <%= image_tag @qrcode_url, style: 'width: 200px' %>
+  </p>
+  <p>
+    <%= link_to '继续推荐', suppliers_job_path(params[:job_id]), class: 'btn btn-lg btn-success' %>
+  </p>
+</div>

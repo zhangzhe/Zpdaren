@@ -27,7 +27,16 @@ class Suppliers::ResumesController < Suppliers::BaseController
       current_supplier.resumes << @resume
       message = '简历上传成功。我们会尽快审核，请耐心等待。' if params[:job_id]
       flash[:success] = message || '简历上传成功。'
-      redirect_to params[:job_id] ? suppliers_job_path(params[:job_id]) : suppliers_resumes_path and return
+      if params[:job_id]
+        unless current_supplier.weixin
+          delivery = Delivery.find_by_resume_id_and_job_id(@resume.id, params[:job_id])
+          redirect_to suppliers_qr_code_path(delivery, job_id: params[:job_id]) and return
+        else
+          redirect_to suppliers_job_path(params[:job_id]) and return
+        end
+      else
+        redirect_to suppliers_resumes_path and return
+      end
     else
       flash[:error] = @resume.errors.full_messages.first
       @job = Job.find(params[:job_id]) if params[:job_id]
