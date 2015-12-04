@@ -30,7 +30,7 @@ class Suppliers::ResumesController < Suppliers::BaseController
       if params[:job_id]
         unless current_supplier.weixin
           delivery = Delivery.find_by_resume_id_and_job_id(@resume.id, params[:job_id])
-          redirect_to suppliers_qr_code_path(delivery, job_id: params[:job_id]) and return
+          redirect_to suppliers_qr_code_path(current_supplier, job_id: params[:job_id]) and return
         else
           redirect_to suppliers_job_path(params[:job_id]) and return
         end
