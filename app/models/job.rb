@@ -25,6 +25,8 @@ class Job < ActiveRecord::Base
   scope :submitted, -> { where('state' => 'submitted')}
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
   scope :deposit_paid_confirmed, -> { where('state' => 'deposit_paid_confirmed')}
+  scope :final_payment_paid, -> { where('state' => 'final_payment_paid') }
+  scope :finished, -> { where('state' => 'finished') }
   scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'deposit_paid_confirmed']) }
   scope :in_hiring, -> { where.not('state in (?)', ['submitted', 'finished', 'final_payment_paid']) }
   scope :un_hiring, -> { where('state in (?)', ['final_payment_paid', 'finished']) }
@@ -59,6 +61,10 @@ class Job < ActiveRecord::Base
     event :confirm_deposit_paid, :after => :notify_recruiter_and_deliver_matching_resumes do
       transitions :from => :deposit_paid, :to => :deposit_paid_confirmed
     end
+  end
+
+  def state_show?
+    self.deposit_paid? || self.final_payment_paid? || self.finished?
   end
 
   def self.high_priority_samples
