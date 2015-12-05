@@ -15,7 +15,6 @@
       <% deliveries.each do |delivery| %>
         <tr>
           <td>
-            <%= sanitize("<i class='fa fa-android' data-toggle='tooltip' data-placement='top' title='我是自动推荐的'></i>") if delivery.auto_delivery %>
             <%= link_to delivery.resume_candidate_name, admins_job_delivery_path(:job_id => delivery.job, :id => delivery), target: '_blank' %>
           </td>
           <td><%= delivery.supplier.email %></td>

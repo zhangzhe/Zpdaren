@@ -87,7 +87,7 @@ class Delivery < ActiveRecord::Base
     end
 
     def state_valid?(state)
-      ['recommended', 'approved', 'paid', 'refused', 'final_payment_paid', 'finished'].include?(state)
+      ['recommended', 'approved', 'paid', 'refused', 'final_paid'].include?(state)
     end
   end
 
@@ -167,10 +167,6 @@ class Delivery < ActiveRecord::Base
 
   def external_credential_valid?(external_credential)
     original_data == EpinCipher.aes128_decrypt(external_credential)
-  end
-
-  def auto_delivery
-    self.resume.auto_delivery
   end
 
   private
