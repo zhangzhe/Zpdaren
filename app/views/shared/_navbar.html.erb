@@ -17,6 +17,9 @@
             <%= f.password_field :password, autocomplete: "off", :class => "form-control", :placeholder => "密码" %>
           </div>
           <%= f.submit "登录", :class => "btn btn-success" %>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation"><%= link_to "众聘热文", Blog.first if Blog.first %></li>
+          </ul>
         <% end %>
       <% end %>
       <ul class="nav navbar-nav navbar-right">
