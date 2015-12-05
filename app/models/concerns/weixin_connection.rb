@@ -16,7 +16,7 @@ module WeixinConnection
     message = {
       touser: subscribe_user.user_name,
       msgtype: 'text',
-      text: { content: '您好，欢迎关注众聘达人！' }
+      text: { content: '您好，欢迎关注众聘达人-火花！本服务号会发送关于简历的实时反馈信息给您。' }
     }
     response = conn.post do |req|
       req.url "/cgi-bin/message/custom/send?access_token=#{access_token}"
