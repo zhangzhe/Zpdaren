@@ -85,6 +85,10 @@ class Delivery < ActiveRecord::Base
     def order_by_state
       select("deliveries.*, case when state='recommended' then 1 else 0 end as state_level").order("state_level desc")
     end
+
+    def state_valid?(state)
+      ['recommended', 'approved', 'paid', 'refused', 'final_payment_paid', 'finished'].include?(state)
+    end
   end
 
   def read!

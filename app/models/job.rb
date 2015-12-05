@@ -63,6 +63,12 @@ class Job < ActiveRecord::Base
     end
   end
 
+  class << self
+    def state_valid?(state)
+      ['submitted', 'deposit_paid', 'deposit_paid_confirmed', 'final_payment_paid', 'finished'].include?(state)
+    end
+  end
+
   def state_show?
     self.deposit_paid? || self.final_payment_paid? || self.finished?
   end
