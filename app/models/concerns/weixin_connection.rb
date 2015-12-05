@@ -16,7 +16,7 @@ module WeixinConnection
     message = {
       touser: subscribe_user.user_name,
       msgtype: 'text',
-      text: { content: '您好，欢迎关注众聘达人-火花！本服务号会发送关于简历的实时反馈信息给您。' }
+      text: { content: '您好，欢迎关注众聘达人-火花！火花是众聘达人平台（zpdaren.com）专为推荐方定制的服务号。推荐优质简历，获得企业悬赏！此服务号将用于您每一次推荐的关键通知。' }
     }
     response = conn.post do |req|
       req.url "/cgi-bin/message/custom/send?access_token=#{access_token}"
