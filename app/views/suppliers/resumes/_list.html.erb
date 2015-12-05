@@ -12,7 +12,10 @@
     <tbody>
       <% resumes.each do |resume| %>
         <tr>
-          <td><%= link_to resume.candidate_name, suppliers_resume_path(resume) %></td>
+          <td>
+            <%= sanitize("<i class='fa fa-android' data-toggle='tooltip' data-placement='top' title='我已自动托管'></i>") if resume.auto_delivery %>
+            <%= link_to resume.candidate_name, suppliers_resume_path(resume) %>
+          </td>
           <td><%= resume.tag_list %></td>
           <td>
           <% resume.deliveries.map(&:job).compact.each do |job| %>
@@ -33,3 +36,8 @@
     </tbody>
   </table>
 </div>
+<script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>

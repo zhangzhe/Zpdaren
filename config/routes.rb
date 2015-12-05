@@ -97,7 +97,7 @@ Rails.application.routes.draw do
 
   namespace :suppliers do
     resources :jobs, only: [:index, :show]
-    resources :resumes, except: [:edit, :update] do
+    resources :resumes do
       collection do
         get :select_list
       end

@@ -68,6 +68,9 @@
     <% end %>
   </p>
   <p>
+    <%= sanitize("<i class='fa fa-android' data-toggle='tooltip' data-placement='top'></i>：系统自动推荐的简历") if @delivery.auto_delivery %>
+  </p>
+  <p>
     <%= sanitize("<div class='alert alert-info' role='alert'><strong>不合适原因：</strong>#{@delivery.rejection_reasons}</div>") if @delivery.refused? %>
   </p>
   <p>
