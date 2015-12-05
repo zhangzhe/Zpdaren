@@ -15,11 +15,13 @@
     <% end %>
   </p>
   <p>
-    备注：<%= @resume.remark %>
+    是否托管：<%= @resume.auto_delivery ? '是' : '否' %>
+  </p>
+  <p>
+    <%= "备注：#{@resume.remark}" if @resume.remark.present? %>
   </p>
   <%= render 'suppliers/shared/resume_show', resume: @resume %>
   <hr>
-  <p>
-    <%= button_to '删除', suppliers_resume_path, method: :delete, data: { confirm: "是否删除简历【#{@resume.candidate_name}】？删除后不可恢复!", disable_with: '提交中...'}, class: "btn btn-danger" %>
-  </p>
+  <%= link_to '编辑', edit_suppliers_resume_path(@resume), class: 'btn btn-primary' %>
+  <%= button_to '删除', suppliers_resume_path, method: :delete, data: { confirm: "是否删除简历【#{@resume.candidate_name}】？删除后不可恢复!", disable_with: '提交中...'}, class: "btn btn-danger" %>
 </div>

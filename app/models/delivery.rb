@@ -169,6 +169,10 @@ class Delivery < ActiveRecord::Base
     original_data == EpinCipher.aes128_decrypt(external_credential)
   end
 
+  def auto_delivery
+    self.resume.auto_delivery
+  end
+
   private
   def sync_job
     job.state = self.state

@@ -44,6 +44,22 @@ class Suppliers::ResumesController < Suppliers::BaseController
     end
   end
 
+  def edit
+    @resume = current_supplier.resumes.find(params[:id])
+  end
+
+  def update
+    @resume = current_supplier.resumes.find(params[:id])
+    @resume.attributes = update_resume_params
+    if @resume.save
+      flash[:success] = '简历修改成功。'
+      redirect_to suppliers_resume_path(@resume)
+    else
+      flash[:error] = @resume.errors.full_messages.first
+      render 'edit'
+    end
+  end
+
   def download
     resume = current_supplier.resumes.find(params[:id])
     send_file resume.attachment.file.file
@@ -78,5 +94,9 @@ class Suppliers::ResumesController < Suppliers::BaseController
   private
   def resume_params
     params[:resume].permit(:candidate_name, :tag_list, :attachment, :mobile, :auto_delivery, :remark, deliveries_attributes: [:message, :job_id])
+  end
+
+  def update_resume_params
+    params[:resume].permit(:candidate_name, :tag_list, :mobile, :auto_delivery, :remark)
   end
 end
