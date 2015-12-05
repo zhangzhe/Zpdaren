@@ -27,7 +27,7 @@
     </p>
     <p>
       <%= f.submit '转账完成', class: 'btn btn-primary', data: { disable_with: '提交中...' } %>
-      <%= link_to '稍后付', recruiters_jobs_path, class: 'btn btn-default' %>
+      <%= link_to '稍后付', recruiters_jobs_path(:state => "submitted"), class: 'btn btn-default' %>
     </p>
   <% end %>
 </div>

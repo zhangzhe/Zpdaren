@@ -12,7 +12,7 @@ class Recruiters::DepositsController < Recruiters::BaseController
       job.pay!
       Deposit.create(:amount => job.deposit, :wallet_id => current_recruiter.wallet.id, :zhifubao_account => admin.bank_account, :job_id => job.id)
     end
-    redirect_to recruiters_jobs_path
+    redirect_to recruiters_jobs_path(:state => "submitted")
   end
 
   private

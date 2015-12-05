@@ -17,6 +17,7 @@ class Admins::DeliveriesController < Admins::BaseController
         resume_ids = Resume.where("candidate_name like ?", "%#{params[:key]}%").map(&:id)
         @deliveries = @deliveries.where("resume_id in (?)", resume_ids)
       end
+      params[:state] = 'recommended' unless Delivery.state_valid?(params[:state])
       @deliveries = @deliveries.send(params[:state])
       @deliveries = @deliveries.order("created_at DESC").paginate(page: params[:page], per_page: Settings.pagination.page_size)
     end

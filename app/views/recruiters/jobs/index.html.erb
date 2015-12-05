@@ -1,4 +1,5 @@
 <%= render 'recruiters/shared/search', title: '我发布的职位', url: recruiters_jobs_path, placeholder: '输入职位名称' %>
+<%= render 'nav_tabs' %>
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
@@ -29,7 +30,7 @@
           <td><%= job.bonus %> / <%= job.original_deposit %></td>
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
           <td>
-            <%= Recruiters::JobsHelper::state_show(job) %>
+            <%= Recruiters::JobsHelper::state_show(job) if job.state_show? %>
 
             <%= link_to '预付订金', new_recruiters_deposit_path(job_id: job.id), class: "btn btn-primary btn-sm" if job.submitted? %>
             <%= link_to '支付尾款', deliveries_list_recruiters_final_payments_path(job_id: job.id), class: "btn btn-primary btn-sm" if job.available_for_final_payment? %>
