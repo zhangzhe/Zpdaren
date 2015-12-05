@@ -13,7 +13,7 @@
             <% active = active_for?([Suppliers::ResumesController]) %>
             <li class="<%= active %>"><%= link_to "我的简历", suppliers_resumes_path %></li>
             <% active = active_for?([Suppliers::DeliveriesController]) %>
-            <li class="<%= active %>"><%= link_to "我的推荐", suppliers_deliveries_path %></li>
+            <li class="<%= active %>"><%= link_to "我的推荐", suppliers_deliveries_path(:state => 'recommended') %></li>
             <% active = active_for?([Suppliers::BaseController]) %>
             <li class="<%= active %>"><%= link_to "账户管理", suppliers_path %></li>
           </ul>
