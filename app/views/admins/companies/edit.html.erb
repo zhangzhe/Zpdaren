@@ -28,6 +28,13 @@
     <%= f.text_field :address, class: 'form-control' %>
   </p>
   <p>
+    <%= f.label :url, "公司网址" %>
+    <span class='fs12'>
+      (网址请以http://或者https://开头)
+    </span>
+    <%= f.text_field :url, class: 'form-control' %>
+  </p>
+  <p>
     <%= f.submit "确定", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
   </p>
 <% end %>

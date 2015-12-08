@@ -34,4 +34,8 @@ module ApplicationHelper
     direction = (column == sort_column && sort_direction == "DESC") ? "ASC" : "DESC"
     link_to title, {:sort => column, :direction => direction}
   end
+
+  def external_url(url)
+    (url.start_with?('http://') || url.start_with?('https://')) ? url : ('http://' + url)
+  end
 end

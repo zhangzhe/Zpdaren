@@ -21,6 +21,6 @@ class Admins::CompaniesController < Admins::BaseController
 
   private
   def company_params
-    params[:company].permit(:name, :description, :mobile, :address)
+    params[:company].permit(:name, :description, :mobile, :address, :url)
   end
 end
