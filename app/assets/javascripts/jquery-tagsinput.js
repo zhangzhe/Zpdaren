@@ -90,7 +90,8 @@
           var skipTag = $(this).tagExist(value);
           if(skipTag == true) {
               //Marks fake input as not_valid to let styling it
-                $('#'+id+'_tag').addClass('not_valid');
+            $('#'+id+'_tag').addClass('not_valid');
+            alert('该标签已经添加。');
             }
         } else {
           var skipTag = false;
@@ -129,6 +130,8 @@
             var f = tags_callbacks[id]['onChange'];
             f.call(this, $(this), tagslist[i-1]);
           }
+        }else if (value !='' && skipTag != true && (tagslist.length >= 5)){
+          alert('您最多只能输入5个标签。');
         }
 
       });
@@ -182,6 +185,7 @@
       minChars:0,
       width:'300px',
       height:'100px',
+      'min-height': '100px',
       autocomplete: {selectFirst: false },
       hide:true,
       delimiter: ',',
@@ -231,18 +235,19 @@
 
       var markup = '';
       if (settings.interactive) {
-        markup = markup + '<p class="help-block" style="margin-bottom:0px;font-size:12px;">在下面的标签输入框中输入想要添加的标签，例如：产品经理、4年工作经验、本科、Java、HTML5等，标签数量不超过5个.</p>';
+        markup = markup + '<p class="help-block" style="margin-bottom:0px;font-size:12px;">在下面的输入框中输入想要添加的标签，标签数量不超过5个，每个标签不超过20个字.</p>';
+        markup = markup + '<p class="help-block" style="margin-bottom:0px;font-size:12px;">例如：产品经理、4年工作经验、本科、Java、HTML5等.</p>';
         markup = markup + '<input id="'+id+'_tag" value="" class="form-control tag-input" placeholder="'+settings.defaultText+'" />';
         markup = markup + '<button type="button" class="btn btn-primary tag-add-btn">添加</button>';
       }
-      markup = markup + '<div id="'+id+'_tagsinput" class="tagsinput" style="width: 100%; min-height: 42px; height: 42px;background-color: #f0f0f0;border-radius: 4px;border-color: #f0f0f0;"><div id="'+id+'_addTag">';
+      markup = markup + '<div id="'+id+'_tagsinput" class="tagsinput" style="display:inline-block;background-color: #f0f0f0;border-radius: 4px;border-color: #f0f0f0;"><div id="'+id+'_addTag">';
 
       markup = markup + '</div><div class="tags_clear"></div></div>';
 
       $(markup).insertAfter(this);
 
       $(data.holder).css('width',settings.width);
-      $(data.holder).css('min-height',settings.height);
+      $(data.holder).css('min-height',settings['min-height']);
       $(data.holder).css('height',settings.height);
 
       if ($(data.real_input).val()!='') {
@@ -309,6 +314,9 @@
             if( (event.data.minChars <= $(event.data.fake_input).val().length) && (!event.data.maxChars || (event.data.maxChars >= $(event.data.fake_input).val().length)) )
               $(event.data.real_input).addTag($(event.data.fake_input).val(),{focus:true,unique:(settings.unique)});
               $(event.data.fake_input).resetAutosize(settings);
+            if (!event.data.maxChars || (event.data.maxChars < $(event.data.fake_input).val().length)) {
+              alert('每个标签的长度不能超过20个字。');
+            };
             return false;
           } else if (event.data.autosize) {
                   $(event.data.fake_input).doAutosize(settings);
@@ -322,6 +330,9 @@
             $(event.data.real_input).addTag($(event.data.fake_input).val(),{focus:true,unique:(settings.unique)});
             $(event.data.fake_input).resetAutosize(settings);
             }
+            if (!event.data.maxChars || (event.data.maxChars < $(event.data.fake_input).val().length)) {
+              alert('每个标签的长度不能超过20个字。');
+            };
         });
 
 
