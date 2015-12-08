@@ -7,7 +7,7 @@
 <div>
   <%= render 'shared/page_title', title: @company.name %>
   <p class='gray-light'>联系方式：<%= @company.mobile %></p>
-  <p class='gray-light'>官方网址：<%= @company.url.present? ? link_to(@company.url, external_url(@company.url), target: '_blank') : '暂未提供' %></p>
+  <p class='gray-light'>公司网址：<%= @company.url.present? ? link_to(@company.url, external_url(@company.url), target: '_blank') : '暂未提供' %></p>
   <p class='blockquote14'>
     <strong>
       公司描述
