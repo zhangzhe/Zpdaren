@@ -12,9 +12,9 @@ class Delivery < ActiveRecord::Base
 
   validates_length_of :message, maximum: 50
 
-  scope :paid, -> { where(state: 'paid') }
-  scope :recommended, -> { where(state: 'recommended') }
-  scope :waiting_approved, -> { where(state: 'recommended') }
+  scope :paid, -> { where('deliveries.state' => 'paid') }
+  scope :recommended, -> { where('deliveries.state' => 'recommended') }
+  scope :waiting_approved, -> { recommended }
 
   scope :process, -> { where("deliveries.state in ('paid', 'refused', 'final_payment_paid', 'finished')") }
   scope :approved, -> { where('deliveries.state' => 'approved') }
@@ -26,7 +26,7 @@ class Delivery < ActiveRecord::Base
   scope :paid_today, -> { where('DATE(deliveries.updated_at) = ? and deliveries.state = ?', Date.today, 'paid') }
   scope :paid_yesterday, -> { where('DATE(deliveries.updated_at) = ? and deliveries.state = ?', 1.day.ago.to_date, 'paid') }
   scope :paid_the_day_before_yesterday, -> { where('DATE(deliveries.updated_at) = ? and deliveries.state = ?', 2.day.ago.to_date, 'paid') }
-  scope :refused, -> { where(state: 'refused') }
+  scope :refused, -> { where('deliveries.state' => 'refused') }
   scope :max_priority, -> { joins(:job).where("jobs.priority = 1") }
 
   default_scope { order('updated_at DESC') }

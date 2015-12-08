@@ -7,6 +7,7 @@
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
   <%= form_tag url, method: :get do %>
+    <%= hidden_field_tag 'state', params[:state] if params[:state] %>
     <div class="col-lg-5">
       <div class="input-group search">
         <%= text_field_tag 'key', params[:key], class: 'form-control', placeholder: placeholder %>
