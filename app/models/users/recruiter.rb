@@ -26,6 +26,15 @@ class Recruiter < User
     unprocess_deliveries.count
   end
 
+  def viewed_deliveries
+    resume_ids = self.deliveries.process.map(&:resume_id)
+    self.deliveries.where("deliveries.state = 'paid' or (deliveries.resume_id in (?) and deliveries.read_at is not null and deliveries.state = 'approved')", resume_ids)
+  end
+
+  def viewed_deliveries_count
+    viewed_deliveries.count
+  end
+
   def paid_deliveries
     deliveries.paid
   end

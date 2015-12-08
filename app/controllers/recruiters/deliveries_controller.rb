@@ -1,12 +1,12 @@
 class Recruiters::DeliveriesController < Recruiters::BaseController
   def index
-    params[:state] = 'approved' unless Delivery.state_valid?(params[:state])
+    params[:state] = 'approved' if params[:state].blank?
     if params[:job_id]
       @job = current_recruiter.jobs.find(params[:job_id])
       if params[:state] == 'approved'
         @deliveries = @job.unprocess_deliveries
-      elsif params[:state] == 'paid'
-        @deliveries = @job.deliveries.paid
+      elsif params[:state] == 'viewed'
+        @deliveries = @job.viewed_deliveries
       elsif params[:state] == 'final_paid'
         @deliveries = @job.deliveries.final_paid
       else
@@ -16,8 +16,8 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
     else
       if params[:state] == 'approved'
         @deliveries = current_recruiter.unprocess_deliveries
-      elsif params[:state] == 'paid'
-        @deliveries = current_recruiter.paid_deliveries
+      elsif params[:state] == 'viewed'
+        @deliveries = current_recruiter.viewed_deliveries
       elsif params[:state] == 'final_paid'
         @deliveries = current_recruiter.final_paid_deliveries
       else

@@ -3,9 +3,9 @@
   <li role="presentation" class="<%= active %>">
     <%= link_to "未查看<span class='badge'>#{params[:job_id] ? @job.unprocess_deliveries.count : current_recruiter.unprocess_deliveries_count}</span>".html_safe, recruiters_deliveries_path(:state => "approved", job_id: params[:job_id]) %>
   </li>
-  <% active = (params[:state] == "paid") ? "active" : "" %>
+  <% active = (params[:state] == "viewed") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "已查看<span class='badge'>#{params[:job_id] ? @job.deliveries.paid.count : current_recruiter.paid_deliveries_count}</span>".html_safe, recruiters_deliveries_path(:state => "paid", job_id: params[:job_id]) %>
+    <%= link_to "已查看<span class='badge'>#{params[:job_id] ? @job.viewed_deliveries.count : current_recruiter.viewed_deliveries_count}</span>".html_safe, recruiters_deliveries_path(:state => "viewed", job_id: params[:job_id]) %>
   </li>
   <% active = (params[:state] == "final_paid") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">

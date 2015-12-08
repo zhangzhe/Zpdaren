@@ -89,6 +89,11 @@ class Job < ActiveRecord::Base
     !['finished', 'final_payment_paid'].include?(self.state)
   end
 
+  def viewed_deliveries
+    resume_ids = recruiter.deliveries.process.map(&:resume_id)
+    self.deliveries.where("deliveries.state = 'paid' or (deliveries.resume_id in (?) and deliveries.read_at is not null and deliveries.state = 'approved')", resume_ids)
+  end
+
   def unprocess_deliveries
     resume_ids = recruiter.deliveries.process.map(&:resume_id)
     self.deliveries.where("(resume_id not in (?) and deliveries.state = 'approved') or (resume_id in (?) and deliveries.state = 'approved' and read_at is null)", resume_ids, resume_ids)
