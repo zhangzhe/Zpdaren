@@ -17,12 +17,37 @@ class Recruiter < User
     self.jobs.in_hiring.count
   end
 
+  def unprocess_deliveries
+    resume_ids = self.deliveries.process.map(&:resume_id)
+    self.deliveries.where("(resume_id not in (?) and deliveries.state = 'approved') or (resume_id in (?) and deliveries.state = 'approved' and read_at is null)", resume_ids, resume_ids)
+  end
+
   def unprocess_deliveries_count
-    unprocess_deliveries = []
-    self.jobs.each do |job|
-      unprocess_deliveries.push(job.unprocess_deliveries)
-    end
-    unprocess_deliveries.flatten.count
+    unprocess_deliveries.count
+  end
+
+  def paid_deliveries
+    deliveries.paid
+  end
+
+  def paid_deliveries_count
+    paid_deliveries.count
+  end
+
+  def final_paid_deliveries
+    deliveries.final_paid
+  end
+
+  def final_paid_deliveries_count
+    final_paid_deliveries.count
+  end
+
+  def refused_deliveries
+    deliveries.refused
+  end
+
+  def refused_deliveries_count
+    refused_deliveries.count
   end
 
   def recruiter_watchable_resumes_count
