@@ -4,6 +4,7 @@
   <div>
     <p class="ti2">公司名称：<%= current_recruiter.company.name %></p>
     <p class="ti2">联系方式：<%= current_recruiter.company.mobile %></p>
+    <p class="ti2">公司网址：<%= current_recruiter.company.url.present? ? link_to(current_recruiter.company.url, external_url(current_recruiter.company.url), target: '_blank') : link_to('待完善', edit_recruiters_company_path(current_recruiter.company)) %></p>
     <p class='blockquote14 ml2em'>
       <strong>
         公司描述
@@ -13,7 +14,7 @@
       <div class='ml2em'><%= simple_format current_recruiter.company.description %></div>
     </p>
     <p class='ml2em'>
-      地址：<%= current_recruiter.company.address.present? ? current_recruiter.company.address : '暂未提供' %>
+      地址：<%= current_recruiter.company.address.present? ? current_recruiter.company.address : link_to('待完善', edit_recruiters_company_path(current_recruiter.company)) %>
     </p>
     <br>
     <p>
