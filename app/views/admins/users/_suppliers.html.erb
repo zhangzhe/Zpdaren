@@ -5,6 +5,8 @@
         <th>联系邮箱</th>
         <th>简历数量</th>
         <th>推荐数量</th>
+        <th>注册时间</th>
+        <th>最后一次登录时间</th>
       </tr>
     </thead>
     <tbody>
@@ -13,6 +15,8 @@
           <td><%= link_to supplier.email, admins_supplier_path(supplier) %></td>
           <td><%= link_to supplier.resumes.count, admins_resumes_path(:supplier_id => supplier) %></td>
           <td><%= link_to supplier.deliveries.count, admins_deliveries_path(:supplier_id => supplier) %></td>
+          <td><%= supplier.created_at.to_s(:db) %></td>
+          <td><%= supplier.last_sign_in_at.present? ? supplier.last_sign_in_at.localtime.to_s(:db) : '未曾登录过' %></td>
         </tr>
       <% end %>
     </tbody>
