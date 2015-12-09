@@ -96,9 +96,15 @@
         </td>
       </tr>
       <tr>
-        <th>活跃推荐方（本周）</th>
+        <th>活跃推荐方（最近7天）</th>
         <td>
-          <%= Statistics.active_suppliers_this_week %>
+          <%= Statistics.active_suppliers_recently_seven_days %>
+        </td>
+      </tr>
+      <tr>
+        <th>新增活跃推荐方（最近7天）</th>
+        <td>
+          <%= Statistics.newly_active_suppliers_recently_seven_days %>
         </td>
       </tr>
       <tr>

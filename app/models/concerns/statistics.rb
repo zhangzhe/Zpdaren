@@ -36,8 +36,12 @@ module Statistics
     (Supplier.count == 0) ? 0 : (Resume.active_suppliers_count.to_f / Supplier.count)
   end
 
-  def Statistics.active_suppliers_this_week
-    (Supplier.count == 0) ? 0 : Supplier.active_supplier_count_this_week
+  def Statistics.active_suppliers_recently_seven_days
+    (Supplier.count == 0) ? 0 : Supplier.active_supplier_count_recently_seven_days
+  end
+
+  def Statistics.newly_active_suppliers_recently_seven_days
+    (Supplier.count == 0) ? 0 : Supplier.newly_active_supplier_count_recently_seven_days
   end
 
   private
