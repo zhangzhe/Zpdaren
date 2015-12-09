@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
         end
       else
         session[:previous_url] = request.fullpath
-        flash[:alert] ||= '请先登录！'
+        flash[:alert] ||= '请先注册！'
         redirect_to new_supplier_registration_path
       end
     end
