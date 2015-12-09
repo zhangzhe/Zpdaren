@@ -36,6 +36,10 @@ module Statistics
     (Supplier.count == 0) ? 0 : (Resume.active_suppliers_count.to_f / Supplier.count)
   end
 
+  def Statistics.active_suppliers_this_week
+    (Supplier.count == 0) ? 0 : Supplier.active_supplier_count_this_week
+  end
+
   private
   def data_count(date)
     self.where(:created_at => (date.beginning_of_day..date.end_of_day)).count

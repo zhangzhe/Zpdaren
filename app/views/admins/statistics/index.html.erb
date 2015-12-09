@@ -96,6 +96,12 @@
         </td>
       </tr>
       <tr>
+        <th>活跃推荐方（本周）</th>
+        <td>
+          <%= Statistics.active_suppliers_this_week %>
+        </td>
+      </tr>
+      <tr>
         <th>有效推荐方率</th>
         <td>
           <%= number_to_percentage Statistics.active_supplier_rate*100 %>

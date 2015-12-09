@@ -11,6 +11,17 @@ class Supplier < User
   include DataRecoverer
   extend Statistics
 
+  class << self
+    def active_suppliers_this_week
+      resume_ids = Delivery.where("created_at >= ? and created_at <= ?", Time.now.beginning_of_week, Time.now.beginning_of_week + 7.days).map(&:resume_id)
+      Supplier.joins(:resumes).where("resumes.id in (?)", resume_ids)
+    end
+
+    def active_supplier_count_this_week
+      active_suppliers_this_week.count
+    end
+  end
+
   private
   def destroy_all_association_entities
     self.supplier_recover
