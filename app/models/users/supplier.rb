@@ -13,7 +13,7 @@ class Supplier < User
 
   class << self
     def active_suppliers_recently_seven_days
-      Supplier.joins(:resumes, :deliveries).where("deliveries.created_at >= ? and deliveries.created_at <= ?", Time.now.at_beginning_of_day - 7.days, Time.now).distinct
+      Supplier.joins(:resumes, :deliveries).where("deliveries.created_at >= ? and deliveries.created_at <= ?", Time.now.at_beginning_of_day - 6.days, Time.now).distinct
     end
 
     def active_supplier_count_recently_seven_days
@@ -21,7 +21,7 @@ class Supplier < User
     end
 
     def newly_active_supplier_recently_seven_days
-      active_suppliers_recently_seven_days.where("users.created_at >= ? and users.created_at <= ?", Time.now.at_beginning_of_day - 7.days, Time.now)
+      active_suppliers_recently_seven_days.where("users.confirmed_at >= ? and users.confirmed_at <= ?", Time.now.at_beginning_of_day - 6.days, Time.now)
     end
 
     def newly_active_supplier_count_recently_seven_days
