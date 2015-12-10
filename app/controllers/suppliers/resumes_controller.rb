@@ -25,7 +25,7 @@ class Suppliers::ResumesController < Suppliers::BaseController
     @resume = Resume.new(resume_params)
     if @resume.save
       current_supplier.resumes << @resume
-      message = '简历上传成功。我们会尽快审核，请耐心等待。' if params[:job_id]
+      message = '简历推荐成功。我们会尽快审核，请耐心等待。' if params[:job_id]
       flash[:success] = message || '简历上传成功。'
       if params[:job_id]
         unless current_supplier.weixin
