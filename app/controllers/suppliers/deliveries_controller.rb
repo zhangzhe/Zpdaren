@@ -6,7 +6,7 @@ class Suppliers::DeliveriesController < Suppliers::BaseController
       recruiter_ids = Company.where("name like ?", "%#{params[:key]}%").map(&:user_id)
       @deliveries = @deliveries.where("user_id in (?)", recruiter_ids)
     end
-    params[:state] = 'recommended' unless Delivery.state_valid?(params[:state])
+    params[:state] = 'recommended' unless Delivery.base_state_valid?(params[:state])
     @deliveries = @deliveries.send(params[:state])
     @deliveries = @deliveries.order("#{params[:sort]} #{params[:direction]}")
     @deliveries = @deliveries.paginate(page: params[:page], per_page: Settings.pagination.page_size)
