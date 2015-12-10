@@ -38,4 +38,8 @@ module ApplicationHelper
   def external_url(url)
     (url.start_with?('http://') || url.start_with?('https://')) ? url : ('http://' + url)
   end
+
+  def refused?(state)
+    ['refused', 'recruiter_refused', 'admin_refused'].include?(state)
+  end
 end
