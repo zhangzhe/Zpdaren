@@ -27,6 +27,8 @@ class Delivery < ActiveRecord::Base
   scope :paid_yesterday, -> { where('DATE(deliveries.updated_at) = ? and deliveries.state = ?', 1.day.ago.to_date, 'paid') }
   scope :paid_the_day_before_yesterday, -> { where('DATE(deliveries.updated_at) = ? and deliveries.state = ?', 2.day.ago.to_date, 'paid') }
   scope :refused, -> { where('deliveries.state' => 'refused') }
+  scope :recruiter_refused, -> { where("deliveries.state = 'refused' and deliveries.read_at is not null") }
+  scope :admin_refused, -> { where("deliveries.state = 'refused' and deliveries.read_at is null") }
   scope :max_priority, -> { joins(:job).where("jobs.priority = 1") }
 
   default_scope { order('updated_at DESC') }
@@ -86,8 +88,12 @@ class Delivery < ActiveRecord::Base
       select("deliveries.*, case when state='recommended' then 1 else 0 end as state_level").order("state_level desc")
     end
 
-    def state_valid?(state)
+    def base_state_valid?(state)
       ['recommended', 'approved', 'paid', 'refused', 'final_paid'].include?(state)
+    end
+
+    def state_valid?(state)
+      ['recommended', 'approved', 'paid', 'refused', 'final_paid', 'recruiter_refused', 'admin_refused'].include?(state)
     end
   end
 

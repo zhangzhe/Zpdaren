@@ -6,7 +6,7 @@ class Suppliers::DeliveriesController < Suppliers::BaseController
       recruiter_ids = Company.where("name like ?", "%#{params[:key]}%").map(&:user_id)
       @deliveries = @deliveries.where("user_id in (?)", recruiter_ids)
     end
-    params[:state] = 'recommended' unless Delivery.state_valid?(params[:state])
+    params[:state] = 'recommended' unless Delivery.base_state_valid?(params[:state])
     @deliveries = @deliveries.send(params[:state])
     @deliveries = @deliveries.order("#{params[:sort]} #{params[:direction]}")
     @deliveries = @deliveries.paginate(page: params[:page], per_page: Settings.pagination.page_size)
@@ -26,10 +26,10 @@ class Suppliers::DeliveriesController < Suppliers::BaseController
         redirect_to :back and return
       end
     else
-      flash[:error] = '该简历已被推荐，请选择其他简历！'
+      flash[:error] = '该简历已被推荐，请选择其他简历。'
       redirect_to select_list_suppliers_resumes_path(job_id: delivery_params[:job_id]) and return
     end
-    flash[:success] = "操作完成！"
+    flash[:success] = "简历推荐成功。我们会尽快审核，请耐心等待。"
     redirect_to current_supplier.weixin ? suppliers_job_path(id: params[:delivery][:job_id]) : suppliers_qr_code_path(current_supplier, job_id: params[:delivery][:job_id])
   end
 

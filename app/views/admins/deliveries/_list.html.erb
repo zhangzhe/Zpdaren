@@ -8,7 +8,7 @@
         <th>公司</th>
         <th>操作时间</th>
         <%= sanitize("<th>状态/操作</th>") if params[:state].nil? || (params[:state] == "recommended") %>
-        <%= sanitize("<th>原因</th>") if params[:state] == "refused" %>
+        <%= sanitize("<th>原因</th>") if refused?(params[:state]) %>
       </tr>
     </thead>
     <tbody>
@@ -31,7 +31,7 @@
               <% end %>
             </td>
           <% end %>
-          <%= sanitize("<td>#{delivery.rejection_reasons}</td>") if params[:state] == "refused" %>
+          <%= sanitize("<td>#{delivery.rejection_reasons}</td>") if refused?(params[:state]) %>
         </tr>
       <% end %>
     </tbody>
