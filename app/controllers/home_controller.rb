@@ -57,6 +57,10 @@ class HomeController < ApplicationController
     end
   end
 
+  def markdown
+
+  end
+
   private
   def subscribe_condition
     params["xml"] && (params["xml"]["Event"] == "subscribe" || params["xml"]["Event"] == "SCAN") && params["xml"]["EventKey"]

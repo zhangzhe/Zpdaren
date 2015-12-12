@@ -1,21 +1,9 @@
 <% content_for :title, "#{@job.title} - #{@job.company_name}" %>
 <% content_for :job_info do %>
-  <%= render 'shared/page_title', title: "招聘#{@job.title}" %>
+  <%= render 'shared/supplier_job_show', job: @job %>
   <div style="word-break:break-all;">
-    <p>
-      <% @job.tag_list.each do |tag| %>
-        <i class="fa fa-tags"></i>
-        <span class='gray-light'><%= tag %></span>
-      <% end %>
-    </p>
-    <p>
-      <%= render 'shared/salary_show', job: @job %>
-    </p>
-    <h4><%= @job.company_name %>提供&nbsp;<b><%= @job.bonus_for_entry %></b>&nbsp;元招聘红包</h4>
     <hr>
-    <p><%= simple_format @job.description %></p>
-    <hr>
-    <h1 class='text-primary'><%= @job.company_name %></h1>
+    <h1 class='text-primary self-h1'><%= @job.company_name %></h1>
     <blockquote>
       <%= simple_format @job.company_description %>
     </blockquote>
@@ -24,20 +12,18 @@
 <% end %>
 
 <% content_for :other_job_info do %>
-  <p>
-    <div class="sidebar-module sidebar-module-inset">
-      <h3>
-        推荐优质简历
-      </h3>
-      <h3>
-        获得企业悬赏
-      </h3>
-      <br>
-      <p>
-        <%= link_to '推荐简历', new_suppliers_resume_path(job_id: @job), class: 'btn btn-primary' %>
-      </p>
-    </div>
-  </p>
+  <div class="sidebar-module sidebar-module-inset">
+    <h3>
+      推荐优质简历
+    </h3>
+    <h3>
+      获得企业悬赏
+    </h3>
+    <br>
+    <p>
+      <%= link_to '推荐简历', new_suppliers_resume_path(job_id: @job), class: 'btn btn-primary' %>
+    </p>
+  </div>
   <hr>
   <p>
     <%= render "similar_jobs", similar_jobs: @similar_jobs %>

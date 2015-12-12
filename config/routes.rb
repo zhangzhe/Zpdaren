@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'qr_codes/:id' => "qr_codes#show", :as => "qr_code"
 
   root :to => 'home#index'
+  get 'markdown' => 'home#markdown', as: 'markdown'
 
   match 'weixin_callback' => 'home#weixin_callback', via: [:get, :post]
 
@@ -33,7 +34,11 @@ Rails.application.routes.draw do
     confirmations: 'authentication/confirmations'
   }
 
-  resources :jobs, only: [:show, :index]
+  resources :jobs, only: [:show, :index] do
+    collection do
+      post :preview
+    end
+  end
   resources :deliveries, only: [:show]
 
   namespace :admins do

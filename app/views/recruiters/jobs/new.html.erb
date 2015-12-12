@@ -29,7 +29,10 @@
       <%= f.label :description, '职位描述' %>
       <span class='red-star'>*</span>
       <%= link_to "《职位描述规范》", good_job_description_path, target: '_blank' %>
-      <%= f.text_area :description, class: "form-control", rows: 10 %>
+      <%= render 'shared/edit_and_preview' %>
+      <%= f.text_area :description, class: "form-control", rows: 20 %>
+      <div id='preview' class="form-control">
+      </div>
     </p>
     <p>
       <%= f.label :bonus, '入职佣金' %>

@@ -1,19 +1,8 @@
 <% content_for :job_info do %>
-  <%= render 'shared/page_title', title: @job.title %>
+  <%= render 'shared/supplier_job_show', job: @job %>
   <div style="word-break:break-all;">
-    <p>
-      <% @job.tag_list.each do |tag| %>
-        <i class="fa fa-tags"></i>
-        <span class='gray-light'><%= tag %></span>
-      <% end %>
-    </p>
-    <p>
-      <%= render 'shared/salary_show', job: @job %>
-    </p>
-    <p class="blog-post-meta"><%= @job.company_name %>提供<%= @job.bonus_for_entry %>元招聘红包</p>
-    <p><%= simple_format @job.description %></p>
     <hr>
-    <h2>关于<%= @job.company_name %></h2>
+    <h2 class='self-h2'>关于<%= @job.company_name %></h2>
     <blockquote>
       <%= simple_format @job.company_description %>
     </blockquote>
@@ -22,15 +11,7 @@
 <% end %>
 
 <% content_for :other_job_info do %>
-  <p>
-    <%= render "resume_deliver", job: @job %>
-  </p>
-
-  <p>
-    <%= render "delivered_resumes", job: @job %>
-  </p>
-
-  <p>
-    <%= render "similar_jobs", similar_jobs: @similar_jobs %>
-  </p>
+  <%= render "resume_deliver", job: @job %>
+  <%= render "delivered_resumes", job: @job %>
+  <%= render "similar_jobs", similar_jobs: @similar_jobs %>
 <% end %>

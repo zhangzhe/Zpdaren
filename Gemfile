@@ -67,3 +67,11 @@ gem 'strip_attributes'
 gem 'acts_as_paranoid', github: 'ActsAsParanoid/acts_as_paranoid'
 gem 'pdfjs_rails'
 gem "wysiwyg-rails"
+
+# Markdown 格式 & 文本处理
+gem 'redcarpet', '~> 3.2.3'
+gem 'rouge', '~> 1.8.0'
+gem 'auto-space', '0.0.4'
+gem 'nokogiri', '1.6.5'
+gem 'rails_autolink', '>= 1.1.0'
+gem 'md_emoji', '1.0.2'

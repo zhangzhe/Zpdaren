@@ -4,35 +4,9 @@
   <li class="active"><%= @job.title %></li>
 </ol>
 
-<div>
-  <%= render 'shared/page_title', title: @job.title %>
-  <p>
-    <% @job.tag_list.each do |tag| %>
-      <i class="fa fa-tags"></i>
-      <span class='gray-light'><%= tag %></span>
-    <% end %>
-  </p>
-  <p>
-    <%= render 'shared/salary_show', job: @job %>
-  </p>
-  <p>
-    <strong>职位佣金：</strong>
-    <span class='gray-light'>
-      <%= @job.bonus %>元
-    </span>
-  </p>
-  <p class='blockquote17'>
-    <strong>
-      职位描述
-    </strong>
-  </p>
-  <p>
-    <div class="word-break gray-light">
-      <%= simple_format @job.description %>
-    </div>
-  </p>
-  <p>
-    <%= link_to '编辑', edit_recruiters_job_path(@job), class: 'btn btn-primary' if @job.editable? %>
-    <%= link_to '预付订金', new_recruiters_deposit_path(job_id: @job), class: "btn btn-primary" if @job.submitted? %>
-  </p>
+<%= render 'shared/job_show', job: @job %>
+
+<div class="panel-footer">
+  <%= link_to '编辑', edit_recruiters_job_path(@job), class: 'btn btn-primary' if @job.editable? %>
+  <%= link_to '预付订金', new_recruiters_deposit_path(job_id: @job), class: "btn btn-primary" if @job.submitted? %>
 </div>

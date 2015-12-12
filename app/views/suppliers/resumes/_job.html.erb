@@ -1,6 +1,6 @@
 <div class="well well-lg">
   <div style="word-break:break-all;">
-    <h2 class="blog-post-title"><%= job.title %></h2>
+    <h2 class="blog-post-title self-h2"><%= job.title %></h2>
     <p>
       <i class="fa fa-tags"></i>
       <%= job.tag_list.each{|tag|}.join(' ') %>
@@ -15,10 +15,10 @@
 
 <div class="collapse" id="DetailCollapse">
   <div class="well">
-    <h2 class="blog-post-title">关于<%= job.company_name %></h2>
+    <h2 class="blog-post-title self-h2">关于<%= job.company_name %></h2>
     <blockquote><%= job.company_description %></blockquote>
     <hr>
     <h3>职位描述</h4>
-    <p><%= simple_format job.description %></p>
+    <p><%= markdown job.description %></p>
   </div>
 </div>

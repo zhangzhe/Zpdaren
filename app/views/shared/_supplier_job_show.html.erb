@@ -1,0 +1,31 @@
+<div class="job-detail">
+  <div class="panel-heading">
+    <p class="job-title"><%= job.title %></p>
+    <p class="info">
+      招聘方·<span class='gray-light'><%= job.company_name %></span>·
+      <% job.tag_list.each do |tag| %>
+        <i class="fa fa-tags"></i>
+        <span class='gray-light'><%= tag %></span>
+      <% end %>
+    </p>
+  </div>
+  <div class="panel-body">
+    <p>
+      <%= render 'shared/salary_show', job: job %>
+    </p>
+    <p>
+      <strong>备注：</strong><%= @job.company_name %>提供&nbsp;<b><%= @job.bonus_for_entry %></b>&nbsp;元招聘红包
+    </p>
+    <p>
+      <H3>
+        职位描述
+      </H3>
+    </p>
+    <hr>
+    <p>
+      <div class="word-break gray-light">
+        <%= markdown job.description %>
+      </div>
+    </p>
+  </div>
+</div>

@@ -7,66 +7,34 @@
     <%= @job.title %>
   </li>
 </ol>
-<br>
-<div>
-  <div class="col-md-8 admin-job-detail default-bgc" style="padding: 20px;">
-    <em></em>
-    <span class="label label-info">
-      <p class="jt"><%= @job.title %></p>
-      <p class="cn"><%= @job.company_name %></p>
-    </span>
-    <br>
-    <br>
-    <br>
-    <br>
-    <p>
-      <% @job.tag_list.each do |tag| %>
-        <i class="fa fa-tags"></i>
-        <span class='gray-light'><%= tag %></span>
-      <% end %>
-    </p>
-    <p>
-      <%= render 'shared/salary_show', job: @job %>
-    </p>
-    <p>
-      <strong>职位佣金：</strong>
-      <span class='gray-light'>
-        <%= @job.bonus %>元
-      </span>
-    </p>
-    <hr>
-    <p class='blockquote17'>
-      <strong>
-        职位描述
-      </strong>
-    </p>
-    <p>
-      <div class='gray-light'>
-        <%= simple_format @job.description %>
+<div class="container-fluid" style="padding-left:0px;">
+  <div class="row">
+    <div class="col-md-9">
+      <%= render 'shared/job_show', job: @job %>
+      <div class="panel-footer">
+        <%= link_to "修改职位信息", edit_admins_job_path(@job), class: "btn btn-primary" %>
+        <%= button_to '删除', admins_job_path(@job), method: :delete, data: { confirm: "是否删除职位【#{@job.title}】？删除后不可恢复!", disable_with: '提交中...'}, class: "btn btn-danger" %>
       </div>
-    </p>
-    <br>
-    <%= link_to "修改职位信息", edit_admins_job_path(@job), class: "btn btn-primary" %>
-    <%= button_to '删除', admins_job_path(@job), method: :delete, data: { confirm: "是否删除职位【#{@job.title}】？删除后不可恢复!", disable_with: '提交中...'}, class: "btn btn-danger" %>
-  </div>
+    </div>
 
-  <div class="col-md-3 col-md-offset-1">
-    <H2>
-      <%= @job.company.name %>
-    </H2 >
-    <p>
-      联系方式：
-      <%= @job.company.mobile %>
-    </p >
-    <p class='blockquote14'>
-      <strong>
-        公司描述
-      </strong>
-    </p>
-    <p>
-      <div class='gray-light'>
-        <%= simple_format @job.company.description %>
-      </div>
-    </p>
+    <div class="col-md-3">
+      <H2 class='self-h2'>
+        <%= @job.company.name %>
+      </H2 >
+      <p>
+        联系方式：
+        <%= @job.company.mobile %>
+      </p >
+      <p class='blockquote14'>
+        <strong>
+          公司描述
+        </strong>
+      </p>
+      <p>
+        <div class='gray-light'>
+          <%= simple_format @job.company.description %>
+        </div>
+      </p>
+    </div>
   </div>
 </div>
