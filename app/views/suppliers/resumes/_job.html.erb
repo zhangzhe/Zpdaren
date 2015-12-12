@@ -18,7 +18,9 @@
     <h2 class="blog-post-title self-h2">关于<%= job.company_name %></h2>
     <blockquote><%= job.company_description %></blockquote>
     <hr>
-    <h3>职位描述</h4>
-    <p><%= markdown job.description %></p>
+    <h3>职位描述</h3>
+    <div class="markdown">
+     <%= markdown job.description %>
+    </div>
   </div>
 </div>
