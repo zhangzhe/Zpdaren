@@ -77,10 +77,6 @@ class Job < ActiveRecord::Base
     self.max_priority.shuffle[0..5]
   end
 
-  def finished_approve_today?
-    self.deliveries.approved_today.count >= 8
-  end
-
   def editable?
     ["submitted", "deposit_paid", "deposit_paid_confirmed"].include?(self.state)
   end
@@ -191,8 +187,13 @@ class Job < ActiveRecord::Base
     self.salary_min.present? and self.salary_max.present? and self.salary_min > 0 and self.salary_max > 0
   end
 
-  def resume_status
-    "#{deliveries.with_deleted.after_paid.count} / #{deliveries.with_deleted.after_approved.count} / #{deliveries.with_deleted.count}"
+  def all_kinds_of_deliveries_count
+    all_kinds_of_deliveries = {}
+    all_kinds_of_deliveries[:all_count] = self.deliveries.with_deleted.count
+    all_kinds_of_deliveries[:after_approved_count] = self.deliveries.after_approved.count
+    all_kinds_of_deliveries[:after_paid_count] = self.deliveries.after_paid.count
+    all_kinds_of_deliveries[:refused_count] = self.deliveries.refused.count
+    all_kinds_of_deliveries
   end
 
   def self.has_approved_delivery
@@ -206,7 +207,7 @@ class Job < ActiveRecord::Base
   end
 
   def may_approve?
-    !self.finished_approve_today? && (self.deliveries.recommended.size > 0)
+    self.deliveries.recommended.size > 0
   end
 
   private

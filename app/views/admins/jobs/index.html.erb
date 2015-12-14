@@ -23,6 +23,7 @@
   </li>
 </ul>
 <br>
+<%= render 'label' %>
 <% if params[:state] == "un_hiring" %>
   <%= render 'un_hiring_list', jobs: @jobs %>
 <% elsif params[:state] == "in_hiring" %>

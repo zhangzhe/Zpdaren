@@ -6,8 +6,7 @@
         <th>公司名称</th>
         <th>发布时间</th>
         <th>简历推荐</th>
-        <th>今日简历推荐</th>
-        <th>状态</th>
+        <th>操作</th>
       </tr>
     </thead>
     <tbody>
@@ -22,13 +21,11 @@
           </td>
           <td><%= link_to job.company_name, 'javascript:void(0);', "data-toggle" => "popover", "data-trigger" => "focus", "data-placement" => "bottom", "data-content" => job.company_description %></td>
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
-          <td><%= job.resume_status %></td>
-          <% flag = job.finished_approve_today? ? "label-success" : "label-danger" %>
           <td>
-            <span class="label <%= flag %> label-as-badge"><%= job.deliveries.approved_today.count %>/8 </span>&nbsp;<%= link_to "审核推荐", admins_job_deliveries_path(:job_id => job, :state => 'recommended'), class: "btn btn-primary btn-sm", target: '_blank' if job.may_approve? %>
+            <%= all_kinds_of_deliveries_count(job) %>
           </td>
           <td>
-            <%= Recruiters::JobsHelper::state_show(job) %>
+            <%= link_to "审核推荐", admins_job_deliveries_path(:job_id => job, :state => 'recommended'), class: "btn btn-primary btn-sm", target: '_blank' if job.may_approve? %>
           </td>
         </tr>
       <% end %>
