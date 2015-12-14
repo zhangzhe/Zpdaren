@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   get 'qr_codes/:id' => "qr_codes#show", :as => "qr_code"
 
   root :to => 'home#index'
-  get 'markdown' => 'home#markdown', as: 'markdown'
 
   match 'weixin_callback' => 'home#weixin_callback', via: [:get, :post]
 
@@ -39,6 +38,7 @@ Rails.application.routes.draw do
       post :preview
     end
   end
+
   resources :deliveries, only: [:show]
 
   namespace :admins do
@@ -115,6 +115,7 @@ Rails.application.routes.draw do
     resources :qr_codes, only: [:show]
   end
 
-  get 'good_job_description' => 'home#good_job_description'
+  get 'good_job_description' => 'handbooks#good_job_description', as: 'good_job_description'
+  get 'markdown' => 'handbooks#markdown', as: 'markdown'
   get 'custom_agreement' => 'home#custom_agreement'
 end

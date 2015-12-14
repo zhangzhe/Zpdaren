@@ -26,10 +26,6 @@ class HomeController < ApplicationController
     send_file "public/pdfs/custom_agreement.pdf"
   end
 
-  def good_job_description
-    send_file "public/pdfs/good_job_description.pdf"
-  end
-
   require 'digest/sha1'
   SIGNATURE_TOKEN = "12345qwert"
   def weixin_callback
@@ -55,10 +51,6 @@ class HomeController < ApplicationController
         false
       end
     end
-  end
-
-  def markdown
-
   end
 
   private
