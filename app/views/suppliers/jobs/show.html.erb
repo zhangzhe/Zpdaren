@@ -2,7 +2,7 @@
   <%= render 'shared/supplier_job_show', job: @job %>
   <div style="word-break:break-all;">
     <hr>
-    <h2 class='self-h2'>关于<%= @job.company_name %></h2>
+    <h2>关于<%= @job.company_name %></h2>
     <blockquote>
       <%= simple_format @job.company_description %>
     </blockquote>

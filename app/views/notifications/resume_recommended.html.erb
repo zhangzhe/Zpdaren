@@ -11,7 +11,7 @@
   <% if @delivery.resume.pdf_attachment.present? %>
     <%= link_to '下载简历', "#{ROOT_URL}/deliveries/#{@delivery.id}?external_credential=#{@delivery.external_credential}" %>
   <% else %>
-    <h2 class='self-h2'>简历详情</h2>
+    <h2>简历详情</h2>
     <%= simple_format @delivery.resume.description %>
   <% end %>
 </p>

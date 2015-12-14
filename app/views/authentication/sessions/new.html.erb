@@ -4,7 +4,7 @@
   <div class="col-sm-6 col-md-6 col-md-offset-3">
     <div class="account-wall">
       <%= form_for(User.new, as: "user", url: session_path("user")) do |f| %>
-        <h2 class="text-center self-h2">用户登录</h2>
+        <h2 class="text-center">用户登录</h2>
         <br>
         <%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "邮箱" %><br>
 

@@ -6,7 +6,7 @@
 
 <div class="col-md-6">
   <%= render 'shared/page_title', title: '职位' %>
-  <h2 class='self-h2'>
+  <h2>
     <%= @delivery.job_title %>
   </h2 >
   <p>
@@ -33,7 +33,7 @@
     <%= markdown  @delivery.job_description %>
   </div>
   <hr>
-  <h2 class='self-h2'>
+  <h2>
     <%= @delivery.job.company.name %>
   </h2 >
   <p class='gray-light'>
@@ -55,7 +55,7 @@
 </div>
 <div class="col-md-6">
   <%= render 'shared/page_title', title: '推荐' %>
-  <H2 class='self-h2'>
+  <H2>
     <%= @delivery.resume_candidate_name %><%= "(请先完善简历)" if @delivery.resume.may_improve? %><%= "(暂时不找工作)" if @delivery.resume.unavailable? %>
   </H2 >
   <p>

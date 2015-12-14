@@ -5,7 +5,7 @@
     <div class="account-wall">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <% name = (resource_name.to_s == "recruiter") ? "我要悬赏招聘" : "我要推荐简历" %>
-        <h2 class="text-center self-h2"><%= name %></h2>
+        <h2 class="text-center"><%= name %></h2>
         <br>
         <%= devise_error_messages! %>
         <%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "邮箱" %>
