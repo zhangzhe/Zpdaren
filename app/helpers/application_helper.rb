@@ -1,4 +1,5 @@
 module ApplicationHelper
+
   def current_user_account_path
     case
     when current_recruiter

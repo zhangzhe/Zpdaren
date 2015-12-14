@@ -6,9 +6,9 @@
 
 <div class="col-md-6">
   <%= render 'shared/page_title', title: '职位' %>
-  <H2>
+  <h2>
     <%= @delivery.job_title %>
-  </H2 >
+  </h2 >
   <p>
     <% @delivery.job_tag_list.each do |tag| %>
       <i class="fa fa-tags"></i>
@@ -29,13 +29,13 @@
       职位描述
     </strong>
   </p>
-  <p>
-    <%= simple_format  @delivery.job_description %>
-  </p>
+  <div class="markdown">
+    <%= markdown  @delivery.job_description %>
+  </div>
   <hr>
-  <H2>
+  <h2>
     <%= @delivery.job.company.name %>
-  </H2 >
+  </h2 >
   <p class='gray-light'>
     联系方式：
     <%= @delivery.job.company.mobile %>

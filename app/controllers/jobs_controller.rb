@@ -13,4 +13,12 @@ class JobsController < ApplicationController
     @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
     render layout: 'anonymous_jobs'
   end
+
+  def preview
+    @description = params[:description]
+
+    respond_to do |format|
+      format.json
+    end
+  end
 end
