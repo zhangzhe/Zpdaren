@@ -10,6 +10,9 @@
 .fs12{
   font-size: 12px;
 }
+.fs32{
+  font-size: 32px;
+}
 .mt20{
   margin-top: 20px;
 }
@@ -30,9 +33,6 @@
 }
 .h180{
   height: 180px;
-}
-.default-bgc{
-  background-color: #fafafa;
 }
 .ti2{
   text-indent: 2em;

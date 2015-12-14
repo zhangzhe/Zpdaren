@@ -190,35 +190,6 @@ body {
   color: #777;
 }
 
-/*admin job show page*/
-.admin-job-detail .label{
-  position: absolute;
-  top: -10px;
-  font-size: 28px;
-  border-radius: 0px;
-  background-color: #428bca;
-}
-.admin-job-detail em{
-  width: 0;
-  height: 0;
-  border-bottom: 8px solid #285e8e;
-  border-left: 8px solid transparent;
-  position: absolute;
-  top: -10px;
-  left: 12px;
-}
-
-.admin-job-detail .label .jt{
-  font-size: 30px;
-  text-align: left;
-}
-.admin-job-detail .label .cn{
-  font-size: 14px;
-  font-weight: normal;
-  text-align: right;
-}
-/*********************/
-
 /*page title*/
   .title{
     height: 80px;
@@ -239,6 +210,18 @@ body {
     width: 10%;
     display: inline-block;
   }
+  #job_description{
+    border-top-right-radius:0;
+    border-top-left-radius:0;
+  }
+  #preview{
+    width: 100%;
+    min-height: 414px;
+    overflow-y: scroll;
+    display: none;
+    border-top-right-radius:0;
+    border-top-left-radius:0;
+  }
 /***********************/
 
 /*admin job list*/
@@ -247,3 +230,16 @@ body {
     color: red;
   }
 /**********************/
+
+.nav-self{
+  width: 160px;
+}
+.nav-self li a{
+  padding: 5px 15px;
+  border-bottom-right-radius:0;
+  border-bottom-left-radius:0;
+  background-color: #f0f0f0;
+  color: #999;
+  margin-right: 2px;
+}
+

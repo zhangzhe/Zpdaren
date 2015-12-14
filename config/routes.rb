@@ -33,7 +33,12 @@ Rails.application.routes.draw do
     confirmations: 'authentication/confirmations'
   }
 
-  resources :jobs, only: [:show, :index]
+  resources :jobs, only: [:show, :index] do
+    collection do
+      post :preview
+    end
+  end
+
   resources :deliveries, only: [:show]
 
   namespace :admins do
@@ -110,6 +115,7 @@ Rails.application.routes.draw do
     resources :qr_codes, only: [:show]
   end
 
-  get 'good_job_description' => 'home#good_job_description'
+  get 'good_job_description' => 'handbooks#good_job_description', as: 'good_job_description'
+  get 'markdown' => 'handbooks#markdown', as: 'markdown'
   get 'custom_agreement' => 'home#custom_agreement'
 end
