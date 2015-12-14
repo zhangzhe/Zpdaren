@@ -15,8 +15,7 @@
           <td><s class="gray-light"><%= job.title %></s></td>
           <td><%= link_to job.company_name, 'javascript:void(0);', "data-toggle" => "popover", "data-trigger" => "focus", "data-placement" => "bottom", "data-content" => job.company_description %></td>
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
-          <td><%= job.resume_status %></td>
-          <% flag = job.finished_approve_today? ? "label-success" : "label-danger" %>
+          <td><%= all_kinds_of_deliveries_count(job) %></td>
           <td>
             <%= Recruiters::JobsHelper::state_show(job) %>
           </td>

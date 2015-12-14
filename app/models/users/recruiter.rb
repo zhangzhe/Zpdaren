@@ -19,7 +19,11 @@ class Recruiter < User
 
   def unprocess_deliveries
     resume_ids = self.deliveries.process.map(&:resume_id)
-    self.deliveries.where("(resume_id not in (?) and deliveries.state = 'approved') or (resume_id in (?) and deliveries.state = 'approved' and read_at is null)", resume_ids, resume_ids)
+    if resume_ids.present?
+      self.deliveries.where("(resume_id not in (?) and deliveries.state = 'approved') or (resume_id in (?) and deliveries.state = 'approved' and read_at is null)", resume_ids, resume_ids)
+    else
+      self.deliveries.approved
+    end
   end
 
   def unprocess_deliveries_count
