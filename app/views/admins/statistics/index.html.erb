@@ -57,6 +57,21 @@
         </td>
       </tr>
       <tr>
+        <th>简历数</th>
+        <td>
+          <%= Resume.count %>
+        </td>
+        <td>
+          <%= Resume.today_added_count %>
+        </td>
+        <td>
+          <%= Resume.yesterday_added_count %>
+        </td>
+        <td>
+          <%= Resume.the_day_before_yesterday_added_count %>
+        </td>
+      </tr>
+      <tr>
         <th>成功推荐</th>
         <td>
           <%= Delivery.after_paid.count %>
@@ -174,6 +189,21 @@
         </td>
         <td>
           <%= Statistics.suppliers_for_high_priority_jobs.the_day_before_yesterday_added_count %>
+        </td>
+      </tr>
+      <tr>
+        <th>简历数</th>
+        <td>
+          <%= Statistics.resumes_for_high_priority_jobs.count %>
+        </td>
+        <td>
+          <%= Statistics.resumes_for_high_priority_jobs.today_added_count %>
+        </td>
+        <td>
+          <%= Statistics.resumes_for_high_priority_jobs.yesterday_added_count %>
+        </td>
+        <td>
+          <%= Statistics.resumes_for_high_priority_jobs.the_day_before_yesterday_added_count %>
         </td>
       </tr>
       <tr>

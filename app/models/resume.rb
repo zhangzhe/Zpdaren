@@ -25,6 +25,8 @@ class Resume < ActiveRecord::Base
   strip_attributes
   acts_as_paranoid
 
+  extend Statistics
+
   def resumes_from(supplier)
     self.resumes.where(:supplier_id => supplier.id)
   end

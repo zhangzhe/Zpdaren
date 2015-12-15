@@ -55,6 +55,10 @@ module Statistics
     Delivery.joins(:job, :resume).where("priority = ?", Job::PRIORITY_LIST['high']).select('supplier_id').distinct
   end
 
+  def self.resumes_for_high_priority_jobs
+    Delivery.joins(:job, :resume).where("priority = ?", Job::PRIORITY_LIST['high']).select('resume_id').distinct
+  end
+
   private
   def data_count(date)
     self.where(:created_at => (date.beginning_of_day..date.end_of_day)).count
