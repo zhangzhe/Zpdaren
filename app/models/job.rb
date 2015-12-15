@@ -30,7 +30,7 @@ class Job < ActiveRecord::Base
   scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'deposit_paid_confirmed']) }
   scope :in_hiring, -> { where.not('state in (?)', ['submitted', 'finished', 'final_payment_paid']) }
   scope :un_hiring, -> { where('state in (?)', ['final_payment_paid', 'finished']) }
-  scope :max_priority, -> { where('priority = 1') }
+  scope :max_priority, -> { where('jobs.priority = 1') }
   default_scope { order(created_at: :desc) }
 
   before_destroy :destroy_all_association_entities
@@ -66,6 +66,10 @@ class Job < ActiveRecord::Base
   class << self
     def state_valid?(state)
       ['submitted', 'deposit_paid', 'deposit_paid_confirmed', 'final_payment_paid', 'finished'].include?(state)
+    end
+
+    def has_deliveries(scope)
+      Delivery.jobs(scope)
     end
   end
 
@@ -194,16 +198,6 @@ class Job < ActiveRecord::Base
     all_kinds_of_deliveries[:after_paid_count] = self.deliveries.after_paid.count
     all_kinds_of_deliveries[:refused_count] = self.deliveries.refused.count
     all_kinds_of_deliveries
-  end
-
-  def self.has_approved_delivery
-    jobs = []
-    Job.all.each do |job|
-      if job.deliveries.approved.size > 0
-        jobs << job
-      end
-    end
-    jobs
   end
 
   def may_approve?

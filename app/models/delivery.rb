@@ -29,7 +29,7 @@ class Delivery < ActiveRecord::Base
   scope :refused, -> { where('deliveries.state' => 'refused') }
   scope :recruiter_refused, -> { where("deliveries.state = 'refused' and deliveries.read_at is not null") }
   scope :admin_refused, -> { where("deliveries.state = 'refused' and deliveries.read_at is null") }
-  scope :max_priority, -> { joins(:job).where("jobs.priority = 1") }
+  scope :max_priority, -> { joins(:job, :resume).where("jobs.priority = 1") }
 
   default_scope { order('updated_at DESC') }
 
@@ -94,6 +94,18 @@ class Delivery < ActiveRecord::Base
 
     def state_valid?(state)
       ['recommended', 'approved', 'paid', 'refused', 'final_paid', 'recruiter_refused', 'admin_refused'].include?(state)
+    end
+
+    def jobs(scope)
+      if scope == 'all'
+        Delivery.select("job_id").distinct
+      else
+        Delivery.max_priority.select("job_id").distinct
+      end
+    end
+
+    def suppliers
+      Delivery.max_priority.select('supplier_id').distinct
     end
   end
 

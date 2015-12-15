@@ -13,9 +13,9 @@ module Statistics
 
   def Statistics.delivery_rate(scope = 'all')
     if scope == 'all'
-      (Job.count == 0) ? 0 : (Job.has_approved_delivery.count.to_f / Job.count)
+      (Job.count == 0) ? 0 : (Job.has_deliveries(scope).count.to_f / Job.count)
     else
-      (Job.max_priority.count == 0) ? 0 : (Job.max_priority.has_approved_delivery.count.to_f / Job.max_priority.count)
+      (Job.max_priority.count == 0) ? 0 : (Job.has_deliveries(scope).count.to_f / Job.max_priority.count)
     end
   end
 
@@ -25,7 +25,6 @@ module Statistics
     else
       (Delivery.max_priority.count == 0) ? 0 : (Delivery.max_priority.after_paid.count.to_f / Delivery.max_priority.count)
     end
-
   end
 
   def self.supplier_attent_weixin_rate(scope = 'all')
