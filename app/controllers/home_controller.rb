@@ -6,11 +6,11 @@ class HomeController < ApplicationController
     if current_user
       redirect_path = case current_user
       when Admin
-        admins_jobs_path(:state => "max_priority")
+        admins_jobs_path(:state => "high_priority")
       when Recruiter
         recruiters_jobs_path(:state => "submitted")
       when Supplier
-        suppliers_jobs_path(:state => "max_priority")
+        suppliers_jobs_path(:state => "high_priority")
       end
       redirect_to redirect_path
     end

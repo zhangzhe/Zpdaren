@@ -2,24 +2,24 @@
   <br>
   <ol class="breadcrumb">
     <li>
-      <%= link_to '我收到的职位', suppliers_jobs_path(:state => 'max_priority') %>
+      <%= link_to '我收到的职位', suppliers_jobs_path(:state => 'high_priority') %>
     </li>
     <li class="active"><%= @jobs.first.company_name %></li>
   </ol>
 <% end %>
 <%= render 'suppliers/shared/search', title: '我收到的职位', url: suppliers_jobs_path, placeholder: '输入职位名称' %>
 <ul class="nav nav-tabs">
-  <% active = (params[:state] == "max_priority") ? "active" : "" %>
+  <% active = (params[:state] == "high_priority") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "急招职位<span class='badge'>#{Job.available.max_priority.count}</span>".html_safe, suppliers_jobs_path(:state => "max_priority") %>
+    <%= link_to "急招职位<span class='badge'>#{Job.available.high_priority.count}</span>".html_safe, suppliers_jobs_path(:state => "high_priority") %>
   </li>
-  <% active = (params[:state] != "max_priority") ? "active" : "" %>
+  <% active = (params[:state] != "high_priority") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
     <%= link_to "最新职位<span class='badge'>#{Job.available.count}</span>".html_safe, suppliers_jobs_path %>
   </li>
 </ul>
 <br>
-<% if params[:state] == 'max_priority' %>
+<% if params[:state] == 'high_priority' %>
   <div class="alert-info mb20" role="alert">
     <i class="fa fa-volume-up"></i>
     &nbsp;急招以下职位，招聘方坐等您的推荐

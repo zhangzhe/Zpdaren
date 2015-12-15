@@ -8,8 +8,8 @@ class Admins::JobsController < Admins::BaseController
       @jobs = Job.only_deleted
     elsif params[:state] == "not_paid"
       @jobs = Job.submitted
-    elsif params[:state] == 'max_priority'
-      @jobs = Job.max_priority
+    elsif params[:state] == 'high_priority'
+      @jobs = Job.high_priority
     else
       @jobs = Job.all
     end

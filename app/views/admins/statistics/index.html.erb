@@ -134,79 +134,79 @@
       <tr>
         <th>职位数</th>
         <td>
-          <%= Job.max_priority.count %>
+          <%= Job.high_priority.count %>
         </td>
         <td>
-          <%= Job.max_priority.today_added_count %>
+          <%= Job.high_priority.today_added_count %>
         </td>
         <td>
-          <%= Job.max_priority.yesterday_added_count %>
+          <%= Job.high_priority.yesterday_added_count %>
         </td>
         <td>
-          <%= Job.max_priority.the_day_before_yesterday_added_count %>
+          <%= Job.high_priority.the_day_before_yesterday_added_count %>
         </td>
       </tr>
       <tr>
         <th>推荐数</th>
         <td>
-          <%= Delivery.max_priority.count %>
+          <%= Statistics.deliveries_for_high_priority_jobs.count %>
         </td>
         <td>
-          <%= Delivery.max_priority.today_added_count %>
+          <%= Statistics.deliveries_for_high_priority_jobs.today_added_count %>
         </td>
         <td>
-          <%= Delivery.max_priority.yesterday_added_count %>
+          <%= Statistics.deliveries_for_high_priority_jobs.yesterday_added_count %>
         </td>
         <td>
-          <%= Delivery.max_priority.the_day_before_yesterday_added_count %>
+          <%= Statistics.deliveries_for_high_priority_jobs.the_day_before_yesterday_added_count %>
         </td>
       </tr>
       <tr>
         <th>推荐方</th>
         <td>
-          <%= Supplier.max_priority.count %>
+          <%= Statistics.suppliers_for_high_priority_jobs.count %>
         </td>
         <td>
-          <%= Supplier.max_priority.today_added_count %>
+          <%= Statistics.suppliers_for_high_priority_jobs.today_added_count %>
         </td>
         <td>
-          <%= Supplier.max_priority.yesterday_added_count %>
+          <%= Statistics.suppliers_for_high_priority_jobs.yesterday_added_count %>
         </td>
         <td>
-          <%= Supplier.max_priority.the_day_before_yesterday_added_count %>
+          <%= Statistics.suppliers_for_high_priority_jobs.the_day_before_yesterday_added_count %>
         </td>
       </tr>
       <tr>
         <th>成功推荐</th>
         <td>
-          <%= Delivery.max_priority.after_paid.count %>
+          <%= Statistics.deliveries_for_high_priority_jobs.after_paid.count %>
         </td>
         <td>
-          <%= Delivery.max_priority.paid_today.count %>
+          <%= Statistics.deliveries_for_high_priority_jobs.paid_today.count %>
         </td>
         <td>
-          <%= Delivery.max_priority.paid_yesterday.count %>
+          <%= Statistics.deliveries_for_high_priority_jobs.paid_yesterday.count %>
         </td>
         <td>
-          <%= Delivery.max_priority.paid_the_day_before_yesterday.count %>
+          <%= Statistics.deliveries_for_high_priority_jobs.paid_the_day_before_yesterday.count %>
         </td>
       </tr>
       <tr>
         <th>成功入职</th>
         <td>
-          <%= Delivery.max_priority.final_paid.count %>
+          <%= Statistics.deliveries_for_high_priority_jobs.final_paid.count %>
         </td>
       </tr>
       <tr>
         <th>推荐率</th>
         <td>
-          <%= number_to_percentage Statistics.delivery_rate('max_priority')*100 %>
+          <%= number_to_percentage Statistics.delivery_rate('high_priority')*100 %>
         </td>
       </tr>
       <tr>
         <th>成功推荐率</th>
         <td>
-          <%= number_to_percentage Statistics.success_delivery_rate('max_priority')*100 %>
+          <%= number_to_percentage Statistics.success_delivery_rate('high_priority')*100 %>
         </td>
       </tr>
     </tbody>

@@ -25,10 +25,6 @@ class Supplier < User
     def newly_active_supplier_count_recently_seven_days
       newly_active_supplier_recently_seven_days.count
     end
-
-    def max_priority
-      Delivery.suppliers
-    end
   end
 
   private

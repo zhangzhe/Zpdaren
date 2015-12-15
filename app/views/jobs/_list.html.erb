@@ -13,7 +13,7 @@
       <% jobs.each do |job| %>
         <tr>
           <td>
-            <% if job.priority == 1 %>
+            <% if job.priority == Job::PRIORITY_LIST['HIGH'] %>
               <i class="fa fa-fire hot-fire"></i>
             <% end %>
             <%= link_to truncate(job.title), job %>

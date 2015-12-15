@@ -30,7 +30,8 @@ class Job < ActiveRecord::Base
   scope :available, -> { where('state in (?)', ['submitted', 'deposit_paid', 'deposit_paid_confirmed']) }
   scope :in_hiring, -> { where.not('state in (?)', ['submitted', 'finished', 'final_payment_paid']) }
   scope :un_hiring, -> { where('state in (?)', ['final_payment_paid', 'finished']) }
-  scope :max_priority, -> { where('jobs.priority = 1') }
+  scope :priority, lambda{ |key| where(priority: PRIORITY_LIST[key]) }
+
   default_scope { order(created_at: :desc) }
 
   before_destroy :destroy_all_association_entities
@@ -42,6 +43,8 @@ class Job < ActiveRecord::Base
   include SimilarEntity
   include DataRecoverer
   include AASM
+
+  PRIORITY_LIST = { 'HIGH' => 1, 'MEDIUM' => 2, 'LOW' => '3' }
 
   acts_as_taggable
   acts_as_taggable_on :skills, :interests
@@ -68,8 +71,8 @@ class Job < ActiveRecord::Base
       ['submitted', 'deposit_paid', 'deposit_paid_confirmed', 'final_payment_paid', 'finished'].include?(state)
     end
 
-    def has_deliveries(scope)
-      Delivery.jobs(scope)
+    def high_priority
+      priority('HIGH')
     end
   end
 
@@ -78,7 +81,7 @@ class Job < ActiveRecord::Base
   end
 
   def self.high_priority_samples
-    self.max_priority.shuffle[0..5]
+    self.high_priority.shuffle[0..5]
   end
 
   def editable?
