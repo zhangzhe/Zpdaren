@@ -44,7 +44,7 @@ class Job < ActiveRecord::Base
   include DataRecoverer
   include AASM
 
-  PRIORITY_LIST = { 'HIGH' => 1, 'MEDIUM' => 2, 'LOW' => '3' }
+  PRIORITY_LIST = { 'high' => 1, 'medium' => 2, 'low' => '3' }
 
   acts_as_taggable
   acts_as_taggable_on :skills, :interests
@@ -72,7 +72,7 @@ class Job < ActiveRecord::Base
     end
 
     def high_priority
-      priority('HIGH')
+      priority('high')
     end
   end
 

@@ -48,11 +48,11 @@ module Statistics
   end
 
   def self.deliveries_for_high_priority_jobs
-    Delivery.joins(:job).where("priority = ?", Job::PRIORITY_LIST['HIGH'])
+    Delivery.joins(:job).where("priority = ?", Job::PRIORITY_LIST['high'])
   end
 
   def self.suppliers_for_high_priority_jobs
-    Delivery.joins(:job, :resume).where("priority = ?", Job::PRIORITY_LIST['HIGH']).select('supplier_id').distinct
+    Delivery.joins(:job, :resume).where("priority = ?", Job::PRIORITY_LIST['high']).select('supplier_id').distinct
   end
 
   private

@@ -13,7 +13,7 @@
       <% jobs.each do |job| %>
         <tr>
           <td>
-            <% if job.priority == Job::PRIORITY_LIST['HIGH'] %>
+            <% if job.priority == Job::PRIORITY_LIST['high'] %>
               <i class="fa fa-fire hot-fire"></i>
             <% end %>
             <%= link_to job.title, admins_job_path(job.id) %>
