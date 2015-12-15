@@ -1,9 +1,9 @@
 <%= render 'admins/shared/search', title: '职位列表', url: admins_jobs_path, placeholder: '输入职位名称' %>
 
 <ul class="nav nav-tabs">
-  <% active = (params[:state] == "max_priority") ? "active" : "" %>
+  <% active = (params[:state] == "high_priority") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "最高优先级的招聘<span class='badge'>#{Job.max_priority.count}</span>".html_safe, admins_jobs_path(:state => "max_priority") %>
+    <%= link_to "最高优先级的招聘<span class='badge'>#{Job.high_priority.count}</span>".html_safe, admins_jobs_path(:state => "high_priority") %>
   </li>
   <% active = (params[:state] == "in_hiring") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
@@ -32,7 +32,7 @@
   <%= render 'deleted_list', jobs: @jobs %>
 <% elsif params[:state] == "not_paid" %>
   <%= render 'not_paid_list', jobs: @jobs %>
-<% elsif params[:state] == 'max_priority' %>
+<% elsif params[:state] == 'high_priority' %>
   <%= render 'in_hiring_list', jobs: @jobs %>
 <% end %>
 

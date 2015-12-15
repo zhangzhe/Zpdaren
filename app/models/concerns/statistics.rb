@@ -12,20 +12,23 @@ module Statistics
   end
 
   def Statistics.delivery_rate(scope = 'all')
+    return 0 if Job.count == 0
+
     if scope == 'all'
-      (Job.count == 0) ? 0 : (Job.has_approved_delivery.count.to_f / Job.count)
+      had_delivery_jobs(scope).count.to_f / Job.count
     else
-      (Job.max_priority.count == 0) ? 0 : (Job.max_priority.has_approved_delivery.count.to_f / Job.max_priority.count)
+      had_delivery_jobs(scope).count.to_f / Job.high_priority.count
     end
   end
 
   def Statistics.success_delivery_rate(scope = 'all')
-    if scope == 'all'
-      (Delivery.count == 0) ? 0 : (Delivery.after_paid.count.to_f / Delivery.count)
-    else
-      (Delivery.max_priority.count == 0) ? 0 : (Delivery.max_priority.after_paid.count.to_f / Delivery.max_priority.count)
-    end
+    return 0 if Delivery.count == 0
 
+    if scope == 'all'
+      Delivery.after_paid.count.to_f / Delivery.count
+    else
+      deliveries_for_high_priority_jobs.after_paid.count.to_f / deliveries_for_high_priority_jobs.count
+    end
   end
 
   def self.supplier_attent_weixin_rate(scope = 'all')
@@ -44,8 +47,22 @@ module Statistics
     (Supplier.count == 0) ? 0 : Supplier.newly_active_supplier_count_recently_seven_days
   end
 
+  def self.deliveries_for_high_priority_jobs
+    Delivery.joins(:job).where("priority = ?", Job::PRIORITY_LIST['high'])
+  end
+
+  def self.suppliers_for_high_priority_jobs
+    Delivery.joins(:job, :resume).where("priority = ?", Job::PRIORITY_LIST['high']).select('supplier_id').distinct
+  end
+
   private
   def data_count(date)
     self.where(:created_at => (date.beginning_of_day..date.end_of_day)).count
+  end
+
+  def self.had_delivery_jobs(scope)
+    jobs = Job.joins(:deliveries)
+    jobs = jobs.high_priority if scope == 'high_priority'
+    jobs.distinct
   end
 end

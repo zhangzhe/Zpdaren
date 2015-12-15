@@ -29,7 +29,6 @@ class Delivery < ActiveRecord::Base
   scope :refused, -> { where('deliveries.state' => 'refused') }
   scope :recruiter_refused, -> { where("deliveries.state = 'refused' and deliveries.read_at is not null") }
   scope :admin_refused, -> { where("deliveries.state = 'refused' and deliveries.read_at is null") }
-  scope :max_priority, -> { joins(:job).where("jobs.priority = 1") }
 
   default_scope { order('updated_at DESC') }
 
