@@ -47,7 +47,6 @@ module Statistics
     (Supplier.count == 0) ? 0 : Supplier.newly_active_supplier_count_recently_seven_days
   end
 
-
   def self.deliveries_for_high_priority_jobs
     Delivery.joins(:job).where("priority = ?", Job::PRIORITY_LIST['HIGH'])
   end
