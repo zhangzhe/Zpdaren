@@ -15,9 +15,9 @@ module Statistics
     return 0 if Job.count == 0
 
     if scope == 'all'
-      had_deliveries_job(scope).count.to_f / Job.count
+      had_delivery_jobs(scope).count.to_f / Job.count
     else
-      had_deliveries_job(scope).count.to_f / Job.high_priority.count
+      had_delivery_jobs(scope).count.to_f / Job.high_priority.count
     end
   end
 
@@ -61,7 +61,7 @@ module Statistics
     self.where(:created_at => (date.beginning_of_day..date.end_of_day)).count
   end
 
-  def self.had_deliveries_job(scope)
+  def self.had_delivery_jobs(scope)
     jobs = Job.joins(:deliveries)
     jobs = jobs.high_priority if scope == 'high_priority'
     jobs.distinct
