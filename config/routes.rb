@@ -113,6 +113,7 @@ Rails.application.routes.draw do
     resources :watchings, only: [:create]
     resources :deliveries, only: [:index, :new, :create]
     resources :qr_codes, only: [:show]
+    resources :users, only: [:update]
   end
 
   get 'good_job_description' => 'handbooks#good_job_description', as: 'good_job_description'

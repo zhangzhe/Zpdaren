@@ -1,0 +1,54 @@
+<div class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel" id="aaaa">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabel">修改手机号</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="alert-danger mb20" role="alert" style='display:none;'>
+              手机号格式不正确
+            </div>
+            <%= form_for current_supplier, url: suppliers_user_path(current_supplier) do |f| %>
+              <p>
+                <%= f.label :mobile, "手机号" %>
+                <%= f.text_field :mobile, class: "form-control" %>
+              </p>
+              <br>
+              <p class='text-right'>
+                <%= f.submit "提交", class: "btn btn-primary", data: { disable_with: '提交中...' }, type: 'button', onclick: 'submitForm();', id: 'submitBtn' %>
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+  function submitForm(){
+    if (validMobile()){
+      $(".edit_supplier").submit();
+    }else{
+      $('#submitBtn').removeAttr('disabled');
+      $('#submitBtn').attr("data-disable-with", '提交');
+      return false;
+    }
+  }
+
+  function validMobile(){
+    var mobile = $('#supplier_mobile').val();
+    if ($.trim(mobile) == '') {
+      $('.alert-danger').html("手机号不能为空");
+      $('.alert-danger').show();
+      return false;
+    };
+    if ($.trim(mobile).length != 11) {
+      $(".alert-danger").html('请输入11位的手机号');
+      return false;
+    };
+    return true;
+  }
+</script>

@@ -7,6 +7,7 @@
     <thead>
       <tr>
         <th>提现人</th>
+        <th>手机号</th>
         <th>支付宝账号</th>
         <th>金额</th>
         <th>申请时间</th>
@@ -17,6 +18,7 @@
       <% @withdraws.each do |withdraw| %>
         <tr>
           <td><%= withdraw.wallet.user.email %></td>
+          <td><%= withdraw.mobile %></td>
           <td><%= withdraw.zhifubao_account %></td>
           <td><%= withdraw.amount %></td>
           <td><%= withdraw.created_at.localtime.to_s(:db) %></td>
