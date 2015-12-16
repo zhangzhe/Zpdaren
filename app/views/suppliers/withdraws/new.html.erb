@@ -1,0 +1,44 @@
+<br>
+<ol class="breadcrumb">
+  <li>
+    <%= link_to '账户管理', recruiters_path %>
+  </li>
+  <li class="active">提现到支付宝</li>
+</ol>
+<%= render 'shared/page_title', title: '提现到支付宝' %>
+<br>
+<%= render 'qrcode' unless current_supplier.weixin %>
+
+<div class="col-md-6 text-center">
+  <div class="container-fluid">
+    <%= form_for @withdraw, url: suppliers_withdraws_path, html: {class: "form-inline"} do |f| %>
+      <div class="row mb20">
+        <div class="col-md-4 text-right">收款支付宝账号</div>
+        <div class="col-md-8 text-left">
+          <%= f.text_field :zhifubao_account, class: "form-control", placeholder: "收款支付宝账号", value: @withdraw.previous_withdraw.try(:zhifubao_account) %>
+        </div>
+      </div>
+      <div class="row mb20">
+        <div class="col-md-4 text-right">提现金额</div>
+        <div class="col-md-8 text-left">
+          <div class="input-group">
+            <div class="input-group-addon">￥</div>
+              <%= f.text_field :amount, class: "form-control", placeholder: "提现金额", size: 7 %>
+            <div class="input-group-addon">.00</div>
+          </div>
+        </div>
+      </div>
+      <div class="row mb20">
+        <div class="col-md-4 text-right">手机号</div>
+        <div class="col-md-8 text-left">
+          <%= f.text_field :mobile, class: "form-control", placeholder: "手机号", value: @withdraw.previous_withdraw.try(:mobile) %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <%= f.submit "确认提现", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
