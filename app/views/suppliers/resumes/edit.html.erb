@@ -7,36 +7,4 @@
 
 <%= render 'shared/page_title', title: '编辑简历' %>
 
-<%= form_for @resume, url: suppliers_resume_path do |f| %>
-  <%= hidden_field_tag 'job_id', params[:job_id] if params[:job_id] %>
-  <p>
-    <%= f.label :candidate_name, '候选人姓名' %>
-    <span class='red-star'>*</span>
-    <%= f.text_field 'candidate_name', class: "form-control" %>
-  </p>
-  <p>
-    <%= f.label :mobile, '候选人手机号码' %>
-    <span class='red-star'>*</span>
-    <%= f.text_field 'mobile', class: 'form-control' %>
-  </p>
-  <p>
-    <%= render '/shared/tag' %>
-  </p>
-  <p>
-    <%= f.label :tag_list, '简历标签' %>
-    <span class='red-star'>*</span>
-    <%= f.text_field :tag_list, value: @resume.tag_list.to_s, class: 'form-control auto-tags' %>
-  </p>
-  <div class="checkbox">
-    <label>
-      <%= f.check_box :auto_delivery, {checked: @resume.auto_delivery} %> 设置自动托管（如果设置，之后一旦有匹配的职位出现，您的简历会被自动推荐。您将会收到更多的简历红包和入职红包。）
-    </label>
-  </div>
-  <p>
-    <%= f.label :remark, '备注' %>
-    <%= f.text_field :remark, class: 'form-control' %>
-  </p>
-  <p>
-    <%= f.submit '上传', class: "btn btn-primary", data: { disable_with: '提交中...' } %>
-  </p>
-<% end %>
+<%= render 'form', resume: @resume, url: suppliers_resume_path, method: 'PUT' %>
