@@ -97,6 +97,6 @@ class Suppliers::ResumesController < Suppliers::BaseController
   end
 
   def update_resume_params
-    params[:resume].permit(:candidate_name, :tag_list, :mobile, :auto_delivery, :remark)
+    params[:resume].permit(:candidate_name, :tag_list, :mobile, :auto_delivery, :remark, :attachment)
   end
 end

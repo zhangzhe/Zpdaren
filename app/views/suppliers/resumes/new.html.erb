@@ -1,3 +1,4 @@
+<br>
 <ol class="breadcrumb">
   <% if params[:job_id].present? %>
     <li>
@@ -14,4 +15,4 @@
   <li class="active">上传简历</li>
 </ol>
 <%= render 'shared/page_title', title: '上传简历' %>
-<%= render 'form', resume: @resume, job_id: params[:job_id] %>
+<%= render 'form', resume: @resume, job_id: params[:job_id], url: suppliers_resumes_path, method: 'POST' %>
