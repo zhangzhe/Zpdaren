@@ -14,7 +14,7 @@
   <p class='ti2'><%= current_supplier.wallet.money %>元</p>
   <br>
   <p>
-    <%= link_to "提现到支付宝", new_withdraw_path, :class => "btn btn-primary" if current_supplier.wallet.money > 0 %>
+    <%= link_to "提现到支付宝", new_suppliers_withdraw_path, :class => "btn btn-primary" if current_supplier.wallet.money > 0 %>
   </p>
 </div>
 

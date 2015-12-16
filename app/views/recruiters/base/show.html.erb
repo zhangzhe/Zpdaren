@@ -30,6 +30,6 @@
   <p class="ti2">账户余额：<%= current_recruiter.wallet.money %>元</p>
   <br>
   <p>
-    <%= link_to "提现到支付宝", new_withdraw_path, :class => "btn btn-primary" if current_recruiter.wallet.money > 0 %>
+    <%= link_to "提现到支付宝", new_recruiters_withdraw_path, :class => "btn btn-primary" if current_recruiter.wallet.money > 0 %>
   </p>
 </div>

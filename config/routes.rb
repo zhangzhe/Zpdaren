@@ -2,7 +2,6 @@ Rails.application.routes.draw do
 
   resources :blogs, only: [:show, :index]
   resources :tags, only: [:index]
-  resources :withdraws, only: [:new, :create]
 
   get 'qr_codes/:id' => "qr_codes#show", :as => "qr_code"
 
@@ -98,6 +97,7 @@ Rails.application.routes.draw do
         get :deliveries_list
       end
     end
+    resources :withdraws, only: [:new, :create]
   end
 
   namespace :suppliers do
@@ -114,6 +114,7 @@ Rails.application.routes.draw do
     resources :deliveries, only: [:index, :new, :create]
     resources :qr_codes, only: [:show]
     resources :users, only: [:update]
+    resources :withdraws, only: [:new, :create]
   end
 
   get 'good_job_description' => 'handbooks#good_job_description', as: 'good_job_description'
