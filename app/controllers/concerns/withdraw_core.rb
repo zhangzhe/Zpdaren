@@ -44,7 +44,7 @@ module WithdrawCore
   end
 
   def qrcode_create
-    ticket = Weixin.qr_code_ticket(current_supplier)
+    ticket = Weixin.qr_code_ticket(current_supplier.id)
     @qrcode_url = Weixin.qrcode_url(ticket)
   end
 
