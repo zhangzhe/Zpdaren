@@ -12,7 +12,7 @@ class Recruiters::RejectionsController < Recruiters::BaseController
     end
     delivery = rejection.delivery
     delivery.refuse!
-    redirect_to recruiters_delivery_path(delivery)
+    redirect_to recruiters_deliveries_path
   end
 
   private
