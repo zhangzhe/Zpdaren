@@ -1,7 +1,7 @@
 ActionMailer::Base.smtp_settings = {
-  :address        => "smtp.qq.com", # default: localhost
-  :port           => '25',                  # default: 25
-  :user_name      =>  'xiaohua@hellohuohua.com',
-  :password       => "1234qwerQWER",
-  :authentication => :plain                 # :plain, :login or :cram_md5
+  :address        => Settings.email.address, # default: localhost
+  :port           => Settings.email.port,                  # default: 25
+  :user_name      => Settings.email.default_account.user_name,
+  :password       => Settings.email.default_account.password,
+  :authentication => Settings.email.authentication.to_sym    # :plain, :login or :cram_md5
 }

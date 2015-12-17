@@ -77,4 +77,12 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   config.action_mailer.default_url_options = { :host => Settings.domain.host }
+
+  #发送程序异常报警邮件
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "[众聘达人异常通知] ",
+      :sender_address => "#{Settings.email.sender} <#{Settings.email.default_account.user_name}>",
+      :exception_recipients => Settings.email.recipients
+    }
 end

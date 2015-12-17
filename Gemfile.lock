@@ -107,6 +107,9 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     erubis (2.7.0)
+    exception_notification (4.1.0)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
     execjs (2.6.0)
     faker (1.6.1)
       i18n (~> 0.5)
@@ -290,6 +293,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   config
   devise
+  exception_notification
   faker
   faraday
   jbuilder (~> 2.0)
