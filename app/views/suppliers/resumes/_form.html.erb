@@ -1,4 +1,4 @@
-<%= form_for resume, url: suppliers_resumes_path do |f| %>
+<%= form_for resume, url: url, method: method do |f| %>
   <%= hidden_field_tag 'job_id', params[:job_id] if params[:job_id] %>
   <p>
     <%= f.label :candidate_name, '候选人姓名' %>
@@ -40,6 +40,6 @@
     <%= f.text_field :remark, class: 'form-control' %>
   </p>
   <p>
-    <%= f.submit '上传', class: "btn btn-primary", data: { disable_with: '提交中...' } %>
+    <%= f.submit '提交', class: "btn btn-primary", data: { disable_with: '提交中...' } %>
   </p>
 <% end %>
