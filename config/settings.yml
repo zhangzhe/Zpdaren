@@ -1,2 +1,24 @@
 pagination:
   page_size: 10
+email:
+  sender: Zpdaren
+  default_account:
+    user_name: xiaoda@zpdaren.com
+    password: 1234qwerQWER
+  accounts:
+    -
+      user_name: xiaozhong@zpdaren.com
+      password: 1234qwerQWER
+    -
+      user_name: xiaopin@zpdaren.com
+      password: 1234qwerQWER
+    -
+      user_name: xiaoren@zpdaren.com
+      password: 1234qwerQWER
+
+  recipients:
+    - gaojingdian@zpdaren.com
+    - zhangzhe@zpdaren.com
+  address: smtp.mxhichina.com
+  port: 25
+  authentication: plain
