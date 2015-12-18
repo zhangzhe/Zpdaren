@@ -5,6 +5,7 @@
         <th>职位名称</th>
         <th>公司名称</th>
         <th>发布时间</th>
+        <th>简历推荐</th>
       </tr>
     </thead>
     <tbody>
@@ -13,6 +14,9 @@
           <td><%= link_to job.title, admins_job_path(job.id) %></td>
           <td><%= link_to job.company_name, 'javascript:void(0);', "data-toggle" => "popover", "data-trigger" => "focus", "data-placement" => "bottom", "data-content" => job.company_description %></td>
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
+          <td>
+            <%= all_kinds_of_deliveries_count(job) %>
+          </td>
         </tr>
       <% end %>
     </tbody>
