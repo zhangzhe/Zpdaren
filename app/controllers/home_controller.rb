@@ -50,6 +50,8 @@ class HomeController < ApplicationController
       else
         false
       end
+    else
+      render :nothing => true
     end
   end
 
