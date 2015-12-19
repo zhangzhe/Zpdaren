@@ -1,4 +1,5 @@
-<p>欢迎新企业用户，众聘达人致力于用HR和业内资深人士手中的简历资源为您找到最优的人才渠道。在朋友圈的数千元或IPHONE这样的招人悬赏无人问津，此时众聘达人的众包招聘将是您最好的选择！</p>
-<p>点击下方的链接来绑定邮箱，即可开启您在我们平台上的新里程。</p>
-<p><%= link_to '绑定', confirmation_url(@resource, confirmation_token: @token) %></p>
-<%= render "/shared/mail_footer" %>
+<p>欢迎您注册众聘达人帐号</p>
+<p>众聘达人致力于用HR和业内资深人士手中的简历资源为您找到最优的人才渠道。在朋友圈的数千元或IPHONE这样的招人悬赏无人问津，此时众聘达人的众包招聘将是您最好的选择！</p>
+<p>点击下方的链接激活邮箱，即可开启您在我们平台上的新里程。</p>
+<p><%= link_to '激活', confirmation_url(@resource, confirmation_token: @token) %></p>
+<%= render "/shared/email_footer" %>

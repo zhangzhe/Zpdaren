@@ -26,6 +26,7 @@ class RecruiterMailer < ApplicationMailer
   private
 
   def send_mail(recipient, subject, template_name, template_path = 'notifications')
+    embed_logo
     i = 0
     begin
       from = Settings.email.accounts[i]

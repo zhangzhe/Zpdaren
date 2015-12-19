@@ -1,19 +1,31 @@
-<p>
-  亲爱的<%= @recruiter.email %>
-</p>
-
-<p style=\"text-indent:2em;\">
-  您的职位<%= @delivery.job_title %>收到了简历投递，点击<%= link_to "#{ROOT_URL}/recruiters/deliveries/#{@delivery.id}", "#{ROOT_URL}/recruiters/deliveries/#{@delivery.id}" %> 查看简历！
-  <br> 在不付费的情况下您可以看到候选人的基本信息，点击购买后，可以看到候选人的联系方式，购买金额将从订金中扣除。
-  <br> 相信您可以轻松hold住候选人，并为他/她开启一段新的职场之路。候选人接受offer后别忘记来我们平台完成尾款支付噢！
-</p>
-<p>
-  <% if @delivery.resume.pdf_attachment.present? %>
-    <%= link_to '下载简历', "#{ROOT_URL}/deliveries/#{@delivery.id}?external_credential=#{@delivery.external_credential}" %>
-  <% else %>
-    <h2>简历详情</h2>
-    <%= simple_format @delivery.resume.description %>
-  <% end %>
-</p>
-<hr>
-<%= render "/shared/mail_footer" %>
+<%= render 'shared/email_head', recruiter: @recruiter %>
+<div class="body">
+  <p>
+    您在<strong class="recruiter">众聘达人</strong>发布的<strong class="recruiter"><%= @delivery.job.title %></strong>职位已收到推荐简历：<strong class="recruiter"><%= @delivery.resume.candidate_name %></strong>的简历
+  </p>
+  <div class="content">
+    <p>
+      <strong class="recruiter"><%= @delivery.resume.candidate_name %>的简历</strong>
+    </p>
+    <p>
+      标签：
+      <% @delivery.resume.tag_list.each do |tag| %>
+        <%= sanitize("<span class='tag'>#{tag}</span>")%>
+      <% end %>
+    </p>
+    <p>目前状态：<%= @delivery.resume.available ? '求职中' : '暂时不找工作（可以挖呀）' %></p>
+    <p>
+      <%= sanitize("推荐者留言：<span class='tag'>#{ @delivery.message }</span>") if @delivery.message.present? %>
+    </p>
+    <p>
+      <% if @delivery.resume.pdf_attachment.present? %>
+        <%= link_to '查看简历', "#{ROOT_URL}/deliveries/#{@delivery.id}?external_credential=#{@delivery.external_credential}" %>
+      <% else %>
+        <h2>简历详情</h2>
+        <%= simple_format @delivery.resume.description %>
+      <% end %>
+      <%= link_to '查看联系方式', "#{ROOT_URL}/recruiters/deliveries/#{@delivery.id}" %>
+    </p>
+  </div>
+</div>
+<%= render 'shared/email_footer' %>

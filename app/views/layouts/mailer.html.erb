@@ -1,5 +1,60 @@
 <html>
+  <head>
+    <style>
+      .email{
+        width: 60%;
+        margin-left: 20%;
+      }
+      .email .recruiter{
+        color: #428bca;
+      }
+      .email .head img{
+        height: 60px;
+      }
+      .email .body .content{
+        padding: 10px;
+        border-radius: 2px;
+        background-color: #f5f5f5;
+      }
+      .email .body .content .opt{
+        display: inline-block;
+        margin-right: 20px;
+      }
+
+      .email .tag{
+        background-color: #428bca;
+        display: inline-block;
+        border-radius: 2px;
+        margin-right: 4px;
+        padding: 2px;
+        color: #fff;
+      }
+      .email .remark{
+        line-height: 20px;
+      }
+      .email .footer{
+        margin-top: 20px;
+        color: #999;
+      }
+      .fs18{
+        font-size: 18px;
+      }
+      .lh24{
+        line-height: 24px;
+      }
+      .email a{
+        text-decoration:none;
+      }
+      .zpdaren{
+        position: absolute;
+        right: 20%;
+        line-height: 60px;
+      }
+    </style>
+  </head>
   <body>
-    <%= yield %>
+    <div class="email">
+      <%= yield %>
+    </div>
   </body>
 </html>
