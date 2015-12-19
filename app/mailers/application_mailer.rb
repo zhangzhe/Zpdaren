@@ -12,4 +12,8 @@ class ApplicationMailer < ActionMailer::Base
       authentication: Settings.email.authentication.to_sym
     }
   end
+
+  def embed_logo
+    attachments.inline['logo.png'] = File.read("#{Rails.root}/app/assets/images/logo.png")
+  end
 end

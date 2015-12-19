@@ -86,3 +86,5 @@ Rails.application.configure do
       :exception_recipients => Settings.email.recipients
     }
 end
+
+ROOT_URL = "https://#{Settings.domain.host}"

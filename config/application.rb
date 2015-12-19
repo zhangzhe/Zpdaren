@@ -17,5 +17,3 @@ module Epin
     }
   end
 end
-
-ROOT_URL = "https://#{Settings.domain.host}"
