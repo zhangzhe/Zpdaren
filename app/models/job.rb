@@ -161,9 +161,9 @@ class Job < ActiveRecord::Base
     suppliers.include?(supplier)
   end
 
-  def may_refund?
-    (self.deposit_paid? || self.deposit_paid_confirmed?) && refund_requests.find_by_state(:submitted).nil?
-  end
+  # def may_refund?
+  #   (self.deposit_paid? || self.deposit_paid_confirmed?) && refund_requests.find_by_state(:submitted).nil?
+  # end
 
   def deliver_matching_resumes
     matching_resumes.each do |resume|

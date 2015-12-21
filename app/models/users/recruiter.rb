@@ -39,14 +39,6 @@ class Recruiter < User
     viewed_deliveries.count
   end
 
-  def paid_deliveries
-    deliveries.paid
-  end
-
-  def paid_deliveries_count
-    paid_deliveries.count
-  end
-
   def final_paid_deliveries
     deliveries.final_paid
   end

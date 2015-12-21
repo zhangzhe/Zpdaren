@@ -38,7 +38,9 @@ Rails.application.routes.draw do
     end
   end
 
+  # get 'deliveries/:id' => 'resumes#show', as: 'delivery'
   resources :deliveries, only: [:show]
+  resources :resumes, only: [:show]
 
   namespace :admins do
     get 'statistics' => 'statistics#index'

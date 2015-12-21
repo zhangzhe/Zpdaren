@@ -13,8 +13,4 @@ class BlogsController < ActionController::Base
   def set_blog
     @blog = Blog.find(params[:id])
   end
-
-  def blog_params
-    params.require(:blog).permit(:title, :content)
-  end
 end

@@ -14,13 +14,11 @@ class Delivery < ActiveRecord::Base
 
   scope :paid, -> { where('deliveries.state' => 'paid') }
   scope :recommended, -> { where('deliveries.state' => 'recommended') }
-  scope :waiting_approved, -> { recommended }
 
   scope :process, -> { where("deliveries.state in ('paid', 'refused', 'final_payment_paid', 'finished')") }
   scope :approved, -> { where('deliveries.state' => 'approved') }
   scope :after_approved, -> { where.not(state: 'recommended') }
   scope :recruiter_watchable, -> { where("deliveries.state not in ('recommended', 'refused') or (deliveries.state = 'refused' and deliveries.read_at is not null)") }
-  scope :approved_today, -> { where('DATE(deliveries.updated_at) = ? and deliveries.state = ?', Date.today, 'approved') }
   scope :after_paid, -> { where("deliveries.state in ('paid', 'final_payment_paid', 'finished')") }
   scope :final_paid, -> { where("deliveries.state in ('final_payment_paid', 'finished')") }
   scope :paid_today, -> { where('DATE(deliveries.updated_at) = ? and deliveries.state = ?', Date.today, 'paid') }
@@ -83,10 +81,6 @@ class Delivery < ActiveRecord::Base
   end
 
   class << self
-    def order_by_state
-      select("deliveries.*, case when state='recommended' then 1 else 0 end as state_level").order("state_level desc")
-    end
-
     def base_state_valid?(state)
       ['recommended', 'approved', 'paid', 'refused', 'final_paid'].include?(state)
     end
@@ -98,10 +92,6 @@ class Delivery < ActiveRecord::Base
 
   def read!
     self.update_attribute(:read_at, Time.now)
-  end
-
-  def read?
-    !unread?
   end
 
   def unread?
@@ -172,10 +162,6 @@ class Delivery < ActiveRecord::Base
 
   def external_credential
     EpinCipher.aes128_encrypt(original_data)
-  end
-
-  def external_credential_valid?(external_credential)
-    original_data == EpinCipher.aes128_decrypt(external_credential)
   end
 
   private

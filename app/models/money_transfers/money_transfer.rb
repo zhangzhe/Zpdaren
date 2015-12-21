@@ -1,7 +1,6 @@
 class MoneyTransfer < ActiveRecord::Base
   belongs_to :wallet
   default_scope { order('created_at DESC') }
-  scope :waiting_approved, -> { where('state' => 'submitted')}
 
   strip_attributes
   include AASM

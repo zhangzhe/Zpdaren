@@ -31,11 +31,6 @@ module ApplicationHelper
     " <span class=\"badge\">#{recruiter.unprocess_deliveries_count}/#{recruiter.recruiter_watchable_resumes_count}</span>" if (recruiter.recruiter_watchable_resumes_count > 0)
   end
 
-  def sortable(title, column)
-    direction = (column == sort_column && sort_direction == "DESC") ? "ASC" : "DESC"
-    link_to title, {:sort => column, :direction => direction}
-  end
-
   def external_url(url)
     (url.start_with?('http://') || url.start_with?('https://')) ? url : ('http://' + url)
   end

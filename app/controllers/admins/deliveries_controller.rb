@@ -1,5 +1,4 @@
 class Admins::DeliveriesController < Admins::BaseController
-  helper_method :sort_column
 
   def index
     if params[:job_id]
@@ -48,10 +47,6 @@ class Admins::DeliveriesController < Admins::BaseController
   end
 
   private
-  def sort_column
-    params[:sort] if Delivery.column_names.include?(params[:sort])
-  end
-
   def delivery_params
     params.require(:delivery).permit(:message, :reason)
   end

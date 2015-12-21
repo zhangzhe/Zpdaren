@@ -1,5 +1,4 @@
 class Suppliers::JobsController < Suppliers::BaseController
-  helper_method :sort_column
 
   def index
     @jobs = Job.available

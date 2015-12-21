@@ -1,3 +1,5 @@
+require 'epin_cipher'
+
 class Resume < ActiveRecord::Base
   has_many :deliveries
   has_many :jobs, through: :deliveries
@@ -10,7 +12,6 @@ class Resume < ActiveRecord::Base
   default_scope { order("created_at DESC") }
   scope :completed, ->{ where("description is not null or pdf_attachment is not null") }
   scope :uncompleted, ->{ where("description is null and pdf_attachment is null and problem is null") }
-  scope :waiting_approved, ->{ where("description is null and pdf_attachment is null") }
   scope :unavailable, ->{ where(:available => false) }
   scope :available, ->{ where(:available => true) }
   scope :problemed, ->{ where("problem is not null") }
@@ -70,6 +71,10 @@ class Resume < ActiveRecord::Base
     end
   end
 
+  def external_credential
+    EpinCipher.aes128_encrypt(original_data)
+  end
+
   private
   def auto_deliver
     matching_jobs.each do |job|
@@ -79,5 +84,9 @@ class Resume < ActiveRecord::Base
 
   def matching_jobs
     similar_entity(Job)
+  end
+
+  def original_data
+    "zpdaren_resumes_#{self.id}"
   end
 end
