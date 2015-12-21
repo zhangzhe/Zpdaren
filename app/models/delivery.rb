@@ -108,6 +108,10 @@ class Delivery < ActiveRecord::Base
     read_at.blank?
   end
 
+  def can_read?
+    (self.ever_paid_or_final_payment_paid_or_finished? && self.unread?) || (self.approved? && !self.ever_paid_or_final_payment_paid_or_finished?)
+  end
+
   def description
     resume.description
   end
