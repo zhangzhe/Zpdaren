@@ -6,8 +6,8 @@ class Delivery < ActiveRecord::Base
   has_one :rejection
   belongs_to :final_payment, :foreign_key => :final_payment_id
 
-  delegate :id, :candidate_name, :tag_list, :mobile, :email, :message, to: :resume, prefix: true
-  delegate :id, :title, :user_id, :bonus, :description, :tag_list, to: :job, prefix: true
+  delegate :id, :candidate_name, :tag_list, :mobile, :email, :message, :attachment, :pdf_attachment, :remark, :available, to: :resume, prefix: true
+  delegate :id, :title, :user_id, :bonus, :description, :tag_list, :state, to: :job, prefix: true
   delegate :reason, :other, to: :rejection, prefix: true
 
   validates_length_of :message, maximum: 50

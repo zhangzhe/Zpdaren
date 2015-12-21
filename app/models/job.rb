@@ -20,7 +20,7 @@ class Job < ActiveRecord::Base
   validates_numericality_of :salary_max, only_integer: true, greater_than_or_equal_to: :salary_min, less_than: 10000, if: Proc.new { |job| job.salary_min.is_a?(Integer) }
   validates_numericality_of :bonus, greater_than_or_equal_to: 1000, only_integer: true
 
-  delegate :name, :id, :address, to: :company, prefix: true
+  delegate :name, :id, :address, :mobile, :description, to: :company, prefix: true
 
   scope :submitted, -> { where('state' => 'submitted')}
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}

@@ -21,7 +21,7 @@
   <p>
     <strong>职位佣金：</strong>
     <span class='gray-light'>
-      <%= @delivery.job.bonus %>元
+      <%= @delivery.job_bonus %>元
     </span>
   </p>
   <p class='blockquote14'>
@@ -71,7 +71,7 @@
     <%= sanitize("<div class='alert alert-info' role='alert'><strong>不合适原因：</strong>#{@delivery.rejection_reasons}</div>") if @delivery.refused? %>
   </p>
   <p>
-    <%= sanitize("<strong>备注：</strong>#{@delivery.resume.remark}") if @delivery.resume.remark.present? %>
+    <%= sanitize("<strong>备注：</strong>#{@delivery.resume_remark}") if @delivery.resume_remark.present? %>
   </p>
   <p class='blockquote14'>
     <strong>

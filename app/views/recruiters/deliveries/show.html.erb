@@ -19,7 +19,7 @@
     <span class="label label-info"><%= "推荐者留言：#{@delivery.message}" if @delivery.message.present? %></span>
   </p>
   <p>
-    <% if ['deposit_paid_confirmed', 'final_payment_paid', 'finished'].include?(@delivery.job.state) %>
+    <% if ['deposit_paid_confirmed', 'final_payment_paid', 'finished'].include?(@delivery.job_state) %>
       <% if @delivery.ever_paid_or_final_payment_paid_or_finished? and !@delivery.refused? %>
         <h3>联系方式 </h3>
         <p><strong>手机号：</strong><%= @delivery.resume_mobile %></p>
