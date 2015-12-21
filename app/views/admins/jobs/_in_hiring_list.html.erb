@@ -17,7 +17,7 @@
               <i class="fa fa-fire hot-fire"></i>
             <% end %>
             <%= link_to job.title, admins_job_path(job.id) %>
-            <%= select_tag "job_priority", options_for_select([['高优先级', 1], ['中优先级', 2], ['低优先级', 3]], job.priority || 3), class: 'job-priority-sel', id: job.id, onchange: 'changePriority(this);' %>
+            <%= select_tag "job_priority", options_for_post_priority(job), class: 'job-priority-sel', id: job.id, onchange: 'changePriority(this);' %>
           </td>
           <td><%= link_to job.company_name, 'javascript:void(0);', "data-toggle" => "popover", "data-trigger" => "focus", "data-placement" => "bottom", "data-content" => job.company_description %></td>
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>

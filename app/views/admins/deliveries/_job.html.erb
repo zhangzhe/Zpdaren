@@ -1,7 +1,7 @@
 <br>
 <ol class="breadcrumb">
   <li><%= link_to "职位列表", admins_jobs_path(:state => "in_hiring") %></li>
-  <li>审核【<%= Job.find(params[:job_id]).title %>】的推荐</li>
+  <li>审核【<%= job.title %>】的推荐</li>
 </ol>
 <%= render 'shared/page_title', title: '推荐列表' %>
 <ul class="nav nav-tabs">
