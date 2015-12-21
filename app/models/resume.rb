@@ -61,10 +61,10 @@ class Resume < ActiveRecord::Base
   end
 
   def sync_deliveries
-    if !self.available || self.problem.present?
+    if !self.available || self.problem?
       self.deliveries.each do |delivery|
         if delivery.recommended? && delivery.may_refuse?
-          Rejection.create(:delivery_id => delivery.id, :other => (self.problem.present? ? self.problem : '暂时不找工作'))
+          Rejection.create(:delivery_id => delivery.id, :other => (self.problem? ? self.problem : '暂时不找工作'))
           delivery.refuse!
         end
       end

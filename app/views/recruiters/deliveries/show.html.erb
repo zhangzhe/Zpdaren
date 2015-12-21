@@ -16,7 +16,7 @@
     <% end %>
   </p>
   <p>
-    <span class="label label-info"><%= "推荐者留言：#{@delivery.message}" if @delivery.message.present? %></span>
+    <span class="label label-info"><%= "推荐者留言：#{@delivery.message}" if @delivery.message? %></span>
   </p>
   <p>
     <% if ['deposit_paid_confirmed', 'final_payment_paid', 'finished'].include?(@delivery.job_state) %>

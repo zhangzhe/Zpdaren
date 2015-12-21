@@ -18,7 +18,7 @@
     是否托管：<%= @resume.auto_delivery ? '是' : '否' %>
   </p>
   <p>
-    <%= "备注：#{@resume.remark}" if @resume.remark.present? %>
+    <%= "备注：#{@resume.remark}" if @resume.remark? %>
   </p>
   <%= render 'suppliers/shared/resume_show', resume: @resume %>
   <hr>

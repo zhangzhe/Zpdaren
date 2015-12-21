@@ -15,10 +15,10 @@
     </p>
     <p>目前状态：<%= @delivery.resume_available ? '求职中' : '暂时不找工作（可以挖呀）' %></p>
     <p>
-      <%= sanitize("推荐者留言：<span class='tag'>#{ @delivery.message }</span>") if @delivery.message.present? %>
+      <%= sanitize("推荐者留言：<span class='tag'>#{ @delivery.message }</span>") if @delivery.message? %>
     </p>
     <p>
-      <% if @delivery.resume_pdf_attachment.present? %>
+      <% if @delivery.resume_pdf_attachment? %>
         <%= link_to '查看简历', "#{ROOT_URL}/resumes/#{@delivery.resume_id}?external_credential=#{@delivery.resume.external_credential}" %>
       <% else %>
         <h2>简历详情</h2>

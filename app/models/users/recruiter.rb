@@ -4,6 +4,10 @@ class Recruiter < User
   has_one :company, :foreign_key => :user_id
   has_many :jobs, :foreign_key => :user_id
   has_many :deliveries, through: :jobs
+
+  delegate :name, :mobile, :url, :address, :description, to: :company, prefix: true
+  delegate :money, to: :wallet, prefix: true
+
   after_create :init_blank_comapny
   before_destroy :destroy_all_association_entities
 

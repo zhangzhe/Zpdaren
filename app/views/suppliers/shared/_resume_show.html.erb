@@ -2,7 +2,7 @@
   <p>简历原件</p>
   <%= render 'shared/show_pdf', pdf_url: download_suppliers_resume_path(resume) %>
 <% else %>
-  <% if resume.description.present? %>
+  <% if resume.description? %>
     <p class='blockquote14'>
       <strong>
         简历详情

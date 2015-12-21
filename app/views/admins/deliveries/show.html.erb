@@ -34,11 +34,11 @@
   </div>
   <hr>
   <h2>
-    <%= @delivery.job.company.name %>
+    <%= @delivery.job.company_name %>
   </h2 >
   <p class='gray-light'>
     联系方式：
-    <%= @delivery.job.company.mobile %>
+    <%= @delivery.job.company_mobile %>
   </p >
   <p class='blockquote14'>
     <strong>
@@ -47,11 +47,11 @@
   </p>
   <p>
     <div class='gray-light'>
-      <%= simple_format @delivery.job.company.description %>
+      <%= simple_format @delivery.job.company_description %>
     </div>
   </p>
-  <p class='gray-light'>地址：<%= @delivery.job.company.address.present? ? @delivery.job.company.address : '暂未提供' %></p>
-  <p><%= "给招聘方的留言：#{@delivery.message}" if @delivery.message.present? %></p>
+  <p class='gray-light'>地址：<%= @delivery.job.company_address.present? ? @delivery.job.company_address : '暂未提供' %></p>
+  <p><%= "给招聘方的留言：#{@delivery.message}" if @delivery.message? %></p>
 </div>
 <div class="col-md-6">
   <%= render 'shared/page_title', title: '推荐' %>

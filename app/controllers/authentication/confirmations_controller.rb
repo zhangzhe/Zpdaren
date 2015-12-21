@@ -1,6 +1,6 @@
 class Authentication::ConfirmationsController < Devise::ConfirmationsController
   def show
-    if self.resource = User.find_by_confirmation_token(params[:confirmation_token]).confirmed_at.present?
+    if self.resource = User.find_by_confirmation_token(params[:confirmation_token]).confirmed_at?
       flash[:success] = '已经确认，请重新登录.'
       redirect_to new_user_session_path
     else

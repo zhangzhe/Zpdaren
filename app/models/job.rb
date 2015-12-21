@@ -191,7 +191,7 @@ class Job < ActiveRecord::Base
   end
 
   def is_show_salary?
-    self.salary_min.present? and self.salary_max.present? and self.salary_min > 0 and self.salary_max > 0
+    self.salary_min? and self.salary_max? and self.salary_min > 0 and self.salary_max > 0
   end
 
   def all_kinds_of_deliveries_count

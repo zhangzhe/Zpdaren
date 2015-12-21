@@ -5,16 +5,16 @@
     邮箱：<%= current_supplier.email %>
   </p>
   <p class="ti2">
-    手机号：<%= current_supplier.mobile.present? ? current_supplier.mobile : '暂未提供' %>
-    <%= link_to("#{current_supplier.mobile.blank? ? '完善' : '修改'}", "javascript:void(0);", "data-toggle" => "modal", "data-target" => "#aaaa") %>
+    手机号：<%= current_supplier.mobile? ? current_supplier.mobile : '暂未提供' %>
+    <%= link_to("#{current_supplier.mobile? ? '修改' : '完善'}", "javascript:void(0);", "data-toggle" => "modal", "data-target" => "#aaaa") %>
   </p>
 </div>
 <div>
   <h3>账户余额</h3>
-  <p class='ti2'><%= current_supplier.wallet.money %>元</p>
+  <p class='ti2'><%= current_supplier.wallet_money %>元</p>
   <br>
   <p>
-    <%= link_to "提现到支付宝", new_suppliers_withdraw_path, :class => "btn btn-primary" if current_supplier.wallet.money > 0 %>
+    <%= link_to "提现到支付宝", new_suppliers_withdraw_path, :class => "btn btn-primary" if current_supplier.wallet_money > 0 %>
   </p>
 </div>
 
