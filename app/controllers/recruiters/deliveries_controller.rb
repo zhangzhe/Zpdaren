@@ -1,34 +1,6 @@
 class Recruiters::DeliveriesController < Recruiters::BaseController
   def index
-    params[:state] = 'approved' if params[:state].blank?
-    if params[:job_id]
-      @job = current_recruiter.jobs.find(params[:job_id])
-      if params[:state] == 'approved'
-        @deliveries = @job.unprocess_deliveries
-      elsif params[:state] == 'viewed'
-        @deliveries = @job.viewed_deliveries
-      elsif params[:state] == 'final_paid'
-        @deliveries = @job.deliveries.final_paid
-      else
-        @deliveries = @job.deliveries.refused
-      end
-      @deliveries = @deliveries.order("created_at DESC")
-    else
-      if params[:state] == 'approved'
-        @deliveries = current_recruiter.unprocess_deliveries
-      elsif params[:state] == 'viewed'
-        @deliveries = current_recruiter.viewed_deliveries
-      elsif params[:state] == 'final_paid'
-        @deliveries = current_recruiter.final_paid_deliveries
-      else
-        @deliveries = current_recruiter.refused_deliveries
-      end
-      @jobs = current_recruiter.jobs
-      @jobs = @jobs.where("title like ?", "%#{params[:key]}%") if params[:key].present?
-      job_ids = @jobs.map(&:id)
-      @deliveries = @deliveries.includes(:job).where("job_id in (?)", job_ids).order("created_at DESC")
-    end
-    @deliveries = @deliveries.order("created_at DESC")
+    @deliveries = Delivery.find_by_recruiter(params, current_recruiter)
     @deliveries = @deliveries.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 

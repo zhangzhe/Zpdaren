@@ -1,5 +1,5 @@
 <% if params[:job_id] %>
-  <%= render 'job', recommended_deliveries: @recommended_deliveries, approved_deliveries: @approved_deliveries, job: @job %>
+  <%= render 'job', deliveries: @deliveries, job: @job %>
 <% else %>
   <%= render 'all', deliveries: @deliveries %>
 <% end %>

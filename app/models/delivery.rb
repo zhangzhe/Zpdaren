@@ -88,6 +88,71 @@ class Delivery < ActiveRecord::Base
     def state_valid?(state)
       ['recommended', 'approved', 'paid', 'refused', 'final_paid', 'recruiter_refused', 'admin_refused'].include?(state)
     end
+
+    def find_by_recruiter(params, current_recruiter)
+      params[:state] = 'approved' if params[:state].blank?
+      if params[:job_id]
+        job = current_recruiter.jobs.find(params[:job_id])
+        if params[:state] == 'approved'
+          deliveries = job.unprocess_deliveries
+        elsif params[:state] == 'viewed'
+          deliveries = job.viewed_deliveries
+        elsif params[:state] == 'final_paid'
+          deliveries = job.deliveries.final_paid
+        else
+          deliveries = job.deliveries.refused
+        end
+        deliveries.order("created_at DESC")
+      else
+        if params[:state] == 'approved'
+          deliveries = current_recruiter.unprocess_deliveries
+        elsif params[:state] == 'viewed'
+          deliveries = current_recruiter.viewed_deliveries
+        elsif params[:state] == 'final_paid'
+          deliveries = current_recruiter.final_paid_deliveries
+        else
+          deliveries = current_recruiter.refused_deliveries
+        end
+        jobs = current_recruiter.jobs
+        jobs = jobs.where("title like ?", "%#{params[:key]}%") if params[:key].present?
+        job_ids = jobs.map(&:id)
+        deliveries.includes(:job).where("job_id in (?)", job_ids).order("created_at DESC")
+      end
+    end
+
+    def find_by_supplier(params, current_supplier)
+      deliveries = current_supplier.deliveries.joins(:job)
+      if params[:key]
+        recruiter_ids = Company.where("name like ?", "%#{params[:key]}%").map(&:user_id)
+        deliveries = deliveries.where("user_id in (?)", recruiter_ids)
+      end
+      params[:state] = 'recommended' unless Delivery.base_state_valid?(params[:state])
+      deliveries = deliveries.send(params[:state])
+      deliveries.order("#{params[:sort]} #{params[:direction]}")
+    end
+
+    def find_by_admin(params)
+      if params[:job_id]
+        job = Job.find(params[:job_id])
+        if params[:state] == 'approved'
+          deliveries = job.approved_deliveries
+        else
+          deliveries = job.recommended_deliveries
+        end
+      else
+        deliveries = Delivery.joins(:job)
+        if params[:supplier_id]
+          supplier = Supplier.find(params[:supplier_id])
+          deliveries = supplier.deliveries
+        end
+        if params[:key]
+          resume_ids = Resume.where("candidate_name like ?", "%#{params[:key]}%").map(&:id)
+          deliveries = @deliveries.where("resume_id in (?)", resume_ids)
+        end
+        params[:state] = 'recommended' unless Delivery.state_valid?(params[:state])
+        deliveries = deliveries.send(params[:state])
+      end
+    end
   end
 
   def read!
@@ -100,10 +165,6 @@ class Delivery < ActiveRecord::Base
 
   def can_read?
     (self.ever_paid_or_final_payment_paid_or_finished? && self.unread?) || (self.approved? && !self.ever_paid_or_final_payment_paid_or_finished?)
-  end
-
-  def description
-    resume.description
   end
 
   def recruiter
@@ -162,6 +223,12 @@ class Delivery < ActiveRecord::Base
 
   def external_credential
     EpinCipher.aes128_encrypt(original_data)
+  end
+
+  def approve(delivery_params)
+    return false unless self.update_attributes(delivery_params)
+    self.approve!
+    true
   end
 
   private

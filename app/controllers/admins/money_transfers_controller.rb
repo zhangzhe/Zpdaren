@@ -13,16 +13,7 @@ class Admins::MoneyTransfersController < Admins::BaseController
 
   def update
     money_transfer = MoneyTransfer.find(params[:id])
-    ActiveRecord::Base.transaction do
-      money_transfer.go!
-      if money_transfer.type == "FinalPayment"
-        money_transfer.delivery.complete!
-      end
-
-      if money_transfer.type == "Deposit"
-        money_transfer.job.confirm_deposit_paid!
-      end
-    end
+    money_transfer.confirm
     flash[:success] = "操作完成！"
     redirect_to :back
   end

@@ -28,6 +28,20 @@ class Resume < ActiveRecord::Base
 
   extend Statistics
 
+  class << self
+    def active_suppliers_count
+      Resume.all.map(&:supplier_id).uniq.count
+    end
+
+    def find_by_admin(params)
+      params[:state] = 'uncompleted' unless ['uncompleted', 'completed', 'unavailable', 'available', 'problemed'].include?(params[:state])
+      resumes = send(params[:state])
+      resumes = resumes.where(:supplier_id => params[:supplier_id]) if params[:supplier_id]
+      resumes = resumes.where("candidate_name like ?", "%#{params[:key]}%") if params[:key].present?
+      resumes
+    end
+  end
+
   def resumes_from(supplier)
     self.resumes.where(:supplier_id => supplier.id)
   end
@@ -56,10 +70,6 @@ class Resume < ActiveRecord::Base
     self.deliveries.after_paid.present?
   end
 
-  def self.active_suppliers_count
-    Resume.all.map(&:supplier_id).uniq.count
-  end
-
   def sync_deliveries
     if !self.available || self.problem?
       self.deliveries.each do |delivery|
@@ -73,6 +83,16 @@ class Resume < ActiveRecord::Base
 
   def external_credential
     EpinCipher.aes128_encrypt(original_data)
+  end
+
+  def complete(resume_params)
+    self.pdf_attachment = self.attachment if resume_params[:problem].blank? && self.is_pdf?
+    self.attributes = resume_params
+    if self.save
+      self.sync_deliveries
+      return true
+    end
+    false
   end
 
   private

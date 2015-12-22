@@ -68,11 +68,36 @@ class Job < ActiveRecord::Base
 
   class << self
     def state_valid?(state)
-      ['submitted', 'deposit_paid', 'deposit_paid_confirmed', 'final_payment_paid', 'finished'].include?(state)
+
     end
 
     def high_priority
       priority('high')
+    end
+
+    def deleted
+      only_deleted
+    end
+
+    def find_by_admin(params)
+      params[:state] = 'in_hiring' unless ['in_hiring', 'un_hiring', 'deleted', 'submitted', 'high_priority'].include?(params[:state])
+      jobs = send(params[:state])
+      jobs = jobs.where("title like ?", "%#{params[:key]}%") if params[:key].present?
+      jobs
+    end
+
+    def find_by_recruiter(params, current_recruiter)
+      params[:state] = 'submitted' unless ['submitted', 'deposit_paid', 'deposit_paid_confirmed', 'final_payment_paid', 'finished'].include?(params[:state])
+      jobs = current_recruiter.jobs.send(params[:state])
+      jobs = jobs.where("title like ?", "%#{params[:key]}%") if params[:key].present?
+      jobs
+    end
+
+    def find_by_supplier(params)
+      jobs = Job.available
+      jobs = jobs.high_priority if params[:state] == 'high_priority'
+      jobs = jobs.where("user_id = ? ", params[:recruiter_id]) if params[:recruiter_id]
+      jobs = jobs.where("title ilike ?", "%#{params[:key]}%") if params[:key].present?
     end
   end
 
@@ -205,6 +230,22 @@ class Job < ActiveRecord::Base
 
   def may_approve?
     self.deliveries.recommended.size > 0
+  end
+
+  def recommended_deliveries
+    self.deliveries.recommended
+  end
+
+  def recommended_deliveries_count
+    recommended_deliveries.count
+  end
+
+  def approved_deliveries
+    self.deliveries.approved
+  end
+
+  def approved_deliveries_count
+    approved_deliveries.count
   end
 
   private

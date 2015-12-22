@@ -9,9 +9,9 @@
   <li role="presentation" class="<%= active %>">
     <%= link_to "进行中的招聘<span class='badge'>#{Job.in_hiring.count}</span>".html_safe, admins_jobs_path(:state => "in_hiring") %>
   </li>
-  <% active = (params[:state] == "not_paid") ? "active" : "" %>
+  <% active = (params[:state] == "submitted") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "未付定金的招聘<span class='badge'>#{Job.submitted.count}</span>".html_safe, admins_jobs_path(:state => "not_paid") %>
+    <%= link_to "未付定金的招聘<span class='badge'>#{Job.submitted.count}</span>".html_safe, admins_jobs_path(:state => "submitted") %>
   </li>
   <% active = (params[:state] == "un_hiring") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
@@ -30,8 +30,8 @@
   <%= render 'in_hiring_list', jobs: @jobs %>
 <% elsif params[:state] == "deleted" %>
   <%= render 'deleted_list', jobs: @jobs %>
-<% elsif params[:state] == "not_paid" %>
-  <%= render 'not_paid_list', jobs: @jobs %>
+<% elsif params[:state] == "submitted" %>
+  <%= render 'submitted_list', jobs: @jobs %>
 <% elsif params[:state] == 'high_priority' %>
   <%= render 'in_hiring_list', jobs: @jobs %>
 <% end %>

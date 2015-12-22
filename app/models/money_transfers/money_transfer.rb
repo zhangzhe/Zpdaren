@@ -24,4 +24,17 @@ class MoneyTransfer < ActiveRecord::Base
       "完成"
     end
   end
+
+  def confirm
+    ActiveRecord::Base.transaction do
+      self.go!
+      if self.type == "FinalPayment"
+        self.delivery.complete!
+      end
+
+      if self.type == "Deposit"
+        self.job.confirm_deposit_paid!
+      end
+    end
+  end
 end

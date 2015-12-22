@@ -1,19 +1,6 @@
 class Admins::JobsController < Admins::BaseController
   def index
-    if params[:state] == "in_hiring"
-      @jobs = Job.in_hiring
-    elsif params[:state] == "un_hiring"
-      @jobs = Job.un_hiring
-    elsif params[:state] == "deleted"
-      @jobs = Job.only_deleted
-    elsif params[:state] == "not_paid"
-      @jobs = Job.submitted
-    elsif params[:state] == 'high_priority'
-      @jobs = Job.high_priority
-    else
-      @jobs = Job.all
-    end
-    @jobs = @jobs.where("title like ?", "%#{params[:key]}%") if params[:key].present?
+    @jobs = Job.find_by_admin(params)
     @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
