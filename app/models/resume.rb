@@ -51,7 +51,7 @@ class Resume < ActiveRecord::Base
   end
 
   def is_pdf?
-    self.attachment.file.file.end_with?('pdf')
+    self.attachment.current_path.end_with?('pdf')
   end
 
   def may_improve?
