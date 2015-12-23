@@ -96,6 +96,10 @@ class Resume < ActiveRecord::Base
     false
   end
 
+  def problematic?
+    self.problem?
+  end
+
   private
   def auto_deliver
     matching_jobs.each do |job|

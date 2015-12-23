@@ -13,6 +13,10 @@ class Suppliers::DeliveriesController < Suppliers::BaseController
 
   def create
     unless Delivery.find_by_resume_id_and_job_id(delivery_params[:resume_id], delivery_params[:job_id])
+      if current_supplier.resumes.find(delivery_params[:resume_id]).problematic?
+        flash[:error] = '该简历有问题，请修改后再推荐。'
+        redirect_to :back and return
+      end
       @delivery = Delivery.create(delivery_params)
       if @delivery.errors.any?
         flash[:error] = @delivery.errors.full_messages.first
