@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'qr_codes/:id' => "qr_codes#show", :as => "qr_code"
 
   root :to => 'home#index'
+  get 'ama' => "ama#index"
+  get 'ama/show' => "ama#show"
 
   match 'weixin_callback' => 'home#weixin_callback', via: [:get, :post]
 
