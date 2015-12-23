@@ -1,7 +1,8 @@
 class Admins::DeliveriesController < Admins::BaseController
 
   def index
-    @deliveries = Delivery.find_by_admin(params)
+    @job = Job.find(params[:job_id]) if params[:job_id]
+    @deliveries = Delivery.find_by_admin(params, @job)
     @deliveries = @deliveries.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
@@ -22,7 +23,7 @@ class Admins::DeliveriesController < Admins::BaseController
       flash[:error] = "简历信息不完整，先去简历列表完善简历吧。"
       render 'edit' and return
     end
-    if @delivery.approve(delivery_params)
+    if @delivery.check(delivery_params)
       flash[:success] = "审核完成。"
     else
       flash[:error] = '程序异常，审核失败。'

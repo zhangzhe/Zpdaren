@@ -18,7 +18,7 @@
       <%= sanitize("推荐者留言：<span class='tag'>#{ @delivery.message }</span>") if @delivery.message? %>
     </p>
     <p>
-      <% if @delivery.resume_pdf_attachment? %>
+      <% if @delivery.resume.pdf_attachment? %>
         <%= link_to '查看简历', "#{ROOT_URL}/resumes/#{@delivery.resume_id}?external_credential=#{@delivery.resume.external_credential}" %>
       <% else %>
         <h2>简历详情</h2>

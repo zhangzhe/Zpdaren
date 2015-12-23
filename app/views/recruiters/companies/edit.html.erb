@@ -6,7 +6,7 @@
   <li class="active">修改公司信息</li>
 </ol>
 
-<%= render 'shared/page_title', title: @company.name %>
+<%= render 'shared/page_title', title: @company.name if @company.name? %>
 
 <%= form_for @company, url: recruiters_company_path do |f| %>
   <p>

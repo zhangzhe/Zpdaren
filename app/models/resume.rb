@@ -15,6 +15,7 @@ class Resume < ActiveRecord::Base
   scope :unavailable, ->{ where(:available => false) }
   scope :available, ->{ where(:available => true) }
   scope :problemed, ->{ where("problem is not null") }
+  scope :unproblematic, ->{ where("problem is null") }
 
   accepts_nested_attributes_for :deliveries
   include SimilarEntity

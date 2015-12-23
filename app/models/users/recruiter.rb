@@ -52,7 +52,7 @@ class Recruiter < User
   end
 
   def refused_deliveries
-    deliveries.refused
+    deliveries.recruiter_refused
   end
 
   def refused_deliveries_count

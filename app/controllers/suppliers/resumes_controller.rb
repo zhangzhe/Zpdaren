@@ -72,7 +72,7 @@ class Suppliers::ResumesController < Suppliers::BaseController
     else
       @resumes = current_supplier.resumes
     end
-    @resumes = @resumes.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @resumes = @resumes.unproblematic.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def destroy

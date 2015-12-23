@@ -27,6 +27,7 @@ class Delivery < ActiveRecord::Base
   scope :refused, -> { where('deliveries.state' => 'refused') }
   scope :recruiter_refused, -> { where("deliveries.state = 'refused' and deliveries.read_at is not null") }
   scope :admin_refused, -> { where("deliveries.state = 'refused' and deliveries.read_at is null") }
+  scope :unread, -> { where("read_at is null") }
 
   default_scope { order('updated_at DESC') }
 
@@ -89,10 +90,9 @@ class Delivery < ActiveRecord::Base
       ['recommended', 'approved', 'paid', 'refused', 'final_paid', 'recruiter_refused', 'admin_refused'].include?(state)
     end
 
-    def find_by_recruiter(params, current_recruiter)
+    def find_by_recruiter(params, current_recruiter, job)
       params[:state] = 'approved' if params[:state].blank?
       if params[:job_id]
-        job = current_recruiter.jobs.find(params[:job_id])
         if params[:state] == 'approved'
           deliveries = job.unprocess_deliveries
         elsif params[:state] == 'viewed'
@@ -100,7 +100,7 @@ class Delivery < ActiveRecord::Base
         elsif params[:state] == 'final_paid'
           deliveries = job.deliveries.final_paid
         else
-          deliveries = job.deliveries.refused
+          deliveries = job.deliveries.recruiter_refused
         end
         deliveries.order("created_at DESC")
       else
@@ -131,9 +131,8 @@ class Delivery < ActiveRecord::Base
       deliveries.order("#{params[:sort]} #{params[:direction]}")
     end
 
-    def find_by_admin(params)
+    def find_by_admin(params, job = nil)
       if params[:job_id]
-        job = Job.find(params[:job_id])
         if params[:state] == 'approved'
           deliveries = job.approved_deliveries
         else
@@ -156,7 +155,7 @@ class Delivery < ActiveRecord::Base
   end
 
   def read!
-    self.update_attribute(:read_at, Time.now)
+    self.update_attribute(:read_at, Time.now) if self.unread?
   end
 
   def unread?
@@ -225,10 +224,14 @@ class Delivery < ActiveRecord::Base
     EpinCipher.aes128_encrypt(original_data)
   end
 
-  def approve(delivery_params)
+  def check(delivery_params)
     return false unless self.update_attributes(delivery_params)
-    self.approve!
+    self.approve! if self.recommended? && self.may_approve?
     true
+  end
+
+  def free_read?
+    self.unread? && self.ever_paid_or_final_payment_paid_or_finished?
   end
 
   private

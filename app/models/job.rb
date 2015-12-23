@@ -98,6 +98,7 @@ class Job < ActiveRecord::Base
       jobs = jobs.high_priority if params[:state] == 'high_priority'
       jobs = jobs.where("user_id = ? ", params[:recruiter_id]) if params[:recruiter_id]
       jobs = jobs.where("title ilike ?", "%#{params[:key]}%") if params[:key].present?
+      jobs
     end
   end
 
@@ -123,8 +124,7 @@ class Job < ActiveRecord::Base
   end
 
   def unprocess_deliveries
-    resume_ids = recruiter.deliveries.process.map(&:resume_id)
-    self.deliveries.where("(resume_id not in (?) and deliveries.state = 'approved') or (resume_id in (?) and deliveries.state = 'approved' and read_at is null)", resume_ids, resume_ids)
+    self.deliveries.approved.unread
   end
 
   def recruiter_watchable_deliveries
