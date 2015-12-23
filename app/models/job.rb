@@ -67,10 +67,6 @@ class Job < ActiveRecord::Base
   end
 
   class << self
-    def state_valid?(state)
-
-    end
-
     def high_priority
       priority('high')
     end
