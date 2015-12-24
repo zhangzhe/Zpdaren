@@ -1,0 +1,45 @@
+<% content_for :title, @interview.title %>
+<% content_for :job_info do %>
+
+<div class="jumbotron">
+    <div class="text-center">
+      <%= image_tag(@interview.avatar_url, :class => "img-thumbnail", :size => "300x300") if @interview.avatar? %>
+
+      <h1><%= @interview.professor_name %></h1>
+      <div><%= @interview.title %></div>
+    </div>
+</div>
+  <div style="word-break:break-all;">
+     <%= @interview.content.html_safe %>
+  </div>
+  <div class="text-center"><%= link_to "我要提问", admins_interviews_path, class: "btn btn-success btn-lg" %></div>
+<% end %>
+
+<% content_for :other_job_info do %>
+  <p>
+    <div class="sidebar-module sidebar-module-inset">
+      <h2><%= link_to "众聘达人", root_path %></h2>
+      <h3>
+        推荐优质简历
+      </h3>
+      <h3>
+        获得企业悬赏
+      </h3>
+      <br>
+      <%= link_to "我要红包", Job, class: "btn btn-danger" %>
+    </div>
+    <hr>
+    <h4>更多访谈</h4>
+    <ol class="list-unstyled">
+      <% Interview.all.each do |interview| %>
+        <li><%= link_to interview.title, interview %></li><br>
+      <% end %>
+    </ol>
+  </p>
+
+  <% if current_admin %>
+    <%= link_to "修改访谈", edit_admins_interview_path(@interview), class: "btn btn-primary" %>
+    &nbsp;
+    <%= link_to "返回访谈列表", admins_interviews_path, class: "btn btn-primary" %>
+  <% end %>
+<% end %>

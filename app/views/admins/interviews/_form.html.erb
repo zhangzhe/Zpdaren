@@ -1,0 +1,30 @@
+<% url = params[:action] == "new" ? admins_interviews_path : admins_interview_path %>
+<%= form_for @interview, url: url, html: { multipart: true } do |f|  %>
+  <p>
+    <%= f.text_field :professor_name, class: "form-control", placeholder: '专家姓名' %>
+  </p>
+  <p>
+    <%= f.text_field :title, class: "form-control", placeholder: '访谈标题' %>
+  </p>
+  <p>
+    <label>Avatar</label>
+    <%= image_tag(@interview.avatar_url, :class => "img-circle", :size => "160x160") if @interview.avatar? %>
+    <%= f.file_field :avatar %>
+  </p>
+  <p>
+    <%= f.text_area :content, class: "form-control", rows: 40 %>
+  </p>
+  <p>
+    <%= f.submit "发布", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
+  </p>
+<% end %>
+
+<script>
+  $(function() {
+      $('#interview_content').froalaEditor({
+        heightMin: 300,
+        placeholderText: '访谈内容'
+      }
+      )
+  });
+</script>

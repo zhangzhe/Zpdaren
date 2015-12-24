@@ -24,6 +24,8 @@
             <li class="<%= active %>"><%= link_to "统计", admins_statistics_path %></li>
             <% active = active_for?([Admins::BlogsController]) %>
             <li class="<%= active %>"><%= link_to "博客", admins_blogs_path %></li>
+            <% active = active_for?([Admins::InterviewsController]) %>
+            <li class="<%= active %>"><%= link_to "访谈", admins_interviews_path %></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

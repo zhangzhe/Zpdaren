@@ -1,0 +1,26 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>访问访谈</th>
+        <th>发布时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @interviews.each do |interview| %>
+        <tr>
+
+          <td><%= link_to interview.title, interview %></td>
+          <td><%= interview.created_at.localtime.to_date.to_s(:db) %></td>
+          <td>
+            <%= link_to '修改', edit_admins_interview_path(interview), class: "btn btn-primary btn-sm" %>
+            <%= link_to '删除', admins_interview_path(interview), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: '确认?' } %>
+          </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= link_to '新建访谈', new_admins_interview_path, class: "btn btn-primary" %>
