@@ -7,4 +7,8 @@ class HandbooksController < ApplicationController
   def markdown
 
   end
+
+  def company_service_protocol
+    send_file "public/pdfs/company_service_protocol.pdf"
+  end
 end

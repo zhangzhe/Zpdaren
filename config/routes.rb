@@ -64,7 +64,11 @@ Rails.application.routes.draw do
       end
     end
     resources :users, only: [:index, :destroy]
-    resources :companies, only: [:show, :edit, :update]
+    resources :companies, only: [:show, :edit, :update] do
+      member do
+        get :service_protocol
+      end
+    end
     resources :suppliers, only: [:show]
     resources :refund_requests, only: [:index, :show] do
       member do
@@ -78,7 +82,11 @@ Rails.application.routes.draw do
 
   namespace :recruiters do
     resources :jobs, except: [:destroy]
-    resources :companies, only: [:edit, :update]
+    resources :companies, only: [:edit, :update] do
+      member do
+        get :service_protocol
+      end
+    end
     resources :resumes, only: [:download] do
       member do
         get :download
@@ -118,6 +126,7 @@ Rails.application.routes.draw do
   end
 
   get 'good_job_description' => 'handbooks#good_job_description', as: 'good_job_description'
+  get 'company_service_protocol' => 'handbooks#company_service_protocol', as: 'company_service_protocol'
   get 'markdown' => 'handbooks#markdown', as: 'markdown'
   get 'custom_agreement' => 'home#custom_agreement'
 end

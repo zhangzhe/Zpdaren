@@ -36,6 +36,16 @@
     <%= f.text_field :url, class: 'form-control' %>
   </p>
   <p>
+    <%= f.label :service_protocol, "企业服务协议" %>
+    <%= sanitize("<span class='red-star'>*</span>") unless @company.service_protocol? %>
+    <span class='fs12'>
+      <%= link_to '企业服务协议模板', company_service_protocol_path %>
+    </span>
+  </p>
+  <p>
+    <%= f.file_field 'service_protocol', style: "display:inline;width:160px;float:left;" %><span style="color:red;font-size:12px;">请上传企业服务协议</span>
+  </p>
+  <p>
     <%= f.submit "确定", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
   </p>
 <% end %>
