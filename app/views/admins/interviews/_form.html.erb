@@ -1,4 +1,4 @@
-<% url = params[:action] == "new" ? admins_interviews_path : admins_interview_path %>
+<% url = (params[:action] == "new" || params[:action] == "create") ? admins_interviews_path : admins_interview_path(@interview) %>
 <%= form_for @interview, url: url, html: { multipart: true } do |f|  %>
   <p>
     <%= f.text_field :professor_name, class: "form-control", placeholder: '专家姓名' %>
@@ -7,12 +7,12 @@
     <%= f.text_field :professor_title, class: "form-control", placeholder: '专家职位描述' %>
   </p>
   <p>
-    <label>Avatar</label>
+    专家照片
     <%= image_tag(@interview.avatar_url, :class => "img-circle", :size => "160x160") if @interview.avatar? %>
     <%= f.file_field :avatar %>
   </p>
   <p>
-    <%= f.text_area :brief, class: "form-control", rows: 10, placeholder: '访谈简介' %>
+    <%= f.text_area :brief, class: "form-control", rows: 5, placeholder: '访谈简介' %>
   </p>
   <p>
     <%= f.text_area :content, class: "form-control", rows: 20 %>

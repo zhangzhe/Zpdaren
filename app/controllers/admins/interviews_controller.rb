@@ -12,6 +12,7 @@ class Admins::InterviewsController < Admins::BaseController
     if @interview.save
       redirect_to @interview, notice: '创建成功'
     else
+      flash[:error] = @interview.errors.full_messages.first
       render :new
     end
   end

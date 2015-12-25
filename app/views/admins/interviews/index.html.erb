@@ -11,7 +11,7 @@
       <% @interviews.each do |interview| %>
         <tr>
 
-          <td><%= link_to interview.professor_name, interview %></td>
+          <td><%= link_to "#{interview.professor_name}-#{interview.professor_title}", interview %></td>
           <td><%= interview.created_at.localtime.to_date.to_s(:db) %></td>
           <td>
             <%= link_to '修改', edit_admins_interview_path(interview), class: "btn btn-primary btn-sm" %>

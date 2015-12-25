@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   resources :blogs, only: [:show, :index]
-  resources :interviews, only: [:show]
+  resources :interviews, only: [:show] do
+    resources :comments
+  end
   resources :tags, only: [:index]
 
   get 'qr_codes/:id' => "qr_codes#show", :as => "qr_code"
