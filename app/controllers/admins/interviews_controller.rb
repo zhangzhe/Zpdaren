@@ -43,6 +43,6 @@ class Admins::InterviewsController < Admins::BaseController
 
   private
   def interview_params
-    params.require(:interview).permit(:title, :content, :avatar, :professor_name)
+    params.require(:interview).permit(:professor_title, :content, :avatar, :professor_name, :brief)
   end
 end

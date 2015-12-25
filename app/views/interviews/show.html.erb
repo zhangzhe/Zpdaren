@@ -1,4 +1,4 @@
-<% content_for :title, @interview.title %>
+<% content_for :title, @interview.professor_name %>
 <% content_for :job_info do %>
 
 <div class="jumbotron">
@@ -6,7 +6,7 @@
       <%= image_tag(@interview.avatar_url, :class => "img-thumbnail", :size => "300x300") if @interview.avatar? %>
 
       <h1><%= @interview.professor_name %></h1>
-      <div><%= @interview.title %></div>
+      <div><%= @interview.professor_title %></div>
     </div>
 </div>
   <div style="word-break:break-all;">
@@ -32,7 +32,7 @@
     <h4>更多访谈</h4>
     <ol class="list-unstyled">
       <% Interview.all.each do |interview| %>
-        <li><%= link_to interview.title, interview %></li><br>
+        <li><%= link_to "#{interview.professor_name}-#{interview.professor_title}", interview %></li><br>
       <% end %>
     </ol>
   </p>
