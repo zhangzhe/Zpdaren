@@ -1,11 +1,11 @@
 <div class="row text-center">
-  <h3>达人指路</h3>
+  <h3>达人指路</h3><br>
   <% Interview.all[0..2].each do |interview| %>
     <div class="col-lg-4">
       <%= image_tag(interview.avatar_url, :class => "img-circle", :size => "140x140") if interview.avatar? %>
-      <h2>Heading</h2>
-      <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-      <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+      <h2><%= interview.professor_name %></h2>
+      <p><%= truncate_html interview.content %></p>
+      <p><%= link_to "我要提问 &raquo;".html_safe, interview, :class => "btn btn-default" %></p>
     </div>
   <% end %>
 </div>
