@@ -1,6 +1,11 @@
-<p class="text-right">
-  <span class="label label-info">总推荐</span>
-  <span class="label label-primary">已审核</span>
-  <span class="label label-success">已付费</span>
-  <span class="label label-danger">已拒绝</span>
-</p>
+<div class="row mb10">
+  <div class="col-md-6">
+    <%= link_to '导出职位列表', export_admins_jobs_path(format: 'xlsx') %>
+  </div>
+  <div class="col-md-6 text-right">
+    <span class="label label-info">总推荐</span>
+    <span class="label label-primary">已审核</span>
+    <span class="label label-success">已付费</span>
+    <span class="label label-danger">已拒绝</span>
+  </div>
+</div>

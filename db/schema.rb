@@ -81,7 +81,6 @@ ActiveRecord::Schema.define(version: 20151225080502) do
     t.datetime "deleted_at"
   end
 
-  add_index "money_transfers", ["job_id"], name: "index_money_transfers_on_job_id", using: :btree
   add_index "money_transfers", ["wallet_id"], name: "index_money_transfers_on_wallet_id", using: :btree
 
   create_table "refund_requests", force: :cascade do |t|

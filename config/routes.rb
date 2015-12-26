@@ -53,6 +53,9 @@ Rails.application.routes.draw do
       member do
         put :priority_update
       end
+      collection do
+        get :export
+      end
     end
     match 'deliveries' => 'deliveries#index', :via => :get, :as => "deliveries"
 
