@@ -1,0 +1,11 @@
+<% if company.service_protocol? %>
+  <% if company.service_protocol_is_pdf? %>
+    <%= render 'shared/show_pdf', pdf_url: url %>
+  <% else %>
+    <div class="text-center" style="width:100%;">
+      <%= image_tag url %>
+    </div>
+  <% end %>
+<% else %>
+  还未上传企业服务协议
+<% end %>
