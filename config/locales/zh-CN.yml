@@ -291,6 +291,7 @@ zh-CN:
         name: '公司名称'
         description: '公司描述'
         mobile: '联系方式'
+        address: '公司地址'
         service_protocol: '企业服务协议'
     errors:
       models:
@@ -343,6 +344,8 @@ zh-CN:
             mobile:
               blank: '不能为空'
               wrong_length: "电话格式不对，请从新输入"
+            address:
+              blank: '不能为空'
             service_protocol:
               blank: '不能为空'
         resume:
