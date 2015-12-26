@@ -6,6 +6,7 @@
 </ol>
 <div>
   <%= render 'shared/page_title', title: @company.name %>
+  <%= image_tag 'company_certificate_128.png', class: 'company_certificate' if @company.service_protocol? %>
   <p class='gray-light'>联系方式：<%= @company.mobile %></p>
   <p class='gray-light'>公司网址：<%= @company.url? ? link_to(@company.url, external_url(@company.url), target: '_blank') : '暂未提供' %></p>
   <p class='blockquote14'>
@@ -17,6 +18,14 @@
     <div class='gray-light'>
       <%= simple_format @company.description %>
     </div>
+  </p>
+  <p class='blockquote14'>
+    <strong>
+      企业服务协议
+    </strong>
+  </p>
+  <p>
+    <%= render 'shared/protocol_show', company: @company, url: service_protocol_admins_company_path(@company) %>
   </p>
   <p class='gray-light'>地址：<%= @company.address? ? @company.address : '暂未提供' %></p>
 </div>

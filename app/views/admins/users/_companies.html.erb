@@ -10,7 +10,10 @@
     <tbody>
       <% companies.each do |company| %>
         <tr>
-          <td><%= link_to company.name, admins_company_path(company.id) %></td>
+          <td>
+            <%= image_tag 'company_certificate_24.png' if company.service_protocol? %>
+            <%= link_to company.name, admins_company_path(company.id) %>
+          </td>
           <td><%= company.mobile %></td>
           <td><%= company.recruiter.email %></td>
         </tr>

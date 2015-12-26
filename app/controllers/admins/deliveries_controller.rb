@@ -13,6 +13,7 @@ class Admins::DeliveriesController < Admins::BaseController
 
   def edit
     @job = Job.find(params[:job_id])
+    @company = @job.company
     @delivery = @job.deliveries.find(params[:id])
   end
 

@@ -22,8 +22,8 @@ class Resume < ActiveRecord::Base
   include DataRecoverer
   acts_as_taggable
   acts_as_taggable_on :skills, :interests
-  mount_uploader :attachment, FileUploader
-  mount_uploader :pdf_attachment, FileUploader
+  mount_uploader :attachment, ResumeUploader
+  mount_uploader :pdf_attachment, ResumeUploader
   strip_attributes
   acts_as_paranoid
 
