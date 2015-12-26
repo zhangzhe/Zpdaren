@@ -58,7 +58,6 @@ class Admins::JobsController < Admins::BaseController
 
   def export
     @jobs = Job.all
-    # render xlsx: '职位列表', template: 'export'
     respond_to do |format|
       format.xlsx{
         response.headers['Content-Disposition'] = 'attachment; filename="职位列表.xlsx"'
