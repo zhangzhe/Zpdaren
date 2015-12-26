@@ -8,12 +8,15 @@
       <h1><%= @interview.professor_name %></h1>
       <div><%= @interview.professor_title %></div>
     </div>
-</div>
+  </div>
   <div style="word-break:break-all;">
      <%= @interview.content.html_safe %>
   </div>
+  <br>
+  <hr>
+  <br>
   <div class="text-center">
-    <%= link_to "我要提问", admins_interviews_path, html_options = {class: "btn btn-success btn-lg", "data-toggle" => "collapse", "href" => "#collapseExample"}  %>
+    <%= link_to "我要提问", "#", html_options = {class: "btn btn-success btn-lg", "data-toggle" => "collapse", "href" => "#collapseExample"}  %>
     <div class="collapse" id="collapseExample">
       <p>
       <%= form_for [@interview, Comment.new] do |f|  %>
@@ -29,47 +32,9 @@
       <% end %>
       </p>
     </div>
-  </div>
-
-    <ul class = "media-list">
-       <li class = "media">
-        <% @interview.comments.each do |comment| %>
-          <%= link_to(image_tag("2.jpeg", :class => "media-object", :alt => "Generic placeholder image"), "#", :class => "pull-left") %>
-          <div class = "media-body">
-             <h4 class = "media-heading"><%= comment.commenter_name %></h4>
-             <p>
-               <%= comment.content %>
-             </p>
-             <br>
-             <div class = "media">
-               <%= link_to(image_tag("2.jpeg", :class => "media-object"), "#", :class => "pull-left") %>
-                <div class = "media-body">
-                   <h4 class = "media-heading">Nested media heading</h4>
-                   This is some sample text. This is some sample text.
-                   This is some sample text. This is some sample text.
-                   This is some sample text. This is some sample text.
-                   This is some sample text. This is some sample text.
-
-                   <!-- Nested media object --><br>
-                   <div class = "media">
-                      <%= link_to(image_tag("2.jpeg", :class => "media-object"), "#", :class => "pull-left") %>
-
-                      <div class = "media-body">
-                         <h4 class = "media-heading">Nested media heading</h4>
-                         This is some sample text. This is some sample text.
-                         This is some sample text. This is some sample text.
-                         This is some sample text. This is some sample text.
-                         This is some sample text. This is some sample text.
-                      </div>
-
-                   </div>
-                </div>
-
-             </div>
-           </div>
-        <% end %>
-      </li>
-    </ul>
+  </div><br>
+  <% @comments = @interview.comments.hash_tree %>
+  <%= comments_tree_for @comments %>
 
 <% end %>
 

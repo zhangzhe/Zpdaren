@@ -77,3 +77,4 @@ gem 'md_emoji', '1.0.2'
 
 gem 'exception_notification'
 gem 'truncate_html'
+gem 'closure_tree'

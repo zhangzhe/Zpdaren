@@ -1,0 +1,27 @@
+<div class="well">
+  <p class="text-muted">
+    <%= comment.root? ? "Started by" : "Replied by" %> <strong><%= comment.commenter_name %></strong> on
+    <%= l(comment.created_at, format: '%B, %d %Y %H:%M:%S') %>
+  </p>
+  <blockquote>
+    <p><%= comment.content %></p>
+  </blockquote>
+
+  <%= link_to "回复", "#", html_options = {class: "btn btn-success", "data-toggle" => "collapse", "href" => "#collapseExample#{comment.id}"}  %>
+  <div class="collapse" id="collapseExample<%= comment.id %>">
+    <p>
+      <%= form_for [@interview, Comment.new] do |f|  %>
+        <%= f.hidden_field :parent_id, value: comment.id %>
+        <p>
+          <%= f.text_field :commenter_name, class: "form-control", placeholder: '您的名字' %>
+        </p>
+        <p>
+          <%= f.text_area :content, class: "form-control", rows: 5, placeholder: '问题' %>
+        </p>
+        <p>
+          <%= f.submit "发布问题", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
+        </p>
+      <% end %>
+    </p>
+  </div>
+</div>
