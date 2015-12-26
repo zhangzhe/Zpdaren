@@ -3,7 +3,7 @@
     <%= render 'shared/show_pdf', pdf_url: url %>
   <% else %>
     <div class="text-center" style="width:100%;">
-      <%= image_tag url %>
+      <%= image_tag url, style: 'width:100%;' %>
     </div>
   <% end %>
 <% else %>
