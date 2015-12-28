@@ -25,4 +25,8 @@ class User < ActiveRecord::Base
   def weixin_subscribable?
     self.type == "Supplier" && self.weixin.nil?
   end
+
+  def name
+    self.read_attribute("name") || email
+  end
 end
