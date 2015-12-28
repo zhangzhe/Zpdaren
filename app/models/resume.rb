@@ -33,14 +33,6 @@ class Resume < ActiveRecord::Base
     def active_suppliers_count
       Resume.all.map(&:supplier_id).uniq.count
     end
-
-    def find_by_admin(params)
-      params[:state] = 'uncompleted' unless ['uncompleted', 'completed', 'unavailable', 'available', 'problemed'].include?(params[:state])
-      resumes = send(params[:state])
-      resumes = resumes.where(:supplier_id => params[:supplier_id]) if params[:supplier_id]
-      resumes = resumes.where("candidate_name like ?", "%#{params[:key]}%") if params[:key].present?
-      resumes
-    end
   end
 
   def resumes_from(supplier)

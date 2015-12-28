@@ -5,7 +5,8 @@ class Recruiters::JobsController < Recruiters::BaseController
       flash[:notice] = "请先完善公司信息，然后再发布职位"
       redirect_to edit_recruiters_company_path(current_recruiter.company)
     else
-      @jobs = Job.find_by_recruiter(params, current_recruiter)
+      params[:state] = 'submitted' unless current_recruiter.job_state_is_legal?(params[:state])
+      @jobs = current_recruiter.find_jobs_by_state(params[:state])
       @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
     end
   end

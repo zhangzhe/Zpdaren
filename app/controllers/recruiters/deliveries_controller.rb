@@ -1,8 +1,14 @@
 class Recruiters::DeliveriesController < Recruiters::BaseController
   def index
-    @job = current_recruiter.jobs.find(params[:job_id]) if params[:job_id]
-    @deliveries = Delivery.find_by_recruiter(params, current_recruiter, @job)
-    @deliveries = @deliveries.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    params[:state] = 'unprocess' unless current_recruiter.delivery_state_is_legal?(params[:state])
+
+    @deliveries = current_recruiter.find_deliveries_by_state(params[:state])
+    if params[:job_id].present?
+      @job = current_recruiter.jobs.find(params[:job_id])
+      @deliveries = @deliveries.where("job_id = ?", params[:job_id])
+    end
+
+    @deliveries = @deliveries.includes(:job).where("title like ?", "%#{params[:key]}%").paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def show

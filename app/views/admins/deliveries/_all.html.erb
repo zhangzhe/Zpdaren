@@ -2,27 +2,27 @@
 <ul class="nav nav-tabs">
   <% active = (params[:state] == "recommended") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "未审核<span class='badge'>#{Delivery.recommended.count}</span>".html_safe, admins_deliveries_path(:state => "recommended") %>
+    <%= link_to "未审核<span class='badge'>#{current_admin.find_deliveries_count_by_state('recommended')}</span>".html_safe, admins_deliveries_path(:state => "recommended") %>
   </li>
   <% active = (params[:state] == "approved") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "待查看<span class='badge'>#{Delivery.approved.count}</span>".html_safe, admins_deliveries_path(:state => "approved") %>
+    <%= link_to "待查看<span class='badge'>#{current_admin.find_deliveries_count_by_state('approved')}</span>".html_safe, admins_deliveries_path(:state => "approved") %>
   </li>
   <% active = (params[:state] == "paid") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "已付费查看<span class='badge'>#{Delivery.paid.count}</span>".html_safe, admins_deliveries_path(:state => "paid") %>
+    <%= link_to "已付费查看<span class='badge'>#{current_admin.find_deliveries_count_by_state('paid')}</span>".html_safe, admins_deliveries_path(:state => "paid") %>
   </li>
   <% active = (params[:state] == "final_paid") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "已支付尾款<span class='badge'>#{Delivery.final_paid.count}</span>".html_safe, admins_deliveries_path(:state => "final_paid") %>
+    <%= link_to "已支付尾款<span class='badge'>#{current_admin.find_deliveries_count_by_state('final_paid')}</span>".html_safe, admins_deliveries_path(:state => "final_paid") %>
   </li>
   <% active = (params[:state] == "recruiter_refused") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "招聘方拒绝<span class='badge'>#{Delivery.recruiter_refused.count}</span>".html_safe, admins_deliveries_path(:state => "recruiter_refused") %>
+    <%= link_to "招聘方拒绝<span class='badge'>#{current_admin.find_deliveries_count_by_state('recruiter_refused')}</span>".html_safe, admins_deliveries_path(:state => "recruiter_refused") %>
   </li>
   <% active = (params[:state] == "admin_refused") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "管理员拒绝<span class='badge'>#{Delivery.admin_refused.count}</span>".html_safe, admins_deliveries_path(:state => "admin_refused") %>
+    <%= link_to "管理员拒绝<span class='badge'>#{current_admin.find_deliveries_count_by_state('admin_refused')}</span>".html_safe, admins_deliveries_path(:state => "admin_refused") %>
   </li>
 </ul>
 <br>

@@ -1,23 +1,23 @@
 <ul class="nav nav-tabs">
   <% active = (params[:state] == "submitted") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "未付订金<span class='badge'>#{current_recruiter.jobs.submitted.count}</span>".html_safe, recruiters_jobs_path(:state => "submitted") %>
+    <%= link_to "未付订金<span class='badge'>#{current_recruiter.find_jobs_count_by_state('submitted')}</span>".html_safe, recruiters_jobs_path(:state => "submitted") %>
   </li>
   <% active = (params[:state] == "deposit_paid") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "订金待确认<span class='badge'>#{current_recruiter.jobs.deposit_paid.count}</span>".html_safe, recruiters_jobs_path(:state => "deposit_paid") %>
+    <%= link_to "订金待确认<span class='badge'>#{current_recruiter.find_jobs_count_by_state('deposit_paid')}</span>".html_safe, recruiters_jobs_path(:state => "deposit_paid") %>
   </li>
   <% active = (params[:state] == "deposit_paid_confirmed") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "招聘进行中<span class='badge'>#{current_recruiter.jobs.deposit_paid_confirmed.count}</span>".html_safe, recruiters_jobs_path(:state => "deposit_paid_confirmed") %>
+    <%= link_to "招聘进行中<span class='badge'>#{current_recruiter.find_jobs_count_by_state('deposit_paid_confirmed')}</span>".html_safe, recruiters_jobs_path(:state => "deposit_paid_confirmed") %>
   </li>
   <% active = (params[:state] == "final_payment_paid") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "已支付尾款<span class='badge'>#{current_recruiter.jobs.final_payment_paid.count}</span>".html_safe, recruiters_jobs_path(:state => "final_payment_paid") %>
+    <%= link_to "已支付尾款<span class='badge'>#{current_recruiter.find_jobs_count_by_state('final_payment_paid')}</span>".html_safe, recruiters_jobs_path(:state => "final_payment_paid") %>
   </li>
   <% active = (params[:state] == "finished") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "招聘完成<span class='badge'>#{current_recruiter.jobs.finished.count}</span>".html_safe, recruiters_jobs_path(:state => "finished") %>
+    <%= link_to "招聘完成<span class='badge'>#{current_recruiter.find_jobs_count_by_state('finished')}</span>".html_safe, recruiters_jobs_path(:state => "finished") %>
   </li>
 </ul>
 <br>

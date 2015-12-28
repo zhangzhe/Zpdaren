@@ -1,5 +1,7 @@
 <% if params[:job_id] %>
-  <%= render 'job', deliveries: @deliveries, job: @job %>
+  <%= render 'job_deliveries', deliveries: @deliveries, job: @job %>
+<% elsif params[:supplier_id] %>
+  <%= render 'supplier_deliveries', deliveries: @deliveries, supplier: @supplier %>
 <% else %>
   <%= render 'all', deliveries: @deliveries %>
 <% end %>

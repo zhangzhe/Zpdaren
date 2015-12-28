@@ -23,14 +23,6 @@ module ApplicationHelper
     " <span class=\"badge\">#{entity.count}</span>"
   end
 
-  def badge_for_recruiter_jobs(recruiter)
-    " <span class=\"badge\">#{recruiter.in_hiring_jobs_count}/#{recruiter.jobs_count}</span>" if (recruiter.jobs_count > 0)
-  end
-
-  def badge_for_recruiter_resumes(recruiter)
-    " <span class=\"badge\">#{recruiter.unprocess_deliveries_count}/#{recruiter.recruiter_watchable_resumes_count}</span>" if (recruiter.recruiter_watchable_resumes_count > 0)
-  end
-
   def external_url(url)
     (url.start_with?('http://') || url.start_with?('https://')) ? url : ('http://' + url)
   end

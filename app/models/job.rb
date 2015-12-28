@@ -74,28 +74,6 @@ class Job < ActiveRecord::Base
     def deleted
       only_deleted
     end
-
-    def find_by_admin(params)
-      params[:state] = 'in_hiring' unless ['in_hiring', 'un_hiring', 'deleted', 'submitted', 'high_priority'].include?(params[:state])
-      jobs = send(params[:state])
-      jobs = jobs.where("title like ?", "%#{params[:key]}%") if params[:key].present?
-      jobs
-    end
-
-    def find_by_recruiter(params, current_recruiter)
-      params[:state] = 'submitted' unless ['submitted', 'deposit_paid', 'deposit_paid_confirmed', 'final_payment_paid', 'finished'].include?(params[:state])
-      jobs = current_recruiter.jobs.send(params[:state])
-      jobs = jobs.where("title like ?", "%#{params[:key]}%") if params[:key].present?
-      jobs
-    end
-
-    def find_by_supplier(params)
-      jobs = Job.available
-      jobs = jobs.high_priority if params[:state] == 'high_priority'
-      jobs = jobs.where("user_id = ? ", params[:recruiter_id]) if params[:recruiter_id]
-      jobs = jobs.where("title ilike ?", "%#{params[:key]}%") if params[:key].present?
-      jobs
-    end
   end
 
   def state_show?
@@ -114,13 +92,21 @@ class Job < ActiveRecord::Base
     !['finished', 'final_payment_paid'].include?(self.state)
   end
 
+  def unprocess_deliveries
+    self.deliveries.approved.unread
+  end
+
   def viewed_deliveries
     resume_ids = recruiter.deliveries.process.map(&:resume_id)
     self.deliveries.where("deliveries.state = 'paid' or (deliveries.resume_id in (?) and deliveries.read_at is not null and deliveries.state = 'approved')", resume_ids)
   end
 
-  def unprocess_deliveries
-    self.deliveries.approved.unread
+  def final_paid_deliveries
+    self.deliveries.final_paid
+  end
+
+  def refused_deliveries
+    self.deliveries.refused
   end
 
   def recruiter_watchable_deliveries
@@ -228,20 +214,12 @@ class Job < ActiveRecord::Base
     self.deliveries.recommended.size > 0
   end
 
-  def recommended_deliveries
-    self.deliveries.recommended
+  def find_deliveries_by_state(state)
+    self.deliveries.send("#{state.downcase}_deliveries")
   end
 
-  def recommended_deliveries_count
-    recommended_deliveries.count
-  end
-
-  def approved_deliveries
-    self.deliveries.approved
-  end
-
-  def approved_deliveries_count
-    approved_deliveries.count
+  def find_deliveries_count_by_state(state)
+    find_deliveries_by_state(state).count
   end
 
   private

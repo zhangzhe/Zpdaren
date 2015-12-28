@@ -1,5 +1,17 @@
 <% content_for :job_info do %>
   <%= render 'suppliers/shared/search', title: '众聘达人推荐职位列表', url: jobs_path, placeholder: '输入职位名称' %>
+
+  <ul class="nav nav-tabs">
+    <% active = (params[:state] == "high_priority") ? "active" : "" %>
+    <li role="presentation" class="<%= active %>">
+      <%= link_to "急招职位<i class='fa fa-fire hot-fire'></i>".html_safe, jobs_path(:state => "high_priority") %>
+    </li>
+    <% active = (params[:state] != "high_priority") ? "active" : "" %>
+    <li role="presentation" class="<%= active %>">
+      <%= link_to "最新职位".html_safe, jobs_path %>
+    </li>
+  </ul>
+
   <%= render 'list', jobs: @jobs %>
   <%= render 'shared/paginate', objs: @jobs %>
 <% end %>

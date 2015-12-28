@@ -13,4 +13,8 @@ module Recruiters::JobsHelper
       '招聘完成'
     end
   end
+
+  def badge_for_recruiter_jobs(recruiter)
+    " <span class=\"badge\">#{recruiter.in_hiring_jobs_count}/#{recruiter.jobs_count}</span>" if (recruiter.jobs_count > 0)
+  end
 end

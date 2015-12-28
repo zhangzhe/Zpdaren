@@ -1,0 +1,32 @@
+<%= render 'admins/shared/search', title: '推荐列表', url: admins_deliveries_path, placeholder: '被推荐人' %>
+<ul class="nav nav-tabs">
+  <% active = (params[:state] == "recommended") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "未审核<span class='badge'>#{supplier.find_deliveries_count_by_state('recommended')}</span>".html_safe, admins_deliveries_path(:state => "recommended") %>
+  </li>
+  <% active = (params[:state] == "approved") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "待查看<span class='badge'>#{supplier.find_deliveries_count_by_state('approved')}</span>".html_safe, admins_deliveries_path(:state => "approved") %>
+  </li>
+  <% active = (params[:state] == "paid") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "已付费查看<span class='badge'>#{supplier.find_deliveries_count_by_state('paid')}</span>".html_safe, admins_deliveries_path(:state => "paid") %>
+  </li>
+  <% active = (params[:state] == "final_paid") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "已支付尾款<span class='badge'>#{supplier.find_deliveries_count_by_state('final_paid')}</span>".html_safe, admins_deliveries_path(:state => "final_paid") %>
+  </li>
+  <% active = (params[:state] == "recruiter_refused") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "招聘方拒绝<span class='badge'>#{supplier.find_deliveries_count_by_state('recruiter_refused')}</span>".html_safe, admins_deliveries_path(:state => "recruiter_refused") %>
+  </li>
+  <% active = (params[:state] == "admin_refused") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "管理员拒绝<span class='badge'>#{supplier.find_deliveries_count_by_state('admin_refused')}</span>".html_safe, admins_deliveries_path(:state => "admin_refused") %>
+  </li>
+</ul>
+<br>
+
+<%= render 'list', deliveries: deliveries %>
+
+<%= render 'shared/paginate', objs: deliveries %>

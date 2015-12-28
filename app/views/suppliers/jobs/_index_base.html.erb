@@ -11,11 +11,11 @@
 <ul class="nav nav-tabs">
   <% active = (params[:state] == "high_priority") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "急招职位<span class='badge'>#{Job.available.high_priority.count}</span>".html_safe, suppliers_jobs_path(:state => "high_priority") %>
+    <%= link_to "急招职位<span class='badge'>#{current_supplier.find_jobs_count_by_state('high_priority')}</span>".html_safe, suppliers_jobs_path(:state => "high_priority") %>
   </li>
   <% active = (params[:state] != "high_priority") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "最新职位<span class='badge'>#{Job.available.count}</span>".html_safe, suppliers_jobs_path %>
+    <%= link_to "最新职位<span class='badge'>#{current_supplier.find_jobs_count_by_state}</span>".html_safe, suppliers_jobs_path %>
   </li>
 </ul>
 <br>
