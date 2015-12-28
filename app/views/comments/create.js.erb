@@ -1,0 +1,6 @@
+$("#collapseExample<%= @parent.try(:id) %>").toggle();
+<% if @parent %>
+$("<div class='replies'><%= escape_javascript(render @comment) %></div>").insertAfter("#comment_<%= @parent.try(:id) %>");
+<% else %>
+  $("<%= escape_javascript(render @comment) %>").insertAfter("#commit_button");
+<% end %>

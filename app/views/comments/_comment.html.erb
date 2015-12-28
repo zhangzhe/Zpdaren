@@ -1,4 +1,4 @@
-<div class="well" id="comment_<%= comment.id %>">
+<div class="well">
   <p class="text-muted">
     <strong><%= comment.commenter_name %></strong>
     <%= l(comment.created_at, format: '%B, %d %Y %H:%M:%S') %>
@@ -8,7 +8,7 @@
   </blockquote>
 
 
-  <%= link_to "<i class='fa fa-reply'></i>".html_safe, "#", onclick: "$('#collapseExample#{comment.id}').toggle(); return false" %>
+  <%= link_to "<i class='fa fa-reply'></i>".html_safe, "#", html_options = { "data-toggle" => "collapse", "href" => "#collapseExample#{comment.id}" } %>
   <div class="collapse" id="collapseExample<%= comment.id %>">
     <p>
       <%= render(partial: "comment_form", locals: {comment: comment}) %>
