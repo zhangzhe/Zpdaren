@@ -5,7 +5,7 @@
   </p>
 
   <p>
-    <%= text_field_tag :professor_email, "", class: "form-control", placeholder: '专家登录邮箱' %>
+    <%= text_field_tag :professor_email, @professor.try(:email), class: "form-control", placeholder: '专家登录邮箱' %>
   </p>
 
   <p>

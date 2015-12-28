@@ -9,7 +9,7 @@ class Admins::InterviewsController < Admins::BaseController
 
   def create
     @interview = Interview.new(interview_params)
-    @professor = build_professor
+    @professor = Professor.new(professor_params)
     @interview.professor = @professor
     if (@professor.save && @interview.save)
       redirect_to @interview, notice: '创建成功'
@@ -21,13 +21,16 @@ class Admins::InterviewsController < Admins::BaseController
 
   def edit
     @interview = Interview.find(params[:id])
+    @professor = @interview.professor
   end
 
   def update
     @interview = Interview.find(params[:id])
+    @professor = @interview.professor || @interview.build_professor
     @interview.update(interview_params)
-    if @interview.errors.any?
-      flash[:error] = @interview.errors.full_messages.first
+    @professor.update(professor_params)
+    if @interview.errors.any? || @professor.errors.any?
+      flash[:error] = @interview.errors.full_messages.first || @professor.errors.full_messages.first
       render 'edit' and return
     end
     redirect_to @interview
@@ -49,7 +52,7 @@ class Admins::InterviewsController < Admins::BaseController
     params.require(:interview).permit(:professor_title, :content, :avatar, :professor_name, :brief)
   end
 
-  def build_professor
-    Professor.new(:email => params[:professor_email], :password => params[:professor_password], :name => params[:interview][:professor_name])
+  def professor_params
+    { :email => params[:professor_email], :password => params[:professor_password], :name => params[:interview][:professor_name] }
   end
 end
