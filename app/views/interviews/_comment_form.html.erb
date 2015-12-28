@@ -7,7 +7,8 @@
     <%= f.text_field :commenter_name, :value => default_value, class: "form-control", placeholder: '您的名字' %>
   </p>
   <p>
-    <%= f.text_area :content, class: "form-control", rows: 5, placeholder: '问题' %>
+    <% form_content_id = defined?(comment) ? "comment_content#{comment.id}" : "comment_content" %>
+    <%= f.text_area :content, class: "form-control", rows: 5, placeholder: '问题', id: form_content_id %>
   </p>
   <p>
     <%= f.submit "发布问题", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
