@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_one :wallet
   default_scope { order('created_at DESC') }
   after_create :create_wallet
-  devise :database_authenticatable, :validatable, :recoverable, :trackable, :confirmable
+  devise :database_authenticatable, :validatable, :recoverable, :trackable
 
   def receive(money)
     self.wallet.update_attribute(:money, self.wallet.money.to_i + money)

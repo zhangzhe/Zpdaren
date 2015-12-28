@@ -3,6 +3,15 @@
   <p>
     <%= f.text_field :professor_name, class: "form-control", placeholder: '专家姓名' %>
   </p>
+
+  <p>
+    <%= text_field_tag :professor_email, "", class: "form-control", placeholder: '专家登录邮箱' %>
+  </p>
+
+  <p>
+    <%= text_field_tag :professor_password, "", class: "form-control", placeholder: '专家登录密码' %>
+  </p>
+
   <p>
     <%= f.text_field :professor_title, class: "form-control", placeholder: '专家职位描述' %>
   </p>
@@ -12,7 +21,7 @@
     <%= f.file_field :avatar %>
   </p>
   <p>
-    <%= f.text_area :brief, class: "form-control", rows: 5, placeholder: '访谈简介' %>
+    <%= f.text_area :brief, class: "form-control", rows: 5, placeholder: '访谈简述' %>
   </p>
   <p>
     <%= f.text_area :content, class: "form-control", rows: 20 %>
