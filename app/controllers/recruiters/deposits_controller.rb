@@ -11,7 +11,7 @@ class Recruiters::DepositsController < Recruiters::BaseController
       deposit = job.deposit
       admin.receive(deposit)
       job.pay!
-      Deposit.create(:amount => deposit, :wallet_id => current_recruiter.wallet.id, :zhifubao_account => admin.bank_account, :job_id => params[:job][:id])
+      Deposit.create(:amount => deposit, :wallet_id => current_recruiter.wallet.id, :zhifubao_account => Admin::BANK_ACCOUNT, :job_id => params[:job][:id])
     end
     redirect_to recruiters_jobs_path(:state => "submitted")
   end

@@ -19,6 +19,11 @@ class Admins::CompaniesController < Admins::BaseController
     end
   end
 
+  def service_protocol
+    company = Company.find(params[:id])
+    send_file company.service_protocol.current_path
+  end
+
   private
   def company_params
     params[:company].permit(:name, :description, :mobile, :address, :url)

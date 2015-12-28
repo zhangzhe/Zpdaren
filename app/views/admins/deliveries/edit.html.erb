@@ -16,6 +16,13 @@
     <% end %>
   </p>
   <p>
+    <strong>公司：</strong>
+     <span class='gray-light'>
+      <%= link_to @company.name, admins_company_path(@company.id), target: '_blank' %>
+    </span>
+    <%= image_tag 'company_certificate_24.png' if @company.service_protocol? %>
+  </p>
+  <p>
     <%= render 'shared/salary_show', job: @delivery.job %>
   </p>
   <p>
