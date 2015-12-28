@@ -19,20 +19,11 @@
     <%= link_to "我要提问", "#", html_options = {class: "btn btn-success btn-lg", "data-toggle" => "collapse", "href" => "#collapseExample"}  %>
     <div class="collapse" id="collapseExample">
       <p>
-      <%= form_for [@interview, Comment.new] do |f|  %>
-        <p>
-          <%= f.text_field :commenter_name, class: "form-control", placeholder: '您的名字' %>
-        </p>
-        <p>
-          <%= f.text_area :content, class: "form-control", rows: 5, placeholder: '问题' %>
-        </p>
-        <p>
-          <%= f.submit "发布问题", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
-        </p>
-      <% end %>
+      <%= render "comment_form" %>
       </p>
     </div>
-  </div><br>
+  </div>
+  <br>
   <% @comments = @interview.comments.hash_tree %>
   <%= comments_tree_for @comments %>
 

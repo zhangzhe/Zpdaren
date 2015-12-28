@@ -11,21 +11,7 @@
   <%= link_to "<i class='fa fa-reply'></i>".html_safe, "#", html_options = { "data-toggle" => "collapse", "href" => "#collapseExample#{comment.id}" } %>
   <div class="collapse" id="collapseExample<%= comment.id %>">
     <p>
-      <%= form_for [@interview, Comment.new] do |f|  %>
-        <%= f.hidden_field :parent_id, value: comment.id %>
-        <%= f.hidden_field :commenter_id, value: current_user.id if current_user %>
-        <p>
-          <% default_value = cookies[:guest_name] ? cookies[:guest_name] : "" %>
-          <% default_value = current_user ? current_user.name : "" %>
-          <%= f.text_field :commenter_name, :value => default_value, class: "form-control", placeholder: '您的名字' %>
-        </p>
-        <p>
-          <%= f.text_area :content, class: "form-control", rows: 5, placeholder: '问题' %>
-        </p>
-        <p>
-          <%= f.submit "发布问题", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
-        </p>
-      <% end %>
+      <%= render(partial: "comment_form", locals: {comment: comment}) %>
     </p>
   </div>
 </div>
