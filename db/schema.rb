@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151228033743) do
+ActiveRecord::Schema.define(version: 20151228064239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,14 +76,18 @@ ActiveRecord::Schema.define(version: 20151228033743) do
   create_table "interviews", force: :cascade do |t|
     t.text     "description"
     t.text     "content"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "avatar"
     t.string   "professor_name"
     t.string   "professor_title"
     t.text     "professor_brief"
     t.text     "brief"
     t.integer  "professor_id"
+    t.datetime "reply_started_at"
+    t.datetime "reply_ended_at"
+    t.datetime "reply_begin_at"
+    t.datetime "reply_end_at"
   end
 
   add_index "interviews", ["professor_id"], name: "index_interviews_on_professor_id", using: :btree

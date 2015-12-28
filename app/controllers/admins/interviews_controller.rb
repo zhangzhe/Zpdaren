@@ -27,13 +27,12 @@ class Admins::InterviewsController < Admins::BaseController
   def update
     @interview = Interview.find(params[:id])
     @professor = @interview.professor || @interview.build_professor
-    @interview.update(interview_params)
-    @professor.update(professor_params)
-    if @interview.errors.any? || @professor.errors.any?
+    if @interview.update(interview_params) && @professor.update(professor_params)
+      redirect_to @interview, notice: '更新成功'
+    else
       flash[:error] = @interview.errors.full_messages.first || @professor.errors.full_messages.first
-      render 'edit' and return
+      render 'edit'
     end
-    redirect_to @interview
   end
 
   def destroy
@@ -49,7 +48,7 @@ class Admins::InterviewsController < Admins::BaseController
 
   private
   def interview_params
-    params.require(:interview).permit(:professor_title, :content, :avatar, :professor_name, :brief)
+    params.require(:interview).permit(:professor_title, :content, :avatar, :professor_name, :brief, :reply_begin_at, :reply_end_at)
   end
 
   def professor_params

@@ -293,6 +293,8 @@ zh-CN:
         professor_name: "专家姓名"
         professor_title: "专家职业描述"
         brief: "访谈概述"
+        reply_begin_at: "回答开始时间"
+        reply_end_at: "回答结束时间"
     errors:
       models:
         user:
@@ -371,5 +373,9 @@ zh-CN:
             professor_title:
               blank: "不能为空"
             brief:
+              blank: "不能为空"
+            reply_begin_at:
+              blank: "不能为空"
+            reply_end_at:
               blank: "不能为空"
 
