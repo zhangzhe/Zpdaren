@@ -49,10 +49,6 @@ class Supplier < User
     end
   end
 
-  def find_jobs_count_by_state(state = nil)
-    find_jobs_by_state(state).count
-  end
-
   private
   def destroy_all_association_entities
     self.supplier_recover

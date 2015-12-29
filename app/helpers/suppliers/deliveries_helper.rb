@@ -15,4 +15,8 @@ module Suppliers::DeliveriesHelper
       '完成招聘'
     end
   end
+
+  def deliveries_count(deliveries, state)
+    deliveries.send(state).count
+  end
 end

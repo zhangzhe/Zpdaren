@@ -1,23 +1,5 @@
 <%= render 'admins/shared/search', title: '简历列表', url: admins_resumes_path, placeholder: '被推荐人' %>
-
-<ul class="nav nav-tabs">
-  <% active = (params[:state] == "uncompleted") ? "active" : "" %>
-  <li role="presentation" class="<%= active %>">
-    <%= link_to "待完善<span class='badge'>#{current_admin.find_resumes_count_by_state('uncompleted')}</span>".html_safe, admins_resumes_path(:state => "uncompleted") %>
-  </li>
-  <% active = (params[:state] == "available") ? "active" : "" %>
-  <li role="presentation" class="<%= active %>">
-    <%= link_to "已完善(求职中)<span class='badge'>#{current_admin.find_resumes_count_by_state('available')}</span>".html_safe, admins_resumes_path(:state => "available") %>
-  </li>
-  <% active = (params[:state] == "unavailable") ? "active" : "" %>
-  <li role="presentation" class="<%= active %>">
-    <%= link_to "已完善(暂时不找工作)<span class='badge'>#{current_admin.find_resumes_count_by_state('unavailable')}</span>".html_safe, admins_resumes_path(:state => "unavailable") %>
-  </li>
-  <% active = (params[:state] == "problemed") ? "active" : "" %>
-  <li role="presentation" class="<%= active %>">
-    <%= link_to "问题简历<span class='badge'>#{current_admin.find_resumes_count_by_state('problemed')}</span>".html_safe, admins_resumes_path(:state => "problemed") %>
-  </li>
-</ul>
+<%= render 'nav_tabs', resumes: @resumes %>
 <br>
 <%= render 'list', resumes: @resumes %>
 <%= render 'shared/paginate', objs: @resumes %>

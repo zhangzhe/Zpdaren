@@ -3,23 +3,23 @@
 <ul class="nav nav-tabs">
   <% active = (params[:state] == "high_priority") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "最高优先级的招聘<span class='badge'>#{current_admin.find_jobs_count_by_state('high_priority')}</span>".html_safe, admins_jobs_path(:state => "high_priority") %>
+    <%= link_to "最高优先级的招聘<span class='badge'>#{active.present? ? jobs_count(@jobs, 'high_priority') : current_admin.find_jobs_count_by_state('high_priority')}</span>".html_safe, admins_jobs_path(:state => "high_priority") %>
   </li>
   <% active = (params[:state] == "in_hiring") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "进行中的招聘<span class='badge'>#{current_admin.find_jobs_count_by_state('in_hiring')}</span>".html_safe, admins_jobs_path(:state => "in_hiring") %>
+    <%= link_to "进行中的招聘<span class='badge'>#{active.present? ? jobs_count(@jobs, 'in_hiring') : current_admin.find_jobs_count_by_state('in_hiring')}</span>".html_safe, admins_jobs_path(:state => "in_hiring") %>
   </li>
   <% active = (params[:state] == "submitted") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "未付定金的招聘<span class='badge'>#{current_admin.find_jobs_count_by_state('submitted')}</span>".html_safe, admins_jobs_path(:state => "submitted") %>
+    <%= link_to "未付定金的招聘<span class='badge'>#{active.present? ? jobs_count(@jobs, 'submitted') : current_admin.find_jobs_count_by_state('submitted')}</span>".html_safe, admins_jobs_path(:state => "submitted") %>
   </li>
   <% active = (params[:state] == "un_hiring") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "已完成的招聘<span class='badge'>#{current_admin.find_jobs_count_by_state('un_hiring')}</span>".html_safe, admins_jobs_path(:state => "un_hiring") %>
+    <%= link_to "已完成的招聘<span class='badge'>#{active.present? ? jobs_count(@jobs, 'un_hiring') : current_admin.find_jobs_count_by_state('un_hiring')}</span>".html_safe, admins_jobs_path(:state => "un_hiring") %>
   </li>
   <% active = (params[:state] == "deleted") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "已删除的招聘<span class='badge'>#{current_admin.find_jobs_count_by_state('deleted')}</span>".html_safe, admins_jobs_path(:state => "deleted") %>
+    <%= link_to "已删除的招聘<span class='badge'>#{active.present? ? jobs_count(@jobs, 'deleted') : current_admin.find_jobs_count_by_state('deleted')}</span>".html_safe, admins_jobs_path(:state => "deleted") %>
   </li>
 </ul>
 <br>

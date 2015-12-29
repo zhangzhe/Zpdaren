@@ -14,4 +14,8 @@ class Company < ActiveRecord::Base
   def service_protocol_is_pdf?
     self.service_protocol.current_path.end_with?('pdf')
   end
+
+  def info_completed?
+    self.name.present? && self.description.present? && self.mobile.present? && self.address.present? && self.service_protocol.present?
+  end
 end

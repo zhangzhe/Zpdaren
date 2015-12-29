@@ -9,9 +9,9 @@
   <li role="presentation" class="<%= active %>">
     <%= link_to "未审核<span class='badge'>#{job.find_deliveries_count_by_state('recommended')}</span>".html_safe, admins_job_deliveries_path(:job_id => params[:job_id], :state => 'recommended') %>
   </li>
-  <% active = (params[:state] == "approved") ? "active" : "" %>
+  <% active = (params[:state] == "after_approved") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "已审核<span class='badge'>#{job.find_deliveries_count_by_state('approved')}</span>".html_safe, admins_job_deliveries_path(:job_id => params[:job_id], :state => 'approved') %>
+    <%= link_to "已审核<span class='badge'>#{job.find_deliveries_count_by_state('after_approved')}</span>".html_safe, admins_job_deliveries_path(:job_id => params[:job_id], :state => 'after_approved') %>
   </li>
 </ul>
 <br>

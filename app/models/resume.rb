@@ -12,8 +12,8 @@ class Resume < ActiveRecord::Base
   default_scope { order("created_at DESC") }
   scope :completed, ->{ where("description is not null or pdf_attachment is not null") }
   scope :uncompleted, ->{ where("description is null and pdf_attachment is null and problem is null") }
-  scope :unavailable, ->{ where(:available => false) }
-  scope :available, ->{ where(:available => true) }
+  scope :unavailable, ->{ where("available = ? and problem is null", false) }
+  scope :available, ->{ where("available = ? and problem is null", true) }
   scope :problemed, ->{ where("problem is not null") }
   scope :unproblematic, ->{ where("problem is null") }
 

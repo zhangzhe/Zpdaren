@@ -17,4 +17,8 @@ module Recruiters::JobsHelper
   def badge_for_recruiter_jobs(recruiter)
     " <span class=\"badge\">#{recruiter.in_hiring_jobs_count}/#{recruiter.jobs_count}</span>" if (recruiter.jobs_count > 0)
   end
+
+  def jobs_count(jobs, state)
+    jobs.send(state).count
+  end
 end

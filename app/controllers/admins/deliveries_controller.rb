@@ -11,7 +11,7 @@ class Admins::DeliveriesController < Admins::BaseController
     else
       @deliveries = current_admin.find_deliveries_by_state(params[:state])
     end
-    @deliveries = @deliveries.joins(:resume).where("candidate_name like ?", "%#{params[:key]}%").paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @deliveries = @deliveries.joins(:resume).where("resumes.candidate_name like ?", "%#{params[:key]}%").paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def show

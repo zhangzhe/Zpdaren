@@ -1,8 +1,6 @@
 <% if params[:job_id] %>
-  <%= render 'job_deliveries', deliveries: @deliveries, job: @job %>
-<% elsif params[:supplier_id] %>
-  <%= render 'supplier_deliveries', deliveries: @deliveries, supplier: @supplier %>
+  <%= render 'job_deliveries_nav_tabs', deliveries: @deliveries, job: @job %>
 <% else %>
-  <%= render 'all', deliveries: @deliveries %>
+  <%= render 'nav_tabs', deliveries: @deliveries %>
 <% end %>
 <%= render 'shared/popover' %>

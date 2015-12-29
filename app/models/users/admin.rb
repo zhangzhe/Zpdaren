@@ -3,7 +3,7 @@ class Admin < User
 
   BANK_ACCOUNT = '11054701040001271'
 
-  DELIVERY_STATE_WHITE_LIST = ['recommended', 'approved', 'paid', 'final_paid', 'recruiter_refused', 'admin_refused']
+  DELIVERY_STATE_WHITE_LIST = ['recommended', 'approved', 'paid', 'final_paid', 'recruiter_refused', 'admin_refused', 'after_approved']
 
   JOB_STATE_WHITE_LIST = ['high_priority', 'in_hiring', 'submitted', 'un_hiring', 'deleted']
 
@@ -22,7 +22,7 @@ class Admin < User
   end
 
   def delivery_state_is_legal?(state)
-    DELIVERY_STATE_WHITE_LIST.includes?((state || '').downcase)
+    DELIVERY_STATE_WHITE_LIST.include?((state || '').downcase)
   end
 
   def find_jobs_by_state(state)
