@@ -36,6 +36,6 @@ class CommentsController < ActionController::Base
   end
 
   def update_guest_name_in_cookies
-    cookies.permanent[:guest_name] = params[:comment][:commenter_name] unless current_user
+    cookies.permanent[:guest_name] = params[:comment][:commenter_name]
   end
 end

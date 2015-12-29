@@ -27,7 +27,6 @@
   <br>
   <% @comments = @interview.comments.with_deleted.hash_tree %>
   <%= comments_tree_for @comments %>
-
 <% end %>
 
 <% content_for :other_job_info do %>
