@@ -295,6 +295,12 @@ zh-CN:
         brief: "访谈概述"
         reply_begin_at: "回答开始时间"
         reply_end_at: "回答结束时间"
+      company:
+        name: '公司名称'
+        description: '公司描述'
+        mobile: '联系方式'
+        address: '公司地址'
+        service_protocol: '企业服务协议'
     errors:
       models:
         user:
@@ -338,8 +344,18 @@ zh-CN:
               blank: "不能为空"
         company:
           attributes:
+            name:
+              blank: '不能为空'
+              too_long: 不能超过%{count}个字
+            description:
+              blank: '不能为空'
             mobile:
+              blank: '不能为空'
               wrong_length: "电话格式不对，请从新输入"
+            address:
+              blank: '不能为空'
+            service_protocol:
+              blank: '不能为空'
         resume:
           attributes:
             candidate_name:

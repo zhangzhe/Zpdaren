@@ -17,7 +17,7 @@
     <tbody>
       <% @deposits.each do |deposit| %>
         <tr>
-          <td><%= link_to deposit.job.company_name, 'javascript:void(0);', "data-toggle" => "popover", "data-trigger" => "focus", "data-placement" => "bottom", "data-content" => deposit.job.company_description %></td>
+          <td><%= link_to deposit.job.company_name, admins_company_path(deposit.job.company_id) %></td>
           <td><%= link_to deposit.job.title, 'javascript:void(0);', "data-toggle" => "popover", "data-trigger" => "focus", "data-placement" => "bottom", "data-content" => deposit.job.description %></td>
           <td><%= deposit.wallet.user.email %></td>
           <td><%= deposit.amount %></td>

@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "职位列表") do |sheet|
+  sheet.add_row ['职位名称', '公司', '地址', '职位佣金(元)', '职位描述', '发布时间']
+  @jobs.each do |job|
+    sheet.add_row [job.title, job.company_name, job.company_address, job.bonus_for_entry, job.description, job.created_at.localtime.to_date.to_s(:db)]
+  end
+end
