@@ -31,7 +31,6 @@ class Job < ActiveRecord::Base
   scope :in_hiring, -> { where.not('state in (?)', ['submitted', 'finished', 'final_payment_paid']) }
   scope :un_hiring, -> { where('state in (?)', ['final_payment_paid', 'finished']) }
   scope :priority, lambda{ |key| where(priority: PRIORITY_LIST[key]) }
-  scope :deleted, -> { where('deleted_at is not null') }
 
   default_scope { order(created_at: :desc) }
 
@@ -70,6 +69,10 @@ class Job < ActiveRecord::Base
   class << self
     def high_priority
       priority('high')
+    end
+
+    def deleted
+      only_deleted
     end
   end
 

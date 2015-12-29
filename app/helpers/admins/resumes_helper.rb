@@ -3,8 +3,4 @@ module Admins::ResumesHelper
     available =  (params.try(:[], :resume).try(:[], :available) == 'false') ? false : true
     options_for_select([["求职中", true], ["暂时不找工作", false]], available ?  ["求职中", true] : ["暂时不找工作", false])
   end
-
-  def resumes_count(resumes, state)
-    resumes.send(state).count
-  end
 end

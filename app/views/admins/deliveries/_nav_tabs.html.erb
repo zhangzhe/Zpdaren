@@ -2,27 +2,27 @@
 <ul class="nav nav-tabs">
   <% active = (params[:state] == "recommended") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "未审核<span class='badge'>#{active.present? ? deliveries_count(deliveries, 'recommended') : current_admin.find_deliveries_count_by_state('recommended')}</span>".html_safe, admins_deliveries_path(:state => "recommended", :supplier_id => params[:supplier_id]) %>
+    <%= link_to "未审核<span class='badge'>#{active.present? ? deliveries.count : current_admin.find_deliveries_count_by_state('recommended')}</span>".html_safe, admins_deliveries_path(:state => "recommended", :supplier_id => params[:supplier_id]) %>
   </li>
   <% active = (params[:state] == "approved") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "待查看<span class='badge'>#{active.present? ? deliveries_count(deliveries, 'approved') : current_admin.find_deliveries_count_by_state('approved')}</span>".html_safe, admins_deliveries_path(:state => "approved", :supplier_id => params[:supplier_id]) %>
+    <%= link_to "待查看<span class='badge'>#{active.present? ? deliveries.count : current_admin.find_deliveries_count_by_state('approved')}</span>".html_safe, admins_deliveries_path(:state => "approved", :supplier_id => params[:supplier_id]) %>
   </li>
   <% active = (params[:state] == "paid") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "已付费查看<span class='badge'>#{active.present? ? deliveries_count(deliveries, 'paid') : current_admin.find_deliveries_count_by_state('paid')}</span>".html_safe, admins_deliveries_path(:state => "paid", :supplier_id => params[:supplier_id]) %>
+    <%= link_to "已付费查看<span class='badge'>#{active.present? ? deliveries.count : current_admin.find_deliveries_count_by_state('paid')}</span>".html_safe, admins_deliveries_path(:state => "paid", :supplier_id => params[:supplier_id]) %>
   </li>
   <% active = (params[:state] == "final_paid") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "已支付尾款<span class='badge'>#{active.present? ? deliveries_count(deliveries, 'final_paid') : current_admin.find_deliveries_count_by_state('final_paid')}</span>".html_safe, admins_deliveries_path(:state => "final_paid", :supplier_id => params[:supplier_id]) %>
+    <%= link_to "已支付尾款<span class='badge'>#{active.present? ? deliveries.count : current_admin.find_deliveries_count_by_state('final_paid')}</span>".html_safe, admins_deliveries_path(:state => "final_paid", :supplier_id => params[:supplier_id]) %>
   </li>
   <% active = (params[:state] == "recruiter_refused") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "招聘方拒绝<span class='badge'>#{active.present? ? deliveries_count(deliveries, 'recruiter_refused') : current_admin.find_deliveries_count_by_state('recruiter_refused')}</span>".html_safe, admins_deliveries_path(:state => "recruiter_refused", :supplier_id => params[:supplier_id]) %>
+    <%= link_to "招聘方拒绝<span class='badge'>#{active.present? ? deliveries.count : current_admin.find_deliveries_count_by_state('recruiter_refused')}</span>".html_safe, admins_deliveries_path(:state => "recruiter_refused", :supplier_id => params[:supplier_id]) %>
   </li>
   <% active = (params[:state] == "admin_refused") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "管理员拒绝<span class='badge'>#{active.present? ? deliveries_count(deliveries, 'admin_refused') : current_admin.find_deliveries_count_by_state('admin_refused')}</span>".html_safe, admins_deliveries_path(:state => "admin_refused", :supplier_id => params[:supplier_id]) %>
+    <%= link_to "管理员拒绝<span class='badge'>#{active.present? ? deliveries.count : current_admin.find_deliveries_count_by_state('admin_refused')}</span>".html_safe, admins_deliveries_path(:state => "admin_refused", :supplier_id => params[:supplier_id]) %>
   </li>
 </ul>
 <br>
