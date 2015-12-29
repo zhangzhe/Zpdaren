@@ -1,5 +1,5 @@
 class Supplier < User
-  devise :registerable
+  devise :registerable, :confirmable
   has_many :resumes
   has_many :deliveries, through: :resumes
   has_many :watchings

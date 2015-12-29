@@ -1,5 +1,5 @@
 class Recruiter < User
-  devise :registerable
+  devise :registerable, :confirmable
 
   has_one :company, :foreign_key => :user_id
   has_many :jobs, :foreign_key => :user_id

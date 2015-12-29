@@ -7,8 +7,15 @@ GIT
       activesupport (~> 4.0)
 
 GIT
+  remote: git://github.com/Nerian/bootstrap-datepicker-rails.git
+  revision: 9610a491d8f88c7fac34bc200dfbd248051be9bc
+  specs:
+    bootstrap-datepicker-rails (1.5.0)
+      railties (>= 3.0)
+
+GIT
   remote: git://github.com/carrierwaveuploader/carrierwave.git
-  revision: 1578777fe3f30140347ebf27d1943471bbe4d425
+  revision: ecf57fe5fed17657b258d708a59feeec9fac74cd
   specs:
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
@@ -88,12 +95,15 @@ GEM
       capistrano (~> 3.1, >= 3.1.0)
     certified (1.0.0)
     choice (0.2.0)
+    closure_tree (6.0.0)
+      activerecord (>= 4.1.0)
+      with_advisory_lock (>= 3.0.0)
     code_analyzer (0.4.5)
       sexp_processor
     coderay (1.1.0)
-    coffee-rails (4.1.0)
+    coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
-      railties (>= 4.0.0, < 5.0)
+      railties (>= 4.0.0, < 5.1.x)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -114,9 +124,9 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     erubis (2.7.0)
-    exception_notification (4.1.0)
-      actionmailer (>= 3.0.4)
-      activesupport (>= 3.0.4)
+    exception_notification (4.1.3)
+      actionmailer (~> 4.0)
+      activesupport (~> 4.0)
     execjs (2.6.0)
     faker (1.6.1)
       i18n (~> 0.5)
@@ -128,8 +138,8 @@ GEM
       activesupport (>= 4.1.0)
     htmlentities (4.3.4)
     i18n (0.7.0)
-    jbuilder (2.3.2)
-      activesupport (>= 3.0.0, < 5)
+    jbuilder (2.4.0)
+      activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
     jquery-rails (4.0.5)
       rails-dom-testing (~> 1.0)
@@ -216,11 +226,12 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.15.0)
     rake (10.4.2)
-    rdoc (4.2.0)
+    rdoc (4.2.1)
+      json (~> 1.4)
     redcarpet (3.2.3)
     require_all (1.3.3)
-    responders (2.1.0)
-      railties (>= 4.2.0, < 5)
+    responders (2.1.1)
+      railties (>= 4.2.0, < 5.1)
     rouge (1.8.0)
     ruby-graphviz (1.2.2)
     ruby-progressbar (1.7.5)
@@ -237,14 +248,14 @@ GEM
       rdoc (~> 4.0)
     sexp_processor (4.6.0)
     slop (3.6.0)
-    spring (1.5.0)
+    spring (1.6.1)
     sprockets (3.5.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-rails (2.3.3)
-      actionpack (>= 3.0)
-      activesupport (>= 3.0)
-      sprockets (>= 2.8, < 4.0)
+    sprockets-rails (3.0.0)
+      actionpack (>= 4.0)
+      activesupport (>= 4.0)
+      sprockets (>= 3.0.0)
     sshkit (1.8.1)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
@@ -253,6 +264,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.1)
+    truncate_html (0.9.3)
     turbolinks (2.5.3)
       coffee-rails
     twitter-bootstrap-rails (3.2.2)
@@ -279,8 +291,11 @@ GEM
     will_paginate (3.0.7)
     will_paginate-bootstrap (1.0.1)
       will_paginate (>= 3.0.3)
+    with_advisory_lock (3.0.0)
+      activerecord (>= 3.2)
+      thread_safe
     wkhtmltopdf-binary-edge (0.12.2.1)
-    wysiwyg-rails (2.0.3)
+    wysiwyg-rails (2.0.5)
       font-awesome-rails (~> 4.4, >= 4.4.0.0)
       railties (>= 3.2, < 5.0)
 
@@ -295,12 +310,14 @@ DEPENDENCIES
   auto-space (= 0.0.4)
   axlsx
   axlsx_rails
+  bootstrap-datepicker-rails!
   byebug
   capistrano (~> 3.4.0)
   capistrano-rails (~> 1.1)
   capistrano3-unicorn (~> 0.2.1)
   carrierwave!
   certified
+  closure_tree
   coffee-rails (~> 4.1.0)
   config
   devise
@@ -325,6 +342,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   spring
   strip_attributes
+  truncate_html
   turbolinks
   twitter-bootstrap-rails
   uglifier (>= 1.3.0)

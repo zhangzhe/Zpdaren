@@ -1,0 +1,10 @@
+$("#collapseExample<%= @parent.try(:id) %>").toggle();
+
+<% if @parent %>
+  $('#comment_content<%= @parent.try(:id) %>').val('');
+  $("<div class='replies'><%= escape_javascript(render @comment) %></div>").insertAfter("#comment_<%= @parent.try(:id) %>");
+<% else %>
+  $('#comment_content').val('');
+  $("<%= escape_javascript(render @comment) %>").insertAfter("#commit_button");
+
+<% end %>
