@@ -11,6 +11,8 @@ class HomeController < ApplicationController
         recruiters_jobs_path(:state => "submitted")
       when Supplier
         suppliers_jobs_path(:state => "high_priority")
+      when Professor
+        current_user.interview
       end
       redirect_to redirect_path
     end

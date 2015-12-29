@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151225080502) do
+ActiveRecord::Schema.define(version: 20151229025843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,30 @@ ActiveRecord::Schema.define(version: 20151225080502) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "comment_hierarchies", id: false, force: :cascade do |t|
+    t.integer "ancestor_id",   null: false
+    t.integer "descendant_id", null: false
+    t.integer "generations",   null: false
+  end
+
+  add_index "comment_hierarchies", ["ancestor_id", "descendant_id", "generations"], name: "comment_anc_desc_udx", unique: true, using: :btree
+  add_index "comment_hierarchies", ["descendant_id"], name: "comment_desc_idx", using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "commenter_id"
+    t.string   "commenter_name"
+    t.integer  "interview_id"
+    t.text     "content"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "parent_id"
+    t.datetime "deleted_at"
+  end
+
+  add_index "comments", ["commenter_id"], name: "index_comments_on_commenter_id", using: :btree
+  add_index "comments", ["interview_id"], name: "index_comments_on_interview_id", using: :btree
+  add_index "comments", ["parent_id"], name: "index_comments_on_parent_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
     t.integer  "user_id"
@@ -50,6 +74,26 @@ ActiveRecord::Schema.define(version: 20151225080502) do
   end
 
   add_index "deliveries", ["resume_id", "job_id"], name: "index_deliveries_on_resume_id_and_job_id", unique: true, using: :btree
+
+  create_table "interviews", force: :cascade do |t|
+    t.text     "description"
+    t.text     "content"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "avatar"
+    t.string   "professor_name"
+    t.string   "professor_title"
+    t.text     "professor_brief"
+    t.text     "brief"
+    t.integer  "professor_id"
+    t.datetime "reply_started_at"
+    t.datetime "reply_ended_at"
+    t.datetime "reply_begin_at"
+    t.datetime "reply_end_at"
+    t.datetime "deleted_at"
+  end
+
+  add_index "interviews", ["professor_id"], name: "index_interviews_on_professor_id", using: :btree
 
   create_table "jobs", force: :cascade do |t|
     t.string   "title"
@@ -161,6 +205,7 @@ ActiveRecord::Schema.define(version: 20151225080502) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.string   "mobile"
+    t.string   "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

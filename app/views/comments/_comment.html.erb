@@ -1,0 +1,17 @@
+<div class="well" id="comment_<%= comment.id %>">
+  <p class="text-muted">
+    <strong><%= comment.commenter_name %></strong>
+    <%= l(comment.created_at, format: '%B, %d %Y %H:%M:%S') %>
+    <%= link_to '删除', admins_comment_path(comment), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: '确认?' }, remote: true %>
+  </p>
+  <blockquote>
+    <p><%= comment.content %></p>
+  </blockquote>
+
+  <%= link_to "<i class='fa fa-reply'></i>".html_safe, "#", onclick: "$('#collapseExample#{comment.id}').toggle(); return false" %>
+  <div class="collapse" id="collapseExample<%= comment.id %>">
+    <p>
+      <%= render(partial: "/comments/comment_form", locals: {comment: comment}) %>
+    </p>
+  </div>
+</div>
