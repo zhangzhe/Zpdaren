@@ -2,7 +2,10 @@ class Admins::ResumesController < Admins::BaseController
   def index
     params[:state] = 'uncompleted' unless current_admin.resume_state_is_legal?(params[:state])
     @resumes = current_admin.find_resumes_by_state(params[:state])
-    @resumes = @resumes.where(:supplier_id => params[:supplier_id]) if params[:supplier_id]
+    if params[:supplier_id]
+      @supplier = Supplier.find(params[:supplier_id])
+      @resumes = @resumes.where(:supplier_id => params[:supplier_id])
+    end
     @resumes = @resumes.where("candidate_name like ?", "%#{params[:key]}%").paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 

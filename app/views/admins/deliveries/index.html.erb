@@ -1,5 +1,7 @@
-<% if params[:job_id] %>
-  <%= render 'job_deliveries_nav_tabs', deliveries: @deliveries, job: @job %>
+<% if params[:job_id].present? %>
+  <%= render 'job_nav_tabs', deliveries: @deliveries, job: @job %>
+<% elsif params[:supplier_id].present? %>
+  <%= render 'supplier_nav_tabs', deliveries: @deliveries, supplier: @supplier %>
 <% else %>
   <%= render 'nav_tabs', deliveries: @deliveries %>
 <% end %>

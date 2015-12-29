@@ -1,5 +1,10 @@
 <%= render 'admins/shared/search', title: '简历列表', url: admins_resumes_path, placeholder: '被推荐人' %>
-<%= render 'nav_tabs', resumes: @resumes %>
+<% if @supplier %>
+  <%= render 'supplier_nav_tabs', resumes: @resumes, supplier: @supplier %>
+<% else %>
+  <%= render 'nav_tabs', resumes: @resumes %>
+<% end %>
+
 <br>
 <%= render 'list', resumes: @resumes %>
 <%= render 'shared/paginate', objs: @resumes %>
