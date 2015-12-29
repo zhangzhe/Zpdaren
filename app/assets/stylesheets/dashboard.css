@@ -14,20 +14,6 @@ body {
   height: 480px;
 }
 
-.ama_image_for_phone {
-  background: url(/assets/front_image.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 160px;
-}
-
-.ama_image {
-  background: url(/assets/front_image.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 400px;
-}
-
 .nav-text {
     font-size: large;
     font-weight: bold;
