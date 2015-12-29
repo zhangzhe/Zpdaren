@@ -3,5 +3,6 @@ class Interview < ActiveRecord::Base
   has_many :comments
   belongs_to :professor
   mount_uploader :avatar, AvatarUploader
+  acts_as_paranoid
 
 end

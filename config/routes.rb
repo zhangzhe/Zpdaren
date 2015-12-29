@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :interviews, only: [:show] do
     resources :comments
   end
+
   resources :tags, only: [:index]
 
   get 'qr_codes/:id' => "qr_codes#show", :as => "qr_code"
@@ -48,7 +49,7 @@ Rails.application.routes.draw do
   namespace :admins do
     get 'statistics' => 'statistics#index'
     resources :interviews, except: [:show]
-
+    resources :comments, only: [:destroy]
     resources :resumes, only: [:index, :show, :edit, :update] do
       member do
         get :download

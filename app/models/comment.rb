@@ -3,6 +3,7 @@ class Comment < ActiveRecord::Base
   validates_presence_of :content
   before_save :set_default_commenter_name
   acts_as_tree order: 'created_at DESC'
+  acts_as_paranoid
 
   private
   def set_default_commenter_name
