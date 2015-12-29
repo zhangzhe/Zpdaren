@@ -11,7 +11,11 @@ class Admins::InterviewsController < Admins::BaseController
     @interview = Interview.new(interview_params)
     @professor = Professor.new(professor_params)
     @interview.professor = @professor
-    if (@professor.save && @interview.save)
+    saved = false
+    ActiveRecord::Base.transaction do
+      saved = @professor.save && @interview.save
+    end
+    if saved
       redirect_to @interview, notice: '创建成功'
     else
       flash[:error] = @interview.errors.full_messages.first || @professor.errors.full_messages.first
