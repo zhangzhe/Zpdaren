@@ -2,7 +2,7 @@
   <p class="text-muted">
     <strong><%= comment.commenter_name %></strong>
     <%= l(comment.created_at, format: '%B, %d %Y %H:%M:%S') %>
-    <%= link_to '删除', admins_comment_path(comment), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: '确认?' }, remote: true %>
+    <%= link_to '删除', admins_comment_path(comment), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: '确认?' }, remote: true if current_admin %>
   </p>
   <blockquote>
     <p><%= comment.content %></p>
