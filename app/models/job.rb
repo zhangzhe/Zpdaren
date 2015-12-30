@@ -80,8 +80,8 @@ class Job < ActiveRecord::Base
     self.deposit_paid? || self.final_payment_paid? || self.finished?
   end
 
-  def self.high_priority_samples
-    self.high_priority.shuffle[0..5]
+  def self.high_priority_samples(count=6)
+    self.high_priority.shuffle[0..(count-1)]
   end
 
   def editable?

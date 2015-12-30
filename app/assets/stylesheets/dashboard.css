@@ -14,6 +14,13 @@ body {
   height: 480px;
 }
 
+.front_image_phone {
+  background: url(/assets/front_image_phone.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 620px;
+}
+
 .nav-text {
     font-size: large;
     font-weight: bold;

@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="text-center"><h3><%= link_to "热门职位", Job %></h3></div>
+  <br>
+  <div class="row">
+    <% Job.high_priority_samples(3).each do |job| %>
+    <div class="col-xs-0 col-md-12">
+      <div class="text-center">
+        <blockquote>
+        <p><%= link_to truncate("#{job.company_name}招聘#{job.title}", length: 28), job %></p>
+        <footer>入职红包: <%= job.bonus_for_entry %>&nbsp;每份简历红包: <%= job.bonus_for_each_resume_for_supplier %></footer>
+      </blockquote>
+        <p><%= link_to "我要红包 &raquo;".html_safe, job, class: "btn btn-default" %></p>
+        <br><br>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+

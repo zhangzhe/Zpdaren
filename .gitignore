@@ -22,6 +22,7 @@
 config/database.yml
 /uploads/*
 !/uploads/.keep
+public/uploads/interview/avatar/*
 !/public/uploads/interview/avatar/.keep
 .DS_Store
 
