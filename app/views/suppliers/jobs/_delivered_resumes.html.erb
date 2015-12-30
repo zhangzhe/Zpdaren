@@ -7,7 +7,7 @@
       <br>
       <%= resume.tag_list %>
       <br>
-      <td><%= link_to resume.attachment.file.file.split('/')[-1], download_suppliers_resume_path(resume[:id]) %></td>
+      <td><%= link_to resume.attachment.current_path.split('/')[-1], download_suppliers_resume_path(resume[:id]) %></td>
       <hr>
     </div>
   <% end %>

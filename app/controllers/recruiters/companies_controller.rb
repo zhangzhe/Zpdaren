@@ -1,4 +1,6 @@
 class Recruiters::CompaniesController < Recruiters::BaseController
+  skip_filter :complete_company_info
+
   def edit
     @company = current_recruiter.company
   end

@@ -6,7 +6,7 @@
   <li class="active">修改公司信息</li>
 </ol>
 
-<%= render 'shared/page_title', title: @company.name %>
+<%= render 'shared/page_title', title: @company.name if @company.name? %>
 
 <%= form_for @company, url: recruiters_company_path do |f| %>
   <p>
@@ -38,7 +38,6 @@
   </p>
   <p>
     <%= f.label :service_protocol, "企业服务协议" %>
-    <%= sanitize("<span class='red-star'>*</span>") unless @company.service_protocol? %>
     <span class='fs12'>
       <%= link_to '企业服务协议模板', company_service_protocol_path %>
     </span>

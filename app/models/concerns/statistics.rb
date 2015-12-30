@@ -12,7 +12,7 @@ module Statistics
   end
 
   def Statistics.delivery_rate(scope = 'all')
-    return 0 if Job.count == 0
+    return 0 if (Job.count == 0) || ((Job.count > 0) && (Job.high_priority.count == 0))
 
     if scope == 'all'
       had_delivery_jobs(scope).count.to_f / Job.count
@@ -22,7 +22,7 @@ module Statistics
   end
 
   def Statistics.success_delivery_rate(scope = 'all')
-    return 0 if Delivery.count == 0
+    return 0 if (Delivery.count == 0) || ((Delivery.count > 0) && (deliveries_for_high_priority_jobs.count == 0))
 
     if scope == 'all'
       Delivery.after_paid.count.to_f / Delivery.count

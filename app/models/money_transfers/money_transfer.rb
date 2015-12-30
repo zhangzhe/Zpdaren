@@ -1,7 +1,6 @@
 class MoneyTransfer < ActiveRecord::Base
   belongs_to :wallet
   default_scope { order('created_at DESC') }
-  scope :waiting_approved, -> { where('state' => 'submitted')}
 
   strip_attributes
   include AASM
@@ -23,6 +22,19 @@ class MoneyTransfer < ActiveRecord::Base
       "提交"
     when "finished"
       "完成"
+    end
+  end
+
+  def confirm
+    ActiveRecord::Base.transaction do
+      self.go!
+      if self.type == "FinalPayment"
+        self.delivery.complete!
+      end
+
+      if self.type == "Deposit"
+        self.job.confirm_deposit_paid!
+      end
     end
   end
 end

@@ -21,7 +21,7 @@
   <p>
     <strong>职位佣金：</strong>
     <span class='gray-light'>
-      <%= @delivery.job.bonus %>元
+      <%= @delivery.job_bonus %>元
     </span>
   </p>
   <p class='blockquote14'>
@@ -34,11 +34,11 @@
   </div>
   <hr>
   <h2>
-    <%= @delivery.job.company.name %>
+    <%= @delivery.job.company_name %>
   </h2 >
   <p class='gray-light'>
     联系方式：
-    <%= @delivery.job.company.mobile %>
+    <%= @delivery.job.company_mobile %>
   </p >
   <p class='blockquote14'>
     <strong>
@@ -47,11 +47,11 @@
   </p>
   <p>
     <div class='gray-light'>
-      <%= simple_format @delivery.job.company.description %>
+      <%= simple_format @delivery.job.company_description %>
     </div>
   </p>
-  <p class='gray-light'>地址：<%= @delivery.job.company.address.present? ? @delivery.job.company.address : '暂未提供' %></p>
-  <p><%= "给招聘方的留言：#{@delivery.message}" if @delivery.message.present? %></p>
+  <p class='gray-light'>地址：<%= @delivery.job.company_address.present? ? @delivery.job.company_address : '暂未提供' %></p>
+  <p><%= "给招聘方的留言：#{@delivery.message}" if @delivery.message? %></p>
 </div>
 <div class="col-md-6">
   <%= render 'shared/page_title', title: '推荐' %>
@@ -71,7 +71,7 @@
     <%= sanitize("<div class='alert alert-info' role='alert'><strong>不合适原因：</strong>#{@delivery.rejection_reasons}</div>") if @delivery.refused? %>
   </p>
   <p>
-    <%= sanitize("<strong>备注：</strong>#{@delivery.resume.remark}") if @delivery.resume.remark.present? %>
+    <%= sanitize("<strong>备注：</strong>#{@delivery.resume_remark}") if @delivery.resume_remark.present? %>
   </p>
   <p class='blockquote14'>
     <strong>

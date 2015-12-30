@@ -7,7 +7,7 @@
 </ol>
 <%= render 'shared/page_title', title: '提现到支付宝' %>
 <br>
-<%= render 'qrcode' unless current_supplier.weixin %>
+<%= render 'qrcode', qrcode_url: @qrcode_url unless current_supplier.weixin %>
 
 <div class="col-md-6 text-center">
   <div class="container-fluid">

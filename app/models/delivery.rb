@@ -6,21 +6,19 @@ class Delivery < ActiveRecord::Base
   has_one :rejection
   belongs_to :final_payment, :foreign_key => :final_payment_id
 
-  delegate :id, :candidate_name, :tag_list, :mobile, :email, :message, to: :resume, prefix: true
-  delegate :id, :title, :user_id, :bonus, :description, :tag_list, to: :job, prefix: true
+  delegate :id, :candidate_name, :tag_list, :mobile, :email, :message, :attachment, :pdf_attachment, :remark, :available, to: :resume, prefix: true
+  delegate :id, :title, :user_id, :bonus, :description, :tag_list, :state, to: :job, prefix: true
   delegate :reason, :other, to: :rejection, prefix: true
 
   validates_length_of :message, maximum: 50
 
   scope :paid, -> { where('deliveries.state' => 'paid') }
   scope :recommended, -> { where('deliveries.state' => 'recommended') }
-  scope :waiting_approved, -> { recommended }
 
   scope :process, -> { where("deliveries.state in ('paid', 'refused', 'final_payment_paid', 'finished')") }
   scope :approved, -> { where('deliveries.state' => 'approved') }
   scope :after_approved, -> { where.not(state: 'recommended') }
   scope :recruiter_watchable, -> { where("deliveries.state not in ('recommended', 'refused') or (deliveries.state = 'refused' and deliveries.read_at is not null)") }
-  scope :approved_today, -> { where('DATE(deliveries.updated_at) = ? and deliveries.state = ?', Date.today, 'approved') }
   scope :after_paid, -> { where("deliveries.state in ('paid', 'final_payment_paid', 'finished')") }
   scope :final_paid, -> { where("deliveries.state in ('final_payment_paid', 'finished')") }
   scope :paid_today, -> { where('DATE(deliveries.updated_at) = ? and deliveries.state = ?', Date.today, 'paid') }
@@ -29,6 +27,7 @@ class Delivery < ActiveRecord::Base
   scope :refused, -> { where('deliveries.state' => 'refused') }
   scope :recruiter_refused, -> { where("deliveries.state = 'refused' and deliveries.read_at is not null") }
   scope :admin_refused, -> { where("deliveries.state = 'refused' and deliveries.read_at is null") }
+  scope :unread, -> { where("read_at is null") }
 
   default_scope { order('updated_at DESC') }
 
@@ -83,10 +82,6 @@ class Delivery < ActiveRecord::Base
   end
 
   class << self
-    def order_by_state
-      select("deliveries.*, case when state='recommended' then 1 else 0 end as state_level").order("state_level desc")
-    end
-
     def base_state_valid?(state)
       ['recommended', 'approved', 'paid', 'refused', 'final_paid'].include?(state)
     end
@@ -97,19 +92,15 @@ class Delivery < ActiveRecord::Base
   end
 
   def read!
-    self.update_attribute(:read_at, Time.now)
-  end
-
-  def read?
-    !unread?
+    self.update_attribute(:read_at, Time.now) if self.unread?
   end
 
   def unread?
     read_at.blank?
   end
 
-  def description
-    resume.description
+  def can_read?
+    (self.ever_paid_or_final_payment_paid_or_finished? && self.unread?) || (self.approved? && !self.ever_paid_or_final_payment_paid_or_finished?)
   end
 
   def recruiter
@@ -170,8 +161,14 @@ class Delivery < ActiveRecord::Base
     EpinCipher.aes128_encrypt(original_data)
   end
 
-  def external_credential_valid?(external_credential)
-    original_data == EpinCipher.aes128_decrypt(external_credential)
+  def check(delivery_params)
+    return false unless self.update_attributes(delivery_params)
+    self.approve! if self.recommended? && self.may_approve?
+    true
+  end
+
+  def free_read?
+    self.unread? && self.ever_paid_or_final_payment_paid_or_finished?
   end
 
   private

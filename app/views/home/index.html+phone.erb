@@ -26,11 +26,11 @@
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active fade in" id="supplier">
             <% @resource = Supplier.new; @resource_name = "supplier" %>
-            <%= render "signup" %>
+            <%= render "signup", resource: @resource, resource_name: @resource_name %>
           </div>
           <div role="tabpanel" class="tab-pane fade" id="recruiter">
             <% @resource = Recruiter.new; @resource_name = "recruiter" %>
-            <%= render "signup" %>
+            <%= render "signup", resource: @resource, resource_name: @resource_name %>
           </div>
         </div>
         <br>

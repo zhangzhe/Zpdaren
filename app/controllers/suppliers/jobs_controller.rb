@@ -1,12 +1,9 @@
 class Suppliers::JobsController < Suppliers::BaseController
-  helper_method :sort_column
 
   def index
-    @jobs = Job.available
-    @jobs = @jobs.high_priority if params[:state] == 'high_priority'
+    @jobs = current_supplier.find_jobs_by_state(params[:state])
     @jobs = @jobs.where("user_id = ? ", params[:recruiter_id]) if params[:recruiter_id]
-    @jobs = @jobs.where("title ilike ?", "%#{params[:key]}%") if params[:key].present?
-    @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @jobs = @jobs.where("title ilike ?", "%#{params[:key]}%").paginate(page: params[:page], per_page: Settings.pagination.page_size)
     select_show_page
   end
 

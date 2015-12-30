@@ -1,3 +1,5 @@
+require 'epin_cipher'
+
 class Resume < ActiveRecord::Base
   has_many :deliveries
   has_many :jobs, through: :deliveries
@@ -10,10 +12,10 @@ class Resume < ActiveRecord::Base
   default_scope { order("created_at DESC") }
   scope :completed, ->{ where("description is not null or pdf_attachment is not null") }
   scope :uncompleted, ->{ where("description is null and pdf_attachment is null and problem is null") }
-  scope :waiting_approved, ->{ where("description is null and pdf_attachment is null") }
-  scope :unavailable, ->{ where(:available => false) }
-  scope :available, ->{ where(:available => true) }
+  scope :unavailable, ->{ where("available = ? and problem is null", false) }
+  scope :available, ->{ where("available = ? and problem is null", true) }
   scope :problemed, ->{ where("problem is not null") }
+  scope :unproblematic, ->{ where("problem is null") }
 
   accepts_nested_attributes_for :deliveries
   include SimilarEntity
@@ -27,6 +29,12 @@ class Resume < ActiveRecord::Base
 
   extend Statistics
 
+  class << self
+    def active_suppliers_count
+      Resume.all.map(&:supplier_id).uniq.count
+    end
+  end
+
   def resumes_from(supplier)
     self.resumes.where(:supplier_id => supplier.id)
   end
@@ -36,7 +44,7 @@ class Resume < ActiveRecord::Base
   end
 
   def is_pdf?
-    self.attachment.file.file.end_with?('pdf')
+    self.attachment.current_path.end_with?('pdf')
   end
 
   def may_improve?
@@ -55,19 +63,33 @@ class Resume < ActiveRecord::Base
     self.deliveries.after_paid.present?
   end
 
-  def self.active_suppliers_count
-    Resume.all.map(&:supplier_id).uniq.count
-  end
-
   def sync_deliveries
-    if !self.available || self.problem.present?
+    if !self.available || self.problem?
       self.deliveries.each do |delivery|
         if delivery.recommended? && delivery.may_refuse?
-          Rejection.create(:delivery_id => delivery.id, :other => (self.problem.present? ? self.problem : '暂时不找工作'))
+          Rejection.create(:delivery_id => delivery.id, :other => (self.problem? ? self.problem : '暂时不找工作'))
           delivery.refuse!
         end
       end
     end
+  end
+
+  def external_credential
+    EpinCipher.aes128_encrypt(original_data)
+  end
+
+  def complete(resume_params)
+    self.pdf_attachment = self.attachment if resume_params[:problem].blank? && self.is_pdf?
+    self.attributes = resume_params
+    if self.save
+      self.sync_deliveries
+      return true
+    end
+    false
+  end
+
+  def problematic?
+    self.problem?
   end
 
   private
@@ -79,5 +101,9 @@ class Resume < ActiveRecord::Base
 
   def matching_jobs
     similar_entity(Job)
+  end
+
+  def original_data
+    "zpdaren_resumes_#{self.id}"
   end
 end

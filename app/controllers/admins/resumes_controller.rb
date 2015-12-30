@@ -1,23 +1,12 @@
 class Admins::ResumesController < Admins::BaseController
   def index
-    if params[:state] == "uncompleted"
-      @resumes = Resume.uncompleted
-    elsif params[:state] == "completed"
-      @resumes = Resume.completed
-    elsif params[:state] == "unavailable"
-      @resumes = Resume.unavailable
-    elsif params[:state] == "available"
-      @resumes = Resume.available
-    elsif params[:state] == "problemed"
-      @resumes = Resume.problemed
-    else
-      @resumes = Resume.all
+    params[:state] = 'uncompleted' unless current_admin.resume_state_is_legal?(params[:state])
+    @resumes = current_admin.find_resumes_by_state(params[:state])
+    if params[:supplier_id]
+      @supplier = Supplier.find(params[:supplier_id])
+      @resumes = @resumes.where(:supplier_id => params[:supplier_id])
     end
-
-    @resumes = @resumes.where(:supplier_id => params[:supplier_id]) if params[:supplier_id]
-    @resumes = @resumes.where("candidate_name like ?", "%#{params[:key]}%") if params[:key].present?
-    @resumes = @resumes.order("#{params[:sort]} #{params[:direction]}")
-    @resumes = @resumes.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @resumes = @resumes.where("candidate_name like ?", "%#{params[:key]}%").paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def show
@@ -36,37 +25,33 @@ class Admins::ResumesController < Admins::BaseController
     unless has_problem?
       if @resume.is_pdf?
         if !is_reuse? && !is_pdf?
-          flash[:error] = '请上传pdf格式的简历'
-          render (@resume.is_pdf? ? 'edit_pdf' : 'edit') and return
+          flash[:error] = '请上传pdf格式的简历。'
+          render 'edit_pdf' and return
         end
-        @resume.pdf_attachment = @resume.attachment
       else
         if !is_pdf?
-          flash[:error] = '请上传pdf格式的简历'
-          render (@resume.is_pdf? ? 'edit_pdf' : 'edit') and return
+          flash[:error] = '请上传pdf格式的简历。'
+          render 'edit' and return
         end
       end
     end
-    @resume.attributes = resume_params
-
-    if @resume.save
-      @resume.sync_deliveries
-      flash[:success] = '完善成功'
+    if @resume.complete(resume_params)
+      flash[:success] = '完善成功。'
       redirect_to admins_resumes_path(:state => "uncompleted") and return
     else
-      flash[:error] = @resume.errors.full_messages.first
+      flash[:error] = '程序异常，完善失败。'
       render (@resume.is_pdf? ? 'edit_pdf' : 'edit') and return
     end
   end
 
   def download
     resume = Resume.find(params[:id])
-    send_file resume.attachment.file.file
+    send_file resume.attachment.current_path
   end
 
   def pdf_download
     resume = Resume.find(params[:id])
-    send_file resume.pdf_attachment.file.file
+    send_file resume.pdf_attachment.current_path
   end
 
   private

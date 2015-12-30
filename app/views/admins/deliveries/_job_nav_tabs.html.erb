@@ -1,0 +1,18 @@
+<br>
+<ol class="breadcrumb">
+  <li><%= link_to "职位列表", admins_jobs_path(:state => "in_hiring") %></li>
+  <li>审核【<%= job.title %>】的推荐</li>
+</ol>
+<%= render 'shared/page_title', title: '推荐列表' %>
+<ul class="nav nav-tabs">
+  <% active = (params[:state] == "recommended") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "未审核<span class='badge'>#{job.find_deliveries_count_by_state('recommended')}</span>".html_safe, admins_job_deliveries_path(:job_id => params[:job_id], :state => 'recommended') %>
+  </li>
+  <% active = (params[:state] == "after_approved") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "已审核<span class='badge'>#{job.find_deliveries_count_by_state('after_approved')}</span>".html_safe, admins_job_deliveries_path(:job_id => params[:job_id], :state => 'after_approved') %>
+  </li>
+</ul>
+<br>
+<%= render 'list', deliveries: deliveries %>

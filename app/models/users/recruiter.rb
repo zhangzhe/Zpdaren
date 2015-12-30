@@ -4,8 +4,16 @@ class Recruiter < User
   has_one :company, :foreign_key => :user_id
   has_many :jobs, :foreign_key => :user_id
   has_many :deliveries, through: :jobs
+
+  delegate :name, :mobile, :url, :address, :description, to: :company, prefix: true
+  delegate :money, to: :wallet, prefix: true
+
   after_create :init_blank_comapny
   before_destroy :destroy_all_association_entities
+
+  DELIVERY_STATE_WHITE_LIST = ['unprocess', 'viewed', 'final_paid', 'refused']
+
+  JOB_STATE_WHITE_LIST = ['submitted', 'deposit_paid', 'deposit_paid_confirmed', 'final_payment_paid', 'finished']
 
   include DataRecoverer
 
@@ -26,54 +34,54 @@ class Recruiter < User
     end
   end
 
-  def unprocess_deliveries_count
-    unprocess_deliveries.count
-  end
-
   def viewed_deliveries
     resume_ids = self.deliveries.process.map(&:resume_id)
     self.deliveries.where("deliveries.state = 'paid' or (deliveries.resume_id in (?) and deliveries.read_at is not null and deliveries.state = 'approved')", resume_ids)
-  end
-
-  def viewed_deliveries_count
-    viewed_deliveries.count
-  end
-
-  def paid_deliveries
-    deliveries.paid
-  end
-
-  def paid_deliveries_count
-    paid_deliveries.count
   end
 
   def final_paid_deliveries
     deliveries.final_paid
   end
 
-  def final_paid_deliveries_count
-    final_paid_deliveries.count
-  end
-
   def refused_deliveries
     deliveries.recruiter_refused
   end
 
-  def refused_deliveries_count
-    refused_deliveries.count
-  end
-
-  def recruiter_watchable_resumes_count
+  def recruiter_watchable_deliveries_count
     self.jobs.map(&:recruiter_watchable_deliveries).flatten.count
   end
 
   def create_and_pay_final_payment_for!(delivery)
     ActiveRecord::Base.transaction do
       self.receive(delivery.job.bonus_for_entry)
-      delivery.final_payment = FinalPayment.create!(:amount => delivery.job.bonus_for_entry, :wallet_id => self.wallet.id, :zhifubao_account => Admin.admin.bank_account)
+      delivery.final_payment = FinalPayment.create!(:amount => delivery.job.bonus_for_entry, :wallet_id => self.wallet.id, :zhifubao_account => Admin::BANK_ACCOUNT)
       delivery.save!
       delivery.pay_final_payment!
     end
+  end
+
+  def find_deliveries_by_state(state)
+    self.send("#{state}_deliveries")
+  end
+
+  def find_deliveries_count_by_state(state)
+    find_deliveries_by_state(state).count
+  end
+
+  def delivery_state_is_legal?(state)
+    DELIVERY_STATE_WHITE_LIST.include?((state || '').downcase)
+  end
+
+  def find_jobs_by_state(state)
+    self.jobs.send(state.downcase)
+  end
+
+  def find_jobs_count_by_state(state)
+    find_jobs_by_state(state).count
+  end
+
+  def job_state_is_legal?(state)
+    JOB_STATE_WHITE_LIST.include?((state || '').downcase)
   end
 
   private

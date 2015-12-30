@@ -1,0 +1,18 @@
+<ul class="nav nav-tabs">
+  <% active = (params[:state] == "uncompleted") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "待完善<span class='badge'>#{active.present? ? resumes.count : current_admin.find_resumes_count_by_state('uncompleted')}</span>".html_safe, admins_resumes_path(:state => "uncompleted", :supplier_id => params[:supplier_id]) %>
+  </li>
+  <% active = (params[:state] == "available") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "已完善(求职中)<span class='badge'>#{active.present? ? resumes.count : current_admin.find_resumes_count_by_state('available')}</span>".html_safe, admins_resumes_path(:state => "available", :supplier_id => params[:supplier_id]) %>
+  </li>
+  <% active = (params[:state] == "unavailable") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "已完善(暂时不找工作)<span class='badge'>#{active.present? ? resumes.count : current_admin.find_resumes_count_by_state('unavailable')}</span>".html_safe, admins_resumes_path(:state => "unavailable", :supplier_id => params[:supplier_id]) %>
+  </li>
+  <% active = (params[:state] == "problemed") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "问题简历<span class='badge'>#{active.present? ? resumes.count : current_admin.find_resumes_count_by_state('problemed')}</span>".html_safe, admins_resumes_path(:state => "problemed", :supplier_id => params[:supplier_id]) %>
+  </li>
+</ul>

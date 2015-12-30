@@ -6,6 +6,8 @@ class Supplier < User
   delegate :money, to: :wallet, prefix: true
   before_destroy :destroy_all_association_entities
 
+  DELIVERY_STATE_WHITE_LIST = ['recommended', 'approved', 'paid', 'final_paid', 'refused']
+
   include DataRecoverer
   extend Statistics
 
@@ -24,6 +26,26 @@ class Supplier < User
 
     def newly_active_supplier_count_recently_seven_days
       newly_active_supplier_recently_seven_days.count
+    end
+  end
+
+  def find_deliveries_by_state(state)
+    self.deliveries.send(state.downcase)
+  end
+
+  def find_deliveries_count_by_state(state)
+    find_deliveries_by_state(state).count
+  end
+
+  def delivery_state_is_legal?(state)
+    DELIVERY_STATE_WHITE_LIST.include?((state || '').downcase)
+  end
+
+  def find_jobs_by_state(state)
+    if state == 'high_priority'
+      jobs = Job.available.high_priority
+    else
+      jobs = Job.available
     end
   end
 

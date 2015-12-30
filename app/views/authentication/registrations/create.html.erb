@@ -1,1 +1,1 @@
-<%= render :partial => "/authentication/registrations/form" %>
+<%= render :partial => "/authentication/registrations/form", locals: { validatable: @validatable, minimum_password_length: @minimum_password_length } %>

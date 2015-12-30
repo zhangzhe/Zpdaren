@@ -78,16 +78,13 @@ ActiveRecord::Schema.define(version: 20151229025843) do
   create_table "interviews", force: :cascade do |t|
     t.text     "description"
     t.text     "content"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "avatar"
     t.string   "professor_name"
     t.string   "professor_title"
-    t.text     "professor_brief"
     t.text     "brief"
     t.integer  "professor_id"
-    t.datetime "reply_started_at"
-    t.datetime "reply_ended_at"
     t.datetime "reply_begin_at"
     t.datetime "reply_end_at"
     t.datetime "deleted_at"
@@ -125,6 +122,7 @@ ActiveRecord::Schema.define(version: 20151229025843) do
     t.datetime "deleted_at"
   end
 
+  add_index "money_transfers", ["job_id"], name: "index_money_transfers_on_job_id", using: :btree
   add_index "money_transfers", ["wallet_id"], name: "index_money_transfers_on_wallet_id", using: :btree
 
   create_table "refund_requests", force: :cascade do |t|

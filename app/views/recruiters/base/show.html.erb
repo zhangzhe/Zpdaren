@@ -2,16 +2,16 @@
 <h3>基本信息</h3>
 <div>
   <div>
-    <p class="ti2">公司名称：<%= current_recruiter.company.name %></p>
-    <p class="ti2">联系方式：<%= current_recruiter.company.mobile %></p>
-    <p class="ti2">公司网址：<%= current_recruiter.company.url.present? ? link_to(current_recruiter.company.url, external_url(current_recruiter.company.url), target: '_blank') : link_to('待完善', edit_recruiters_company_path(current_recruiter.company)) %></p>
+    <p class="ti2">公司名称：<%= current_recruiter.company_name %></p>
+    <p class="ti2">联系方式：<%= current_recruiter.company_mobile %></p>
+    <p class="ti2">公司网址：<%= current_recruiter.company_url.present? ? link_to(current_recruiter.company_url, external_url(current_recruiter.company_url), target: '_blank') : link_to('待完善', edit_recruiters_company_path(current_recruiter.company)) %></p>
     <p class='blockquote14 ml2em'>
       <strong>
         公司描述
       </strong>
     </p>
     <p>
-      <div class='ml2em'><%= simple_format current_recruiter.company.description %></div>
+      <div class='ml2em'><%= simple_format current_recruiter.company_description %></div>
     </p>
     <p class='blockquote14 ml2em'>
       <strong>
@@ -22,7 +22,7 @@
       <%= render 'shared/protocol_show', company: current_recruiter.company, url: service_protocol_recruiters_company_path(current_recruiter.company) %>
     </p>
     <p class='ml2em'>
-      地址：<%= current_recruiter.company.address.present? ? current_recruiter.company.address : link_to('待完善', edit_recruiters_company_path(current_recruiter.company)) %>
+      地址：<%= current_recruiter.company_address.present? ? current_recruiter.company_address : link_to('待完善', edit_recruiters_company_path(current_recruiter.company)) %>
     </p>
     <br>
     <p>
@@ -35,9 +35,9 @@
 
 <div>
   <h3>公司账户</h3>
-  <p class="ti2">账户余额：<%= current_recruiter.wallet.money %>元</p>
+  <p class="ti2">账户余额：<%= current_recruiter.wallet_money %>元</p>
   <br>
   <p>
-    <%= link_to "提现到支付宝", new_recruiters_withdraw_path, :class => "btn btn-primary" if current_recruiter.wallet.money > 0 %>
+    <%= link_to "提现到支付宝", new_recruiters_withdraw_path, :class => "btn btn-primary" if current_recruiter.wallet_money > 0 %>
   </p>
 </div>

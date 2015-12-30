@@ -10,8 +10,8 @@
         <%= devise_error_messages! %>
         <%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "邮箱" %>
         <br>
-        <% if @validatable %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% if validatable %>
+          <em>(<%= minimum_password_length %> characters minimum)</em>
         <% end %>
         <%= f.password_field :password, autocomplete: "off", :class => "form-control input-lg", :placeholder => "密码" %><br>
         <br>

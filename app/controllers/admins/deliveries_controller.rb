@@ -1,26 +1,17 @@
 class Admins::DeliveriesController < Admins::BaseController
-  helper_method :sort_column
 
   def index
-    if params[:job_id]
+    params[:state] = 'recommended' unless current_admin.delivery_state_is_legal?(params[:state])
+    if params[:job_id].present?
       @job = Job.find(params[:job_id])
-      @deliveries = @job.deliveries
-      @approved_deliveries = @deliveries.after_approved.order("created_at DESC")
-      @recommended_deliveries = @deliveries.recommended.order("created_at DESC")
+      @deliveries = @job.find_deliveries_by_state(params[:state])
+    elsif params[:supplier_id].present?
+      @supplier = Supplier.find(params[:supplier_id])
+      @deliveries = @supplier.find_deliveries_by_state(params[:state])
     else
-      @deliveries = Delivery.joins(:job)
-      if params[:supplier_id]
-        supplier = Supplier.find(params[:supplier_id])
-        @deliveries = supplier.deliveries
-      end
-      if params[:key]
-        resume_ids = Resume.where("candidate_name like ?", "%#{params[:key]}%").map(&:id)
-        @deliveries = @deliveries.where("resume_id in (?)", resume_ids)
-      end
-      params[:state] = 'recommended' unless Delivery.state_valid?(params[:state])
-      @deliveries = @deliveries.send(params[:state])
-      @deliveries = @deliveries.order("created_at DESC").paginate(page: params[:page], per_page: Settings.pagination.page_size)
+      @deliveries = current_admin.find_deliveries_by_state(params[:state])
     end
+    @deliveries = @deliveries.joins(:resume).where("resumes.candidate_name like ?", "%#{params[:key]}%").paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def show
@@ -38,21 +29,19 @@ class Admins::DeliveriesController < Admins::BaseController
     @job = Job.find(params[:job_id])
     @delivery = @job.deliveries.find(params[:id])
     if @delivery.resume.may_improve?
-      flash[:error] = "简历信息不完整，先去简历列表完善简历吧！"
+      flash[:error] = "简历信息不完整，先去简历列表完善简历吧。"
       render 'edit' and return
     end
-    if @delivery.update_attributes(delivery_params)
-      @delivery.approve!
-      flash[:success] = "审核完成！"
+    if @delivery.check(delivery_params)
+      flash[:success] = "审核完成。"
+    else
+      flash[:error] = '程序异常，审核失败。'
     end
+
     redirect_to admins_job_deliveries_path(:job_id => @delivery.job, :state => 'recommended')
   end
 
   private
-  def sort_column
-    params[:sort] if Delivery.column_names.include?(params[:sort])
-  end
-
   def delivery_params
     params.require(:delivery).permit(:message, :reason)
   end

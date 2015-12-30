@@ -1,5 +1,5 @@
 <% url = params[:action] == "new" ? admins_blogs_path : admins_blog_path %>
-<%= form_for @blog, url: url do |f|  %>
+<%= form_for blog, url: url do |f|  %>
   <p>
     <%= f.text_field :title, class: "form-control", placeholder: '博客标题' %>
   </p>

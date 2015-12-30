@@ -20,7 +20,7 @@ class Job < ActiveRecord::Base
   validates_numericality_of :salary_max, only_integer: true, greater_than_or_equal_to: :salary_min, less_than: 10000, if: Proc.new { |job| job.salary_min.is_a?(Integer) }
   validates_numericality_of :bonus, greater_than_or_equal_to: 1000, only_integer: true
 
-  delegate :name, :id, :address, to: :company, prefix: true
+  delegate :name, :id, :address, :mobile, :description, to: :company, prefix: true
 
   scope :submitted, -> { where('state' => 'submitted')}
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
@@ -67,12 +67,12 @@ class Job < ActiveRecord::Base
   end
 
   class << self
-    def state_valid?(state)
-      ['submitted', 'deposit_paid', 'deposit_paid_confirmed', 'final_payment_paid', 'finished'].include?(state)
-    end
-
     def high_priority
       priority('high')
+    end
+
+    def deleted
+      only_deleted
     end
   end
 
@@ -92,14 +92,21 @@ class Job < ActiveRecord::Base
     !['finished', 'final_payment_paid'].include?(self.state)
   end
 
+  def unprocess_deliveries
+    self.deliveries.approved.unread
+  end
+
   def viewed_deliveries
     resume_ids = recruiter.deliveries.process.map(&:resume_id)
     self.deliveries.where("deliveries.state = 'paid' or (deliveries.resume_id in (?) and deliveries.read_at is not null and deliveries.state = 'approved')", resume_ids)
   end
 
-  def unprocess_deliveries
-    resume_ids = recruiter.deliveries.process.map(&:resume_id)
-    self.deliveries.where("(resume_id not in (?) and deliveries.state = 'approved') or (resume_id in (?) and deliveries.state = 'approved' and read_at is null)", resume_ids, resume_ids)
+  def final_paid_deliveries
+    self.deliveries.final_paid
+  end
+
+  def refused_deliveries
+    self.deliveries.refused
   end
 
   def recruiter_watchable_deliveries
@@ -161,9 +168,9 @@ class Job < ActiveRecord::Base
     suppliers.include?(supplier)
   end
 
-  def may_refund?
-    (self.deposit_paid? || self.deposit_paid_confirmed?) && refund_requests.find_by_state(:submitted).nil?
-  end
+  # def may_refund?
+  #   (self.deposit_paid? || self.deposit_paid_confirmed?) && refund_requests.find_by_state(:submitted).nil?
+  # end
 
   def deliver_matching_resumes
     matching_resumes.each do |resume|
@@ -191,7 +198,7 @@ class Job < ActiveRecord::Base
   end
 
   def is_show_salary?
-    self.salary_min.present? and self.salary_max.present? and self.salary_min > 0 and self.salary_max > 0
+    self.salary_min? and self.salary_max? and self.salary_min > 0 and self.salary_max > 0
   end
 
   def all_kinds_of_deliveries_count
@@ -205,6 +212,14 @@ class Job < ActiveRecord::Base
 
   def may_approve?
     self.deliveries.recommended.size > 0
+  end
+
+  def find_deliveries_by_state(state)
+    self.deliveries.send(state.downcase)
+  end
+
+  def find_deliveries_count_by_state(state)
+    find_deliveries_by_state(state).count
   end
 
   private

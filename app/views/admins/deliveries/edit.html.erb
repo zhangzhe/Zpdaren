@@ -28,7 +28,7 @@
   <p>
     <strong>职位佣金：</strong>
     <span class='gray-light'>
-      <%= @delivery.job.bonus %>元
+      <%= @delivery.job_bonus %>元
     </span>
   </p>
   <p class='blockquote14'>
@@ -57,7 +57,7 @@
       <%= simple_format @delivery.job.company.description %>
     </div>
   </p>
-  <p class='gray-light'>地址：<%= @delivery.job.company.address.present? ? @delivery.job.company.address : '暂未提供' %></p>
+  <p class='gray-light'>地址：<%= @delivery.job.company_address.present? ? @delivery.job.company_address : '暂未提供' %></p>
 </div>
 <div class="col-md-6">
   <%= render 'shared/page_title', title: '推荐' %>
@@ -82,7 +82,7 @@
     <%= render 'shared/resume_show', resume: @delivery.resume, pdf_url: pdf_download_admins_resume_path(@delivery.resume), default: 'prompt' %>
   </p>
   <p>
-    <%= sanitize("<strong>备注：</strong>#{@delivery.resume.remark}") if @delivery.resume.remark.present? %>
+    <%= sanitize("<strong>备注：</strong>#{@delivery.resume_remark}") if @delivery.resume_remark.present? %>
   </p>
 </div>
 <div class="col-md-10">

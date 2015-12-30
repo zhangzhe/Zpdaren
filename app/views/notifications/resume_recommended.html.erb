@@ -1,11 +1,11 @@
 <%= render 'shared/email_head', recruiter: @recruiter %>
 <div class="body">
   <p>
-    您在<strong class="recruiter">众聘达人</strong>发布的<strong class="recruiter"><%= @delivery.job.title %></strong>职位已收到推荐简历：<strong class="recruiter"><%= @delivery.resume.candidate_name %></strong>的简历
+    您在<strong class="recruiter">众聘达人</strong>发布的<strong class="recruiter"><%= @delivery.job_title %></strong>职位已收到推荐简历：<strong class="recruiter"><%= @delivery.resume_candidate_name %></strong>的简历
   </p>
   <div class="content">
     <p>
-      <strong class="recruiter"><%= @delivery.resume.candidate_name %>的简历</strong>
+      <strong class="recruiter"><%= @delivery.resume_candidate_name %>的简历</strong>
     </p>
     <p>
       标签：
@@ -13,16 +13,16 @@
         <%= sanitize("<span class='tag'>#{tag}</span>")%>
       <% end %>
     </p>
-    <p>目前状态：<%= @delivery.resume.available ? '求职中' : '暂时不找工作（可以挖呀）' %></p>
+    <p>目前状态：<%= @delivery.resume_available ? '求职中' : '暂时不找工作（可以挖呀）' %></p>
     <p>
-      <%= sanitize("推荐者留言：<span class='tag'>#{ @delivery.message }</span>") if @delivery.message.present? %>
+      <%= sanitize("推荐者留言：<span class='tag'>#{ @delivery.message }</span>") if @delivery.message? %>
     </p>
     <p>
-      <% if @delivery.resume.pdf_attachment.present? %>
-        <%= link_to '查看简历', "#{ROOT_URL}/deliveries/#{@delivery.id}?external_credential=#{@delivery.external_credential}" %>
+      <% if @delivery.resume.pdf_attachment? %>
+        <%= link_to '查看简历', "#{ROOT_URL}/resumes/#{@delivery.resume_id}?external_credential=#{@delivery.resume.external_credential}" %>
       <% else %>
         <h2>简历详情</h2>
-        <%= simple_format @delivery.resume.description %>
+        <%= simple_format @delivery.resume_description %>
       <% end %>
       <%= link_to '查看联系方式', "#{ROOT_URL}/recruiters/deliveries/#{@delivery.id}" %>
     </p>

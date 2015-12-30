@@ -1,7 +1,7 @@
-<% if resume.pdf_attachment.present? %>
+<% if resume.pdf_attachment? %>
   <%= render 'shared/show_pdf', pdf_url: pdf_url %>
 <% else %>
-  <% if resume.description.present? %>
+  <% if resume.description? %>
   <div class="gray-light">
     <%= simple_format resume.description %>
   </div>

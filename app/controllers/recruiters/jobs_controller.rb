@@ -1,16 +1,9 @@
 class Recruiters::JobsController < Recruiters::BaseController
 
   def index
-    if current_recruiter.company.description.blank?
-      flash[:notice] = "请先完善公司信息，然后再发布职位"
-      redirect_to edit_recruiters_company_path(current_recruiter.company)
-    else
-      params[:state] = 'submitted' unless Job.state_valid?(params[:state])
-      @jobs = current_recruiter.jobs.send(params[:state])
-      @jobs = @jobs.where("title like ?", "%#{params[:key]}%") if params[:key].present?
-      @jobs = @jobs.order('created_at DESC')
-      @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
-    end
+    params[:state] = 'submitted' unless current_recruiter.job_state_is_legal?(params[:state])
+    @jobs = current_recruiter.find_jobs_by_state(params[:state])
+    @jobs = @jobs.where("title like ?", "%#{params[:key]}%").paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def new

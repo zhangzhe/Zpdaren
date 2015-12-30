@@ -1,15 +1,16 @@
 class Suppliers::DeliveriesController < Suppliers::BaseController
 
   def index
-    @deliveries = current_supplier.deliveries.joins(:job)
+    params[:state] = 'recommended' unless current_supplier.delivery_state_is_legal?(params[:state])
+
+    @deliveries = current_supplier.find_deliveries_by_state(params[:state])
+
     if params[:key]
       recruiter_ids = Company.where("name like ?", "%#{params[:key]}%").map(&:user_id)
-      @deliveries = @deliveries.where("user_id in (?)", recruiter_ids)
+      @deliveries = @deliveries.joins(:job).where("user_id in (?)", recruiter_ids)
     end
-    params[:state] = 'recommended' unless Delivery.base_state_valid?(params[:state])
-    @deliveries = @deliveries.send(params[:state])
-    @deliveries = @deliveries.order("#{params[:sort]} #{params[:direction]}")
-    @deliveries = @deliveries.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+
+    @deliveries = @deliveries.joins(:job).paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def new
@@ -20,6 +21,10 @@ class Suppliers::DeliveriesController < Suppliers::BaseController
 
   def create
     unless Delivery.find_by_resume_id_and_job_id(delivery_params[:resume_id], delivery_params[:job_id])
+      if current_supplier.resumes.find(delivery_params[:resume_id]).problematic?
+        flash[:error] = '该简历有问题，请修改后再推荐。'
+        redirect_to :back and return
+      end
       @delivery = Delivery.create(delivery_params)
       if @delivery.errors.any?
         flash[:error] = @delivery.errors.full_messages.first

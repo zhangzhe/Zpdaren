@@ -15,7 +15,7 @@
         <tr>
           <td><%= resume.candidate_name %></td>
           <td><%= resume.tag_list %></td>
-          <td><%= link_to resume.attachment.file.file.split('/')[-1], download_suppliers_resume_path(resume) %></td>
+          <td><%= link_to resume.attachment.current_path.split('/')[-1], download_suppliers_resume_path(resume) %></td>
           <td>
             <% if resume.deliveried?(@job) %>
               已推荐

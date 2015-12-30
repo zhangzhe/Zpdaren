@@ -19,11 +19,11 @@
 
     <div class="col-md-3">
       <H2>
-        <%= @job.company.name %>
+        <%= @job.company_name %>
       </H2 >
       <p>
         联系方式：
-        <%= @job.company.mobile %>
+        <%= @job.company_mobile %>
       </p >
       <p class='blockquote14'>
         <strong>
@@ -32,7 +32,7 @@
       </p>
       <p>
         <div class='gray-light'>
-          <%= simple_format @job.company.description %>
+          <%= simple_format @job.company_description %>
         </div>
       </p>
     </div>

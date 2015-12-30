@@ -24,7 +24,7 @@
           <td><%= delivery.updated_at.localtime.to_date.to_s(:db) %></td>
           <% if params[:state].nil? || (params[:state] == "recommended") %>
             <td>
-              <% if delivery.recommended? %>
+              <% if delivery.recommended? && delivery.may_approve? %>
                 <%= link_to '审核', edit_admins_job_delivery_path(:job_id => delivery.job, :id => delivery), class: 'btn btn-primary btn-sm', target: '_blank' %>
               <% else %>
                 已审核

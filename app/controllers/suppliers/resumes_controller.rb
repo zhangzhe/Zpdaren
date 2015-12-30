@@ -62,7 +62,7 @@ class Suppliers::ResumesController < Suppliers::BaseController
 
   def download
     resume = current_supplier.resumes.find(params[:id])
-    send_file resume.attachment.file.file
+    send_file resume.attachment.current_path
   end
 
   def select_list
@@ -72,7 +72,7 @@ class Suppliers::ResumesController < Suppliers::BaseController
     else
       @resumes = current_supplier.resumes
     end
-    @resumes = @resumes.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @resumes = @resumes.unproblematic.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def destroy
