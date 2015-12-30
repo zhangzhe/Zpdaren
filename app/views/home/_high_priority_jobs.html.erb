@@ -3,7 +3,7 @@
   <br>
   <div class="row">
     <% Job.high_priority_samples.each do |job| %>
-    <div class="col-xs-6 col-md-4">
+    <div class="col-xs-4 col-md-4">
       <div class="text-center">
         <blockquote>
         <p><%= link_to truncate("#{job.company_name}招聘#{job.title}", length: 20), job %></p>
