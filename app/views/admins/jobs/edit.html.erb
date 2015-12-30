@@ -15,6 +15,18 @@
     <span class='red-star'>*</span>
     <%= f.text_field :title, class: "form-control" %>
   </p>
+  <div class='salary_range'>
+    <label>月薪范围</label>
+    <p>
+      <span>最低月薪：</span>
+      <%= f.text_field :salary_min, class: "form-control" %>
+      <span>K</span>
+      &nbsp;&nbsp;
+      <span>最高月薪：</span>
+      <%= f.text_field :salary_max, class: "form-control" %>
+      <span>K</span>
+    </p>
+  </div>
   <p>
     <%= f.label :description, '职位描述' %>
     <span class='red-star'>*</span>

@@ -56,6 +56,6 @@ class Admins::JobsController < Admins::BaseController
 
   private
   def job_params
-    params.require(:job).permit(:title, :description, :tag_list)
+    params.require(:job).permit(:title, :salary_min, :salary_max, :description, :tag_list)
   end
 end
