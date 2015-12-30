@@ -23,6 +23,8 @@ config/database.yml
 /uploads/*
 !/uploads/.keep
 !/public/uploads/interview/avatar/.keep
+!/public/uploads/interview/.keep
+!/public/uploads/.keep
 .DS_Store
 
 config/settings.local.yml
