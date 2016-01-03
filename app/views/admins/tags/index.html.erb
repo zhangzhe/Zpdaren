@@ -8,7 +8,7 @@
           <div id="droppable1">
           <% @nomal_tags.each do |tag| %>
             <div id="draggable" class="draggable1 label label-primary">
-              <%= tag.name %>&nbsp;
+              <%= tag.name %>
             </div>
           <% end %>
         </div>
@@ -17,7 +17,7 @@
           <div id="droppable" >
             <% @priority_tags.each do |tag| %>
               <div id="draggable" class="draggable2 label label-primary">
-                <%= tag.name %>&nbsp;
+                <%= tag.name %>
               </div>
             <% end %>
           </div>
@@ -42,14 +42,29 @@
     $( ".draggable2" ).draggable();
     $( "#droppable1" ).droppable({
       drop: function( event, ui ) {
-        alert("你妹")
+        alert($(this).text())
       }
     });
 
     $( "#droppable" ).droppable({
       drop: function( event, ui ) {
-        $( this ).addClass( "ui-state-highlight" ).find( "p" ).html( "Dropped!" );
-        alert("去你妹")
+        // send ajax to server
+
+        $.ajax({
+          type: 'PUT',
+          url: '/admins/tags/update',
+          data: { priority: 1, tag: $(ui.draggable).text() },
+          success: function(response){
+            if (response['status'] == 200) {
+              location.reload();
+            }else{
+              alert('程序异常，设置失败。');
+            }
+          },
+          error: function(){
+            alert('程序异常，设置失败。');
+          }
+        });
       }
     });
   });
