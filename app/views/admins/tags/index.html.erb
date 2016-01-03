@@ -6,7 +6,7 @@
       <tr>
         <td class="default">
           <div id="droppable1">
-          <% @tags.each do |tag| %>
+          <% @nomal_tags.each do |tag| %>
             <div id="draggable" class="draggable1 label label-primary">
               <%= tag.name %>&nbsp;
             </div>
@@ -15,7 +15,7 @@
         </td>
         <td class="success">
           <div id="droppable" >
-            <% @tags.each do |tag| %>
+            <% @priority_tags.each do |tag| %>
               <div id="draggable" class="draggable2 label label-primary">
                 <%= tag.name %>&nbsp;
               </div>
