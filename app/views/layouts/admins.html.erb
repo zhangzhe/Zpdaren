@@ -20,12 +20,14 @@
             <li class="<%= active %>"><%= link_to "存款/提现确认#{badge_for_admin(MoneyTransfer)}".html_safe, deposits_admins_money_transfers_path %></li>
             <% active = active_for?([Admins::UsersController, Admins::CompaniesController, Admins::SuppliersController]) %>
             <li class="<%= active %>"><%= link_to "用户列表#{badge_for_admin(User)}".html_safe, admins_users_path(type: 'Recruiter') %></li>
+            <% active = active_for?([Admins::BlogsController]) %>
+            <li class="<%= active %>"><%= link_to "博客管理", admins_blogs_path %></li>
+            <% active = active_for?([Admins::InterviewsController]) %>
+            <li class="<%= active %>"><%= link_to "访谈管理", admins_interviews_path %></li>
+            <% active = active_for?([Admins::TagsController]) %>
+            <li class="<%= active %>"><%= link_to "标签管理", admins_tags_path %></li>
             <% active = active_for?([Admins::StatisticsController]) %>
             <li class="<%= active %>"><%= link_to "统计", admins_statistics_path %></li>
-            <% active = active_for?([Admins::BlogsController]) %>
-            <li class="<%= active %>"><%= link_to "博客", admins_blogs_path %></li>
-            <% active = active_for?([Admins::InterviewsController]) %>
-            <li class="<%= active %>"><%= link_to "访谈", admins_interviews_path %></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

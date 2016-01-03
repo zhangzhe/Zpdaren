@@ -1,0 +1,56 @@
+<body>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <td class="default">
+          <div id="droppable1">
+          <% @tags.each do |tag| %>
+            <div id="draggable" class="draggable1 label label-primary">
+              <%= tag.name %>&nbsp;
+            </div>
+          <% end %>
+        </div>
+        </td>
+        <td class="success">
+          <div id="droppable" >
+            <% @tags.each do |tag| %>
+              <div id="draggable" class="draggable2 label label-primary">
+                <%= tag.name %>&nbsp;
+              </div>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+    </thead>
+  </table>
+</div>
+
+
+</body>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+  <style>
+  #draggable { padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+  #droppable1 { width: 400px; height: 800px; padding: 0.5em; float: left; margin: 10px; }
+  #droppable { width: 400px; height: 800px; padding: 0.5em; float: left; margin: 10px; }
+  </style>
+  <script>
+  $(function() {
+    $( ".draggable1" ).draggable();
+    $( ".draggable2" ).draggable();
+    $( "#droppable1" ).droppable({
+      drop: function( event, ui ) {
+        alert("你妹")
+      }
+    });
+
+    $( "#droppable" ).droppable({
+      drop: function( event, ui ) {
+        $( this ).addClass( "ui-state-highlight" ).find( "p" ).html( "Dropped!" );
+        alert("去你妹")
+      }
+    });
+  });
+  </script>
