@@ -1,12 +1,9 @@
 class Suppliers::ResumesController < Suppliers::BaseController
 
   def index
-    if params[:key].present?
-      @resumes = current_supplier.resumes.tagged_with([params[:key]], any: true, wild: true)
-    else
-      @resumes = current_supplier.resumes
-    end
-    @resumes = @resumes.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @q = current_supplier.resumes.ransack(params[:q])
+    @resumes = @q.result(distinct: true)
+    @resumes = @resumes.joins(:jobs, :tags).paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def new
@@ -67,12 +64,9 @@ class Suppliers::ResumesController < Suppliers::BaseController
 
   def select_list
     @job = Job.find(params[:job_id])
-    if params[:key].present?
-      @resumes = current_supplier.resumes.tagged_with([params[:key]], any: true, wild: true)
-    else
-      @resumes = current_supplier.resumes
-    end
-    @resumes = @resumes.unproblematic.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @q = current_supplier.resumes.ransack(params[:q])
+    @resumes = @q.result(distinct: true)
+    @resumes = @resumes.joins(:jobs, :tags).unproblematic.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def destroy

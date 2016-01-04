@@ -1,4 +1,4 @@
-<%= render 'admins/shared/search', title: '简历列表', url: admins_resumes_path, placeholder: '被推荐人' %>
+<%= render 'admins/shared/search', title: '简历列表', url: admins_resumes_path, placeholder: '被推荐人、推荐人、标签', search_fields: 'candidate_name_or_supplier_email_or_tags_name_cont' %>
 <% if @supplier %>
   <%= render 'supplier_nav_tabs', resumes: @resumes, supplier: @supplier %>
 <% else %>

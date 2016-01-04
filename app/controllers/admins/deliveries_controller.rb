@@ -4,14 +4,15 @@ class Admins::DeliveriesController < Admins::BaseController
     params[:state] = 'recommended' unless current_admin.delivery_state_is_legal?(params[:state])
     if params[:job_id].present?
       @job = Job.find(params[:job_id])
-      @deliveries = @job.find_deliveries_by_state(params[:state])
+      @q = @job.find_deliveries_by_state(params[:state]).ransack(params[:q])
     elsif params[:supplier_id].present?
       @supplier = Supplier.find(params[:supplier_id])
-      @deliveries = @supplier.find_deliveries_by_state(params[:state])
+      @q = @supplier.find_deliveries_by_state(params[:state]).ransack(params[:q])
     else
-      @deliveries = current_admin.find_deliveries_by_state(params[:state])
+      @q = current_admin.find_deliveries_by_state(params[:state]).ransack(params[:q])
     end
-    @deliveries = @deliveries.joins(:resume).where("resumes.candidate_name like ?", "%#{params[:key]}%").paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @deliveries = @q.result(distinct: true)
+    @deliveries = @deliveries.joins(:resume, :job, :supplier, :company).paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def show

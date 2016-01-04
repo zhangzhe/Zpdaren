@@ -6,11 +6,11 @@
       </h2>
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
-  <%= form_tag url, method: :get do %>
+  <%= search_form_for @q, url: url do |f| %>
     <%= hidden_field_tag 'state', params[:state] if params[:state] %>
     <div class="col-lg-5">
       <div class="input-group search">
-        <%= text_field_tag 'key', params[:key], class: 'form-control', placeholder: placeholder %>
+        <%= f.search_field search_fields, class: 'form-control', placeholder: placeholder %>
         <span class="input-group-btn">
           <%= submit_tag '搜索', class: 'btn btn-default' %>
         </span>

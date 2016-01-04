@@ -1,3 +1,7 @@
+<%= render 'admins/shared/search', title: '用户列表', url: admins_users_path, placeholder: '邮箱', search_fields: 'email_cont' %>
+<br>
+<%= render 'nav_tabs', suppliers: @suppliers %>
+<br>
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
@@ -10,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <% suppliers.each do |supplier| %>
+      <% @suppliers.each do |supplier| %>
         <tr>
           <td><%= link_to supplier.email, admins_supplier_path(supplier) %></td>
           <td><%= link_to supplier.resumes.count, admins_resumes_path(:supplier_id => supplier) %></td>
@@ -22,3 +26,4 @@
     </tbody>
   </table>
 </div>
+<%= render 'shared/paginate', objs: @suppliers %>
