@@ -1,7 +1,6 @@
 class Recruiters::DeliveriesController < Recruiters::BaseController
   def index
     params[:state] = 'unprocess' unless current_recruiter.delivery_state_is_legal?(params[:state])
-
     @q = current_recruiter.find_deliveries_by_state(params[:state]).ransack(params[:q])
     @deliveries = @q.result
     if params[:job_id].present?

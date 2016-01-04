@@ -19,7 +19,7 @@
             <% active = active_for?([Admins::MoneyTransfersController]) %>
             <li class="<%= active %>"><%= link_to "存款/提现确认#{badge_for_admin(MoneyTransfer)}".html_safe, deposits_admins_money_transfers_path %></li>
             <% active = active_for?([Admins::UsersController, Admins::CompaniesController, Admins::SuppliersController]) %>
-            <li class="<%= active %>"><%= link_to "用户列表#{badge_for_admin(User)}".html_safe, admins_users_path(type: 'Commany') %></li>
+            <li class="<%= active %>"><%= link_to "用户列表#{badge_for_admin(User)}".html_safe, admins_users_path(type: 'Company') %></li>
             <% active = active_for?([Admins::StatisticsController]) %>
             <% active = active_for?([Admins::BlogsController]) %>
             <li class="<%= active %>"><%= link_to "博客管理", admins_blogs_path %></li>
