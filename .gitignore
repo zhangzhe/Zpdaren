@@ -17,13 +17,15 @@
 /tmp
 /public/assets/*
 
+!/uploads/.keep
+
 config/database.yml
 /uploads/*
 !/uploads/.keep
-
+!/public/uploads/interview/avatar/.keep
+!/public/uploads/interview/.keep
+!/public/uploads/.keep
 .DS_Store
-
-public/uploads/
 
 config/settings.local.yml
 config/settings/*.local.yml
