@@ -2,13 +2,13 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
   def index
     params[:state] = 'unprocess' unless current_recruiter.delivery_state_is_legal?(params[:state])
 
-    @deliveries = current_recruiter.find_deliveries_by_state(params[:state])
+    @q = current_recruiter.find_deliveries_by_state(params[:state]).ransack(params[:q])
+    @deliveries = @q.result
     if params[:job_id].present?
       @job = current_recruiter.jobs.find(params[:job_id])
       @deliveries = @deliveries.where("job_id = ?", params[:job_id])
     end
-
-    @deliveries = @deliveries.includes(:job).where("title like ?", "%#{params[:key]}%").paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @deliveries = @deliveries.joins(:job).paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def show

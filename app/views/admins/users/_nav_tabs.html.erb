@@ -1,0 +1,14 @@
+<ul class="nav nav-tabs">
+  <% active = (params[:type] == "Company") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "招聘方<span class='badge'>#{active.present? ? companies.count : Company.count}</span>".html_safe, admins_users_path(type: 'Company') %>
+  </li>
+  <% active = (params[:type] == "Supplier") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "推荐方<span class='badge'>#{active.present? ? suppliers.count : Supplier.count}</span>".html_safe, admins_users_path(type: 'Supplier') %>
+  </li>
+  <% active = params[:type].nil? ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "所有用户<span class='badge'>#{active.present? ? users.count : User.count}</span>".html_safe, admins_users_path %>
+  </li>
+</ul>

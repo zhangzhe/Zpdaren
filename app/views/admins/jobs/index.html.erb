@@ -1,4 +1,4 @@
-<%= render 'admins/shared/search', title: '职位列表', url: admins_jobs_path, placeholder: '输入职位名称' %>
+<%= render 'admins/shared/search', title: '职位列表', url: admins_jobs_path, placeholder: '职位名称、公司名称', search_fields: 'title_or_company_name_cont', q: @q %>
 
 <ul class="nav nav-tabs">
   <% active = (params[:state] == "high_priority") ? "active" : "" %>

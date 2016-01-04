@@ -1,8 +1,8 @@
-<% url = (params[:action] == "new" || params[:action] == "create") ? admins_interviews_path : admins_interview_path(@interview) %>
-<%= form_for @interview, url: url, html: { multipart: true } do |f|  %>
+<% url = (params[:action] == "new" || params[:action] == "create") ? admins_interviews_path : admins_interview_path(interview) %>
+<%= form_for interview, url: url, html: { multipart: true } do |f|  %>
   <div class="row">
     <div class="col-xs-6">
-      <%= text_field_tag :professor_email, @professor.try(:email), class: "form-control", placeholder: '专家登录邮箱' %>
+      <%= text_field_tag :professor_email, professor.try(:email), class: "form-control", placeholder: '专家登录邮箱' %>
     </div>
     <div class="col-xs-6">
       <%= text_field_tag :professor_password, "", class: "form-control", placeholder: '专家登录密码' %>
@@ -29,7 +29,7 @@
 
   <p>
     专家照片
-    <%= image_tag(@interview.avatar_url, :class => "img-circle", :size => "60x60") if @interview.avatar? %>
+    <%= image_tag(interview.avatar_url, :class => "img-circle", :size => "60x60") if interview.avatar? %>
     <%= f.file_field :avatar %>
   </p>
   <p><%= f.text_area :brief, class: "form-control", rows: 4, placeholder: '访谈简述' %></p>

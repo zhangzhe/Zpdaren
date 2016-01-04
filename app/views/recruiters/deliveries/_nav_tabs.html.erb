@@ -1,19 +1,19 @@
 <ul class="nav nav-tabs">
   <% active = (params[:state] == "unprocess") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "未查看<span class='badge'>#{params[:job_id] ? job.unprocess_deliveries.count : current_recruiter.find_deliveries_count_by_state('unprocess')}</span>".html_safe, recruiters_deliveries_path(:state => 'unprocess', job_id: params[:job_id]) %>
+    <%= link_to "未查看<span class='badge'>#{active.present? ? deliveries.count : current_recruiter.find_deliveries_count_by_state('unprocess')}</span>".html_safe, recruiters_deliveries_path(:state => 'unprocess', job_id: params[:job_id]) %>
   </li>
   <% active = (params[:state] == "viewed") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "已查看<span class='badge'>#{params[:job_id] ? job.viewed_deliveries.count : current_recruiter.find_deliveries_count_by_state('viewed')}</span>".html_safe, recruiters_deliveries_path(:state => 'viewed', job_id: params[:job_id]) %>
+    <%= link_to "已查看<span class='badge'>#{active.present? ? deliveries.count : current_recruiter.find_deliveries_count_by_state('viewed')}</span>".html_safe, recruiters_deliveries_path(:state => 'viewed', job_id: params[:job_id]) %>
   </li>
   <% active = (params[:state] == "final_paid") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "已付尾款<span class='badge'>#{params[:job_id] ? job.deliveries.final_paid.count : current_recruiter.find_deliveries_count_by_state('final_paid')}</span>".html_safe, recruiters_deliveries_path(:state => 'final_paid', job_id: params[:job_id]) %>
+    <%= link_to "已付尾款<span class='badge'>#{active.present? ? deliveries.count : current_recruiter.find_deliveries_count_by_state('final_paid')}</span>".html_safe, recruiters_deliveries_path(:state => 'final_paid', job_id: params[:job_id]) %>
   </li>
   <% active = (params[:state] == "refused") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "已拒绝<span class='badge'>#{params[:job_id] ? job.deliveries.recruiter_refused.count : current_recruiter.find_deliveries_count_by_state('refused')}</span>".html_safe, recruiters_deliveries_path(:state => 'refused', job_id: params[:job_id]) %>
+    <%= link_to "已拒绝<span class='badge'>#{active.present? ? deliveries.count : current_recruiter.find_deliveries_count_by_state('refused')}</span>".html_safe, recruiters_deliveries_path(:state => 'refused', job_id: params[:job_id]) %>
   </li>
 </ul>
 <br>

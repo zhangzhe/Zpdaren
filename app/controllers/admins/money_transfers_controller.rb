@@ -1,14 +1,20 @@
 class Admins::MoneyTransfersController < Admins::BaseController
   def deposits
-    @deposits = Deposit.joins(:job).all.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @q = Deposit.ransack(params[:q])
+    @deposits = @q.result(distinct: true)
+    @deposits = @deposits.joins(:company, :job, :recruiter).paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def final_payments
-    @final_payments = FinalPayment.all.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @q = FinalPayment.ransack(params[:q])
+    @final_payments = @q.result(distinct: true)
+    @final_payments = @final_payments.joins(:company, :job, :recruiter).paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def withdraws
-    @withdraws = Withdraw.all.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @q = Withdraw.ransack(params[:q])
+    @withdraws = @q.result(distinct: true)
+    @withdraws = @withdraws.joins(:user).paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def update

@@ -1,5 +1,5 @@
-<%= render 'shared/page_title', title: '存款/提现确认' %>
-<%= render 'tab' %>
+<%= render 'admins/shared/search', title: '存款/提现确认', url: withdraws_admins_money_transfers_path, placeholder: '提现人、手机号、支付宝帐号', search_fields: 'user_email_or_mobile_or_zhifubao_account_cont', q: @q %>
+<%= render 'tab', withdraws: @withdraws %>
 <br>
 
 <div class="table-responsive">
@@ -17,7 +17,7 @@
     <tbody>
       <% @withdraws.each do |withdraw| %>
         <tr>
-          <td><%= withdraw.wallet.user.email %></td>
+          <td><%= withdraw.user_email %></td>
           <td><%= withdraw.mobile %></td>
           <td><%= withdraw.zhifubao_account %></td>
           <td><%= withdraw.amount %></td>

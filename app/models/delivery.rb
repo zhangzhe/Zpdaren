@@ -3,12 +3,17 @@ require 'epin_cipher'
 class Delivery < ActiveRecord::Base
   belongs_to :job
   belongs_to :resume
+  has_one :supplier, through: :resume
+  has_one :recruiter, through: :job, :foreign_key => :user_id
+  has_one :company, through: :recruiter
   has_one :rejection
   belongs_to :final_payment, :foreign_key => :final_payment_id
 
   delegate :id, :candidate_name, :tag_list, :mobile, :email, :message, :attachment, :pdf_attachment, :remark, :available, to: :resume, prefix: true
   delegate :id, :title, :user_id, :bonus, :description, :tag_list, :state, to: :job, prefix: true
   delegate :reason, :other, to: :rejection, prefix: true
+  delegate :email, to: :supplier, prefix: true
+  delegate :id, :name, :mobile, :description, to: :company, prefix: true
 
   validates_length_of :message, maximum: 50
 
@@ -78,16 +83,6 @@ class Delivery < ActiveRecord::Base
         notify_supplier_final_payment_paid
       end
       transitions :from => :final_payment_paid, :to => :finished
-    end
-  end
-
-  class << self
-    def base_state_valid?(state)
-      ['recommended', 'approved', 'paid', 'refused', 'final_paid'].include?(state)
-    end
-
-    def state_valid?(state)
-      ['recommended', 'approved', 'paid', 'refused', 'final_paid', 'recruiter_refused', 'admin_refused'].include?(state)
     end
   end
 

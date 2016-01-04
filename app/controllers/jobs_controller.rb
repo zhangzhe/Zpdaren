@@ -1,13 +1,13 @@
 class JobsController < ApplicationController
 
   def index
+    @q = Job.available.ransack(params[:q])
+    @jobs = @q.result(distinct: true)
     if params[:state] == 'high_priority'
-      @jobs = Job.available.high_priority
-    else
-      @jobs = Job.available
+      @jobs = @jobs.high_priority
     end
     @jobs = @jobs.tagged_with(params[:tag]) if params[:tag]
-    @jobs = @jobs.where("title ilike ?", "%#{params[:key]}%").paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
     tags = Job.tag_counts_on(:tags).order('taggings_count DESC')
     @priority_tags = tags.where(:priority => 1)
     render layout: 'anonymous_jobs'

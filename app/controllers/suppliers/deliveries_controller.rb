@@ -3,14 +3,9 @@ class Suppliers::DeliveriesController < Suppliers::BaseController
   def index
     params[:state] = 'recommended' unless current_supplier.delivery_state_is_legal?(params[:state])
 
-    @deliveries = current_supplier.find_deliveries_by_state(params[:state])
-
-    if params[:key]
-      recruiter_ids = Company.where("name like ?", "%#{params[:key]}%").map(&:user_id)
-      @deliveries = @deliveries.joins(:job).where("user_id in (?)", recruiter_ids)
-    end
-
-    @deliveries = @deliveries.joins(:job).paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @q = current_supplier.find_deliveries_by_state(params[:state]).ransack(params[:q])
+    @deliveries = @q.result(distinct: true)
+    @deliveries = @deliveries.joins(:job, :resume, :company).paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def new
