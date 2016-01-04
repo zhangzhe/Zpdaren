@@ -74,6 +74,18 @@ class Job < ActiveRecord::Base
     def deleted
       only_deleted
     end
+
+    def priority_tags
+      tags.where(:priority => 1)
+    end
+
+    def nomal_tags
+      tags.where(priority: [nil, 0])
+    end
+
+    def tags
+      Job.tag_counts_on(:tags).order('taggings_count DESC')
+    end
   end
 
   def state_show?

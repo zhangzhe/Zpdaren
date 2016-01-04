@@ -4,6 +4,7 @@ class Suppliers::JobsController < Suppliers::BaseController
     @q = current_supplier.find_jobs_by_state(params[:state]).ransack(params[:q])
     @jobs = @q.result(distinct: true)
     @jobs = @jobs.where("user_id = ? ", params[:recruiter_id]) if params[:recruiter_id]
+    @jobs = @jobs.tagged_with(params[:tag]) if params[:tag]
     @jobs = @jobs.joins(:company).paginate(page: params[:page], per_page: Settings.pagination.page_size)
     select_show_page
   end

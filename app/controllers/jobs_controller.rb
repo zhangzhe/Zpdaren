@@ -6,6 +6,7 @@ class JobsController < ApplicationController
     if params[:state] == 'high_priority'
       @jobs = @jobs.high_priority
     end
+    @jobs = @jobs.tagged_with(params[:tag]) if params[:tag]
     @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
     render layout: 'anonymous_jobs'
   end

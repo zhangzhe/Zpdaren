@@ -1,0 +1,5 @@
+$( "#droppable1" ).replaceWith( "<div id='droppable1'><%= escape_javascript(render 'nomal_tags') %></div>" );
+$( "#droppable2" ).replaceWith( "<div id='droppable2'><%= escape_javascript(render 'priority_tags') %></div>" );
+
+$( "#droppable1" ).effect("highlight", {}, 1000);
+$( "#droppable2" ).effect("highlight", {}, 1000);
