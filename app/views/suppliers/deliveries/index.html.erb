@@ -1,4 +1,4 @@
-<%= render 'suppliers/shared/search', title: '我的推荐', url: suppliers_deliveries_path, placeholder: '输入公司名称' %>
+<%= render 'suppliers/shared/search', title: '我的推荐', url: suppliers_deliveries_path, placeholder: '公司名称、职位、被推荐人', search_fields: 'job_title_or_resume_candidate_name_or_company_name_cont', q: @q %>
 <ul class="nav nav-tabs">
   <% active = (params[:state] == "recommended") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">
@@ -36,7 +36,7 @@
     <tbody>
       <% @deliveries.each do |delivery| %>
         <tr>
-          <td><%= link_to delivery.job.company.name, suppliers_jobs_path(recruiter_id: delivery.job.recruiter.id) %></td>
+          <td><%= link_to delivery.company_name, suppliers_jobs_path(recruiter_id: delivery.recruiter) %></td>
           <td><%= link_to truncate(delivery.job_title), suppliers_job_path(delivery.job) %></td>
           <td><%= delivery.resume_candidate_name %></td>
           <td><%= delivery.created_at.localtime.to_date.to_s(:db) %></td>

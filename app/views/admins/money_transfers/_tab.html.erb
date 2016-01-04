@@ -1,14 +1,14 @@
 <ul class="nav nav-tabs">
   <% active = (params[:action] == "deposits") ? "active" : nil %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "订金确认<span class='badge'>#{Deposit.count}</span>".html_safe, deposits_admins_money_transfers_path %>
+    <%= link_to "订金确认<span class='badge'>#{active.present? ? deposits.count : Deposit.count}</span>".html_safe, deposits_admins_money_transfers_path %>
   </li>
   <% active = (params[:action] == "final_payments") ? "active" : nil %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "尾款确认<span class='badge'>#{FinalPayment.count}</span>".html_safe, final_payments_admins_money_transfers_path %>
+    <%= link_to "尾款确认<span class='badge'>#{active.present? ? final_payments.count : FinalPayment.count}</span>".html_safe, final_payments_admins_money_transfers_path %>
   </li>
   <% active = (params[:action] == "withdraws") ? "active" : nil %>
   <li role="presentation" class="<%= active %>">
-    <%= link_to "提现申请<span class='badge'>#{Withdraw.count}</span>".html_safe, withdraws_admins_money_transfers_path %>
+    <%= link_to "提现申请<span class='badge'>#{active.present? ? withdraws.count : Withdraw.count}</span>".html_safe, withdraws_admins_money_transfers_path %>
   </li>
 </ul>

@@ -2,8 +2,8 @@ class Recruiters::JobsController < Recruiters::BaseController
 
   def index
     params[:state] = 'submitted' unless current_recruiter.job_state_is_legal?(params[:state])
-    @jobs = current_recruiter.find_jobs_by_state(params[:state])
-    @jobs = @jobs.where("title like ?", "%#{params[:key]}%").paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @q = current_recruiter.find_jobs_by_state(params[:state]).ransack(params[:q])
+    @jobs = @q.result(distinct: true).paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def new

@@ -1,5 +1,5 @@
 <% content_for :job_info do %>
-  <%= render 'suppliers/shared/search', title: '众聘达人推荐职位列表', url: jobs_path, placeholder: '输入职位名称' %>
+  <%= render 'suppliers/shared/search', title: '众聘达人推荐职位列表', url: jobs_path, placeholder: '职位名称、公司名称', search_fields: 'title_or_company_name_cont', q: @q %>
 
   <ul class="nav nav-tabs">
     <% active = (params[:state] == "high_priority") ? "active" : "" %>

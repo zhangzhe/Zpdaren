@@ -1,3 +1,8 @@
+<%= render 'admins/shared/search', title: '用户列表', url: admins_users_path, placeholder: '公司名称、电话、邮箱', search_fields: 'name_or_mobile_or_recruiter_email_cont', q: @q %>
+<br>
+<%= render 'nav_tabs', companies: @companies %>
+<br>
+
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
@@ -8,11 +13,11 @@
       </tr>
     </thead>
     <tbody>
-      <% companies.each do |company| %>
+      <% @companies.each do |company| %>
         <tr>
           <td>
             <%= image_tag 'company_certificate_24.png' if company.service_protocol? %>
-            <%= link_to company.name, admins_company_path(company.id) %>
+            <%= link_to company.name, admins_company_path(company) %>
           </td>
           <td><%= company.mobile %></td>
           <td><%= company.recruiter.email %></td>
@@ -21,3 +26,4 @@
     </tbody>
   </table>
 </div>
+<%= render 'shared/paginate', objs: @companies %>

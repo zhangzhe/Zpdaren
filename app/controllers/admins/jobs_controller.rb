@@ -2,8 +2,9 @@ class Admins::JobsController < Admins::BaseController
 
   def index
     params[:state] = 'high_priority' unless current_admin.job_state_is_legal?(params[:state])
-    @jobs = current_admin.find_jobs_by_state(params[:state])
-    @jobs = @jobs.where("title like ?", "%#{params[:key]}%").paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @q = current_admin.find_jobs_by_state(params[:state]).ransack(params[:q])
+    @jobs = @q.result(distinct: true)
+    @jobs = @jobs.joins(:company).paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def edit

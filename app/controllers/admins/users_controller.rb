@@ -1,12 +1,20 @@
 class Admins::UsersController < Admins::BaseController
 
   def index
-    if params[:type] == 'Recruiter'
-      @companies = Company.active.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    if params[:type] == 'Company'
+      @q = Company.ransack(params[:q])
+      @companies = @q.result(distinct: true)
+      @companies = @companies.joins(:recruiter).active.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+      render 'recruiters'
     elsif params[:type] == 'Supplier'
-      @suppliers = Supplier.all.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+      @q = Supplier.ransack(params[:q])
+      @suppliers = @q.result(distinct: true)
+      @suppliers = @suppliers.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+      render 'suppliers'
     else
-      @users = User.all.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+      @q = User.ransack(params[:q])
+      @users = @q.result(distinct: true)
+      @users = @users.paginate(page: params[:page], per_page: Settings.pagination.page_size)
     end
   end
 

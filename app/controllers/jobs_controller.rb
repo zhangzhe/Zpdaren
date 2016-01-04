@@ -1,12 +1,12 @@
 class JobsController < ApplicationController
 
   def index
+    @q = Job.available.ransack(params[:q])
+    @jobs = @q.result(distinct: true)
     if params[:state] == 'high_priority'
-      @jobs = Job.available.high_priority
-    else
-      @jobs = Job.available
+      @jobs = @jobs.high_priority
     end
-    @jobs = @jobs.where("title ilike ?", "%#{params[:key]}%").paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
     render layout: 'anonymous_jobs'
   end
 

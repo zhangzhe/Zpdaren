@@ -1,12 +1,13 @@
 class Admins::ResumesController < Admins::BaseController
   def index
     params[:state] = 'uncompleted' unless current_admin.resume_state_is_legal?(params[:state])
-    @resumes = current_admin.find_resumes_by_state(params[:state])
     if params[:supplier_id]
       @supplier = Supplier.find(params[:supplier_id])
-      @resumes = @resumes.where(:supplier_id => params[:supplier_id])
+      @q = @supplier.resumes.ransack(params[:q])
+    else
+      @q = current_admin.find_resumes_by_state(params[:state]).ransack(params[:q])
     end
-    @resumes = @resumes.where("candidate_name like ?", "%#{params[:key]}%").paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @resumes = @q.result.joins(:supplier, :tags).paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def show

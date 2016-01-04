@@ -1,26 +1,29 @@
-<%= render 'shared/page_title', title: '用户列表' %>
+<%= render 'admins/shared/search', title: '用户列表', url: admins_users_path, placeholder: '邮箱', search_fields: 'email_cont', q: @q %>
 <br>
-<ul class="nav nav-tabs">
-  <% active = (params[:type] == "Recruiter") ? "active" : "" %>
-  <li role="presentation" class="<%= active %>">
-    <%= link_to "招聘方<span class='badge'>#{Company.active.count}</span>".html_safe, admins_users_path(:type => "Recruiter") %>
-  </li>
-  <% active = (params[:type] == "Supplier") ? "active" : "" %>
-  <li role="presentation" class="<%= active %>">
-    <%= link_to "推荐方<span class='badge'>#{Supplier.count}</span>".html_safe, admins_users_path(:type => "Supplier") %>
-  </li>
-  <% active = params[:type].nil? ? "active" : "" %>
-  <li role="presentation" class="<%= active %>">
-    <%= link_to "所有用户<span class='badge'>#{User.count}</span>".html_safe, admins_users_path() %>
-  </li>
-</ul>
+<%= render 'nav_tabs', users: @users %>
 <br>
 
-<% if params[:type] == 'Recruiter' %>
-  <%= render 'companies', companies: @companies %>
-<% elsif params[:type] == 'Supplier' %>
-  <%= render 'suppliers', suppliers: @suppliers %>
-<% else %>
-  <%= render 'users', users: @users %>
-<% end %>
-<%= render 'shared/paginate', objs: @companies || @suppliers || @users %>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>邮箱</th>
+        <th>登录数量</th>
+        <th>角色</th>
+        <th>微信关注</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.sign_in_count %></td>
+        <td><%= user.type %></td>
+        <td><%= user.weixin ? "已关注" : "未关注" %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= render 'shared/paginate', objs: @users %>
