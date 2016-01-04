@@ -43,5 +43,6 @@
 //= require plugins/url.min.js
 //= require plugins/video.min.js
 //= require bootstrap-datepicker
-//= require jquery-ui
+//= require jquery-ui/draggable
+//= require jquery-ui/droppable
 //
