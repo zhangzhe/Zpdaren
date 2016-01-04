@@ -5,6 +5,10 @@ class Comment < ActiveRecord::Base
   acts_as_tree order: 'created_at DESC'
   acts_as_paranoid
 
+  def replied_by_author?
+    interview.professor_id == self.commenter_id
+  end
+
   private
   def set_default_commenter_name
     self.commenter_name = "匿名用户" if self.commenter_name.blank?

@@ -25,7 +25,7 @@
     </div>
   </div>
   <br>
-  <% @comments = @interview.comments.with_deleted.hash_tree %>
+  <% @comments = @interview.comments.hash_tree %>
   <%= comments_tree_for @comments %>
 <% end %>
 
