@@ -1,6 +1,6 @@
 <div class="well" id="comment_<%= comment.id %>">
   <p class="text-muted">
-    <strong><%= comment.commenter_name %></strong><%= "(专家)" if @interview.professor_id == comment.commenter_id %>
+    <strong><%= comment.commenter_name %></strong><%= "(专家)" if comment.replied_by_author? %>
     <%= l(comment.created_at, format: '%B, %d %Y %H:%M:%S') %>
     <%= link_to '删除', admins_comment_path(comment), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: '确认?' }, remote: true if current_admin %>
   </p>
