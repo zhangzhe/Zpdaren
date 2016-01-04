@@ -1,16 +1,23 @@
-<body>
+<style>
+  #draggable { padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+  #droppable1 { width: 400px; height: 800px; padding: 0.5em; float: left; margin: 10px; }
+  #droppable2 { width: 400px; height: 800px; padding: 0.5em; float: left; margin: 10px; } </style>
 
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
       <tr>
         <td class="default">
+
           <div id="droppable1">
+            <h4>不显示在表头</h4>
             <%= render "nomal_tags" %>
           </div>
         </td>
         <td class="success">
+
           <div id="droppable2" >
+            <h4>显示在表头</h4>
             <%= render "priority_tags" %>
           </div>
         </td>
@@ -18,36 +25,3 @@
     </thead>
   </table>
 </div>
-
-</body>
-  <style>
-  #draggable { padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
-  #droppable1 { width: 400px; height: 800px; padding: 0.5em; float: left; margin: 10px; }
-  #droppable2 { width: 400px; height: 800px; padding: 0.5em; float: left; margin: 10px; }
-  </style>
-  <script>
-  $(function() {
-    $( ".draggable1" ).draggable();
-    $( ".draggable2" ).draggable();
-    $( "#droppable1" ).droppable({
-      drop: function( event, ui ) {
-        $.ajax({
-          type: 'PUT',
-          url: '/admins/tags/update',
-          data: { priority: 0, tag: $(ui.draggable).text() },
-        });
-      }
-    });
-
-    $( "#droppable2" ).droppable({
-      drop: function( event, ui ) {
-
-        $.ajax({
-          type: 'PUT',
-          url: '/admins/tags/update',
-          data: { priority: 1, tag: $(ui.draggable).text() },
-        });
-      }
-    });
-  });
-  </script>

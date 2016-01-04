@@ -3,3 +3,17 @@
     <%= tag.name %>
   </div>
 <% end %>
+<script>
+  $(function() {
+    $( ".draggable2" ).draggable();
+    $( "#droppable2" ).droppable({
+      drop: function( event, ui ) {
+        $.ajax({
+          type: 'PUT',
+          url: '/admins/tags/update',
+          data: { priority: 1, tag: $(ui.draggable).text() },
+        });
+      }
+    });
+  });
+</script>
