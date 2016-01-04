@@ -48,7 +48,7 @@ Rails.application.routes.draw do
 
   namespace :admins do
     get 'statistics' => 'statistics#index'
-    resources :tags, only: [:index]
+    resources :tags, only: [:index, :update]
     resources :interviews, except: [:show]
     resources :comments, only: [:destroy]
     resources :resumes, only: [:index, :show, :edit, :update] do

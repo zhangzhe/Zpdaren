@@ -14,7 +14,7 @@
         </div>
         </td>
         <td class="success">
-          <div id="droppable" >
+          <div id="droppable2" >
             <% @priority_tags.each do |tag| %>
               <div id="draggable" class="draggable2 label label-primary">
                 <%= tag.name %>
@@ -29,12 +29,11 @@
 
 
 </body>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
   <style>
   #draggable { padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
   #droppable1 { width: 400px; height: 800px; padding: 0.5em; float: left; margin: 10px; }
-  #droppable { width: 400px; height: 800px; padding: 0.5em; float: left; margin: 10px; }
+  #droppable2 { width: 400px; height: 800px; padding: 0.5em; float: left; margin: 10px; }
   </style>
   <script>
   $(function() {
@@ -42,27 +41,32 @@
     $( ".draggable2" ).draggable();
     $( "#droppable1" ).droppable({
       drop: function( event, ui ) {
-        alert($(this).text())
+        $.ajax({
+          type: 'PUT',
+          url: '/admins/tags/update',
+          data: { priority: 0, tag: $(ui.draggable).text() },
+          success: function(response){
+              location.reload();
+          },
+          error: function(){
+            alert('程序异常，请联系开发人员。');
+          }
+        });
       }
     });
 
-    $( "#droppable" ).droppable({
+    $( "#droppable2" ).droppable({
       drop: function( event, ui ) {
-        // send ajax to server
 
         $.ajax({
           type: 'PUT',
           url: '/admins/tags/update',
           data: { priority: 1, tag: $(ui.draggable).text() },
           success: function(response){
-            if (response['status'] == 200) {
               location.reload();
-            }else{
-              alert('程序异常，设置失败。');
-            }
           },
           error: function(){
-            alert('程序异常，设置失败。');
+            alert('程序异常，请联系开发人员。');
           }
         });
       }

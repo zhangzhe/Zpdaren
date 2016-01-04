@@ -51,3 +51,5 @@ gem 'closure_tree'
 gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails', :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 gem 'axlsx'
 gem 'axlsx_rails'
+gem 'jquery-ui-rails'
+
