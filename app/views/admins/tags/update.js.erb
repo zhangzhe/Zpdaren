@@ -1,0 +1,24 @@
+$( "#droppable1" ).replaceWith( "<div id='droppable1'><%= escape_javascript(render 'nomal_tags') %></div>" );
+$( "#droppable2" ).replaceWith( "<div id='droppable2'><%= escape_javascript(render 'priority_tags') %></div>" );
+$( ".draggable1" ).draggable();
+$( ".draggable2" ).draggable();
+$( "#droppable1" ).droppable({
+  drop: function( event, ui ) {
+    $.ajax({
+      type: 'PUT',
+      url: '/admins/tags/update',
+      data: { priority: 0, tag: $(ui.draggable).text() },
+    });
+  }
+});
+
+$( "#droppable2" ).droppable({
+  drop: function( event, ui ) {
+
+    $.ajax({
+      type: 'PUT',
+      url: '/admins/tags/update',
+      data: { priority: 1, tag: $(ui.draggable).text() },
+    });
+  }
+});

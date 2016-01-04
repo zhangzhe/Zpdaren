@@ -6,20 +6,12 @@
       <tr>
         <td class="default">
           <div id="droppable1">
-          <% @nomal_tags.each do |tag| %>
-            <div id="draggable" class="draggable1 label label-primary">
-              <%= tag.name %>
-            </div>
-          <% end %>
-        </div>
+            <%= render "nomal_tags" %>
+          </div>
         </td>
         <td class="success">
           <div id="droppable2" >
-            <% @priority_tags.each do |tag| %>
-              <div id="draggable" class="draggable2 label label-primary">
-                <%= tag.name %>
-              </div>
-            <% end %>
+            <%= render "priority_tags" %>
           </div>
         </td>
       </tr>
@@ -27,9 +19,7 @@
   </table>
 </div>
 
-
 </body>
-
   <style>
   #draggable { padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
   #droppable1 { width: 400px; height: 800px; padding: 0.5em; float: left; margin: 10px; }
@@ -45,12 +35,6 @@
           type: 'PUT',
           url: '/admins/tags/update',
           data: { priority: 0, tag: $(ui.draggable).text() },
-          success: function(response){
-              location.reload();
-          },
-          error: function(){
-            alert('程序异常，请联系开发人员。');
-          }
         });
       }
     });
@@ -62,12 +46,6 @@
           type: 'PUT',
           url: '/admins/tags/update',
           data: { priority: 1, tag: $(ui.draggable).text() },
-          success: function(response){
-              location.reload();
-          },
-          error: function(){
-            alert('程序异常，请联系开发人员。');
-          }
         });
       }
     });
