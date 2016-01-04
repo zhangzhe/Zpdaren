@@ -6,7 +6,7 @@
       </h2>
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
-  <%= search_form_for @q, url: url do |f| %>
+  <%= search_form_for q, url: url do |f| %>
     <div class="col-lg-5">
       <div class="input-group search">
         <%= hidden_field_tag :state, params[:state] if params[:state].present? %>

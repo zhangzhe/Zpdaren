@@ -1,5 +1,5 @@
-<%= render 'admins/shared/search', title: '存款/提现确认', url: withdraws_admins_money_transfers_path, placeholder: '提现人、手机号、支付宝帐号', search_fields: 'user_email_or_mobile_or_zhifubao_account_cont' %>
-<%= render 'tab' %>
+<%= render 'admins/shared/search', title: '存款/提现确认', url: withdraws_admins_money_transfers_path, placeholder: '提现人、手机号、支付宝帐号', search_fields: 'user_email_or_mobile_or_zhifubao_account_cont', q: @q %>
+<%= render 'tab', withdraws: @withdraws %>
 <br>
 
 <div class="table-responsive">

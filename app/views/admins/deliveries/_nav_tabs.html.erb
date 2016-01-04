@@ -1,4 +1,4 @@
-<%= render 'admins/shared/search', title: '推荐列表', url: admins_deliveries_path, placeholder: '被推荐人、推荐人、职位、公司', search_fields: 'resume_candidate_name_or_supplier_email_or_job_title_or_company_name_cont' %>
+<%= render 'admins/shared/search', title: '推荐列表', url: admins_deliveries_path, placeholder: '被推荐人、推荐人、职位、公司', search_fields: 'resume_candidate_name_or_supplier_email_or_job_title_or_company_name_cont', q: @q %>
 <ul class="nav nav-tabs">
   <% active = (params[:state] == "recommended") ? "active" : "" %>
   <li role="presentation" class="<%= active %>">

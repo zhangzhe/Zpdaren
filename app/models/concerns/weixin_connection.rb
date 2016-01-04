@@ -41,7 +41,7 @@ module WeixinConnection
     \"color\":\"#173177\"
     },
     \"keyword1\":{
-    \"value\":\"#{delivery.job.company.name}\",
+    \"value\":\"#{delivery.company_name}\",
     \"color\":\"#173177\"
     },
     \"keyword2\":{
@@ -85,7 +85,7 @@ module WeixinConnection
     \"color\":\"#173177\"
     },
     \"keyword1\":{
-    \"value\":\"#{delivery.job.company.name}\",
+    \"value\":\"#{delivery.company_name}\",
     \"color\":\"#173177\"
     },
     \"keyword2\":{

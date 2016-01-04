@@ -1,5 +1,5 @@
-<%= render 'admins/shared/search', title: '存款/提现确认', url: final_payments_admins_money_transfers_path, placeholder: '公司、职位、操作帐号', search_fields: 'company_name_or_job_title_or_recruiter_email_cont' %>
-<%= render 'tab' %>
+<%= render 'admins/shared/search', title: '存款/提现确认', url: final_payments_admins_money_transfers_path, placeholder: '公司、职位、操作帐号', search_fields: 'company_name_or_job_title_or_recruiter_email_cont', q: @q %>
+<%= render 'tab', final_payments: @final_payments %>
 <br>
 
 <div class="table-responsive">
