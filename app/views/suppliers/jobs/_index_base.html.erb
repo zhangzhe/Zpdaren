@@ -10,7 +10,7 @@
 <%= render 'suppliers/shared/search', title: '我收到的职位', url: suppliers_jobs_path, placeholder: '职位名称、公司名称', search_fields: 'title_or_company_name_cont', q: @q %>
 <div style="background:#eee !important;padding-left: 16px;padding-bottom: 8px;padding-top: 20px;">
   <p>
-    <% @priority_tags.each do |tag| %>
+    <% Job.priority_tags.each do |tag| %>
       <%= link_to tag.name, suppliers_jobs_path(:tag => tag.name) %>
 
       &nbsp;&nbsp;&nbsp;

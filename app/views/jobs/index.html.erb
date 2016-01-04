@@ -3,7 +3,7 @@
 
   <div style="background:#eee !important;padding-left: 16px;padding-bottom: 8px;padding-top: 20px;">
     <p>
-      <% @priority_tags.each do |tag| %>
+      <% Job.priority_tags.each do |tag| %>
         <%= link_to tag.name, jobs_path(:tag => tag.name) %>
 
         &nbsp;&nbsp;&nbsp;

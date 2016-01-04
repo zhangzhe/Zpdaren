@@ -8,8 +8,6 @@ class JobsController < ApplicationController
     end
     @jobs = @jobs.tagged_with(params[:tag]) if params[:tag]
     @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
-    tags = Job.tag_counts_on(:tags).order('taggings_count DESC')
-    @priority_tags = tags.where(:priority => 1)
     render layout: 'anonymous_jobs'
   end
 
