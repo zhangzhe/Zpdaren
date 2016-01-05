@@ -201,7 +201,7 @@ class Job < ActiveRecord::Base
   def update_and_notify_supplier!(job_params)
     self.attributes = job_params
     if self.changed? and self.save
-      RecruiterMailer.job_updated(self).deliver_later(queue: Settings.sidekiq.email_queue)
+      RecruiterMailer.job_updated(id).deliver_later(queue: Settings.sidekiq.email_queue)
     end
   end
 
@@ -236,7 +236,7 @@ class Job < ActiveRecord::Base
 
   private
   def notify_recruiter_and_deliver_matching_resumes
-    RecruiterMailer.job_approved(self).deliver_later(queue: Settings.sidekiq.email_queue)
+    RecruiterMailer.job_approved(id).deliver_later(queue: Settings.sidekiq.email_queue)
     deliver_matching_resumes
   end
 
