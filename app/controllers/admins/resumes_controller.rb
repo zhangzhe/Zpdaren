@@ -7,7 +7,7 @@ class Admins::ResumesController < Admins::BaseController
     else
       @q = current_admin.find_resumes_by_state(params[:state]).ransack(params[:q])
     end
-    @resumes = @q.result.joins(:supplier, :tags).paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @resumes = @q.result(distinct: true).joins(:supplier, :tags).paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def show
