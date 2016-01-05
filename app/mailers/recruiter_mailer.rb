@@ -1,19 +1,19 @@
 class RecruiterMailer < ApplicationMailer
 
-  def job_approved(recruiter, job)
-    @recruiter = recruiter
+  def job_approved(job)
+    @recruiter = job.recruiter
     @job = job
     subject = '招聘信息成功发布【众聘】'
     template_name = 'job_approved'
-    send_mail(recruiter.email, subject, template_name)
+    send_mail(@recruiter.email, subject, template_name)
   end
 
-  def resume_recommended(recruiter, delivery)
-    @recruiter = recruiter
+  def resume_recommended(delivery)
+    @recruiter = delivery.recruiter
     @delivery = delivery
     subject = '新的简历推荐【众聘】'
     template_name = 'resume_recommended'
-    send_mail(recruiter.email, subject, template_name)
+    send_mail(@recruiter.email, subject, template_name)
   end
 
   def job_updated(job)

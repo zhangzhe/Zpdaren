@@ -22,3 +22,6 @@ email:
   address: smtp.mxhichina.com
   port: 25
   authentication: plain
+
+sidekiq:
+  email_queue: emails

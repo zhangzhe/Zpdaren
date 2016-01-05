@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 
   resources :blogs, only: [:show, :index]
   resources :interviews, only: [:show] do
