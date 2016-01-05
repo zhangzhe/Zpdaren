@@ -12,8 +12,11 @@ class Admins::InterviewsController < Admins::BaseController
     @professor = Professor.new(professor_params)
     @interview.professor = @professor
     saved = false
-    ActiveRecord::Base.transaction do
-      saved = @professor.save && @interview.save
+    begin
+      ActiveRecord::Base.transaction do
+        saved = @professor.save! && @interview.save!
+      end
+    rescue ActiveRecord::RecordInvalid
     end
     if saved
       redirect_to @interview, notice: '创建成功'
