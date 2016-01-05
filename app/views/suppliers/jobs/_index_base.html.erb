@@ -11,24 +11,15 @@
 <div style="background:#eee !important;padding-left: 16px;padding-bottom: 8px;padding-top: 20px;">
   <p>
     <% Job.priority_tags.each do |tag| %>
-      <%= link_to tag.name, suppliers_jobs_path(:tag => tag.name) %>
+      <%= link_to tag.name, suppliers_jobs_path(:tag => tag.name, recruiter_id: params[:recruiter_id]) %>
 
       &nbsp;&nbsp;&nbsp;
     <% end %>
-    <%= link_to "所有", suppliers_jobs_path %>
+    <%= link_to "所有", suppliers_jobs_path(recruiter_id: params[:recruiter_id]) %>
   </p>
 </div>
 <br>
-<ul class="nav nav-tabs">
-  <% active = (params[:state] == "high_priority") ? "active" : "" %>
-  <li role="presentation" class="<%= active %>">
-    <%= link_to "急招职位<span class='badge'>#{active.present? ? jobs.count : Job.available.priority('high').count }</span>".html_safe, suppliers_jobs_path(:state => "high_priority") %>
-  </li>
-  <% active = (params[:state] != "high_priority") ? "active" : "" %>
-  <li role="presentation" class="<%= active %>">
-    <%= link_to "最新职位<span class='badge'>#{active.present? ? jobs.count : Job.available.count}</span>".html_safe, suppliers_jobs_path %>
-  </li>
-</ul>
+<%= render 'nav_tabs', jobs: jobs if params[:recruiter_id].blank? %>
 <br>
 <% if params[:state] == 'high_priority' %>
   <div class="alert-info mb20" role="alert">
