@@ -29,4 +29,8 @@ class User < ActiveRecord::Base
   def name
     self.read_attribute("name") || email
   end
+
+  def admin?
+    self.type == 'Admin'
+  end
 end
