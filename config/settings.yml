@@ -22,3 +22,8 @@ email:
   address: smtp.mxhichina.com
   port: 25
   authentication: plain
+
+redis:
+  url: redis://localhost:6379/12
+  queues:
+    email: emails

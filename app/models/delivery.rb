@@ -211,7 +211,7 @@ class Delivery < ActiveRecord::Base
   end
 
   def notify_recruiter_and_supplier
-    RecruiterMailer.resume_recommended(recruiter, self).deliver_now
+    RecruiterMailer.resume_recommended(id).deliver_later(queue: Settings.redis.queues.email)
     Weixin.notify_resume_approved(self) if self.resume.supplier.weixin
   end
 

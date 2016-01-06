@@ -22,6 +22,7 @@ group :development, :test do
   gem 'rails_best_practices', '~> 1.15.7'
   gem 'rails-erd', '~> 1.4.2'
   gem 'faker'
+  gem 'capistrano-sidekiq'
 end
 gem "twitter-bootstrap-rails"
 gem 'devise'
@@ -53,3 +54,5 @@ gem 'axlsx'
 gem 'axlsx_rails'
 gem 'jquery-ui-rails'
 gem 'ransack'
+gem 'sidekiq'
+gem 'sinatra', :require => nil
