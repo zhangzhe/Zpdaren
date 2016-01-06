@@ -27,6 +27,3 @@ redis:
   url: redis://localhost:6379/12
   queues:
     email: emails
-
-
-
