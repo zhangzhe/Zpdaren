@@ -23,5 +23,10 @@ email:
   port: 25
   authentication: plain
 
-sidekiq:
-  email_queue: emails
+redis:
+  url: redis://localhost:6379/12
+  queues:
+    email: emails
+
+
+

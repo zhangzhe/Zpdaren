@@ -29,8 +29,8 @@ class RecruiterMailer < ApplicationMailer
     embed_logo
     i = 0
     begin
-      from = Settings.email.accounts[i]
-      mail(:from => "#{Settings.email.sender}<#{from.user_name}>", to: recipient, subject: subject, :template_path => template_path , :template_name => template_name, delivery_method_options: delivery_options(from))
+      @from = Settings.email.accounts[i]
+      mail(:from => "#{Settings.email.sender}<#{@from.user_name}>", to: recipient, subject: subject, :template_path => template_path , :template_name => template_name, delivery_method_options: delivery_options(@from))
     rescue Net::SMTPFatalError
       i += 1
       retry if i < Settings.email.accounts.size
