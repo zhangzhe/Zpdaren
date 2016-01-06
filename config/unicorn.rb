@@ -1,10 +1,8 @@
 rails_root = File.expand_path('../..', __FILE__)
 working_directory rails_root
 
-shared_path = File.expand_path('../../../../shared', __FILE__)
-
-pid "#{shared_path}/pids/unicorn.pid"
-listen "#{shared_path}/tmp/unicorn.sock"
+pid "#{rails_root}/tmp/pids/unicorn.pid"
+listen "#{rails_root}/tmp/sockets/unicorn.sock"
 
 stderr_path "#{rails_root}/log/unicorn.log"
 stdout_path "#{rails_root}/log/unicorn.log"
