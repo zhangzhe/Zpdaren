@@ -201,6 +201,10 @@ module WeixinConnection
     Faraday.new(:url => weixin_config["url"])
   end
 
+  def callback_url
+    weixin_config["callback_url"]
+  end
+
   private
   def access_token
     response = conn.get '/cgi-bin/token', { :appid => appid, :secret => secret, :grant_type => "client_credential" }
