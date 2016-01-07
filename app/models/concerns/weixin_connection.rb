@@ -209,6 +209,10 @@ module WeixinConnection
     weixin_config["callback_url"]
   end
 
+  def appid
+    weixin_config["appid"]
+  end
+
   private
   def conn
     Faraday.new(:url => weixin_config["url"])
@@ -221,10 +225,6 @@ module WeixinConnection
 
   def weixin_config
     YAML.load_file("#{Rails.root}/config/weixin.yml")["mp"]
-  end
-
-  def appid
-    weixin_config["appid"]
   end
 
   def secret
