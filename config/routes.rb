@@ -9,6 +9,12 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resources :comments, only: [] do
+    member do
+      put :like
+    end
+  end
+
   resources :tags, only: [:index]
 
   get 'qr_codes/:id' => "qr_codes#show", :as => "qr_code"
