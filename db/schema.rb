@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160103083756) do
+ActiveRecord::Schema.define(version: 20160107072440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,19 @@ ActiveRecord::Schema.define(version: 20160103083756) do
 
   add_index "comment_hierarchies", ["ancestor_id", "descendant_id", "generations"], name: "comment_anc_desc_udx", unique: true, using: :btree
   add_index "comment_hierarchies", ["descendant_id"], name: "comment_desc_idx", using: :btree
+
+  create_table "commenter_details", force: :cascade do |t|
+    t.string   "nickname"
+    t.string   "sex"
+    t.string   "city"
+    t.string   "province"
+    t.string   "headimgurl"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "commenter_details", ["user_id"], name: "index_commenter_details_on_user_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.integer  "commenter_id"
@@ -78,13 +91,16 @@ ActiveRecord::Schema.define(version: 20160103083756) do
   create_table "interviews", force: :cascade do |t|
     t.text     "description"
     t.text     "content"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "avatar"
     t.string   "professor_name"
     t.string   "professor_title"
+    t.text     "professor_brief"
     t.text     "brief"
     t.integer  "professor_id"
+    t.datetime "reply_started_at"
+    t.datetime "reply_ended_at"
     t.datetime "reply_begin_at"
     t.datetime "reply_end_at"
     t.datetime "deleted_at"
@@ -205,6 +221,8 @@ ActiveRecord::Schema.define(version: 20160103083756) do
     t.string   "unconfirmed_email"
     t.string   "mobile"
     t.string   "name"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
