@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   root :to => 'home#index'
 
   match 'weixin_callback' => 'home#weixin_callback', via: [:get, :post]
+  get 'wechat_oauth/callback', to: 'wechat_oauth#callback'
 
   get 'recruiters' => 'recruiters/base#show'
   get 'suppliers' => 'suppliers/base#show'
