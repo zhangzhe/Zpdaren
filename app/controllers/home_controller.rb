@@ -72,8 +72,6 @@ class HomeController < ApplicationController
 
   def detect_browser
     case request.user_agent
-    when /HTTP_USER_AGENT/i
-      request.variant = :weixin
     when /iPad/i
       request.variant = :tablet
     when /iPhone/i
