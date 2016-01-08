@@ -10,23 +10,37 @@
     </div>
   </div>
   <div style="word-break:break-all;">
-     <%= @interview.content.html_safe %>
+    <%= @interview.content.html_safe %>
   </div>
   <br>
   <hr>
   <br>
   <div class="text-center" id="commit_button">
-    <%= link_to "我要提问", "#", onclick: "$('#collapseExample').toggle(); return false", class: "btn btn-success btn-lg" %>
+    <%= link_to "我要提问", "#", onclick: "showTextField();return false;", class: "btn btn-success btn-lg" %>
     <br><br>
     <div class="collapse" id="collapseExample">
       <p>
-      <%= render "/comments/comment_form" %>
+        <%= render "/comments/comment_form" %>
       </p>
     </div>
   </div>
   <br>
   <% @comments = @interview.comments.hash_tree %>
   <%= comments_tree_for @comments %>
+
+  <script>
+
+    function showTextField() {
+      if ("<%= current_user %>" != "" ) {
+        $('#collapseExample').toggle();
+      }
+      else{
+        alert("sss");
+      }
+
+    }
+  </script>
+
 <% end %>
 
 <% content_for :other_job_info do %>
@@ -46,14 +60,17 @@
     <h4>更多访谈</h4>
     <ol class="list-unstyled">
       <% Interview.all.each do |interview| %>
-        <li><%= link_to "#{interview.professor_name}-#{interview.professor_title}", interview %></li><br>
+      <li><%= link_to "#{interview.professor_name}-#{interview.professor_title}", interview %></li><br>
       <% end %>
     </ol>
   </p>
 
   <% if current_admin %>
-    <%= link_to "修改访谈", edit_admins_interview_path(@interview), class: "btn btn-primary" %>
-    &nbsp;
-    <%= link_to "返回访谈列表", admins_interviews_path, class: "btn btn-primary" %>
+  <%= link_to "修改访谈", edit_admins_interview_path(@interview), class: "btn btn-primary" %>
+  &nbsp;
+  <%= link_to "返回访谈列表", admins_interviews_path, class: "btn btn-primary" %>
   <% end %>
 <% end %>
+
+
+

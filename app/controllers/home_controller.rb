@@ -13,6 +13,8 @@ class HomeController < ApplicationController
         suppliers_jobs_path(:state => "high_priority")
       when Professor
         current_user.interview
+      when Commenter
+        Interview.last
       end
       redirect_to redirect_path
     end
