@@ -3,7 +3,6 @@ class CommentsController < ActionController::Base
   def create
     respond_to do |format|
       update_user_info_if_login_user
-      update_guest_name_in_cookies
       if params[:comment][:parent_id].to_i > 0
         @parent = Comment.find_by_id(params[:comment].delete(:parent_id))
         @comment = @parent.children.build(comment_params)
@@ -44,9 +43,5 @@ class CommentsController < ActionController::Base
       current_user.name = params[:comment][:commenter_name]
       current_user.save!
     end
-  end
-
-  def update_guest_name_in_cookies
-    cookies.permanent[:guest_name] = params[:comment][:commenter_name]
   end
 end
