@@ -2,4 +2,4 @@ mp:
   appid: wx0e604319f74644b3
   secret: 89a7ebf45ee66181dfd5bb7cbe1d646c
   url: https://api.weixin.qq.com
-  callback_url: zpdaren.ngrok.cc
+  callback_url: zpdaren.com
