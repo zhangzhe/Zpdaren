@@ -23,6 +23,17 @@ class CommentsController < ActionController::Base
     end
   end
 
+  def like
+    comment = Comment.find(params[:id])
+    comment.like_count += 1
+    if comment.save
+      session[comment.id] = comment.id
+      render json: { status: 'OK', like_count: comment.like_count }
+    else
+      render json: { status: 'ERROR' }
+    end
+  end
+
   private
   def comment_params
     params.require(:comment).permit(:commenter_name, :content, :interview_id, :commenter_id)
