@@ -8,15 +8,15 @@ set :repo_url, 'git@github.com:SparkYacademy/Epin.git'
 set :recipient, "Ruby"
 set :branch, "develop"
 set :default_stage, "production"
-set :pty, false
+# set :pty, false
 set :deploy_to, "/data/Epin"
 set :use_sudo, false
 set :tmp_dir, '/data/Epin/shared/tmp'
-set :rails_env, "production"
-set :unicorn_config_path, "#{fetch(:deploy_to)}/current/config/unicorn.rb"
-set :unicorn_rack_env, "#{fetch(:default_stage)}"
+# set :rails_env, "production"
+# set :unicorn_config_path, "#{current_path}/config/unicorn.rb"
+# set :unicorn_rack_env, "#{fetch(:default_stage)}"
 set :sidekiq_monit_default_hooks, false
-set :sidekiq_config, "#{fetch(:deploy_to)}/current/config/sidekiq.yml"
+# set :sidekiq_config, "#{current_path}/config/sidekiq.yml"
 set :linked_files, fetch(:linked_files, []).push('config/database.yml')
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps uploads public/uploads/interview/avatar}
 

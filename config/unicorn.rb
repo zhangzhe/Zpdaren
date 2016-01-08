@@ -1,4 +1,5 @@
-rails_root = File.expand_path('../..', __FILE__)
+# rails_root = File.expand_path('../..', __FILE__)
+rails_root = `pwd`.strip.sub(/releases\/\d+$/, 'current').to_s
 working_directory rails_root
 
 pid "#{rails_root}/tmp/pids/unicorn.pid"
