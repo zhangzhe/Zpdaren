@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160107072440) do
+ActiveRecord::Schema.define(version: 20160107080909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,10 +50,11 @@ ActiveRecord::Schema.define(version: 20160107072440) do
     t.string   "commenter_name"
     t.integer  "interview_id"
     t.text     "content"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "parent_id"
     t.datetime "deleted_at"
+    t.integer  "like_count",     default: 0
   end
 
   add_index "comments", ["commenter_id"], name: "index_comments_on_commenter_id", using: :btree
@@ -91,16 +92,13 @@ ActiveRecord::Schema.define(version: 20160107072440) do
   create_table "interviews", force: :cascade do |t|
     t.text     "description"
     t.text     "content"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "avatar"
     t.string   "professor_name"
     t.string   "professor_title"
-    t.text     "professor_brief"
     t.text     "brief"
     t.integer  "professor_id"
-    t.datetime "reply_started_at"
-    t.datetime "reply_ended_at"
     t.datetime "reply_begin_at"
     t.datetime "reply_end_at"
     t.datetime "deleted_at"
