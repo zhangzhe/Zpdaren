@@ -14,7 +14,7 @@
   <% else %>
     <i class="fa fa-thumbs-o-up unfollowed" comment-id="<%= comment.id %>" onclick="follow(this)"></i>
   <% end %>
-  <span id="<%= comment.id %>_like_count"><%= "#{comment.like_count}个赞" if comment.like_count > 0 %></span>
+  <span id="<%= comment.id %>_like_count" like-count="<%= comment.like_count %>" ><%= "#{comment.like_count}个赞" if comment.like_count > 0 %></span>
 
   <div class="collapse" id="collapseExample<%= comment.id %>">
     <p>
