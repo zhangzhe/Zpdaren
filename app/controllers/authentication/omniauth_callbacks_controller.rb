@@ -7,6 +7,6 @@ class Authentication::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
     commenter_detail = user.commenter_detail || user.build_commenter_detail
     commenter_detail.update_from_remote!(remote_data)
     sign_in(user)
-    redirect_to(Interview.last)
+    redirect_to(request.env["omniauth.origin"])
   end
 end

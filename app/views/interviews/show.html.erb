@@ -5,6 +5,8 @@
     <div class="text-center">
       <%= image_tag(@interview.avatar_url, :class => "img-thumbnail", :size => "300x300") if @interview.avatar? %>
 
+      <%= link_to "微信登录", "http://localhost:3000/commenters/auth/wechat" %>
+
       <h1><%= @interview.professor_name %></h1>
       <div><%= @interview.professor_title %></div>
     </div>
@@ -20,7 +22,11 @@
     <br><br>
     <div class="collapse" id="collapseExample">
       <p>
-        <%= render "/comments/comment_form" %>
+        <% if current_user %>
+          <%= render "/comments/comment_form" %>
+        <% else %>
+          <%= render "login_page" %>
+        <% end %>
       </p>
     </div>
   </div>
@@ -29,15 +35,8 @@
   <%= comments_tree_for @comments %>
 
   <script>
-
     function showTextField() {
-      if ("<%= current_user %>" != "" ) {
         $('#collapseExample').toggle();
-      }
-      else{
-        alert("sss");
-      }
-
     }
   </script>
 
