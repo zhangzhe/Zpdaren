@@ -1,4 +1,4 @@
-<% if current_user %>
+<%# if current_user %>
   <%= form_for [@interview, Comment.new], :remote => true do |f|  %>
     <%= f.hidden_field :parent_id, value: comment.id if defined?(comment) %>
     <%= f.hidden_field :commenter_id, value: current_user.id if current_user %>
@@ -15,7 +15,6 @@
       <%= f.submit "发布", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
     </p>
   <% end %>
-
-<% else %>
-  <%= render "login_page" %>
-<% end %>
+<%# else %>
+  <%#= render "login_page" %>
+<%# end %>
