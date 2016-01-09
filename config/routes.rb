@@ -48,12 +48,8 @@ Rails.application.routes.draw do
 
   }
   devise_for :commenters, controllers: {
-    # sessions: 'commenters/sessions',
     :omniauth_callbacks => "authentication/omniauth_callbacks"
   }
-# /commenters/auth/wechat/callback?
-  # http://localhost:3000/commenters/auth/wechat
-
 
   resources :jobs, only: [:show, :index] do
     collection do
