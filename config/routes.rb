@@ -44,7 +44,11 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'authentication/sessions',
     passwords: 'authentication/passwords',
-    confirmations: 'authentication/confirmations'
+    confirmations: 'authentication/confirmations',
+
+  }
+  devise_for :commenters, controllers: {
+    :omniauth_callbacks => "authentication/omniauth_callbacks"
   }
 
   resources :jobs, only: [:show, :index] do

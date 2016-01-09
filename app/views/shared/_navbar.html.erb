@@ -27,7 +27,7 @@
           <li><%= link_to current_user.wallet.money.to_i, "" %></li>
         <% end %>
         <% if current_user %>
-          <li><%= link_to current_user.email, current_user_account_path %></li>
+          <li><%= link_to current_user.name, current_user_account_path %></li>
           <li><%= link_to "退出", destroy_user_session_path, :method => "DELETE" %></li>
         <% end %>
       </ul>
