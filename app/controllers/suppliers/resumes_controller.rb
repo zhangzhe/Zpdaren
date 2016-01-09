@@ -3,7 +3,7 @@ class Suppliers::ResumesController < Suppliers::BaseController
   def index
     @q = current_supplier.resumes.ransack(params[:q])
     @resumes = @q.result(distinct: true)
-    @resumes = @resumes.joins(:jobs, :tags).paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @resumes = @resumes.joins(:tags).paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def new
@@ -66,7 +66,7 @@ class Suppliers::ResumesController < Suppliers::BaseController
     @job = Job.find(params[:job_id])
     @q = current_supplier.resumes.ransack(params[:q])
     @resumes = @q.result(distinct: true)
-    @resumes = @resumes.joins(:jobs, :tags).unproblematic.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @resumes = @resumes.joins(:tags).unproblematic.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def destroy
