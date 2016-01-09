@@ -5,7 +5,7 @@
     <%= link_to '删除', admins_comment_path(comment), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: '确认?' }, remote: true if current_admin %>
   </p>
   <blockquote>
-    <p><%= comment.content %></p>
+    <p><%= simple_format comment.content %></p>
   </blockquote>
 
   <%= link_to "<i class='fa fa-reply'></i>".html_safe, "#", onclick: "$('#collapseExample#{comment.id}').toggle(); return false" %>&nbsp;&nbsp;&nbsp;
