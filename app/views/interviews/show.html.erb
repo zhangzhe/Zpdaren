@@ -4,9 +4,6 @@
   <div class="jumbotron">
     <div class="text-center">
       <%= image_tag(@interview.avatar_url, :class => "img-thumbnail", :size => "300x300") if @interview.avatar? %>
-
-      <%= link_to "微信登录", "http://localhost:3000/commenters/auth/wechat" %>
-
       <h1><%= @interview.professor_name %></h1>
       <div><%= @interview.professor_title %></div>
     </div>
