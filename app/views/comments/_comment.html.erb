@@ -8,12 +8,13 @@
     <p><%= simple_format comment.content %></p>
   </blockquote>
 
-  <%= link_to "<i class='fa fa-reply'></i>".html_safe, "#", onclick: "$('#collapseExample#{comment.id}').toggle(); return false" %>&nbsp;&nbsp;&nbsp;
+  <%= link_to "<i class='fa fa-reply'></i> 回复".html_safe, "#", onclick: "$('#collapseExample#{comment.id}').toggle(); return false" %>&nbsp;&nbsp;&nbsp;
   <% if session[comment.id].present? %>
     <i class="fa fa-thumbs-o-up followed" comment-id="<%= comment.id %>"></i>
   <% else %>
-    <i class="fa fa-thumbs-o-up unfollowed" comment-id="<%= comment.id %>" onclick="follow(this)"></i>
+    <i class="fa fa-thumbs-o-up unfollowed btn-link" comment-id="<%= comment.id %>" onclick="follow(this)"></i>
   <% end %>
+
   <span id="<%= comment.id %>_like_count" like-count="<%= comment.like_count %>" ><%= "#{comment.like_count}个赞" if comment.like_count > 0 %></span>
 
   <div class="collapse" id="collapseExample<%= comment.id %>">
