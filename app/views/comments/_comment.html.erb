@@ -1,19 +1,25 @@
 <div class="well" id="comment_<%= comment.id %>">
   <p class="text-muted">
     <strong><%= comment.commenter_name %></strong><%= "(专家)" if comment.replied_by_author? %>
-    <%= l(comment.created_at, format: '%B, %d %Y %H:%M:%S') %>
+    <% if comment.parent %>
+      回复&nbsp;<%= comment.parent.try(:commenter_name) %>  &nbsp;
+    <% end %>
+
+    <%= time_ago_in_words(comment.created_at) %>以前
     <%= link_to '删除', admins_comment_path(comment), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: '确认?' }, remote: true if current_admin %>
   </p>
-  <blockquote>
-    <p><%= simple_format comment.content %></p>
+
+  <blockquote style="width:auto; word-wrap:break-word;">
+    <%= simple_format comment.content %>
   </blockquote>
 
-  <%= link_to "<i class='fa fa-reply'></i>".html_safe, "#", onclick: "$('#collapseExample#{comment.id}').toggle(); return false" %>&nbsp;&nbsp;&nbsp;
+  <%= link_to "<i class='fa fa-reply'></i> 回复".html_safe, "#", onclick: "$('#collapseExample#{comment.id}').toggle(); return false" %>&nbsp;&nbsp;&nbsp;
   <% if session[comment.id].present? %>
     <i class="fa fa-thumbs-o-up followed" comment-id="<%= comment.id %>"></i>
   <% else %>
-    <i class="fa fa-thumbs-o-up unfollowed" comment-id="<%= comment.id %>" onclick="follow(this)"></i>
+    <i class="fa fa-thumbs-o-up unfollowed btn-link" comment-id="<%= comment.id %>" onclick="follow(this)"></i>
   <% end %>
+
   <span id="<%= comment.id %>_like_count" like-count="<%= comment.like_count %>" ><%= "#{comment.like_count}个赞" if comment.like_count > 0 %></span>
 
   <div class="collapse" id="collapseExample<%= comment.id %>">
