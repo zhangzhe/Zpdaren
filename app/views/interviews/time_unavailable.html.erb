@@ -2,9 +2,12 @@
   <div class="container">
     <div class="jumbotron">
       <h2>
-        感谢您的参与
         <br>
         本访谈的提问时间为<%= @interview.reply_begin_at.localtime.to_date.to_s(:db) %>到<%= @interview.reply_end_at.localtime.to_date.to_s(:db) %>
+        <br>
+        请届时访问
+        <br>
+        感谢您的参与。
       </h2>
       <blockquote class="blockquote-reverse">
         5秒后本页会自动关闭并跳转到众聘达人首页

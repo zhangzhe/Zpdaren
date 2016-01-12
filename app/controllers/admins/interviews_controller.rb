@@ -8,8 +8,8 @@ class Admins::InterviewsController < Admins::BaseController
   end
 
   def create
-    @interview = Interview.new(interview_params)
-    @professor = Professor.new(professor_params)
+    @interview = Interview.new(raw_interview_params)
+    @professor = Professor.new(raw_professor_params)
     @interview.professor = @professor
     saved = false
     begin
