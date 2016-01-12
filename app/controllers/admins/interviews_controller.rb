@@ -34,6 +34,8 @@ class Admins::InterviewsController < Admins::BaseController
   def update
     @interview = Interview.find(params[:id])
     @professor = @interview.professor || @interview.build_professor
+    interview_params = raw_interview_params.delete_if { |k, v| v.blank? }
+    professor_params = raw_professor_params.delete_if { |k, v| v.blank? }
     if @interview.update(interview_params) && @professor.update(professor_params)
       redirect_to @interview, notice: '更新成功'
     else
@@ -54,11 +56,11 @@ class Admins::InterviewsController < Admins::BaseController
   end
 
   private
-  def interview_params
+  def raw_interview_params
     params.require(:interview).permit(:professor_title, :content, :avatar, :professor_name, :brief, :reply_begin_at, :reply_end_at)
   end
 
-  def professor_params
+  def raw_professor_params
     { :email => params[:professor_email], :password => params[:professor_password], :name => params[:interview][:professor_name] }
   end
 end
