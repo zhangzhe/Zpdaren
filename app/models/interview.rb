@@ -4,6 +4,7 @@ class Interview < ActiveRecord::Base
   belongs_to :professor
   mount_uploader :avatar, AvatarUploader
   acts_as_paranoid
+  default_scope { order('updated_at DESC') }
 
   def available?
     (Time.now.to_i < reply_end_at.to_i) && (Time.now.to_i > reply_begin_at.to_i)
