@@ -5,6 +5,7 @@
     <div class="account-wall">
       <%= form_for(User.new, as: "user", url: session_path("user")) do |f| %>
         <h2 class="text-center">用户登录</h2>
+        <%= hidden_field_tag 'redirect_url', params[:redirect_url] %>
         <br>
         <%= f.email_field :email, autofocus: true, :class => "form-control input-lg", :placeholder => "邮箱" %><br>
 

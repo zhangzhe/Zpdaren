@@ -14,6 +14,7 @@ class Authentication::SessionsController < Devise::SessionsController
   def after_sign_in_path_for(resource)
     previous_url = session[:previous_url]
     session[:previous_url] = nil
-    previous_url || super
+    redirect_url = params[:redirect_url]
+    redirect_url || previous_url || super
   end
 end
