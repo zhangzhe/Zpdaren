@@ -19,10 +19,6 @@ group :development, :test do
   gem 'rails_best_practices', '~> 1.15.7'
   gem 'rails-erd', '~> 1.4.2'
   gem 'faker'
-  gem 'capistrano', '~> 3.4.0'
-  gem 'capistrano-sidekiq'
-  gem 'capistrano-rails', '~> 1.1'
-  gem 'capistrano3-unicorn', '~> 0.2.1'
 end
 gem "twitter-bootstrap-rails"
 gem 'devise'

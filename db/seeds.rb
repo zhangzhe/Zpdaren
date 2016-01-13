@@ -1,1 +1,1 @@
-Admin.create!(:email => "xiaoda@zpdaren.com", :password => "xiaoda@zpdaren.comNov11", :password_confirmation => "xiaoda@zpdaren.comNov11", :confirmed_at => Time.now, :confirmation_sent_at => Time.now)
+Admin.create!(:email => "xiaoda@zpdaren.com", :password => "xiaoda@zpdaren.comJan01", :password_confirmation => "xiaoda@zpdaren.comJan01", :confirmed_at => Time.now, :confirmation_sent_at => Time.now)

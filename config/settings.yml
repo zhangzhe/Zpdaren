@@ -24,6 +24,7 @@ email:
   authentication: plain
 
 redis:
-  url: redis://localhost:6379/12
+  host: <%= ENV["REDIS_HOST"] %>
+  port: <%= ENV["REDIS_PORT"] %>
   queues:
     email: emails
