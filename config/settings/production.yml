@@ -1,2 +1,2 @@
 domain:
-  host: 'zpdaren.com'
+  host: <%= ENV["RAILS_HOST"] %>

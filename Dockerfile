@@ -6,4 +6,6 @@ COPY config/nginx.conf /etc/nginx/nginx.conf
 
 RUN bundle exec rake assets:precompile RAILS_ENV=production
 
+EXPOSE 80
+
 CMD sh start.sh
