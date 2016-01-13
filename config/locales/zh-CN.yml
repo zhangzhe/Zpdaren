@@ -394,4 +394,5 @@ zh-CN:
               blank: "不能为空"
             reply_end_at:
               blank: "不能为空"
-
+      messages:
+        record_invalid: "数据无效"
