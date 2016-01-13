@@ -59,13 +59,22 @@
       <li><%= link_to "#{interview.professor_name}-#{interview.professor_title}", interview %></li><br>
       <% end %>
     </ol>
+    <hr>
+    <h4>赞助伙伴</h4>
+    <ol class="list-unstyled">
+        <%= link_to image_tag('mika.jpg', class: "img-thumbnail"), 'http://www.micamika.com/', target: '_blank' %>
+        <%= link_to image_tag('zaodian.jpg', class: "img-thumbnail"), 'http://www.izaodiandao.com/', target: '_blank' %>
+        <%= link_to image_tag('benlai.jpg', class: "img-thumbnail"), 'http://www.benlai.com/', target: '_blank' %>
+        <%= link_to image_tag('meidao.jpg', class: "img-thumbnail"), 'http://www.emeidaojia.com/', target: '_blank' %>
+    </ol>
+    <hr>
+    <% if current_admin %>
+      <%= link_to "修改访谈", edit_admins_interview_path(@interview), class: "btn btn-primary" %>
+      &nbsp;
+      <%= link_to "返回访谈列表", admins_interviews_path, class: "btn btn-primary" %>
+    <% end %>
   </p>
 
-  <% if current_admin %>
-  <%= link_to "修改访谈", edit_admins_interview_path(@interview), class: "btn btn-primary" %>
-  &nbsp;
-  <%= link_to "返回访谈列表", admins_interviews_path, class: "btn btn-primary" %>
-  <% end %>
 <% end %>
 
 
