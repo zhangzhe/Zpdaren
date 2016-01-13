@@ -30,8 +30,12 @@ Rails.application.routes.draw do
   get 'signup_redirection' => 'home#signup_redirection'
   get 'forget_password_redirection' => 'home#forget_password_redirection'
 
-  get "/suppliers/sign_in", to: redirect("users/sign_in")
-  get "/recruiters/sign_in", to: redirect("users/sign_in")
+  # get "/suppliers/sign_in", to: redirect("users/sign_in")
+  # get "/recruiters/sign_in", to: redirect("users/sign_in")
+
+  get "/suppliers/sign_in", to: redirect { |params, request| "/users/sign_in?#{request.params.to_query}" }
+  get "/recruiters/sign_in", to: redirect { |params, request| "/users/sign_in?#{request.params.to_query}" }
+
 
   devise_for :recruiters, controllers: {
     registrations: 'authentication/recruiters/registrations',
