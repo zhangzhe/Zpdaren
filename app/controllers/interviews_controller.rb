@@ -1,7 +1,7 @@
 class InterviewsController < ActionController::Base
   layout 'anonymous_job'
   def show
-    @interview = Interview.find_by_id(params[:id])
+    @interview = Interview.find(params[:id])
     if @interview.available? || (current_user && current_user.admin?)
       if request.user_agent =~ /MicroMessenger/ # visit from weixin
         if current_user # step 3
