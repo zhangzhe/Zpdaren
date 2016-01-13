@@ -19,7 +19,6 @@
 
 !/uploads/.keep
 
-config/database.yml
 /uploads/*
 !/uploads/.keep
 !/public/uploads/interview/avatar/.keep

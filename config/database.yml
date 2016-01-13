@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  host: 127.0.0.1
+  port: 5432
+  username: postgres
+  password: postgres
+  database: dev_epin_pro
+
+production:
+  <<: *default
+  host: <%= ENV["PG_HOST"] %>
+  port: <%= ENV["PG_PORT"] %>
+  username: <%= ENV["PG_USERNAME"] %>
+  password: <%= ENV["PG_PASSWORD"] %>
+  database: <%= ENV["PG_DB"] %>
