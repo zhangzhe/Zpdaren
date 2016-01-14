@@ -87,4 +87,4 @@ Rails.application.configure do
     }
 end
 
-ROOT_URL = "https://#{Settings.domain.host}"
+ROOT_URL = "http://#{Settings.domain.host}"
