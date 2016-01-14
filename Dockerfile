@@ -6,6 +6,8 @@ COPY config/nginx.conf /etc/nginx/nginx.conf
 
 RUN bundle exec rake assets:precompile RAILS_ENV=production
 
+RUN mkdir -p tmp/pids
+
 EXPOSE 80
 
 CMD sh start.sh
