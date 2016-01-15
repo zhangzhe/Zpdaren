@@ -26,6 +26,7 @@ group :development, :test do
 end
 gem "twitter-bootstrap-rails"
 gem 'devise'
+gem 'devise-async'
 gem 'aasm', '~> 4.2.0'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'acts-as-taggable-on', '~> 3.4'
