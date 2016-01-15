@@ -4,8 +4,7 @@
     <%= f.hidden_field :commenter_id, value: current_user.id if current_user %>
     <p>
       <% default_value = current_user ? current_user.name : "" %>
-      <% had_name = current_user && !current_user.read_attribute("name").blank? %>
-      <%= f.text_field :commenter_name, :value => default_value, class: "form-control", placeholder: '您的名字', readonly: had_name %>
+      <%= f.text_field :commenter_name, :value => default_value, class: "form-control", placeholder: '您的名字'%>
     </p>
     <p>
       <% form_content_id = defined?(comment) ? "comment_content#{comment.id}" : "comment_content" %>
