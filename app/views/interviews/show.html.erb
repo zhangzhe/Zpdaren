@@ -12,31 +12,27 @@
     <%= @interview.content.html_safe %>
   </div>
   <br>
-  <hr>
-  <br>
-  <div class="text-center" id="commit_button">
-    <%= link_to "我要提问", "#", onclick: "showTextField();return false;", class: "btn btn-success btn-lg" %>
+  <div id="comment_form_01">
+    <hr>
+    <br>
+    <p class="text-right">共收到<%= @interview.questions_count %>个提问</p>
     <br><br>
-    <div class="collapse" id="collapseExample">
-      <p>
-        <% if current_user %>
-          <%= render "/comments/comment_form" %>
-        <% else %>
-          <%= render "login_page" %>
-        <% end %>
-      </p>
-    </div>
+    <p>
+      <% if current_user %>
+        <%= render "/comments/comment_form" %>
+      <% else %>
+        <%= render "login_page" %>
+      <% end %>
+    </p>
   </div>
+
+  <div class="bottom-column" id="commit_button">
+    <%= link_to "我要提问", "#comment_form_01", class: "btn btn-success btn-lg" %>
+  </div>
+
   <br>
   <% @comments = @interview.comments.hash_tree %>
   <%= comments_tree_for @comments %>
-
-  <script>
-    function showTextField() {
-        $('#collapseExample').toggle();
-    }
-  </script>
-
 <% end %>
 
 <% content_for :other_job_info do %>
@@ -76,6 +72,3 @@
   </p>
 
 <% end %>
-
-
-

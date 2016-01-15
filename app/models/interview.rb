@@ -9,4 +9,8 @@ class Interview < ActiveRecord::Base
   def available?
     (Time.now.to_i < reply_end_at.to_i) && (Time.now.to_i > reply_begin_at.to_i)
   end
+
+  def questions_count
+    comments.questions.count
+  end
 end
