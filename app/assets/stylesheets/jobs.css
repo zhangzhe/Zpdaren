@@ -31,3 +31,9 @@
   left: 220px;
   margin-top: -26px;
 }
+
+.bottom-column {
+    position: fixed;
+    bottom: 40px;
+    z-index: 9999;
+  }
