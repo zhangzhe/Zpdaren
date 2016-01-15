@@ -24,6 +24,7 @@
 !/public/uploads/interview/avatar/.keep
 !/public/uploads/interview/.keep
 !/public/uploads/.keep
+/public/uploads
 .DS_Store
 
 config/settings.local.yml

@@ -10,7 +10,13 @@
   </p>
 
   <blockquote style="width:auto; word-wrap:break-word;">
-    <%= simple_format comment.content %>
+    <% if comment.replied_by_author? %>
+      <strong>
+        <%= simple_format comment.content %>
+      </strong>
+    <% else %>
+      <%= simple_format comment.content %>
+    <% end %>
   </blockquote>
 
   <%= link_to "<i class='fa fa-reply'></i> 回复".html_safe, "#", onclick: "$('#collapseExample#{comment.id}').toggle(); return false" %>&nbsp;&nbsp;&nbsp;
