@@ -4,9 +4,14 @@ class Comment < ActiveRecord::Base
   before_save :set_default_commenter_name
   acts_as_tree order: 'created_at DESC'
   acts_as_paranoid
+  scope :questions, -> { where("parent_id is null") }
 
   def replied_by_author?
     interview.professor_id == self.commenter_id
+  end
+
+  def question?
+    self.parent_id.nil?
   end
 
   private
