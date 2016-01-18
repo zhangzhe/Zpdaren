@@ -88,6 +88,14 @@ class Job < ActiveRecord::Base
     end
   end
 
+  def slug
+    Pinyin.t(title.downcase).split(' ').join('-')
+  end
+
+  def to_param
+    "#{id}-job-with-#{slug}"
+  end
+
   def state_show?
     self.deposit_paid? || self.final_payment_paid? || self.finished?
   end

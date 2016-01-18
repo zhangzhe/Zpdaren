@@ -15,7 +15,7 @@ class Interview < ActiveRecord::Base
   end
 
   def slug
-    professor_name.downcase.gsub(" ", "-")
+    Pinyin.t(professor_name.downcase).split(' ').join('-')
   end
 
   def to_param
