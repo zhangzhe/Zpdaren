@@ -15,19 +15,6 @@ class Comment < ActiveRecord::Base
     self.parent_id.nil?
   end
 
-  def self.commenters_info
-    results = []
-    commenters = Comment.all.map(&:commenter)
-    commenters.each do |commenter|
-      if commenter.is_a?(Commenter)
-        results << [commenter.commenter_detail.nickname, commenter.name]
-      else
-        results << commenter.email
-      end
-    end
-    p results.uniq
-  end
-
   private
   def set_default_commenter_name
     self.commenter_name = "匿名用户" if self.commenter_name.blank?
