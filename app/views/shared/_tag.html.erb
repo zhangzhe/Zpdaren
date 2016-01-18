@@ -1,19 +1,21 @@
-<script>
-  $(function(){
-    $('.auto-tags').tagsInput({
-      'autocomplete_url': '/tags',
-      'autocomplete': {
-        'selectFirst': false,
-        'width': '374px',
-        'autoFill': false,
-        'noRecord': ''
-      },
-      'defaultText':'标签(必填)',
-      'width': '100%',
-      'min-height': '42px',
-      'height': 'auto',
-      'max': 5,
-      'maxChars': 20
+<%= content_for :scripts do %>
+  <script>
+    $(function(){
+      $('.auto-tags').tagsInput({
+        'autocomplete_url': '/tags',
+        'autocomplete': {
+          'selectFirst': false,
+          'width': '374px',
+          'autoFill': false,
+          'noRecord': ''
+        },
+        'defaultText':'标签(必填)',
+        'width': '100%',
+        'min-height': '42px',
+        'height': 'auto',
+        'max': 5,
+        'maxChars': 20
+      });
     });
-  });
-</script>
+  </script>
+<% end %>

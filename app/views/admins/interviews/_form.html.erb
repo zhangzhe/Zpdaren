@@ -41,21 +41,23 @@
   </p>
 <% end %>
 
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('.datepicker').datepicker({
-      format: "yyyy-mm-dd",
-      autoclose: true,
-      todayHighlight: true
+<%= content_for :scripts do %>
+  <script>
+    $(document).ready(function(){
+      $('.datepicker').datepicker({
+        format: "yyyy-mm-dd",
+        autoclose: true,
+        todayHighlight: true
+      });
+
     });
 
-  });
-
-  $(function() {
-      $('#interview_content').froalaEditor({
-        heightMin: 300,
-        placeholderText: '访谈内容'
-      }
-      )
-  });
-</script>
+    $(function() {
+        $('#interview_content').froalaEditor({
+          heightMin: 300,
+          placeholderText: '访谈内容'
+        }
+        )
+    });
+  </script>
+<% end %>

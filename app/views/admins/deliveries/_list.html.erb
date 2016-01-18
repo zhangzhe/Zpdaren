@@ -37,8 +37,10 @@
     </tbody>
   </table>
 </div>
-<script>
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  })
-</script>
+<%= content_for :scripts do %>
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+  </script>
+<% end %>

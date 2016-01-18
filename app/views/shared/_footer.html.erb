@@ -1,6 +1,12 @@
-<br><br>
-<div class="text-center">
-  <footer>
-    <p>&copy; 火花航程科技有限公司 2015</p>
-  </footer>
+<div class="container">
+  <p>
+    <div class="text-center">
+      <footer>
+        <p>&copy; 火花航程科技有限公司 2015</p>
+      </footer>
+    </div>
+    <%= render partial: "/shared/js" %>
+    <%= yield :scripts %>
+    <%= render "/shared/cnzz" unless admin_page? %>
+  </p>
 </div>

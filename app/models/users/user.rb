@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_one :weixin
   has_one :wallet
+  has_many :comments, foreign_key: "commenter_id"
   default_scope { order('created_at DESC') }
   after_create :create_wallet
   devise :database_authenticatable, :validatable, :recoverable, :trackable, :async

@@ -3,7 +3,6 @@
   <%= render partial: "/shared/head" %>
   <body>
     <%= render partial: "/shared/navbar" %>
-    <%= javascript_include_tag "suppliers/base" %>
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-1 main">
@@ -24,7 +23,7 @@
         </div>
       </div>
     </div>
-    <%= render partial: "/shared/js" %>
-    <%= render "/shared/cnzz" %>
+    <%= render "/shared/footer" %>
+    <%= javascript_include_tag "suppliers/base" %>
   </body>
 </html>

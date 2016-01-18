@@ -5,10 +5,6 @@
     <%= render partial: "/shared/navbar" %>
     <% flash[:error], flash[:success] = nil, nil %>
     <%= yield %>
-    <div class="container">
-      <%= render "/shared/footer" %>
-    </div>
-    <%= render partial: "/shared/js" %>
-    <%= render "/shared/cnzz" %>
+    <%= render "/shared/footer" %>
   </body>
 </html>

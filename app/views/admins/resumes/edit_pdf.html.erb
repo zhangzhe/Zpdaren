@@ -71,16 +71,18 @@
   <%= render 'shared/page_title', title: '简历预览' %>
   <%= render 'shared/show_pdf', pdf_url: download_admins_resume_path(@resume) %>
 </div>
-<script type="text/javascript">
-  $(function(){
-    var checkBox = $('.checkbox').find("input[type='checkbox']")
-    $(checkBox).click(function(){
-      if ($(checkBox).is(':checked')) {
-        $('.pdfAttachment').hide();
-      }else{
-        $('.pdfAttachment').show();
-      }
-    });
-  });
-</script>
 
+<%= content_for :scripts do %>
+  <script>
+    $(function(){
+      var checkBox = $('.checkbox').find("input[type='checkbox']")
+      $(checkBox).click(function(){
+        if ($(checkBox).is(':checked')) {
+          $('.pdfAttachment').hide();
+        }else{
+          $('.pdfAttachment').show();
+        }
+      });
+    });
+  </script>
+<% end %>

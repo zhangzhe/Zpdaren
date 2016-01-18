@@ -15,6 +15,10 @@ module ApplicationHelper
     params[:controller] == "home" && params[:action] == "index"
   end
 
+  def admin_page?
+    true if params[:controller] =~ /^admins\//
+  end
+
   def active_for?(current_controllers)
     current_controllers.include?(controller.class) ? "active" : ""
   end

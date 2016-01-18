@@ -11,12 +11,16 @@
   </p>
 <% end %>
 
-<script>
-    $(function() {
-        $('#blog_content').froalaEditor({
-          heightMin: 300,
-          placeholderText: '博客内容'
-        }
-        )
-    });
-</script>
+
+<%= content_for :scripts do %>
+  <script>
+      $(function() {
+          $('#blog_content').froalaEditor({
+            heightMin: 300,
+            placeholderText: '博客内容'
+          }
+          )
+      });
+  </script>
+<% end %>
+
