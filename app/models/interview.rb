@@ -13,4 +13,12 @@ class Interview < ActiveRecord::Base
   def questions_count
     comments.questions.count
   end
+
+  def slug
+    professor_name.downcase.gsub(" ", "-")
+  end
+
+  def to_param
+    "#{id}-ama-with-#{slug}"
+  end
 end

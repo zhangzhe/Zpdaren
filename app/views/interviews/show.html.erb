@@ -52,7 +52,7 @@
     <h4>更多访谈</h4>
     <ol class="list-unstyled">
       <% Interview.all.each do |interview| %>
-      <li><%= link_to "#{interview.professor_name}-#{interview.professor_title}", show_path(interview) %></li><br>
+      <li><%= link_to "#{interview.professor_name}-#{interview.professor_title}", interview %></li><br>
       <% end %>
     </ol>
     <hr>

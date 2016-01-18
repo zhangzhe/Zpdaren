@@ -1,5 +1,3 @@
-require 'interviews_constraint'
-
 Rails.application.routes.draw do
   require 'sidekiq/web'
   authenticate :user, lambda { |u| u.admin? } do
@@ -7,8 +5,7 @@ Rails.application.routes.draw do
   end
 
   resources :blogs, only: [:show, :index]
-  get '/interviews/:id', to: 'interviews#show', :as => "interview", constraints: InterviewsConstraint.new
-  resources :interviews, only: [] do
+  resources :interviews, only: [:show] do
     resources :comments
   end
 

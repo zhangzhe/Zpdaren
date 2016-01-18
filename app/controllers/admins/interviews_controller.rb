@@ -19,7 +19,7 @@ class Admins::InterviewsController < Admins::BaseController
     rescue ActiveRecord::RecordInvalid
     end
     if saved
-      show_path(@interview, '创建成功')
+      redirect_to @interview, notice: '创建成功'
     else
       flash[:error] = @interview.errors.full_messages.first || @professor.errors.full_messages.first
       render :new
@@ -37,7 +37,7 @@ class Admins::InterviewsController < Admins::BaseController
     interview_params = raw_interview_params.delete_if { |k, v| v.blank? }
     professor_params = raw_professor_params.delete_if { |k, v| v.blank? }
     if @interview.update(interview_params) && @professor.update(professor_params)
-      show_path(@interview, '更新成功')
+      redirect_to @interview, notice: '更新成功'
     else
       flash[:error] = @interview.errors.full_messages.first || @professor.errors.full_messages.first
       render 'edit'
@@ -62,10 +62,5 @@ class Admins::InterviewsController < Admins::BaseController
 
   def raw_professor_params
     { :email => params[:professor_email], :password => params[:professor_password], :name => params[:interview][:professor_name] }
-  end
-
-  private
-  def show_path(interview, notice)
-    redirect_to interview_path(:id => "#{interview.id}-ama-with-#{interview.professor_name}"), notice: notice
   end
 end
