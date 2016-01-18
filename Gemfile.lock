@@ -90,6 +90,7 @@ GEM
     builder (3.2.2)
     byebug (8.2.1)
     certified (1.0.0)
+    chinese_pinyin (0.6.1.1)
     choice (0.2.0)
     closure_tree (6.0.0)
       activerecord (>= 4.1.0)
@@ -344,6 +345,7 @@ DEPENDENCIES
   byebug
   carrierwave!
   certified
+  chinese_pinyin
   closure_tree
   coffee-rails (~> 4.1.0)
   config
