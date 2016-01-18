@@ -14,11 +14,12 @@ class Interview < ActiveRecord::Base
     comments.questions.count
   end
 
-  def slug
-    Pinyin.t(professor_name.downcase).split(' ').join('-')
-  end
-
   def to_param
     "#{id}-ama-with-#{slug}"
+  end
+
+  private
+  def slug
+    Pinyin.t(professor_name.downcase).split(' ').join('-')
   end
 end

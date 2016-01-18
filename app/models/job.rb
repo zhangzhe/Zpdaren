@@ -88,10 +88,6 @@ class Job < ActiveRecord::Base
     end
   end
 
-  def slug
-    Pinyin.t(title.downcase).split(' ').join('-')
-  end
-
   def to_param
     "#{id}-job-with-#{slug}"
   end
@@ -250,5 +246,9 @@ class Job < ActiveRecord::Base
 
   def destroy_all_association_entities
     self.job_recover
+  end
+
+  def slug
+    Pinyin.t(title.downcase).split(' ').join('-')
   end
 end
