@@ -237,7 +237,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
-  weixin_config = YAML.load(ERB.new(File.read("#{Rails.root}/config/weixin.yml")).result)
+  weixin_config = YAML.load(ERB.new(File.read("#{Rails.root}/config/weixin.yml")).result)[Rails.env]
   weixin_key = weixin_config["key"]
   weixin_secret = weixin_config["secret"]
   config.omniauth  :wechat, weixin_key, weixin_secret
