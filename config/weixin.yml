@@ -3,8 +3,8 @@ development:
   secret: 87c7009f35ab8c4451664071216a4f8f
 
 production:
-  key: wx43c6e09b6b423c06
-  secret: c2cce2aa16a011486c1337fdf6f598ef
+  key: <%= ENV["APP_ID"] %>
+  secret: <%= ENV["APP_SECRET"] %>
 
 mp:
   appid: wx0e604319f74644b3
