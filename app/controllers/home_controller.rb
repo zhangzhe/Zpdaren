@@ -39,7 +39,7 @@ class HomeController < ApplicationController
         user = User.find(user_id)
         # may cause may weixins for one user, fix later
         subscribe_user = user.create_weixin(:user_name => params["xml"]["FromUserName"])
-        WeixinsWorker.perform_later({:event => 'subscribe', :id => subscribe_user.id})
+        WeixinsJob.perform_later({:event => 'subscribe', :id => subscribe_user.id})
       end
       render :nothing => true
     elsif unsubscribe_condition
