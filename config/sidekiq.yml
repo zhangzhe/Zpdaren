@@ -2,4 +2,5 @@
 :logfile: log/sidekiq.log
 :queues:
   - [mailers, 5]
+  - [weixins, 4]
   - default
