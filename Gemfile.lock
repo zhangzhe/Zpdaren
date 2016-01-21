@@ -105,7 +105,7 @@ GEM
     capistrano3-unicorn (0.2.1)
       capistrano (~> 3.1, >= 3.1.0)
     certified (1.0.0)
-    chinese_pinyin (0.6.1.1)
+    chinese_pinyin (1.0.0)
     choice (0.2.0)
     closure_tree (6.0.0)
       activerecord (>= 4.1.0)
@@ -272,6 +272,8 @@ GEM
       json (~> 1.4)
     redcarpet (3.2.3)
     redis (3.2.2)
+    redis-namespace (1.5.2)
+      redis (~> 3.0, >= 3.0.4)
     require_all (1.3.3)
     responders (2.1.1)
       railties (>= 4.2.0, < 5.1)
@@ -290,10 +292,9 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     sexp_processor (4.6.0)
-    sidekiq (4.0.1)
+    sidekiq (4.0.2)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
-      json (~> 1.0)
       redis (~> 3.2, >= 3.2.1)
     sinatra (1.4.6)
       rack (~> 1.4)
@@ -393,12 +394,14 @@ DEPENDENCIES
   rails-erd (~> 1.4.2)
   rails_autolink (>= 1.1.0)
   rails_best_practices (~> 1.15.7)
-  ransack
+  ransack (~> 1.7)
   redcarpet (~> 3.2.3)
+  redis (~> 3.2, >= 3.2.2)
+  redis-namespace (~> 1.5, >= 1.5.2)
   rouge (~> 1.8.0)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
-  sidekiq
+  sidekiq (~> 4.0, >= 4.0.2)
   sinatra
   spring
   strip_attributes
