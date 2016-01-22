@@ -36,3 +36,7 @@
 
 <%= render 'shared/paginate', objs: @jobs %>
 <%= render 'shared/popover' %>
+<%= content_for :scripts do %>
+  <%= javascript_include_tag "admins/jobs" %>
+<% end %>
+

@@ -32,3 +32,5 @@
 //= require jquery-ui/draggable
 //= require jquery-ui/droppable
 //= require turbolinks
+
+$(".alert").fadeOut('slow');

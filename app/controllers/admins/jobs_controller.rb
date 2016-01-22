@@ -29,9 +29,12 @@ class Admins::JobsController < Admins::BaseController
     job = Job.find(params[:id])
     job.priority = params[:priority]
     if job.save
-      render json: { status: 200 }
+      flash[:success] = '更新成功。'
     else
-      render json: { status: 500 }
+      flash[:error] = "更新失败，请联系程序员！"
+    end
+    respond_to do |format|
+      format.js   {}
     end
   end
 
