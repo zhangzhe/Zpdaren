@@ -19,7 +19,6 @@ class JobsController < ApplicationController
 
   def preview
     @description = params[:description]
-
     respond_to do |format|
       format.json
     end

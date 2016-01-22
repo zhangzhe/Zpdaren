@@ -2,7 +2,6 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require jobs
 //= require bootstrap_support
 
 //= require froala_editor.min.js

@@ -25,5 +25,5 @@
   </div>
 </div>
 <% content_for :scripts do %>
-  <%= javascript_include_tag "suppliers/mobile_validation" %>
+  <%= javascript_include_tag "suppliers/mobile_validation", 'data-turbolinks-track' => true %>
 <% end %>

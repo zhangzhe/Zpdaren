@@ -33,5 +33,5 @@
   </table>
 </div>
 <%= content_for :scripts do %>
-  <%= javascript_include_tag "admins/jobs" %>
+  <%= javascript_include_tag "admins/jobs", 'data-turbolinks-track' => true %>
 <% end %>

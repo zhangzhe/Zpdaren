@@ -35,7 +35,7 @@
   <%= comments_tree_for @comments %>
 
   <% content_for :scripts do %>
-    <%= javascript_include_tag 'comment' %>
+    <%= javascript_include_tag 'comment', 'data-turbolinks-track' => true %>
   <% end %>
 
   <% content_for :styles do %>
