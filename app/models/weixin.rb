@@ -1,5 +1,6 @@
 class Weixin < ActiveRecord::Base
   belongs_to :user
 
-  extend WeixinConnection
+  extend WeixinApi::Base
+  extend WeixinApi::Notification
 end

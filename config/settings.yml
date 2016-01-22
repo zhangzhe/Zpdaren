@@ -22,7 +22,3 @@ email:
   address: smtp.mxhichina.com
   port: 25
   authentication: plain
-
-redis:
-  host: <%= ENV["REDIS_HOST"] %>
-  port: <%= ENV["REDIS_PORT"] %>

@@ -55,7 +55,7 @@ class Delivery < ActiveRecord::Base
 
     event :pay do
       after do
-        notify_supplier_deposit_paid
+        notify_supplier_delivery_paid
         transfer_deposit
       end
       transitions :from => :approved, :to => :paid
@@ -188,13 +188,13 @@ class Delivery < ActiveRecord::Base
     end
   end
 
-  def notify_supplier_deposit_paid
-    Weixin.notify_supplier_deposit_paid(self) if supplier.weixin
+  def notify_supplier_delivery_paid
+    WeixinsJob.perform_later({:event => 'delivery_paid', :id => self.id}) if supplier.weixin
   end
 
   # FIXME: refactor dupplicate code
   def notify_supplier_final_payment_paid
-    Weixin.notify_supplier_final_payment_paid(self) if supplier.weixin
+    WeixinsJob.perform_later({:event => 'delivery_final_payment_paid', :id => self.id}) if supplier.weixin
   end
 
   def transfer_deposit
@@ -212,11 +212,11 @@ class Delivery < ActiveRecord::Base
 
   def notify_recruiter_and_supplier
     RecruiterMailer.resume_recommended(id).deliver_later
-    Weixin.notify_resume_approved(self) if self.resume.supplier.weixin
+    WeixinsJob.perform_later({:event => 'delivery_approved', :id => self.id}) if self.resume.supplier.weixin
   end
 
   def notify_supplier_refused
-    Weixin.send_resume_refused_notification(self) if self.resume.supplier.weixin
+    WeixinsJob.perform_later({:event => 'delivery_refused', :id => self.id}) if self.resume.supplier.weixin
   end
 
   def original_data
