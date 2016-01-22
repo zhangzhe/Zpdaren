@@ -4,7 +4,7 @@ class Commenter < User
 
   class << self
     def from_omniauth(auth)
-      where(provider: auth.provider, uid: auth.uid).first_or_create
+      where(provider: auth.provider, open_id: auth.extra.raw_info.openid).first_or_create
     end
   end
 

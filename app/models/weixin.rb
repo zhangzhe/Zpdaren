@@ -2,6 +2,7 @@ class Weixin < ActiveRecord::Base
   belongs_to :user
 
   extend WeixinApi::Base
+  extend WeixinApi::Notification
 
   def update_from_remote!(remote_data)
     self.user_name = remote_data['openid']

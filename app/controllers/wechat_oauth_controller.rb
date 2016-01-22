@@ -2,7 +2,7 @@ class WechatOauthController < ApplicationController
   def callback
     response = Weixin.get_access_token(params[:code])
     remote_data = JSON(response.body)
-    user = Commenter.where(provider: "wechat", uid: remote_data["unionid"]).first_or_create
+    user = Commenter.where(provider: "wechat", open_id: remote_data["openid"]).first_or_create
 
     if !user.persisted?
       unless user.update_attributes(:email => "#{remote_data["unionid"]}@wechat.com", :password => remote_data["unionid"])
