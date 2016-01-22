@@ -32,6 +32,4 @@
 //= require bootstrap-datepicker/core
 //= require jquery-ui/draggable
 //= require jquery-ui/droppable
-//= require jquery-tagsinput
-//= require jquery-autocomplete
 //= require turbolinks

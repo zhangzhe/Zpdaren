@@ -9,4 +9,4 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
-Rails.application.config.assets.precompile += %w( comment.js suppliers/mobile_validation.js admins/jobs.js jobs.js comment.css )
+Rails.application.config.assets.precompile += %w( comment.js suppliers/mobile_validation.js admins/jobs.js jobs.js auto_complete_tags/jquery-tagsinput.js auto_complete_tags/jquery-autocomplete.js comment.css )

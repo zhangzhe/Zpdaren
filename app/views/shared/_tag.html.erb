@@ -1,4 +1,7 @@
 <%= content_for :scripts do %>
+  <%= javascript_include_tag "auto_complete_tags/jquery-tagsinput", 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "auto_complete_tags/jquery-autocomplete", 'data-turbolinks-track' => true %>
+
   <script>
     $(function(){
       $('.auto-tags').tagsInput({
