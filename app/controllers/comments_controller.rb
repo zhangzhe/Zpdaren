@@ -27,9 +27,9 @@ class CommentsController < ActionController::Base
     comment.like_count += 1
     if comment.save
       session[comment.id] = comment.id
-      render json: { status: 'OK', like_count: comment.like_count }
+      render json: { status: 200 }
     else
-      render json: { status: 'ERROR' }
+      render json: { status: 500 }
     end
   end
 

@@ -21,9 +21,9 @@
 
   <%= link_to "<i class='fa fa-reply'></i> 回复".html_safe, "#", onclick: "$('#collapseExample#{comment.id}').toggle(); return false" %>&nbsp;&nbsp;&nbsp;
   <% if session[comment.id].present? %>
-    <i class="fa fa-thumbs-o-up followed" comment-id="<%= comment.id %>"></i>
+    <i class="fa fa-thumbs-o-up thumbuped" comment-id="<%= comment.id %>"></i>
   <% else %>
-    <i class="fa fa-thumbs-o-up unfollowed btn-link" comment-id="<%= comment.id %>" onclick="like(this)"></i>
+    <i class="fa fa-thumbs-o-up unthumbuped btn-link" comment-id="<%= comment.id %>"></i>
   <% end %>
 
   <span id="<%= comment.id %>_like_count" like-count="<%= comment.like_count %>" ><%= "#{comment.like_count}个赞" if comment.like_count > 0 %></span>
@@ -34,6 +34,3 @@
     </p>
   </div>
 </div>
-<% content_for :scripts do %>
-  <%= javascript_include_tag 'comment_like' %>
-<% end %>

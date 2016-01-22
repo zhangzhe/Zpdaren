@@ -35,5 +35,4 @@
 //= require jquery-ui/droppable
 //= require jquery-tagsinput
 //= require jquery-autocomplete
-
 //= require turbolinks
