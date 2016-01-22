@@ -54,9 +54,11 @@ gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails', :git
 gem 'axlsx'
 gem 'axlsx_rails'
 gem 'jquery-ui-rails'
-gem 'ransack'
-gem 'sidekiq'
+gem 'ransack', '~> 1.7'
+gem 'sidekiq', '~> 4.0', '>= 4.0.2'
 gem 'sinatra', :require => nil
 gem "omniauth-wechat-oauth2", git: "https://github.com/SparkYacademy/omniauth-wechat-oauth2.git"
 gem 'chinese_pinyin'
+gem 'redis', '~> 3.2', '>= 3.2.2'
+gem 'redis-namespace', '~> 1.5', '>= 1.5.2'
 
