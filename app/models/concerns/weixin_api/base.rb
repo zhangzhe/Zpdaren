@@ -53,7 +53,7 @@ module WeixinApi
     end
 
     def weixin_config
-      YAML.load_file("#{Rails.root}/config/weixin.yml")["mp"]
+      YAML.load(ERB.new(File.read("#{Rails.root}/config/weixin.yml")).result)["mp"]
     end
 
     def secret
