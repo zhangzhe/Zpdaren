@@ -28,9 +28,7 @@ class Admins::JobsController < Admins::BaseController
   def priority_update
     job = Job.find(params[:id])
     job.priority = params[:priority]
-    if job.save
-      flash[:success] = '更新成功。'
-    else
+    unless job.save
       flash[:error] = "更新失败，请联系程序员！"
     end
     respond_to do |format|

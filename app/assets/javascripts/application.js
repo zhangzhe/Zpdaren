@@ -3,6 +3,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree ./suppliers
+//= require jobs
 //= require froala_editor.min.js
 //= require plugins/align.min.js
 //= require plugins/char_counter.min.js
@@ -31,6 +32,7 @@
 //= require bootstrap-datepicker/core
 //= require jquery-ui/draggable
 //= require jquery-ui/droppable
+//= require jquery-tagsinput
+//= require jquery-autocomplete
+//= require bootstrap_support
 //= require turbolinks
-
-$(".alert").fadeOut('slow');

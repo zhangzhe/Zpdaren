@@ -1,11 +1,3 @@
-$(function(){
-  $(".resumesForJob").popover(
-    {
-      html: true
-    }
-  );
-});
-
 function validMobile(){
   var mobile = $('#supplier_mobile').val();
   if ($.trim(mobile) == '') {
