@@ -1,12 +1,9 @@
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require turbolinks
-//= require_tree .
-//= require_tree ./admins
 //= require_tree ./suppliers
 //= require froala_editor.min.js
-// Include other plugins.
 //= require plugins/align.min.js
 //= require plugins/char_counter.min.js
 //= require plugins/code_beautifier.min.js
@@ -34,4 +31,4 @@
 //= require bootstrap-datepicker/core
 //= require jquery-ui/draggable
 //= require jquery-ui/droppable
-//
+//= require turbolinks

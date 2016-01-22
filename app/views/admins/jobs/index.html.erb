@@ -26,14 +26,12 @@
 <%= render 'label' %>
 <% if params[:state] == "un_hiring" %>
   <%= render 'un_hiring_list', jobs: @jobs %>
-<% elsif params[:state] == "in_hiring" %>
+<% elsif (params[:state] == "in_hiring" || params[:state] == 'high_priority') %>
   <%= render 'in_hiring_list', jobs: @jobs %>
 <% elsif params[:state] == "deleted" %>
   <%= render 'deleted_list', jobs: @jobs %>
 <% elsif params[:state] == "submitted" %>
   <%= render 'submitted_list', jobs: @jobs %>
-<% elsif params[:state] == 'high_priority' %>
-  <%= render 'in_hiring_list', jobs: @jobs %>
 <% end %>
 
 <%= render 'shared/paginate', objs: @jobs %>

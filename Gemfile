@@ -59,4 +59,4 @@ gem 'sidekiq'
 gem 'sinatra', :require => nil
 gem "omniauth-wechat-oauth2", git: "https://github.com/SparkYacademy/omniauth-wechat-oauth2.git"
 gem 'chinese_pinyin'
-
+gem 'jquery-turbolinks'
