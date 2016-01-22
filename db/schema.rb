@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160107080909) do
+ActiveRecord::Schema.define(version: 20160122034317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,19 +31,6 @@ ActiveRecord::Schema.define(version: 20160107080909) do
 
   add_index "comment_hierarchies", ["ancestor_id", "descendant_id", "generations"], name: "comment_anc_desc_udx", unique: true, using: :btree
   add_index "comment_hierarchies", ["descendant_id"], name: "comment_desc_idx", using: :btree
-
-  create_table "commenter_details", force: :cascade do |t|
-    t.string   "nickname"
-    t.string   "sex"
-    t.string   "city"
-    t.string   "province"
-    t.string   "headimgurl"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "commenter_details", ["user_id"], name: "index_commenter_details_on_user_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.integer  "commenter_id"
@@ -251,6 +238,11 @@ ActiveRecord::Schema.define(version: 20160107080909) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "nickname"
+    t.string   "sex"
+    t.string   "city"
+    t.string   "province"
+    t.string   "headimgurl"
   end
 
   add_index "weixins", ["user_id"], name: "index_weixins_on_user_id", using: :btree
