@@ -1,6 +1,5 @@
-class WeixinApi::Notification
-  extend WeixinApi::Base
-  class << self
+module WeixinApi
+  module Notification
     def subscribe(id)
       subscribe_user = weixin.find(id)
       message = {
@@ -192,3 +191,4 @@ class WeixinApi::Notification
     end
   end
 end
+

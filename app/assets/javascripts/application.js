@@ -3,6 +3,8 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jobs
+//= require bootstrap_support
+
 //= require froala_editor.min.js
 //= require plugins/align.min.js
 //= require plugins/char_counter.min.js
@@ -33,5 +35,5 @@
 //= require jquery-ui/droppable
 //= require jquery-tagsinput
 //= require jquery-autocomplete
-//= require bootstrap_support
+
 //= require turbolinks

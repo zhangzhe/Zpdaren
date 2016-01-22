@@ -23,7 +23,7 @@
   <% if session[comment.id].present? %>
     <i class="fa fa-thumbs-o-up followed" comment-id="<%= comment.id %>"></i>
   <% else %>
-    <i class="fa fa-thumbs-o-up unfollowed btn-link" comment-id="<%= comment.id %>" onclick="follow(this)"></i>
+    <i class="fa fa-thumbs-o-up unfollowed btn-link" comment-id="<%= comment.id %>" onclick="like(this)"></i>
   <% end %>
 
   <span id="<%= comment.id %>_like_count" like-count="<%= comment.like_count %>" ><%= "#{comment.like_count}个赞" if comment.like_count > 0 %></span>
@@ -34,3 +34,6 @@
     </p>
   </div>
 </div>
+<% content_for :scripts do %>
+  <%= javascript_include_tag 'comment_like' %>
+<% end %>

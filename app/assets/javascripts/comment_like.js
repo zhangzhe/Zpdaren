@@ -1,4 +1,4 @@
-function follow(e){
+function like(e){
   var id = $(e).attr('comment-id');
   $(e).removeClass('unfollowed');
   $(e).addClass('followed');
