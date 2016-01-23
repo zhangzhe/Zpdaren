@@ -1,6 +1,12 @@
-/* Move down content because we have a fixed navbar that is 50px tall */
-body {
-  padding-top: 50px;
+h1{
+  font-size:56px;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+h2{
+  font-size:32px;
+  color: #428bca;
 }
 
 .front_image {
@@ -15,6 +21,15 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   height: 600px;
+}
+
+#preview{
+  width: 100%;
+  min-height: 414px;
+  overflow-y: scroll;
+  display: none;
+  border-top-right-radius:0;
+  border-top-left-radius:0;
 }
 
 .nav-text {
@@ -72,11 +87,6 @@ body {
   background-color: #428bca;
 }
 
-
-
-/*
- * Main content
- */
 
 .main {
   padding: 20px;
@@ -193,45 +203,38 @@ body {
   color: #777;
 }
 
-/*page title*/
-  .title{
-    height: 80px;
-  }
-  .title input{
-    height: 40px;
-  }
-  .title button{
-    height: 40px;
-  }
-  .title .search{
-    margin-top: 20px;
-  }
+
+.title{
+  height: 80px;
+}
+.title input{
+  height: 40px;
+}
+.title button{
+  height: 40px;
+}
+.title .search{
+  margin-top: 20px;
+}
 /***********************/
 
 /*recruiter job page*/
-  .salary_range input{
-    width: 10%;
-    display: inline-block;
-  }
-  #job_description{
-    border-top-right-radius:0;
-    border-top-left-radius:0;
-  }
-  #preview{
-    width: 100%;
-    min-height: 414px;
-    overflow-y: scroll;
-    display: none;
-    border-top-right-radius:0;
-    border-top-left-radius:0;
-  }
+.salary_range input{
+  width: 10%;
+  display: inline-block;
+}
+#job_description{
+  border-top-right-radius:0;
+  border-top-left-radius:0;
+}
+
 /***********************/
 
 /*admin job list*/
-  .hot-fire{
-    font-size: 20px;
-    color: red;
-  }
+.hot-fire{
+  font-size: 20px;
+  color: red;
+}
 /**********************/
 
 .nav-self{

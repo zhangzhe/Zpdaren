@@ -19,23 +19,14 @@
  *= require jquery-tagsinput
  *= require jquery-autocomplete
  *= require jquery-ui
- *= require base
  */
 
 body{
   font-family: "Hiragino Sans GB","Microsoft Yahei","SimSun","Arial","Helvetica Neue","Helvetica";
+  padding-top: 50px;
 }
 
-h1{
-  font-size:56px;
-  color: #FFFFFF;
-  font-weight: bold;
-}
 
-h2{
-  font-size:32px;
-  color: #428bca;
-}
 
 .mt20{
   margin-top: 20px;
