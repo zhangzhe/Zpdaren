@@ -12,9 +12,14 @@ module Cache
           value || cache_item[:value]
         rescue Redis::CannotConnectError => e
           raise Redis::CannotConnectError, e.message
-        else
+        rescue Exception => e
           i += 1
-          retry if i < RETRY_COUNT
+          if i < REDIS_RETRY_COUNT
+            retry
+          else
+            cache_item = block.call if block_given?
+            cache_item.try(:[], :value)
+          end
         end
       end
 
