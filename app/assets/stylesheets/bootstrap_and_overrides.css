@@ -2,29 +2,28 @@
   =require twitter-bootstrap-static/bootstrap
   =require twitter-bootstrap-static/fontawesome
   */
-
-.mt20{
-  margin-top: 20px;
-}
-.mb20{
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
   margin-bottom: 20px;
+  margin-left: -20px;
 }
-.mb10{
-  margin-bottom: 10px;
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
 }
-.ml2em{
-  margin-left: 2em;
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #428bca;
 }
-.pb48{
-  padding-bottom: 48px;
+
+.main {
+  padding: 20px;
 }
-.ti2{
-  text-indent: 2em;
+
+.main .page-header {
+  margin-top: 0;
 }
-.word-break{
-  word-break:break-all;
-}
-.red-star{
-  color: red;
-  vertical-align: text-top;
-}
+

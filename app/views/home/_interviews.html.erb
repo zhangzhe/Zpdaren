@@ -3,7 +3,7 @@
   <% Interview.all[0..2].each do |interview| %>
     <div class="col-lg-4">
        <blockquote><%= link_to(image_tag(interview.avatar_url, :class => "img-circle", :size => "140x140"), interview) if interview.avatar? %>
-       <h3> <%= link_to interview.professor_name, interview %></h3>
+       <h4><%= link_to interview.professor_name, interview %></h4>
         <footer><%= interview.professor_title %></footer>
       </blockquote>
       <p><%= truncate_html interview.brief %></p>
