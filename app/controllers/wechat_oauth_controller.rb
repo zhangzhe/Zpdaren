@@ -5,7 +5,7 @@ class WechatOauthController < ApplicationController
     user = Commenter.where(provider: "wechat", open_id: remote_data["openid"]).first_or_create
 
     if !user.persisted?
-      unless user.update_attributes(:email => "#{remote_data["unionid"]}@wechat.com", :password => remote_data["unionid"])
+      unless user.update_attributes(:email => "#{remote_data["openid"]}@wechat.com", :password => remote_data["openid"])
         raise ActiveRecord::Rollback, user.errors.messages
       end
     end
