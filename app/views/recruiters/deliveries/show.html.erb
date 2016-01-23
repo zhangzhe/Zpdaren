@@ -46,10 +46,11 @@
 <br>
 <div>
   <% if @delivery.may_pay_or_refuse? %>
-    <%= button_to "查看联系方式", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary", role: "button", method: :put, data: { disable_with: '提交中...' } %>
-    <%= link_to "拒绝", new_recruiters_rejection_path(delivery_id: @delivery.id), class: "btn btn-primary", role: "button" %>
-    <p class='fs12 mt20 gray-light'>备注：点击【查看联系方式】，该职位可查看简历数减1。</p>
+    <p><%= link_to "查看联系方式", pay_recruiters_delivery_path(@delivery), class: "btn btn-primary", role: "button", method: :put, data: { disable_with: '提交中...' } %>
+    (点击【查看联系方式】，可查看候选人联系方式，该职位可查看简历数会减1。)</p>
+    <%= link_to "拒绝", new_recruiters_rejection_path(delivery_id: @delivery.id), class: "btn btn-danger", role: "button" %>
   <% end %>
+
 </div>
 <br>
 <br>
