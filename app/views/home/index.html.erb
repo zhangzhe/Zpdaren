@@ -2,32 +2,15 @@
   <div class="front_image">
     <div class="container">
       <br><br><br><br><br>
-      <div class="col-md-offset-0 col-md-5">
-        <div>
-          <h1>
-            众聘达人
-          </h1>
-          <h2>
-            推荐优质<span style="font-size:36px;">&nbsp;简历&nbsp;</span>
-          </h2>
-          <h2>
-            <p class="text-primary">获得企业<span style="font-size:36px;">&nbsp;悬赏</span></p>
-          </h2>
-          <br>
-        </div>
-      </div>
+      <%= render "slogon" %>
       <%= render "register", resource_name: @resource_name %>
     </div>
   </div>
 </b>
-<br><br>
+<br>
 <div class="container marketing">
   <%= render "high_priority_jobs" %>
-  <hr>
   <%= render "interviews" %>
-  <!-- <%= render "customer_examples" %> -->
-  <!-- <hr> -->
-
   <%= render "partner" %>
   <%= render "contact" %>
 </div>
