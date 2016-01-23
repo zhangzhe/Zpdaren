@@ -3,9 +3,9 @@ class WechatOauthController < ApplicationController
     response = Weixin.get_access_token(params[:code])
     remote_data = JSON(response.body)
     user = Commenter.where(provider: "wechat", open_id: remote_data["openid"]).first_or_create
-
+    Rails.logger.info("****************#{remote_data}")
     if !user.persisted?
-      unless user.update_attributes(:email => "#{remote_data["unionid"]}@wechat.com", :password => remote_data["unionid"])
+      unless user.update_attributes(:email => "#{remote_data["openid"]}@wechat.com", :password => remote_data["openid"])
         raise ActiveRecord::Rollback, user.errors.messages
       end
     end
