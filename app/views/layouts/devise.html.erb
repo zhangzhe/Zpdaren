@@ -3,7 +3,11 @@
   <%= render partial: "/shared/head" %>
   <body>
     <%= render partial: "/shared/navbar" %>
-    <%= yield %>
+    <div class="container">
+      <br>
+      <%= bootstrap_flash %>
+      <%= yield %>
+  </div>
     <div class="container">
       <%= render "/shared/footer" %>
     </div>
