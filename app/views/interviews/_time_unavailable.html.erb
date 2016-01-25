@@ -1,0 +1,5 @@
+<div class="alert alert-info" role="alert">
+  <a href="javascript:void(0);" class="alert-link">
+    本访谈已结束（时间为：<%= interview.reply_begin_at.localtime.to_date.to_s(:db) %>到<%= interview.reply_end_at.localtime.to_date.to_s(:db) %>）感谢您的参与。
+  </a>
+</div>
