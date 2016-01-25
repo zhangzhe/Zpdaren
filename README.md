@@ -1,3 +1,8 @@
+#rails配置文件
+1、redis
+
+  rails访问redis的配置文件路径：config/redis.yml，生产环境下redis的host和port从linux配置的环境变量里面取，redis环境变量配置在/etc/enviorment文件
+
 #rails外部依赖 
 1、postgresql数据库
 
