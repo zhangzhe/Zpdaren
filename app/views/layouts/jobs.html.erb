@@ -19,7 +19,6 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <%= bootstrap_flash %>
-          <% flash[:error], flash[:success] = nil, nil %>
           <br>
           <ol class="breadcrumb">
             <li>
@@ -35,16 +34,14 @@
                 <div class="blog-post">
                   <%= yield :job_info %>
                 </div>
-              </div><!-- /.blog-main -->
+              </div>
               <div class="col-sm-3 blog-sidebar" style="margin-top:-15px;">
                 <div class="sidebar-module">
                   <%= yield :other_job_info %>
                 </div>
-              </div><!-- /.blog-sidebar -->
-
-            </div><!-- /.row -->
-
-          </div><!-- /.container -->
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

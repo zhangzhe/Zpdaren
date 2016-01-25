@@ -13,7 +13,7 @@ class Recruiters::JobsController < Recruiters::BaseController
   def create
     @job = current_recruiter.jobs.create(job_params)
     if @job.errors.any?
-      flash[:error] = @job.errors.full_messages.first
+      flash.now[:error] = @job.errors.full_messages.first
       render 'new' and return
     end
     flash[:success] = "发布完成！"
@@ -34,7 +34,7 @@ class Recruiters::JobsController < Recruiters::BaseController
       flash[:success] = "修改完成！"
       redirect_to recruiters_jobs_path
     else
-      flash[:error] = @job.errors.full_messages.first
+      flash.now[:error] = @job.errors.full_messages.first
       render 'edit' and return
     end
   end

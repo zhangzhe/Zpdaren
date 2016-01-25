@@ -3,7 +3,6 @@
   <%= render partial: "/shared/head" %>
   <body>
     <%= render partial: "/shared/navbar" %>
-    <% flash[:error], flash[:success] = nil, nil %>
     <%= yield %>
     <%= render "/shared/footer" %>
   </body>

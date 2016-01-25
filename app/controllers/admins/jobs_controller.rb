@@ -19,7 +19,7 @@ class Admins::JobsController < Admins::BaseController
     @job = Job.find(params[:id])
     @job.update_and_notify_supplier!(job_params)
     if @job.errors.any?
-      flash[:error] = @job.errors.full_messages.first
+      flash.now[:error] = @job.errors.full_messages.first
       render 'edit' and return
     end
     redirect_to admins_job_path(@job)

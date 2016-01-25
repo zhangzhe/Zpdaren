@@ -35,7 +35,7 @@ class Suppliers::ResumesController < Suppliers::BaseController
         redirect_to suppliers_resumes_path and return
       end
     else
-      flash[:error] = @resume.errors.full_messages.first
+      flash.now[:error] = @resume.errors.full_messages.first
       @job = Job.find(params[:job_id]) if params[:job_id]
       render 'new' and return
     end
@@ -52,7 +52,7 @@ class Suppliers::ResumesController < Suppliers::BaseController
       flash[:success] = '简历修改成功。'
       redirect_to suppliers_resume_path(@resume)
     else
-      flash[:error] = @resume.errors.full_messages.first
+      flash.now[:error] = @resume.errors.full_messages.first
       render 'edit'
     end
   end
