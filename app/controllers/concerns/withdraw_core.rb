@@ -2,7 +2,7 @@ module WithdrawCore
 
   def new
     if current_user.wallet.money > 0
-      qrcode_create if current_supplier
+      qrcode_create if current_supplier and !current_supplier.weixin
       @withdraw = current_user.wallet.build_withdraw_template
     else
       flash[:error] = '您账户的余额为零，不能提现'

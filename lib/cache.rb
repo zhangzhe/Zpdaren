@@ -2,6 +2,7 @@ module Cache
   class Redis
     class << self
       def get(key, &block)
+        i = 0
         begin
           value = only_get(key)
           if value.blank?
@@ -9,8 +10,16 @@ module Cache
             set(key, cache_item[:value], cache_item[:expires_in])
           end
           value || cache_item[:value]
+        rescue Redis::CannotConnectError => e
+          raise Redis::CannotConnectError, e.message
         rescue Exception => e
-          retry
+          i += 1
+          if i < REDIS_RETRY_COUNT
+            retry
+          else
+            cache_item = block.call if block_given?
+            cache_item.try(:[], :value)
+          end
         end
       end
 
