@@ -22,7 +22,7 @@ module WeixinApi
     # {{remark.DATA}}
     def delivery_refused(id)
       delivery = Delivery.find(id)
-      template_id = "D8iifbTdXyl__XGNpOF_3FItm5y8vpauWptkADXciVQ"
+      template_id = resume_status_change_template_id
       response = conn.post do |req|
         req.url "/cgi-bin/message/template/send?access_token=#{access_token}"
         req.body =  "{ \"touser\":\"#{delivery.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://#{Settings.domain.host}\",\"topcolor\":\"#FF0000\", \"data\": {
@@ -67,7 +67,7 @@ module WeixinApi
     # {{remark.DATA}}
     def delivery_approved(id)
       delivery = Delivery.find(id)
-      template_id = "D8iifbTdXyl__XGNpOF_3FItm5y8vpauWptkADXciVQ"
+      template_id = resume_status_change_template_id
       response = conn.post do |req|
         req.url "/cgi-bin/message/template/send?access_token=#{access_token}"
         req.body =  "{ \"touser\":\"#{delivery.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://#{Settings.domain.host}\",\"topcolor\":\"#FF0000\", \"data\": {
@@ -112,7 +112,7 @@ module WeixinApi
     # {{remark.DATA}}
     def delivery_paid(id)
       delivery = Delivery.find(id)
-      template_id = "WIOViJ34e8OnSrLVHfR8slRFbt0pybhBehx4jm2VhfM"
+      template_id = delivery_award_template_id
       response = conn.post do |req|
         req.url "/cgi-bin/message/template/send?access_token=#{access_token}"
         req.body =  "{ \"touser\":\"#{delivery.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://weixin.qq.com/download\",\"topcolor\":\"#FF0000\", \"data\": {
@@ -154,7 +154,7 @@ module WeixinApi
     # {{remark.DATA}}
     def delivery_final_payment_paid(id)
       delivery = Delivery.find(id)
-      template_id = "WIOViJ34e8OnSrLVHfR8slRFbt0pybhBehx4jm2VhfM"
+      template_id = delivery_award_template_id
       response = conn.post do |req|
         req.url "/cgi-bin/message/template/send?access_token=#{access_token}"
         req.body =  "{ \"touser\":\"#{delivery.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://weixin.qq.com/download\",\"topcolor\":\"#FF0000\", \"data\": {
