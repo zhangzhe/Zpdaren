@@ -8,13 +8,12 @@ class JobsController < ApplicationController
     end
     @jobs = @jobs.tagged_with(params[:tag]) if params[:tag]
     @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
-    render layout: 'anonymous_jobs'
   end
 
   def show
     @job = Job.find(params[:id])
     @similar_jobs = @job.similar_jobs
-    render layout: 'anonymous_job'
+    render layout: 'job'
   end
 
   def preview
