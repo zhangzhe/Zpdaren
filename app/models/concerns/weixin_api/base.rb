@@ -36,6 +36,14 @@ module WeixinApi
       weixin_config["appid"]
     end
 
+    def resume_status_change_template_id
+      weixin_config["message_templates"]["resume_status_change_template_id"]
+    end
+
+    def delivery_award_template_id
+      weixin_config["message_templates"]["delivery_award_template_id"]
+    end
+
     def conn
       Faraday.new(:url => weixin_config["url"])
     end

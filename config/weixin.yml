@@ -11,3 +11,6 @@ mp:
   secret: 89a7ebf45ee66181dfd5bb7cbe1d646c
   url: https://api.weixin.qq.com
   callback_url: zpdaren.com
+  message_templates:
+    resume_status_change_template_id: <%= ENV["RESUME_STATUS_CHANGE_TEMPLATE_ID"] %>
+    delivery_award_template_id: <%= ENV["DELIVERY_AWARD_TEMPLATE_ID"] %>

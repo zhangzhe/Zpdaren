@@ -32,9 +32,8 @@
   <%= render 'time_unavailable', interview: @interview unless @interview.available? %>
 
   <div class="bottom-column" id="commit_button">
-    <%= link_to "我要提问", "#comment_form_01", class: "btn btn-success btn-lg" %>
+    <%= link_to "我要提问", "#comment_form_01", class: "btn btn-success btn-lg" if @interview.available? %>
   </div>
-
   <br>
   <% @comments = @interview.comments.hash_tree %>
   <%= comments_tree_for @comments %>
