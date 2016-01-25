@@ -13,7 +13,7 @@ class Commenter < User
   end
 
   def create_or_update_weixin_from_remote(remote_data)
-    weixin = Weixin.find_by_user_name(remote_data['open_id']) || self.build_weixin
+    weixin = Weixin.find_by_user_name(remote_data['openid']) || self.build_weixin
     weixin.update_from_remote!(remote_data)
   end
 end

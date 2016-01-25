@@ -1,7 +1,7 @@
 defaults: &defaults
   host: 127.0.0.1
   port: 6379
-  retry: 3
+  retry_count: 3
 
 development:
   <<: *defaults
