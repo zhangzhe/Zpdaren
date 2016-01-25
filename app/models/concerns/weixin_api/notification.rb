@@ -1,7 +1,7 @@
 module WeixinApi
   module Notification
     def subscribe(id)
-      subscribe_user = weixin.find(id)
+      subscribe_user = Weixin.find(id)
       message = {
         touser: subscribe_user.user_name,
         msgtype: 'text',
