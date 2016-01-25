@@ -23,15 +23,6 @@ h2{
   height: 600px;
 }
 
-#preview{
-  width: 100%;
-  min-height: 414px;
-  overflow-y: scroll;
-  display: none;
-  border-top-right-radius:0;
-  border-top-left-radius:0;
-}
-
 .partner-logo{
   height: 100px;
   line-height: 100px;
