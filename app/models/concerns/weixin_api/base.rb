@@ -15,7 +15,7 @@ module WeixinApi
     end
 
     def qr_code_ticket(scene_id)
-      Cache::Redis.get('ticket') do
+      Cache::Redis.get("ticket_#{scene_id}") do
         response = conn.post do |req|
           req.url "/cgi-bin/qrcode/create?access_token=#{access_token}"
           req.body = "{ \"expire_seconds\": 604800, \"action_name\": \"QR_SCENE\", \"action_info\": { \"scene\": { \"scene_id\": #{scene_id} } } }"
