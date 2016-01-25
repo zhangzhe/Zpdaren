@@ -1,16 +1,31 @@
+defaults: &defaults
+  open:
+    key: wx6664cd85e3fa1aa6
+    secret: 87c7009f35ab8c4451664071216a4f8f
+  mp:
+    appid: wx1e62bc6eab8865c3
+    secret: d4624c36b6795d1d99dcf0547af5443d
+    url: https://api.weixin.qq.com
+    callback_url: 3029bd74.ngrok.io
+    message_templates:
+      resume_status_change_template_id: 8Lsk_xjzj8y6EAe4Mo1tzAYr-O4PUglc-j3mlWi5Kvc
+      delivery_award_template_id: s-KsdEK9aRRPmg3VA7p3AzPXdsasK-MKpnOvbWHqIzM
+
 development:
-  key: wx6664cd85e3fa1aa6
-  secret: 87c7009f35ab8c4451664071216a4f8f
+  <<: *defaults
+
+test:
+  <<: *defaults
 
 production:
-  key: wx43c6e09b6b423c06
-  secret: c2cce2aa16a011486c1337fdf6f598ef
-
-mp:
-  appid: wx0e604319f74644b3
-  secret: 89a7ebf45ee66181dfd5bb7cbe1d646c
-  url: https://api.weixin.qq.com
-  callback_url: zpdaren.com
-  message_templates:
-    resume_status_change_template_id: <%= ENV["RESUME_STATUS_CHANGE_TEMPLATE_ID"] %>
-    delivery_award_template_id: <%= ENV["DELIVERY_AWARD_TEMPLATE_ID"] %>
+  open:
+    key: <%= ENV["OPEN_APP_ID"] %>
+    secret: <%= ENV["OPEN_APP_SECRET"] %>
+  mp:
+    appid: <%= ENV["MP_APP_ID"] %>
+    secret: <%= ENV["MP_APP_SECRET"] %>
+    url: https://api.weixin.qq.com
+    callback_url: <%= ENV["MP_CALLBACK_URL"] %>
+    message_templates:
+      resume_status_change_template_id: <%= ENV["RESUME_STATUS_CHANGE_TEMPLATE_ID"] %>
+      delivery_award_template_id: <%= ENV["DELIVERY_AWARD_TEMPLATE_ID"] %>
