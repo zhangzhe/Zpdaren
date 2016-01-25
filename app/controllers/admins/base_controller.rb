@@ -1,6 +1,5 @@
 class Admins::BaseController < ApplicationController
   before_action :default_sort, only: [:index]
-  layout 'admins'
 
   # 管理员账户信息
   def show
