@@ -13,7 +13,7 @@ class CommentsController < ActionController::Base
       @comment.interview_id = params[:interview_id]
       if @comment.save
         format.html { redirect_to @interview, notice: '回复失败' }
-        format.js   {}
+        format.js {}
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.html { redirect_to @interview, error: '回复失败，请填写好回复内容' }
@@ -22,14 +22,18 @@ class CommentsController < ActionController::Base
     end
   end
 
+
   def like
-    comment = Comment.find(params[:id])
-    comment.like_count += 1
-    if comment.save
-      session[comment.id] = comment.id
-      render json: { status: 200 }
-    else
-      render json: { status: 500 }
+    respond_to do |format|
+      comment = Comment.find(params[:id])
+      comment.like_count += 1
+      if comment.save
+        @id = params[:id]
+        # session[comment.id] = comment.id
+        format.js {}
+      else
+        format.js {}
+      end
     end
   end
 

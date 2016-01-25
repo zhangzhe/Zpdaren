@@ -1,6 +1,5 @@
 /*
  *= require bootstrap_and_overrides
- *= require home
  *= require_self
  *= require froala_editor.min.css
  *= require froala_style.min.css
@@ -105,6 +104,7 @@ body{
   width: 10%;
   display: inline-block;
 }
+
 #job_description{
   border-top-right-radius:0;
   border-top-left-radius:0;
@@ -137,4 +137,20 @@ body{
   padding: 15px;
   background-color: #f5f5f5;
   border-radius: 4px;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    border-right: 1px solid #eee;
+    background-color: #f5f5f5;
+  }
 }

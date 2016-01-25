@@ -2,7 +2,6 @@
   =require twitter-bootstrap-static/bootstrap
   =require twitter-bootstrap-static/fontawesome
   */
-/* Sidebar navigation */
 .nav-sidebar {
   margin-right: -21px; /* 20px padding + 1px border */
   margin-bottom: 20px;
@@ -18,12 +17,9 @@
   color: #fff;
   background-color: #428bca;
 }
-
 .main {
   padding: 20px;
 }
-
 .main .page-header {
   margin-top: 0;
 }
-
