@@ -22,17 +22,16 @@ class CommentsController < ActionController::Base
     end
   end
 
-
   def like
     respond_to do |format|
       comment = Comment.find(params[:id])
       comment.like_count += 1
       if comment.save
         @id = params[:id]
-        # session[comment.id] = comment.id
-        format.js {}
+        session[comment.id] = comment.id
+        format.js { render status: 200 }
       else
-        format.js {}
+        format.js { render status: 500 }
       end
     end
   end
