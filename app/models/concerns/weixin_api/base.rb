@@ -15,7 +15,7 @@ module WeixinApi
     end
 
     def qr_code_ticket(scene_id)
-      Cache::Redis.get('ticket') do
+      Cache::Redis.get("ticket_#{scene_id}") do
         response = conn.post do |req|
           req.url "/cgi-bin/qrcode/create?access_token=#{access_token}"
           req.body = "{ \"expire_seconds\": 604800, \"action_name\": \"QR_SCENE\", \"action_info\": { \"scene\": { \"scene_id\": #{scene_id} } } }"
@@ -36,6 +36,14 @@ module WeixinApi
       weixin_config["appid"]
     end
 
+    def resume_status_change_template_id
+      weixin_config["message_templates"]["resume_status_change_template_id"]
+    end
+
+    def delivery_award_template_id
+      weixin_config["message_templates"]["delivery_award_template_id"]
+    end
+
     def conn
       Faraday.new(:url => weixin_config["url"])
     end
@@ -53,7 +61,7 @@ module WeixinApi
     end
 
     def weixin_config
-      YAML.load_file("#{Rails.root}/config/weixin.yml")["mp"]
+      YAML.load(ERB.new(File.read("#{Rails.root}/config/weixin.yml")).result)[Rails.env]["mp"]
     end
 
     def secret
