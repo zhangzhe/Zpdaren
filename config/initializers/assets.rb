@@ -9,4 +9,4 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
-Rails.application.config.assets.precompile += %w( comment.js suppliers/mobile_validation.js admins/jobs.js jobs.js auto_complete_tags/jquery-tagsinput.js auto_complete_tags/jquery-autocomplete.js froala_editor.js bootstrap-datepicker/core.js drag_and_drop.js bootstrap-datepicker3.css drag_and_drop.scss comment.css home.css froala_editor.css )
+Rails.application.config.assets.precompile += %w( comment.js suppliers/mobile_validation.js admins/jobs.js jobs.js auto_complete_tags/jquery-tagsinput.js auto_complete_tags/jquery-autocomplete.js froala_editor.js bootstrap-datepicker/core.js drag_and_drop.js bootstrap-datepicker3.css drag_and_drop.scss comment.css home.css froala_editor.css jquery-tagsinput.css jquery-autocomplete.css )
