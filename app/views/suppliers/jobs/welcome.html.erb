@@ -1,7 +1,7 @@
 <%= render 'index_base', jobs: @jobs %>
 
 <%= content_for :scripts do %>
-  <script type="text/javascript">
+  <script>
     $(function(){
       $("#bigQrcode").html("<%= j render('qr_codes/qr_code', :ticket => @ticket) %>");
       $('#bigQrcode').modal();

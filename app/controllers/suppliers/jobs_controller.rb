@@ -21,7 +21,7 @@ class Suppliers::JobsController < Suppliers::BaseController
       @ticket = Weixin.qr_code_ticket(current_user.id)
       render 'welcome'
     else
-      render 'index'
+      render 'welcome'
     end
   end
 end
