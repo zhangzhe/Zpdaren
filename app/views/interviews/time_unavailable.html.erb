@@ -17,5 +17,5 @@
 <% end %>
 
 <%= content_for :scripts do %>
-  <script>setTimeout(function(){window.location.href='/'}, 5000);</script>
+  <%= javascript_include_tag "redirect", "data-turbolinks-track" => true %>
 <% end %>

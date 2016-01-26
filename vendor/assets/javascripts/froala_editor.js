@@ -23,3 +23,11 @@
 //= require plugins/table.min.js
 //= require plugins/url.min.js
 //= require plugins/video.min.js
+
+$(function() {
+    $('.froala_editor').froalaEditor({
+      heightMin: 300,
+      placeholderText: '博客内容'
+    }
+    )
+});

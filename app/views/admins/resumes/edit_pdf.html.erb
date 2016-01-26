@@ -73,16 +73,5 @@
 </div>
 
 <%= content_for :scripts do %>
-  <script>
-    $(function(){
-      var checkBox = $('.checkbox').find("input[type='checkbox']")
-      $(checkBox).click(function(){
-        if ($(checkBox).is(':checked')) {
-          $('.pdfAttachment').hide();
-        }else{
-          $('.pdfAttachment').show();
-        }
-      });
-    });
-  </script>
+  <%= javascript_include_tag "resume" %>
 <% end %>

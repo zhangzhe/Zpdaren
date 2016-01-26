@@ -26,44 +26,27 @@
       <%= f.text_field :reply_end_at, class: "form-control .col-xs-4 datepicker", placeholder: '回答结束时间'  %>
     </div>
   </div>
-
   <p>
     专家照片
     <%= image_tag(interview.avatar_url, :class => "img-circle", :size => "60x60") if interview.avatar? %>
     <%= f.file_field :avatar %>
   </p>
   <p><%= f.text_area :brief, class: "form-control", rows: 4, placeholder: '访谈简述' %></p>
-  <p><%= f.text_area :content, class: "form-control", rows: 16 %></p>
+  <p><%= f.text_area :content, class: "form-control froala_editor", rows: 16 %></p>
 
-<br>
+  <br>
   <p>
     <%= f.submit "发布", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
   </p>
 <% end %>
 
-<%= content_for :scripts do %>
-  <%= javascript_include_tag 'froala_editor', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'bootstrap-datepicker/core', 'data-turbolinks-track' => true %>
-  <script>
-    $(document).ready(function(){
-      $('.datepicker').datepicker({
-        format: "yyyy-mm-dd",
-        autoclose: true,
-        todayHighlight: true
-      });
-    });
-
-    $(function() {
-        $('#interview_content').froalaEditor({
-          heightMin: 300,
-          placeholderText: '访谈内容'
-        }
-        )
-    });
-  </script>
-<% end %>
-
 <%= content_for :styles do %>
   <%= stylesheet_link_tag "froala_editor" %>
   <%= stylesheet_link_tag "bootstrap-datepicker3" %>
+<% end %>
+
+<%= content_for :scripts do %>
+  <%= javascript_include_tag 'froala_editor', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'bootstrap-datepicker/core', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'datepicker', 'data-turbolinks-track' => true %>
 <% end %>
