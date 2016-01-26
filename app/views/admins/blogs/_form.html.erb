@@ -13,6 +13,7 @@
 
 
 <%= content_for :scripts do %>
+  <%= javascript_include_tag 'froala_editor', 'data-turbolinks-track' => true %>
   <script>
       $(function() {
           $('#blog_content').froalaEditor({

@@ -1,22 +1,5 @@
 <% Job.nomal_tags.each do |tag| %>
-  <div id="draggable" class="draggable1 label label-primary">
+  <div id="draggable" class="draggable_nomal_tags label label-primary">
     <%= tag.name %>
   </div>
-<% end %>
-
-<%= content_for :scripts do %>
-  <script>
-    $(function() {
-      $( ".draggable1" ).draggable();
-      $( "#droppable1" ).droppable({
-        drop: function( event, ui ) {
-          $.ajax({
-            type: 'PUT',
-            url: '/admins/tags/update',
-            data: { priority: 0, tag: $(ui.draggable).text() },
-          });
-        }
-      });
-    });
-  </script>
 <% end %>

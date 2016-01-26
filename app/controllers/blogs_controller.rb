@@ -1,6 +1,6 @@
 class BlogsController < ActionController::Base
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
-  layout 'anonymous_job'
+  layout 'job'
 
   def index
     @blogs = Blog.all

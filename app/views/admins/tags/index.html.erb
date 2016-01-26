@@ -1,22 +1,17 @@
-<style>
-  #draggable { padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
-  #droppable1 { width: 400px; height: 800px; padding: 0.5em; float: left; margin: 10px; }
-  #droppable2 { width: 400px; height: 800px; padding: 0.5em; float: left; margin: 10px; } </style>
-
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
       <tr>
         <td class="default">
 
-          <div id="droppable1">
+          <div id="droppable_nomal_tags">
             <h4>不显示在表头</h4>
             <%= render "nomal_tags" %>
           </div>
         </td>
         <td class="success">
 
-          <div id="droppable2" >
+          <div id="droppable_priority_tags" >
             <h4>显示在表头</h4>
             <%= render "priority_tags" %>
           </div>
@@ -25,3 +20,11 @@
     </thead>
   </table>
 </div>
+
+<%= content_for :styles do %>
+  <%= stylesheet_link_tag 'drag_and_drop' %>
+<% end %>
+
+<%= content_for :scripts do %>
+  <%= javascript_include_tag 'drag_and_drop', 'data-turbolinks-track' => true %>
+<% end %>

@@ -1,5 +1,5 @@
 class InterviewsController < ActionController::Base
-  layout 'anonymous_job'
+  layout 'job'
   def show
     @interview = Interview.find(params[:id])
     if @interview.available? || (current_user && current_user.admin?)

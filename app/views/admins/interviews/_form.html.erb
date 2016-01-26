@@ -42,6 +42,8 @@
 <% end %>
 
 <%= content_for :scripts do %>
+  <%= javascript_include_tag 'froala_editor', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'bootstrap-datepicker/core', 'data-turbolinks-track' => true %>
   <script>
     $(document).ready(function(){
       $('.datepicker').datepicker({
@@ -49,7 +51,6 @@
         autoclose: true,
         todayHighlight: true
       });
-
     });
 
     $(function() {
