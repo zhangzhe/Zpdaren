@@ -1,20 +1,17 @@
-<div class="container">
-  <br>
-  <%= bootstrap_flash %>
-  <div class="col-sm-6 col-md-6 col-md-offset-3">
-    <div class="account-wall">
-      <h2 class="text-center">重置密码</h2>
+<div class="col-sm-6 col-md-6 col-md-offset-3">
+  <div class="account-wall">
+    <h2 class="text-center">重置密码</h2>
+    <br>
+    <%= form_for(resource, as: resource_name, url: eval("#{resource_name.to_s}_password_path"), html: { method: :post }) do |f| %>
+      <div class="form-group">
+        <%= f.email_field :email, autofocus: true, class: "form-control input-lg", placeholder: "邮箱" %>
+      </div>
+      <p class="help-block">请输入您的注册邮箱地址，我们会发给您重置密码链接.</p>
+      <%= f.submit "发送确认邮件", :class => "btn btn-primary btn-lg btn-block" %>
       <br>
-      <%= form_for(resource, as: resource_name, url: eval("#{resource_name.to_s}_password_path"), html: { method: :post }) do |f| %>
-        <div class="form-group">
-          <%= f.email_field :email, autofocus: true, class: "form-control input-lg", placeholder: "邮箱" %>
-        </div>
-        <p class="help-block">请输入您的注册邮箱地址，我们会发给您重置密码链接.</p>
-        <%= f.submit "发送确认邮件", :class => "btn btn-primary btn-lg btn-block" %>
-        <br>
-        <%= link_to "登录", login_path_for("user") %>&nbsp;&nbsp;|&nbsp;&nbsp;
-        还没有账号？<%= link_to "注册", root_path %>
-      <% end %>
-    </div>
+      <%= link_to "登录", login_path_for("user") %>&nbsp;&nbsp;|&nbsp;&nbsp;
+      还没有账号？<%= link_to "注册", root_path %>
+    <% end %>
   </div>
 </div>
+

@@ -19,7 +19,7 @@ class Admins::JobsController < Admins::BaseController
     @job = Job.find(params[:id])
     @job.update_and_notify_supplier!(job_params)
     if @job.errors.any?
-      flash[:error] = @job.errors.full_messages.first
+      flash.now[:error] = @job.errors.full_messages.first
       render 'edit' and return
     end
     redirect_to admins_job_path(@job)
@@ -28,10 +28,11 @@ class Admins::JobsController < Admins::BaseController
   def priority_update
     job = Job.find(params[:id])
     job.priority = params[:priority]
-    if job.save
-      render json: { status: 200 }
-    else
-      render json: { status: 500 }
+    unless job.save
+      flash[:error] = "更新失败，请联系程序员！"
+    end
+    respond_to do |format|
+      format.js   {}
     end
   end
 

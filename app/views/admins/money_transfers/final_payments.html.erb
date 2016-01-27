@@ -1,4 +1,4 @@
-<%= render 'admins/shared/search', title: '存款/提现确认', url: final_payments_admins_money_transfers_path, placeholder: '公司、职位、操作帐号', search_fields: 'company_name_or_job_title_or_recruiter_email_cont', q: @q %>
+<%= render '/shared/search', title: '存款/提现确认', url: final_payments_admins_money_transfers_path, placeholder: '公司、职位、操作帐号', search_fields: 'company_name_or_job_title_or_recruiter_email_cont', q: @q %>
 <%= render 'tab', final_payments: @final_payments %>
 <br>
 
@@ -17,7 +17,7 @@
     <tbody>
       <% @final_payments.each do |final_payment| %>
         <tr>
-          <td><%= link_to final_payment.delivery.job.company_name, 'javascript:void(0);', "data-toggle" => "popover", "data-trigger" => "focus", "data-placement" => "bottom", "data-content" => final_payment.delivery.job.company_description %></td>
+          <td><%= link_to final_payment.delivery.job.company_name, '#', "data-toggle" => "popover", "data-placement" => "bottom", "data-content" => final_payment.delivery.job.company_description %></td>
           <td><%= final_payment.try(:delivery).try(:job).try(:title) %>:<%= final_payment.delivery.try(:resume).try(:candidate_name) %>的简历</td>
           <td><%= final_payment.wallet.user.email %></td>
           <td><%= final_payment.amount %></td>
@@ -34,4 +34,3 @@
   </table>
 </div>
 <%= render 'shared/paginate', objs: @final_payments %>
-<%= render 'shared/popover' %>

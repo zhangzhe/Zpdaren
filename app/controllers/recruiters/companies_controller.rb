@@ -10,7 +10,7 @@ class Recruiters::CompaniesController < Recruiters::BaseController
     if @company.update_attributes(company_params)
       redirect_to recruiters_jobs_path
     else
-      flash[:error] = @company.errors.full_messages.first
+      flash.now[:error] = @company.errors.full_messages.first
       render 'edit' and return
     end
   end

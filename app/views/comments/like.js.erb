@@ -1,0 +1,10 @@
+<% if (response.status.to_s == "200") %>
+  current_count = parseInt($("#" + <%= @id %> + '_like_count').attr('like-count'));
+  $("#" + <%= @id %> + '_like_count').text((current_count + 1) + '个赞');
+  $("#" + <%= @id %> + '_like_count').attr('like-count', current_count + 1);
+  $('*[comment-id=<%= @id %>]').removeClass('unthumbuped').off('click');
+  $('*[comment-id=<%= @id %>]').removeClass('btn-link')
+  $('*[comment-id=<%= @id %>]').addClass('thumbuped')
+<% else %>
+  alert('点赞失败，请联系管理员！');
+<% end %>

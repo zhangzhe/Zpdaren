@@ -1,6 +1,4 @@
 class Recruiters::BaseController < ApplicationController
-  layout 'recruiters'
-
   before_action :complete_company_info
 
   # 账户管理

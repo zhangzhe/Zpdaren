@@ -1,5 +1,6 @@
 class Comment < ActiveRecord::Base
   belongs_to :interview
+  belongs_to :commenter, class_name: "User", foreign_key: "commenter_id"
   validates_presence_of :content
   before_save :set_default_commenter_name
   acts_as_tree order: 'created_at DESC'

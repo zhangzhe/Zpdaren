@@ -17,7 +17,7 @@
   <p>
     <%= f.label :description, "公司描述" %>
     <span class='red-star'>*</span>
-    <%= f.text_area :description, class: "form-control", rows: 20 %>
+    <%= f.text_area :description, class: "form-control", rows: 14 %>
   </p>
   <p>
     <%= f.label :mobile, "联系方式" %>
@@ -30,17 +30,11 @@
     <%= f.text_field :address, class: 'form-control' %>
   </p>
   <p>
-    <%= f.label :url, "公司网址" %>
-    <span class='fs12'>
-      (网址请以http://或者https://开头)
-    </span>
+    <%= f.label :url, "公司网址" %>(网址请以http://或者https://开头)
     <%= f.text_field :url, class: 'form-control' %>
   </p>
   <p>
-    <%= f.label :service_protocol, "企业服务协议" %>
-    <span class='fs12'>
-      <%= link_to '企业服务协议模板', company_service_protocol_path %>
-    </span>
+    <%= f.label :service_protocol, "企业服务协议" %><%= link_to '企业服务协议模板', company_service_protocol_path %>
   </p>
   <p>
     <%= f.file_field 'service_protocol', style: "display:inline;width:160px;float:left;" %><span style="color:red;font-size:12px;">请上传企业服务协议文件&nbsp;&nbsp;(支持pdf、jpg、jpeg、gif、png格式)</span>

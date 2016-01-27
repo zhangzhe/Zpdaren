@@ -1,4 +1,4 @@
-<%= render 'admins/shared/search', title: '用户列表', url: admins_users_path, placeholder: '公司名称、电话、邮箱', search_fields: 'name_or_mobile_or_recruiter_email_cont', q: @q %>
+<%= render '/shared/search', title: '用户列表', url: admins_users_path, placeholder: '公司名称、电话、邮箱', search_fields: 'name_or_mobile_or_recruiter_email_cont', q: @q %>
 <br>
 <%= render 'nav_tabs', companies: @companies %>
 <br>

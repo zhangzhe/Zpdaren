@@ -1,5 +1,4 @@
 class Suppliers::BaseController < ApplicationController
-  layout 'suppliers'
   before_action :default_sort, only: [:index]
 
   def show

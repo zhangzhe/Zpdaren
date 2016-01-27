@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%= render partial: "/shared/head" %>
+  <body>
+    <%= render partial: "/shared/navbar" %>
+    <div class="container">
+      <br>
+      <%= bootstrap_flash %>
+      <%= yield %>
+  </div>
+    <div class="container">
+      <%= render "/shared/footer" %>
+    </div>
+  </body>
+</html>
