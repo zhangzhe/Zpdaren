@@ -5,8 +5,7 @@
         <th>职位名称</th>
         <th>公司名称</th>
         <th>发布时间</th>
-        <th>简历推荐</th>
-        <th>操作</th>
+        <th>简历推荐情况</th>
       </tr>
     </thead>
     <tbody>
@@ -23,8 +22,6 @@
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
           <td>
             <%= all_kinds_of_deliveries_count(job) %>
-          </td>
-          <td>
             <%= link_to "审核推荐", admins_job_deliveries_path(:job_id => job, :state => 'recommended'), class: "btn btn-primary btn-sm", target: '_blank' if job.may_approve? %>
           </td>
         </tr>

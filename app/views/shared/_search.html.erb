@@ -1,13 +1,13 @@
 <div class="row title">
-  <div class="col-md-5">
+  <div class="col-md-5 col-sm-5">
     <div class="input-group">
       <h2>
         <strong><%= title %></strong>
       </h2>
     </div>
   </div>
-  <%= search_form_for q, url: url do |f| %>
-    <div class="col-md-7">
+  <div class="col-md-7 col-sm-7">
+    <%= search_form_for q, url: url do |f| %>
       <div class="input-group search">
         <%= hidden_field_tag :state, params[:state] if params[:state].present? %>
         <%= hidden_field_tag :supplier_id, params[:supplier_id] if params[:supplier_id].present? %>
@@ -19,6 +19,6 @@
           <%= submit_tag '搜索', class: 'btn btn-default' %>
         </span>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
