@@ -17,7 +17,6 @@ group :development, :test do
   gem 'spring'
   gem 'quiet_assets'
   gem 'rails_best_practices', '~> 1.15.7'
-  gem 'rails-erd', '~> 1.4.2'
   gem 'faker'
 end
 gem "twitter-bootstrap-rails"
@@ -55,6 +54,6 @@ gem 'sidekiq', '~> 4.0', '>= 4.0.2'
 gem 'sinatra', :require => nil
 gem "omniauth-wechat-oauth2", git: "https://github.com/SparkYacademy/omniauth-wechat-oauth2.git"
 gem 'chinese_pinyin'
+gem 'jquery-turbolinks'
 gem 'redis', '~> 3.2', '>= 3.2.2'
 gem 'redis-namespace', '~> 1.5', '>= 1.5.2'
-

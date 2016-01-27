@@ -22,7 +22,7 @@
             <%= resume.problem %>
           <% else %>
             <% resume.jobs.each do |job| %>
-              <%= link_to (job.company_name + " : " + job.title), 'javascript:void(0);', "data-toggle" => "popover", "data-trigger" => "focus", "data-placement" => "bottom", "data-content" => job.description %>
+              <%= link_to (job.company_name + " : " + job.title), '#', "data-toggle" => "popover", "data-placement" => "bottom", "data-content" => job.description %>
                 <br>
             <% end %>
           <% end %>

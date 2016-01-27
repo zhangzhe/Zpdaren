@@ -21,7 +21,7 @@ class Admins::InterviewsController < Admins::BaseController
     if saved
       redirect_to @interview, notice: '创建成功'
     else
-      flash[:error] = @interview.errors.full_messages.first || @professor.errors.full_messages.first
+      flash.now[:error] = @interview.errors.full_messages.first || @professor.errors.full_messages.first
       render :new
     end
   end
@@ -39,7 +39,7 @@ class Admins::InterviewsController < Admins::BaseController
     if @interview.update(interview_params) && @professor.update(professor_params)
       redirect_to @interview, notice: '更新成功'
     else
-      flash[:error] = @interview.errors.full_messages.first || @professor.errors.full_messages.first
+      flash.now[:error] = @interview.errors.full_messages.first || @professor.errors.full_messages.first
       render 'edit'
     end
   end

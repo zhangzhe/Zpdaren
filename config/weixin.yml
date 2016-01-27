@@ -3,10 +3,10 @@ defaults: &defaults
     key: wx6664cd85e3fa1aa6
     secret: 87c7009f35ab8c4451664071216a4f8f
   mp:
-    appid: wx1e62bc6eab8865c3
-    secret: d4624c36b6795d1d99dcf0547af5443d
+    appid: wx0a1606a79489a89c
+    secret: 046851a0cf0a758c97f7426b8f57443a
     url: https://api.weixin.qq.com
-    callback_url: 3029bd74.ngrok.io
+    callback_url: zpdaren.ngrok.cc
     message_templates:
       resume_status_change_template_id: 8Lsk_xjzj8y6EAe4Mo1tzAYr-O4PUglc-j3mlWi5Kvc
       delivery_award_template_id: s-KsdEK9aRRPmg3VA7p3AzPXdsasK-MKpnOvbWHqIzM

@@ -1,6 +1,6 @@
 <div class="job-detail">
   <div class="panel-heading">
-    <p class="job-title"><%= job.title %></p>
+    <%= render 'shared/page_title', title: job.title %>
     <p class="info">
       招聘方·<span class='gray-light'><%= job.company_name %></span>·
       <% job.tag_list.each do |tag| %>

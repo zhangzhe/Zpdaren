@@ -14,8 +14,8 @@ class Admins::CompaniesController < Admins::BaseController
     if @company.save
       redirect_to admins_company_path(@company)
     else
-      flash[:error] = @company.errors.full_messages.first
-      render 'edit' and return
+      flash.now[:error] = @company.errors.full_messages.first
+      render 'edit'
     end
   end
 

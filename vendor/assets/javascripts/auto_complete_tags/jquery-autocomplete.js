@@ -435,7 +435,6 @@ $.Autocompleter = function(input, options) {
 $.Autocompleter.defaults = {
   inputClass: "ac_input",
   resultsClass: "ac_results",
-  loadingClass: "ac_loading",
   minChars: 1,
   delay: 400,
   matchCase: false,
@@ -846,3 +845,21 @@ $.fn.selection = function(start, end) {
 };
 
 })(jQuery);
+
+$(function(){
+  $('.auto-tags').tagsInput({
+    'autocomplete_url': '/tags',
+    'autocomplete': {
+      'selectFirst': false,
+      'width': '374px',
+      'autoFill': false,
+      'noRecord': ''
+    },
+    'defaultText':'职位标签(必填)',
+    'width': '100%',
+    'min-height': '42px',
+    'height': 'auto',
+    'max': 5,
+    'maxChars': 20
+  });
+});

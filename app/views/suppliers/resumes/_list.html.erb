@@ -13,7 +13,7 @@
       <% resumes.each do |resume| %>
         <tr>
           <td>
-            <%= sanitize("<i class='fa fa-android' data-toggle='tooltip' data-placement='top' title='我已自动托管'></i>") if resume.auto_delivery %>
+            <%= sanitize("<i class='fa fa-android' data-toggle='tooltip' data-placement='top' data-original-title='我已自动托管'></i>") if resume.auto_delivery %>
             <%= link_to resume.candidate_name, suppliers_resume_path(resume) %>
           </td>
           <td><%= resume.tag_list %></td>
@@ -36,8 +36,3 @@
     </tbody>
   </table>
 </div>
-<script>
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  })
-</script>
