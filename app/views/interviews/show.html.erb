@@ -1,10 +1,10 @@
-<% content_for :title, @interview.professor_name %>
+<% content_for :title, "AMA with #{@interview.professor_name}" %>
 <% content_for :job_info do %>
 
   <div class="jumbotron">
     <div class="text-center">
-      <%= image_tag(@interview.avatar_url, :class => "img-thumbnail", :size => "300x300") if @interview.avatar? %>
-      <h1><%= @interview.professor_name %></h1>
+      <%= image_tag(@interview.avatar_url, :class => "img-thumbnail", :size => "200x200") if @interview.avatar? %>
+      <h2>AMA with <%= @interview.professor_name %></h2>
       <div><%= @interview.professor_title %></div>
     </div>
   </div>
@@ -17,7 +17,6 @@
     <br>
     <p class="text-right">共收到<%= @interview.questions_count %>个提问</p>
     <br><br>
-
     <p>
       <% if @interview.available? %>
         <% if current_user %>
