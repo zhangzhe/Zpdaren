@@ -8,6 +8,7 @@ class JobsController < ApplicationController
     end
     @jobs = @jobs.tagged_with(params[:tag]) if params[:tag]
     @jobs = @jobs.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    render layout: 'jobs'
   end
 
   def show

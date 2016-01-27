@@ -5,15 +5,10 @@
     <%= render "/shared/navbar" %>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-12 col-sm-offset-3 col-md-10 col-md-offset-1 main">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="blog-post">
-                  <%= yield :job_info %>
-                </div>
-              </div>
-            </div>
+        <div class="col-md-10 col-md-offset-1 main">
+
+          <div class="blog-post">
+            <%= yield :job_info %>
           </div>
         </div>
       </div>
