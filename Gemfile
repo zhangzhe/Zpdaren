@@ -17,7 +17,6 @@ group :development, :test do
   gem 'spring'
   gem 'quiet_assets'
   gem 'rails_best_practices', '~> 1.15.7'
-  gem 'rails-erd', '~> 1.4.2'
   gem 'faker'
   gem 'capistrano', '~> 3.4.0'
   gem 'capistrano-sidekiq'

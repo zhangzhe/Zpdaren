@@ -69,7 +69,7 @@
 
 <div class="col-md-6">
   <%= render 'shared/page_title', title: '简历预览' %>
-  <%= render 'shared/show_pdf', pdf_url: download_admins_resume_path(@resume) %>
+  <%= render 'shared/show_pdf', pdf_url: download_admins_resume_path(@resume), width: "100%" %>
 </div>
 
 <%= content_for :scripts do %>

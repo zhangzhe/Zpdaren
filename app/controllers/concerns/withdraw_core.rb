@@ -25,14 +25,6 @@ module WithdrawCore
   end
 
   private
-  def choose_layout
-    case
-    when current_recruiter
-      self.class.layout 'recruiters'
-    when current_supplier
-      self.class.layout 'suppliers'
-    end
-  end
 
   def redirect_path
     case

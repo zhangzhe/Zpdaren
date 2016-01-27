@@ -7,7 +7,7 @@
     <li class="active"><%= jobs.first.company_name %></li>
   </ol>
 <% end %>
-<%= render 'suppliers/shared/search', title: '我收到的职位', url: suppliers_jobs_path, placeholder: '职位名称、公司名称', search_fields: 'title_or_company_name_cont', q: @q %>
+<%= render '/shared/search', title: '我收到的职位', url: suppliers_jobs_path, placeholder: '职位名称、公司名称', search_fields: 'title_or_company_name_cont', q: @q %>
 <div style="background:#eee !important;padding-left: 16px;padding-bottom: 8px;padding-top: 20px;">
   <p>
     <% Job.priority_tags.each do |tag| %>
