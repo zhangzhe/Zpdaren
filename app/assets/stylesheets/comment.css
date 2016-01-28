@@ -3,7 +3,7 @@
 .replies .replies .replies {margin-left: 0;}
 
 /* Animations */
-.followed {
+.thumbuped {
   animation:bounceIn infinite;
   animation-duration:0.5s;
   animation-iteration-count:1;
@@ -55,11 +55,11 @@
   }
 }
 
-.bounceIn {
-  -webkit-animation-name: bounceIn;
-  animation-name: bounceIn;
-}
-
-.unfollowed:hover{
+.unthumbuped{
   cursor:pointer;
+}
+.bottom-column {
+    position: fixed;
+    bottom: 40px;
+    z-index: 9999;
 }

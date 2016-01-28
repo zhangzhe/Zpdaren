@@ -4,19 +4,16 @@
     <%= f.text_field :title, class: "form-control", placeholder: '博客标题' %>
   </p>
   <p>
-    <%= f.text_area :content, class: "form-control", rows: 40 %>
+    <%= f.text_area :content, class: "form-control froala_editor", rows: 40 %>
   </p>
   <p>
     <%= f.submit "发布", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
   </p>
 <% end %>
 
-<script>
-    $(function() {
-        $('#blog_content').froalaEditor({
-          heightMin: 300,
-          placeholderText: '博客内容'
-        }
-        )
-    });
-</script>
+<%= content_for :scripts do %>
+  <%= javascript_include_tag 'froala_editor', 'data-turbolinks-track' => true %>
+<% end %>
+<%= content_for :styles do %>
+  <%= stylesheet_link_tag "froala_editor" %>
+<% end %>

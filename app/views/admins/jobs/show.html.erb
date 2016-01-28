@@ -9,7 +9,7 @@
 </ol>
 <div class="container-fluid" style="padding-left:0px;">
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8">
       <%= render 'shared/job_show', job: @job %>
       <div class="panel-footer">
         <%= link_to "修改职位信息", edit_admins_job_path(@job), class: "btn btn-primary" %>
@@ -17,10 +17,8 @@
       </div>
     </div>
 
-    <div class="col-md-3">
-      <H2>
-        <%= @job.company_name %>
-      </H2 >
+    <div class="col-md-4">
+       <%= render 'shared/page_title', title: @job.company_name %>
       <p>
         联系方式：
         <%= @job.company_mobile %>

@@ -14,6 +14,10 @@ class Interview < ActiveRecord::Base
     comments.questions.count
   end
 
+  def answers_count
+    comments.count - comments.questions.count
+  end
+
   def to_param
     "#{id}-ama-with-#{slug}"
   end

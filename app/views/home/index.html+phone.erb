@@ -1,21 +1,11 @@
+<%= content_for :styles do %>
+  <%= stylesheet_link_tag 'home' %>
+<% end %>
 <b>
   <div class="front_image_phone">
     <div class="container">
       <br>
-      <div class="col-md-offset-1 col-md-5">
-        <div>
-          <h1>
-            众聘达人
-          </h1>
-          <h2>
-            推荐优质<span style="font-size:36px;">&nbsp;简历&nbsp;</span>
-          </h2>
-          <h2>
-            <p class="text-primary">获得企业<span style="font-size:36px;">&nbsp;悬赏</span></p>
-          </h2>
-          <br>
-        </div>
-      </div>
+      <%= render "slogon" %>
       <div class="col-md-5 col-md-offset-2">
       <div>
         <ul class="nav nav-tabs" role="tablist">
@@ -40,11 +30,8 @@
       </div>
     </div>
   </div>
-
   <%= render "interviews" %>
-  <hr>
   <%= render "high_priority_jobs" %>
-  <hr>
   <%= render "partner" %>
   <%= render "contact" %>
 </b>

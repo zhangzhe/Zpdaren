@@ -1,19 +1,8 @@
-<script>
-  $(function(){
-    $('.auto-tags').tagsInput({
-      'autocomplete_url': '/tags',
-      'autocomplete': {
-        'selectFirst': false,
-        'width': '374px',
-        'autoFill': false,
-        'noRecord': ''
-      },
-      'defaultText':'标签(必填)',
-      'width': '100%',
-      'min-height': '42px',
-      'height': 'auto',
-      'max': 5,
-      'maxChars': 20
-    });
-  });
-</script>
+<%= content_for :styles do %>
+  <%= stylesheet_link_tag "jquery-tagsinput" %>
+  <%= stylesheet_link_tag "jquery-autocomplete" %>
+<% end %>
+<%= content_for :scripts do %>
+  <%= javascript_include_tag "auto_complete_tags/jquery-tagsinput", 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "auto_complete_tags/jquery-autocomplete", 'data-turbolinks-track' => true %>
+<% end %>

@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%= render partial: "/shared/head" %>
+  <%= render "/shared/head" %>
   <body>
-    <%= render partial: "/shared/navbar" %>
-    <% flash[:error], flash[:success] = nil, nil %>
-    <%= yield %>
-    <div class="container">
-      <%= render "/shared/footer" %>
+    <%= render "/shared/navbar" %>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <%= render "sidebar" if current_user %>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <%= bootstrap_flash %>
+          <%= yield %>
+        </div>
+      </div>
     </div>
-    <%= render partial: "/shared/js" %>
-    <%= render "/shared/cnzz" %>
+    <%= render "/shared/footer" %>
   </body>
 </html>

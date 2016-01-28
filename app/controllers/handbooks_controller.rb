@@ -5,7 +5,7 @@ class HandbooksController < ApplicationController
   end
 
   def markdown
-
+    render :layout => "devise"
   end
 
   def company_service_protocol

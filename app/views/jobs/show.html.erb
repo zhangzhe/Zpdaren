@@ -1,5 +1,9 @@
 <% content_for :title, "#{@job.title} - #{@job.company_name}" %>
 <% content_for :job_info do %>
+  <ol class="breadcrumb">
+    <li><%= link_to "职位列表", Job %></li>
+    <li><%= @job.title %></li>
+  </ol>
   <%= render 'shared/supplier_job_show', job: @job %>
   <div style="word-break:break-all;">
     <hr>

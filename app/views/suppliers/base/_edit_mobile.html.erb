@@ -3,27 +3,27 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="gridSystemModalLabel">修改手机号</h4>
+        <h4 class="modal-title" id="gridSystemModalLabel">新的手机号</h4>
       </div>
       <div class="modal-body">
         <div class="container-fluid">
           <div class="row">
-            <div class="alert-danger mb20" role="alert" style='display:none;'>
-              手机号格式不正确
-            </div>
-            <%= form_for current_supplier, url: suppliers_user_path(current_supplier), html: { onsubmit: "return validMobile();" } do |f| %>
+            <div class="alert-danger mb20" role="alert" style='display:none;'></div>
+            <%= form_for current_supplier, url: suppliers_user_path(current_supplier), :html => { :id => "update_mobile_form" } do |f| %>
               <p>
-                <%= f.label :mobile, "手机号" %>
                 <%= f.text_field :mobile, class: "form-control" %>
               </p>
               <br>
               <p class='text-right'>
-                <%= f.submit "提交", class: "btn btn-primary", id: 'submitBtn' %>
+                <%= f.submit "提交", class: "btn btn-primary", id: 'UpdateSupplierMobile' %>
               </p>
             <% end %>
           </div>
         </div>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+  </div>
+</div>
+<% content_for :scripts do %>
+  <%= javascript_include_tag "suppliers/mobile_validation", 'data-turbolinks-track' => true %>
+<% end %>

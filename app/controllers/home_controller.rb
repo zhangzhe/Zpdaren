@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  layout "home"
   protect_from_forgery :except => [:weixin_callback]
   before_action :detect_browser, :only => [:index]
 

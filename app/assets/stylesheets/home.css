@@ -1,0 +1,32 @@
+h1{
+  font-size:56px;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+h2{
+  font-size:36px;
+  color: #428bca;
+}
+
+.front_image {
+  background: url(/assets/front_image.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 480px;
+}
+
+.front_image_phone {
+  background: url(/assets/front_image_phone.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 600px;
+}
+
+.partner-logo{
+  height: 100px;
+  line-height: 100px;
+}
+.partner-logo img{
+  width: 100px;
+}

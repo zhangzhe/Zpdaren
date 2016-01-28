@@ -1,0 +1,12 @@
+<ul class="nav nav-pills nav-justified nav-self">
+  <li role="presentation" class="active" id='markdown_edit'>
+    <%= link_to '编辑', 'javascript:void(0)' %>
+  <li role="presentation" id='markdown_preview'>
+    <%= link_to '预览', 'javascript:void(0)' %>
+  </li>
+</ul>
+<%= link_to '《markdown排版说明》', markdown_path, id: 'markdown-doc', target: '_blank' %>
+
+<%= content_for :scripts do %>
+  <%= javascript_include_tag "jobs", 'data-turbolinks-track' => true %>
+<% end %>

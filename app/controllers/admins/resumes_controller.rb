@@ -26,12 +26,12 @@ class Admins::ResumesController < Admins::BaseController
     unless has_problem?
       if @resume.is_pdf?
         if !is_reuse? && !is_pdf?
-          flash[:error] = '请上传pdf格式的简历。'
+          flash.now[:error] = '请上传pdf格式的简历。'
           render 'edit_pdf' and return
         end
       else
         if !is_pdf?
-          flash[:error] = '请上传pdf格式的简历。'
+          flash.now[:error] = '请上传pdf格式的简历。'
           render 'edit' and return
         end
       end
@@ -40,7 +40,7 @@ class Admins::ResumesController < Admins::BaseController
       flash[:success] = '完善成功。'
       redirect_to admins_resumes_path(:state => "uncompleted") and return
     else
-      flash[:error] = '程序异常，完善失败。'
+      flash.now[:error] = '程序异常，完善失败。'
       render (@resume.is_pdf? ? 'edit_pdf' : 'edit') and return
     end
   end

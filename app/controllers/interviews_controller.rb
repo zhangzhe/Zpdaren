@@ -1,6 +1,5 @@
 class InterviewsController < ActionController::Base
-  layout 'anonymous_job'
-
+  layout 'job'
   def show
     @interview = Interview.find(params[:id])
     if request.user_agent =~ /MicroMessenger/ # visit from weixin
