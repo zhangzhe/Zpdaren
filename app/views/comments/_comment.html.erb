@@ -19,7 +19,7 @@
     <% end %>
   </blockquote>
 
-  <%= link_to "<i class='fa fa-reply'></i> 回复".html_safe, "#", onclick: "$('#collapseExample#{comment.id}').toggle(); return false" %>&nbsp;&nbsp;&nbsp;
+  <%= link_to "<i class='fa fa-reply'></i> 回复".html_safe, "javascript:void(0)", onclick: "$('#collapseExample#{comment.id}').toggle()" %>&nbsp;&nbsp;&nbsp;
   <% if session[comment.id].present? %>
     <i class="fa fa-thumbs-o-up thumbuped" comment-id="<%= comment.id %>"></i>
   <% else %>

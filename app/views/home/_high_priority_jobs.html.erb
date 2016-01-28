@@ -5,7 +5,7 @@
     <blockquote>
     <h4><%= link_to truncate(job.company_name, length: 16), job %></h4>
     <p><%= link_to truncate(job.title, length: 16), job %></p>
-    <footer>入职红包: <%= job.bonus_for_entry %><a href="#" data-toggle="tooltip" data-original-title="入职红包是指众聘公司成功招聘到您推荐的人选您将得到的现金奖励。众聘达人负责在候选人入职满一个月的时候把这笔钱打到您的帐户。">&nbsp;<i class="fa fa-question-circle"></i></a> &nbsp;简历红包: <%= job.bonus_for_each_resume_for_supplier %><a href="#" data-toggle="tooltip" data-original-title="简历红包是指招聘公司认可并查看您推荐的的简历后您得到的现金奖励。您的一份简历可以推荐给多个招聘公司，也就是一份简历可以获得多次红包奖励。">&nbsp;<i class="fa fa-question-circle"></i>&nbsp;</a></footer>
+    <footer>入职红包: <%= job.bonus_for_entry %><a href="javascript:void(0)" data-toggle="tooltip" data-original-title="入职红包是指众聘公司成功招聘到您推荐的人选您将得到的现金奖励。众聘达人负责在候选人入职满一个月的时候把这笔钱打到您的帐户。">&nbsp;<i class="fa fa-question-circle"></i></a> &nbsp;简历红包: <%= job.bonus_for_each_resume_for_supplier %><a href="javascript:void(0)" data-toggle="tooltip" data-original-title="简历红包是指招聘公司认可并查看您推荐的的简历后您得到的现金奖励。您的一份简历可以推荐给多个招聘公司，也就是一份简历可以获得多次红包奖励。">&nbsp;<i class="fa fa-question-circle"></i>&nbsp;</a></footer>
     </blockquote>
     <p><%= link_to "我要红包 &raquo;".html_safe, job, class: "btn btn-default" %></p>
     <br>

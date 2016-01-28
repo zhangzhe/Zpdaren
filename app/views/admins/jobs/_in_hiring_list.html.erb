@@ -6,6 +6,7 @@
         <th>公司名称</th>
         <th>发布时间</th>
         <th>简历推荐情况</th>
+        <th>操作</th>
       </tr>
     </thead>
     <tbody>
@@ -15,13 +16,15 @@
             <% if job.priority == Job::PRIORITY_LIST['high'] %>
               <i class="fa fa-fire hot-fire"></i>
             <% end %>
-            <%= link_to job.title, admins_job_path(job.id) %>
-            <%= select_tag "job_priority", options_for_post_priority(job), class: 'job-priority-sel', id: job.id %>
+            <%= link_to job.title, admins_job_path(job.id) %><br>
           </td>
-          <td><%= link_to job.company_name, '#', "data-toggle" => "popover", "data-placement" => "bottom", "data-content" => job.company_description %></td>
+          <td><%= link_to job.company_name, 'javascript:void(0)', "data-toggle" => "popover", "data-placement" => "bottom", "data-content" => job.company_description %></td>
           <td><%= job.created_at.localtime.to_date.to_s(:db) %></td>
           <td>
             <%= all_kinds_of_deliveries_count(job) %>
+          </td>
+          <td>
+            <%= select_tag "job_priority", options_for_post_priority(job), class: 'job-priority-sel', id: job.id %>
             <%= link_to "审核推荐", admins_job_deliveries_path(:job_id => job, :state => 'recommended'), class: "btn btn-primary btn-sm", target: '_blank' if job.may_approve? %>
           </td>
         </tr>
