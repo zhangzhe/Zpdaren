@@ -1,0 +1,13 @@
+<br>
+<ol class="breadcrumb">
+  <li>
+    <%= link_to '合作伙伴', admins_partners_path() %>
+  </li>
+  <li>
+    添加合作伙伴
+  </li>
+</ol>
+
+<%= render 'shared/page_title', title: '添加合作伙伴' %>
+
+<%= render 'form', partner: @partner, url: admins_partners_path %>

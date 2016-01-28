@@ -301,6 +301,9 @@ zh-CN:
         mobile: '联系方式'
         address: '公司地址'
         service_protocol: '企业服务协议'
+      partner:
+        name: '合作伙伴名称'
+        logo: '合作伙伴logo'
     errors:
       models:
         user:
@@ -394,5 +397,13 @@ zh-CN:
               blank: "不能为空"
             reply_end_at:
               blank: "不能为空"
+        partner:
+          attributes:
+            name:
+              blank: '不能为空'
+              too_long: 不能超过%{count}个字符
+            logo:
+              blank: '不能为空'
+
       messages:
         record_invalid: "数据无效"
