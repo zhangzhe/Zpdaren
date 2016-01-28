@@ -55,10 +55,9 @@
   }
 }
 
-.unthumbuped:hover{
+.unthumbuped{
   cursor:pointer;
 }
-
 .bottom-column {
     position: fixed;
     bottom: 40px;
