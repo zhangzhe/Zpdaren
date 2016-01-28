@@ -15,7 +15,7 @@ module WeixinApi
     end
 
     def qr_code_ticket(scene_id)
-      Cache::Redis.get("ticket_#{scene_id}") do
+      cache.get("weixin:qr_scene:ticket_#{scene_id}") do
         response = conn.post do |req|
           req.url "/cgi-bin/qrcode/create?access_token=#{access_token}"
           req.body = "{ \"expire_seconds\": 604800, \"action_name\": \"QR_SCENE\", \"action_info\": { \"scene\": { \"scene_id\": #{scene_id} } } }"
@@ -50,7 +50,7 @@ module WeixinApi
 
     private
     def access_token
-      Cache::Redis.get('access_token') do
+      cache.get('weixin:access_token') do
         response = conn.get '/cgi-bin/token', { :appid => appid, :secret => secret, :grant_type => "client_credential" }
         response_result = JSON(response.body)
         {
@@ -66,6 +66,10 @@ module WeixinApi
 
     def secret
       weixin_config["secret"]
+    end
+
+    def cache
+      Cache.new
     end
   end
 end

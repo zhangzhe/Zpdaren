@@ -44,7 +44,7 @@
             <p>
               <%= Suppliers::DeliveriesHelper.state_show(delivery) %>
               <% if delivery.refused? && delivery.rejection %>
-                <a href="#" data-toggle="popover" data-placement="bottom"  data-content="<%= delivery.rejection_reasons %>">原因</a>
+                <a href="javascript:void(0)" data-toggle="popover" data-placement="bottom"  data-content="<%= delivery.rejection_reasons %>">原因</a>
               <% end %>
             </p>
           </td>
