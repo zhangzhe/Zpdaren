@@ -1,4 +1,4 @@
-$(function () {
+$(document).ready(function(){
   $("#markdown_edit").click(function () {
     $('.nav-self').find('li').each(function(){
       $(this).removeClass('active')
