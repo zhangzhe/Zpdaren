@@ -1,7 +1,7 @@
 //= require jquery-ui/draggable
 //= require jquery-ui/droppable
 
-$(function() {
+$(document).ready(function(){
   $( ".draggable_priority_tags" ).draggable();
   $( ".draggable_nomal_tags" ).draggable();
 
