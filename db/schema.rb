@@ -127,10 +127,12 @@ ActiveRecord::Schema.define(version: 20160128070908) do
   add_index "money_transfers", ["wallet_id"], name: "index_money_transfers_on_wallet_id", using: :btree
 
   create_table "partners", force: :cascade do |t|
-    t.string "name"
-    t.text   "logo"
-    t.text   "url"
-    t.text   "qrcode"
+    t.string   "name"
+    t.text     "logo"
+    t.text     "url"
+    t.text     "qrcode"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "refund_requests", force: :cascade do |t|
