@@ -106,6 +106,11 @@ Rails.application.routes.draw do
     end
     resources :rejections, only: [:new, :create]
     resources :blogs, except: [:show]
+    resources :partners, except: [:show] do
+      member do
+        get :logo_download
+      end
+    end
   end
 
   namespace :recruiters do
@@ -151,6 +156,13 @@ Rails.application.routes.draw do
     resources :qr_codes, only: [:show]
     resources :users, only: [:update]
     resources :withdraws, only: [:new, :create]
+  end
+
+  resources :partners, only: [:logo_download, :qrcode_download, :show] do
+    member do
+      get :logo_download
+      get :qrcode_download
+    end
   end
 
   get 'good_job_description' => 'handbooks#good_job_description', as: 'good_job_description'

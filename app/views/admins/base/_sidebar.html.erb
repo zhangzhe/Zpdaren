@@ -18,6 +18,8 @@
   <li class="<%= active %>"><%= link_to "访谈管理", admins_interviews_path %></li>
   <% active = active_for?([Admins::TagsController]) %>
   <li class="<%= active %>"><%= link_to "标签管理", admins_tags_path %></li>
+  <% active = active_for?([Admins::PartnersController]) %>
+  <li class="<%= active %>"><%= link_to "合作伙伴", admins_partners_path %></li>
   <% active = active_for?([Admins::StatisticsController]) %>
   <li class="<%= active %>"><%= link_to "统计", admins_statistics_path %></li>
 </ul>

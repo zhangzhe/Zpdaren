@@ -1,0 +1,27 @@
+<%= form_for partner, url: url do |f| %>
+  <p>
+    <%= f.label :name, "伙伴名称" %>
+    <span class='red-star'>*</span>
+    <%= f.text_field :name, class: "form-control" %>
+  </p>
+  <div>
+    <%= f.label :logo, "伙伴logo" %>
+    <span class='red-star'>*</span>
+    <p>
+      <%= f.file_field 'logo', style: "display:inline;width:160px;float:left;" %><span style="color:red;font-size:12px;">请上传png、jpg、jpeg格式的logo</span>
+    </p>
+  </div>
+  <p>
+    <%= f.label :url, "网址" %>(网址请以http://或者https://开头)
+    <%= f.text_field :url, class: 'form-control' %>
+  </p>
+  <div>
+    <%= f.label :qrcode, "二维码" %>
+    <p>
+      <%= f.file_field 'qrcode', style: "display:inline;width:160px;float:left;" %><span style="color:red;font-size:12px;">请上传png、jpg、jpeg格式的二维码</span>
+    </p>
+  </div>
+  <p>
+    <%= f.submit "确定", class: "btn btn-primary", data: { disable_with: '提交中...' } %>
+  </p>
+<% end %>
