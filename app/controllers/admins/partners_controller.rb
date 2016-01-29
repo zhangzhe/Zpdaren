@@ -19,10 +19,6 @@ class Admins::PartnersController < Admins::BaseController
     end
   end
 
-  def show
-    @partner = Partner.find(params[:id])
-  end
-
   def edit
     @partner = Partner.find(params[:id])
   end
