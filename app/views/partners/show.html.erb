@@ -2,5 +2,5 @@
   <p>
     此二维码由<%= @partner.name %>提供，扫一扫了解更多。
   </p>
-  <%= image_tag qrcode_download_partner_path(@partner), style: 'width:200px;' %>
+  <%= image_tag @partner.qrcode_url, style: 'width:200px;' %>
 </div>

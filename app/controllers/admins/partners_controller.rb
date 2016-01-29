@@ -42,11 +42,6 @@ class Admins::PartnersController < Admins::BaseController
     end
   end
 
-  def logo_download
-    partner = Partner.find(params[:id])
-    send_file partner.logo.current_path
-  end
-
   private
   def partner_params
     params.require(:partner).permit(:name, :logo, :url, :qrcode)

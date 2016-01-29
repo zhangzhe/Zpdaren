@@ -173,3 +173,15 @@ body{
 .button_to div {
   display: inline;
 }
+
+.thumbnail .partner-logo{
+  height: 200px;
+}
+.thumbnail .partner-logo img{
+  width: 100%;
+}
+
+.caption p a{
+  overflow: hidden;
+  display: inherit;
+}
