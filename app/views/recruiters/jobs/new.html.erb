@@ -33,7 +33,7 @@
       <%= f.label :description, '职位描述' %>
       <span class='red-star'>*</span>
       <%= link_to "《职位描述规范》", good_job_description_path, target: '_blank' %>
-      <%= render 'shared/edit_and_preview' %>
+      <%= render 'shared/markdown_edit_and_preview' %>
       <%= f.text_area :description, class: "form-control", rows: 14 %>
       <div id='preview' class="form-control markdown">
       </div>
