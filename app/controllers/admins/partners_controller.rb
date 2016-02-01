@@ -2,7 +2,7 @@ class Admins::PartnersController < Admins::BaseController
   def index
     @q = Partner.ransack(params[:q])
     @partners = @q.result(distinct: true)
-    @partners = @partners.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @partners = @partners.paginate(page: params[:page], per_page: Settings.pagination.partner_page_size)
   end
 
   def new
