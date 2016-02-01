@@ -106,6 +106,7 @@ Rails.application.routes.draw do
     end
     resources :rejections, only: [:new, :create]
     resources :blogs, except: [:show]
+    resources :partners, except: [:show]
   end
 
   namespace :recruiters do
@@ -152,6 +153,8 @@ Rails.application.routes.draw do
     resources :users, only: [:update]
     resources :withdraws, only: [:new, :create]
   end
+
+  resources :partners, only: [:show]
 
   get 'good_job_description' => 'handbooks#good_job_description', as: 'good_job_description'
   get 'company_service_protocol' => 'handbooks#company_service_protocol', as: 'company_service_protocol'

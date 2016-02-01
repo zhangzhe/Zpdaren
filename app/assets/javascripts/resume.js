@@ -1,4 +1,4 @@
-$(function(){
+$(document).ready(function(){
   var checkBox = $('.checkbox').find("input[type='checkbox']")
   $(checkBox).click(function(){
     if ($(checkBox).is(':checked')) {

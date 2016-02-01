@@ -18,7 +18,7 @@ set :unicorn_rack_env, "#{fetch(:default_stage)}"
 set :sidekiq_monit_default_hooks, false
 set :sidekiq_config, "#{fetch(:deploy_to)}/current/config/sidekiq.yml"
 set :linked_files, fetch(:linked_files, []).push('config/database.yml')
-set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps uploads public/uploads/interview/avatar}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/sitemaps uploads public/uploads/interview/avatar public/uploads/partner}
 
 namespace :deploy do
   desc "Start Application"
