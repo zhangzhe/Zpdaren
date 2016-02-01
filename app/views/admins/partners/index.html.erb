@@ -3,14 +3,20 @@
   <% @partners.each do |partner| %>
     <div class="col-sm-6 col-md-3">
       <div class="thumbnail">
-        <%= image_tag logo_download_admins_partner_path(partner) %>
+        <div class="partner-logo">
+          <%= image_tag partner.logo_url %>
+        </div>
         <div class="caption">
           <h3>
-            <%= partner.name %>
-            <%= sanitize('<i class="fa fa-qrcode"></i>') if partner.qrcode.present? %>
           </h3>
           <p>
-            <%= link_to partner.url, partner.url, target: '_blank' %>
+            <% if partner.url.present? %>
+              <%= link_to external_url(partner.url), external_url(partner.url), target: '_blank' %>
+            <% elsif partner.qrcode.present? %>
+              <%= sanitize('<i class="fa fa-qrcode"></i>') %>
+            <% else %>
+              <%= link_to '完善网址', edit_admins_partner_path(partner) %>
+            <% end %>
           </p>
           <div>
             <%= link_to '编辑', edit_admins_partner_path(partner), class: 'btn btn-primary' %>

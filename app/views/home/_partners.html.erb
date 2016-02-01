@@ -2,7 +2,13 @@
   <h3>合作伙伴</h3>
   <% Partner.all.each do |partner| %>
     <div class="col-md-2 text-center partner-logo">
-      <%= link_to image_tag(logo_download_partner_path(partner)), partner.url.present? ? partner.url : partner_path(partner), target: '_blank' %>
+      <% if partner.url.present? %>
+        <%= link_to image_tag(partner.logo_url), external_url(partner.url), target: '_blank' %>
+      <% elsif partner.qrcode.present? %>
+        <%= link_to image_tag(partner.logo_url), partner_path(partner), target: '_blank' %>
+      <% else %>
+        <%= image_tag partner.logo_url %>
+      <% end %>
     </div>
   <% end %>
 </div>
