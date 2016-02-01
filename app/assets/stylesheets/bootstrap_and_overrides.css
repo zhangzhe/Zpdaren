@@ -175,11 +175,11 @@ body{
 }
 
 .thumbnail .partner-logo{
-  height: 120px;
+  height: 110px;
+  line-height: 110px;
 }
 .thumbnail .partner-logo img{
   width: 100%;
-  max-height: 120px;
 }
 
 .caption p a{
