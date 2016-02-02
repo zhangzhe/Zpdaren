@@ -1,15 +1,15 @@
 <div class="row text-center col-md-offset-1">
-  <h3>合作伙伴</h3>
   <div class="col-md-11">
     <div class="row">
+      <h3>合作伙伴</h3>
       <% Partner.all.each do |partner| %>
         <div class="col-md-2 partner-logo">
           <% if partner.url.present? %>
-            <%= link_to image_tag(partner.logo_url, class: 'img-rounded'), external_url(partner.url), target: '_blank' %>
+            <%= link_to image_tag(partner.logo_url), external_url(partner.url), target: '_blank' %>
           <% elsif partner.qrcode.present? %>
-            <%= link_to image_tag(partner.logo_url, class: 'img-rounded'), partner_path(partner), target: '_blank' %>
+            <%= link_to image_tag(partner.logo_url), partner_path(partner), target: '_blank' %>
           <% else %>
-            <%= image_tag partner.logo_url, class: 'img-rounded' %>
+            <%= image_tag partner.logo_url %>
           <% end %>
         </div>
       <% end %>
