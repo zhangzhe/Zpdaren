@@ -175,7 +175,8 @@ body{
 }
 
 .thumbnail .partner-logo{
-  height: 200px;
+  height: 110px;
+  line-height: 110px;
 }
 .thumbnail .partner-logo img{
   width: 100%;

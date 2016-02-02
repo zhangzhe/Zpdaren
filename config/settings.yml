@@ -1,5 +1,6 @@
 pagination:
   page_size: 10
+  partner_page_size: 12
 email:
   sender: Zpdaren
   default_account:
