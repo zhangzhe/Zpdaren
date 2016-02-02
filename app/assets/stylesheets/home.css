@@ -30,5 +30,6 @@ h2{
 }
 .partner-logo img{
   width: 110px;
+  max-height: 110px;
   border-radius: 4px;
 }

@@ -177,9 +177,11 @@ body{
 .thumbnail .partner-logo{
   height: 110px;
   line-height: 110px;
+  text-align: center;
 }
 .thumbnail .partner-logo img{
-  width: 100%;
+  width: 110px;
+  max-height: 100px;
 }
 
 .caption p a{
