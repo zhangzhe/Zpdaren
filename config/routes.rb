@@ -154,6 +154,9 @@ Rails.application.routes.draw do
     resources :withdraws, only: [:new, :create]
   end
 
+  namespace :weixin do
+    resources :deliveries, only: [:show]
+  end
   resources :partners, only: [:show]
 
   get 'good_job_description' => 'handbooks#good_job_description', as: 'good_job_description'
