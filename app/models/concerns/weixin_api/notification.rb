@@ -25,7 +25,7 @@ module WeixinApi
       template_id = resume_status_change_template_id
       response = conn.post do |req|
         req.url "/cgi-bin/message/template/send?access_token=#{access_token}"
-        req.body =  "{ \"touser\":\"#{delivery.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://#{Settings.domain.host}\",\"topcolor\":\"#FF0000\", \"data\": {
+        req.body =  "{ \"touser\":\"#{delivery.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://#{Settings.domain.host}/weixin/deliveries/#{delivery.id}\",\"topcolor\":\"#FF0000\", \"data\": {
       \"first\": {
       \"value\":\"尊敬的用户#{delivery.supplier.email}, 您好！您推荐的#{delivery.resume_candidate_name}被拒绝\",
       \"color\":\"#173177\"
@@ -70,7 +70,7 @@ module WeixinApi
       template_id = resume_status_change_template_id
       response = conn.post do |req|
         req.url "/cgi-bin/message/template/send?access_token=#{access_token}"
-        req.body =  "{ \"touser\":\"#{delivery.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://#{Settings.domain.host}\",\"topcolor\":\"#FF0000\", \"data\": {
+        req.body =  "{ \"touser\":\"#{delivery.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://#{Settings.domain.host}/weixin/deliveries/#{delivery.id}\",\"topcolor\":\"#FF0000\", \"data\": {
       \"first\": {
       \"value\":\"尊敬的用户#{delivery.supplier.email}, 您好！您推荐的#{delivery.resume_candidate_name}审核通过\",
       \"color\":\"#173177\"
@@ -115,7 +115,7 @@ module WeixinApi
       template_id = delivery_award_template_id
       response = conn.post do |req|
         req.url "/cgi-bin/message/template/send?access_token=#{access_token}"
-        req.body =  "{ \"touser\":\"#{delivery.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://weixin.qq.com/download\",\"topcolor\":\"#FF0000\", \"data\": {
+        req.body =  "{ \"touser\":\"#{delivery.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://#{Settings.domain.host}/weixin/deliveries/#{delivery.id}\",\"topcolor\":\"#FF0000\", \"data\": {
       \"first\": {
       \"value\":\"尊敬的用户#{delivery.supplier.email}, 您好！您推荐的#{delivery.resume_candidate_name}的简历被查看，获得了简历红包：\",
       \"color\":\"#173177\"
@@ -157,7 +157,7 @@ module WeixinApi
       template_id = delivery_award_template_id
       response = conn.post do |req|
         req.url "/cgi-bin/message/template/send?access_token=#{access_token}"
-        req.body =  "{ \"touser\":\"#{delivery.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://weixin.qq.com/download\",\"topcolor\":\"#FF0000\", \"data\": {
+        req.body =  "{ \"touser\":\"#{delivery.supplier.weixin_name}\", \"template_id\":\"#{template_id}\", \"url\":\"http://#{Settings.domain.host}/weixin/deliveries/#{delivery.id}\",\"topcolor\":\"#FF0000\", \"data\": {
       \"first\": {
       \"value\":\"尊敬的用户#{delivery.supplier.email}, 您好！您推荐的 #{delivery.resume_candidate_name}已成功入职，获得了入职红包：\",
       \"color\":\"#173177\"
