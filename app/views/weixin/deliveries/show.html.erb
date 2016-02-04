@@ -1,0 +1,94 @@
+<table class="table">
+  <tbody>
+    <tr class="active">
+      <td>
+        <strong>
+          状态
+        </strong>
+      </td>
+      <td class='gray-light'>
+        <%= Suppliers::DeliveriesHelper.state_show(@delivery) %>
+      </td>
+    </tr class="active">
+    <%= sanitize("<tr class=\"active\"><td><strong>查看简历奖励</strong></td><td class=\"gray-light\">#{@delivery.job.bonus_for_each_resume_for_supplier}元</td></tr>") if @delivery.ever_paid? %>
+    <%= sanitize("<tr class=\"active\"><td><strong>入职奖励</strong></td><td class=\"gray-light\">#{@delivery.final_payment.amount}元</td></tr>") if @delivery.final_payment_paid? || @delivery.finished? %>
+    <%= sanitize("<tr class=\"active\"><td><strong>拒绝原因</strong></td><td class=\"gray-light\">#{@delivery.rejection_reasons}</td></tr>") if @delivery.refused? && @delivery.rejection %>
+    <tr class="active">
+      <td>
+        <strong>
+          时间
+        </strong>
+      </td>
+      <td class='gray-light'>
+        <%= @delivery.updated_at.strftime("%Y年%m月%d日 %H:%m") %>
+      </td>
+    </tr>
+    <tr class="active">
+      <td>
+        <strong>
+          投递的职位
+        </strong>
+      </td>
+      <td class='gray-light'>
+        <%= @delivery.job_title %>
+      </td>
+    </tr>
+    <tr class="active">
+      <td>
+        <strong>
+          职位标签
+        </strong>
+      </td>
+      <td>
+        <% @delivery.job.tag_list.each do |tag| %>
+          <i class="fa fa-tags"></i>
+          <span class='gray-light'><%= tag %></span>
+        <% end %>
+      </td>
+    </tr>
+    <tr class="active">
+      <td>
+        <strong>
+          被推荐人
+        </strong>
+      </td>
+      <td class='gray-light'>
+        <%= @delivery.resume_candidate_name %>
+      </td>
+    </tr>
+    <tr class="active">
+      <td>
+        <strong>
+          被推荐人简历标签
+        </strong>
+      </td>
+      <td>
+        <% @delivery.resume.tag_list.each do |tag| %>
+          <i class="fa fa-tags"></i>
+          <span class='gray-light'><%= tag %></span>
+        <% end %>
+      </td>
+    </tr>
+    <tr class="active">
+      <td>
+        <strong>
+          招聘企业
+        </strong>
+      </td>
+      <td class='gray-light'>
+        <%= @delivery.company_name %>
+      </td>
+    </tr>
+    <tr class="active">
+      <td>
+        <strong>
+          企业地址
+        </strong>
+      </td>
+      <td class='gray-light'>
+        <%= @delivery.company_address %>
+      </td>
+    </tr>
+    <%= sanitize("<tr class=\"active\"><td><strong>企业网址</strong></td><td class=\"gray-light\">#{@delivery.company_url}</td></tr>") if @delivery.company_url.present? %>
+  </tbody>
+</table>

@@ -24,9 +24,12 @@ h2{
 }
 
 .partner-logo{
-  height: 100px;
-  line-height: 100px;
+  height: 110px;
+  line-height: 110px;
+  margin-bottom: 10px;
 }
 .partner-logo img{
-  width: 100px;
+  width: 110px;
+  max-height: 110px;
+  border-radius: 4px;
 }

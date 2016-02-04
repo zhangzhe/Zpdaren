@@ -5,6 +5,7 @@ class CreatePartners < ActiveRecord::Migration
       t.text :logo
       t.text :url
       t.text :qrcode
+      t.timestamps null: false
     end
   end
 end

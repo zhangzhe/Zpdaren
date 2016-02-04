@@ -1,4 +1,4 @@
-class Cache
+class ZpdarenCache
   def get(key, &block)
     i = 0
     begin

@@ -1,4 +1,4 @@
-require 'cache'
+require 'zpdaren_cache'
 
 module WeixinApi
   module Base
@@ -69,7 +69,7 @@ module WeixinApi
     end
 
     def cache
-      Cache.new
+      ZpdarenCache.new
     end
   end
 end

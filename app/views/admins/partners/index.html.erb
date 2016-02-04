@@ -1,25 +1,6 @@
 <%= render '/shared/search', title: '合作伙伴', url: admins_partners_path, placeholder: '合作伙伴', search_fields: 'name_cont', q: @q %>
 <div class="row">
-  <% @partners.each do |partner| %>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <%= image_tag logo_download_admins_partner_path(partner) %>
-        <div class="caption">
-          <h3>
-            <%= partner.name %>
-            <%= sanitize('<i class="fa fa-qrcode"></i>') if partner.qrcode.present? %>
-          </h3>
-          <p>
-            <%= link_to partner.url, partner.url, target: '_blank' %>
-          </p>
-          <div>
-            <%= link_to '编辑', edit_admins_partner_path(partner), class: 'btn btn-primary' %>
-            <%= button_to '删除', admins_partner_path(partner), method: :delete, data: { confirm: "是否删除合作伙伴【#{partner.name}】？删除后不可恢复!", disable_with: '提交中...'}, class: "btn btn-danger" %>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
+  <%= render partial: 'partner', collection: @partners %>
 </div>
 
 <%= render 'shared/paginate', objs: @partners %>

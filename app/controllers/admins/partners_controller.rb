@@ -2,7 +2,7 @@ class Admins::PartnersController < Admins::BaseController
   def index
     @q = Partner.ransack(params[:q])
     @partners = @q.result(distinct: true)
-    @partners = @partners.paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @partners = @partners.paginate(page: params[:page], per_page: Settings.pagination.partner_page_size)
   end
 
   def new
@@ -15,12 +15,8 @@ class Admins::PartnersController < Admins::BaseController
       redirect_to admins_partners_path, notice: '添加成功。'
     else
       flash.now[:error] = @partner.errors.full_messages.first
-      render 'new' and return
+      render 'new'
     end
-  end
-
-  def show
-    @partner = Partner.find(params[:id])
   end
 
   def edit
@@ -33,7 +29,7 @@ class Admins::PartnersController < Admins::BaseController
       redirect_to admins_partners_path, notice: '编辑成功。'
     else
       flash.now[:error] = @partner.errors.full_messages.first
-      render 'edit' and return
+      render 'edit'
     end
   end
 
@@ -42,18 +38,12 @@ class Admins::PartnersController < Admins::BaseController
     if partner.destroy
       redirect_to admins_partners_path, notice: '删除成功。'
     else
-      flash.now[:error] = '程序异常，删除失败。'
-      redirect_to admins_partners_path
+      redirect_to admins_partners_path, error: '程序异常，删除失败。'
     end
-  end
-
-  def logo_download
-    partner = Partner.find(params[:id])
-    send_file partner.logo.current_path
   end
 
   private
   def partner_params
-    params[:partner].permit!
+    params.require(:partner).permit(:name, :logo, :url, :qrcode)
   end
 end

@@ -173,3 +173,22 @@ body{
 .button_to div {
   display: inline;
 }
+
+.thumbnail .partner-logo{
+  height: 110px;
+  line-height: 110px;
+  text-align: center;
+}
+.thumbnail .partner-logo img{
+  width: 110px;
+  max-height: 100px;
+}
+
+.caption p a{
+  overflow: hidden;
+  display: inherit;
+}
+.weixin-page-font-size{
+  font-size: 16px;
+  padding-top: 20px;
+}
