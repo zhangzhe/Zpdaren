@@ -19,7 +19,6 @@
           </td>
           <td><%= delivery.supplier_email %></td>
           <td><%= link_to delivery.job_title, admins_job_path(delivery.job), target: '_blank' %></td>
-          </td>
           <td><%= link_to delivery.company_name, admins_company_path(delivery.company_id), target: '_blank' %></td>
           <td><%= delivery.updated_at.localtime.to_date.to_s(:db) %></td>
           <% if params[:state].nil? || (params[:state] == "recommended") %>
@@ -37,4 +36,3 @@
     </tbody>
   </table>
 </div>
-
