@@ -92,7 +92,7 @@ Rails.application.routes.draw do
       end
     end
     resources :users, only: [:index, :destroy]
-    resources :companies, only: [:show, :edit, :update, :export] do
+    resources :companies, only: [:show, :edit, :update] do
       member do
         get :service_protocol
       end
