@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "招聘方列表") do |sheet|
+  sheet.add_row ['公司名称', '联系方式', '公司地址']
+  @companies.each do |company|
+    sheet.add_row [company.name, company.mobile, company.address]
+  end
+end

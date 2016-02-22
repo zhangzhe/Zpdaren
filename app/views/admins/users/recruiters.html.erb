@@ -2,7 +2,7 @@
 <br>
 <%= render 'nav_tabs', companies: @companies %>
 <br>
-
+<%= link_to '导出招聘放列表', export_admins_companies_path(format: 'xlsx') %>
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>

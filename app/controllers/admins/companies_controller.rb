@@ -24,6 +24,15 @@ class Admins::CompaniesController < Admins::BaseController
     send_file company.service_protocol.current_path
   end
 
+  def export
+    @companies = Company.all
+    respond_to do |format|
+      format.xlsx{
+        response.headers['Content-Disposition'] = 'attachment; filename="招聘方列表.xlsx"'
+      }
+    end
+  end
+
   private
   def company_params
     params[:company].permit(:name, :description, :mobile, :address, :url)
