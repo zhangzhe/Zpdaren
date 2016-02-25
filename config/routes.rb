@@ -110,6 +110,7 @@ Rails.application.routes.draw do
     resources :rejections, only: [:new, :create]
     resources :blogs, except: [:show]
     resources :partners, except: [:show]
+    resources :classifications
   end
 
   namespace :recruiters do

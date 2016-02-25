@@ -180,20 +180,6 @@ class Job < ActiveRecord::Base
     suppliers.include?(supplier)
   end
 
-  # def may_refund?
-  #   (self.deposit_paid? || self.deposit_paid_confirmed?) && refund_requests.find_by_state(:submitted).nil?
-  # end
-
-  def deliver_matching_resumes
-    matching_resumes.each do |resume|
-      self.delivery!(resume) if resume.auto_delivery?
-    end
-  end
-
-  def matching_resumes
-    similar_entity(Resume)
-  end
-
   def similar_jobs
     similar_entity(Job)
   end
@@ -237,7 +223,6 @@ class Job < ActiveRecord::Base
   private
   def notify_recruiter_and_deliver_matching_resumes
     RecruiterMailer.job_approved(id).deliver_later
-    deliver_matching_resumes
   end
 
   def destroy_all_association_entities

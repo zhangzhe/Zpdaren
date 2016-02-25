@@ -1,0 +1,34 @@
+<br>
+<%= render 'shared/page_title', title: "职位分类" %>
+
+<ul class="classification-list">
+  <% @classifications.each do |root| %>
+    <li>
+      <%= root.name %>
+      <%= link_to sanitize('<i class="fa fa-plus-circle"></i>'), new_admins_classification_path(parent_id: root.id), remote: true %>
+      <%= link_to sanitize('<i class="fa fa-minus-circle"></i>'), admins_classification_path(root), method: :delete, data: { confirm: "是否删除分类【#{root.name}】？删除后不可恢复!", disable_with: '提交中...'} %>
+      <%= link_to sanitize('<i class="fa fa-pencil-square-o"></i>'), edit_admins_classification_path(root), remote: true %>
+      <ul>
+        <% root.children.each do |classification| %>
+        <li>
+          <%= classification.name %>
+          <%= link_to sanitize('<i class="fa fa-plus-circle"></i>'), new_admins_classification_path(parent_id: classification.id), remote: true %>
+          <%= link_to sanitize('<i class="fa fa-minus-circle"></i>'), admins_classification_path(classification), method: :delete, data: { confirm: "是否删除分类【#{classification.name}】？删除后不可恢复!", disable_with: '提交中...'} %>
+          <%= link_to sanitize('<i class="fa fa-pencil-square-o"></i>'), edit_admins_classification_path(classification), remote: true %>
+          <ul>
+            <% classification.children.each do |leaf| %>
+              <li>
+                <%= leaf.name %>
+                <%= link_to sanitize('<i class="fa fa-minus-circle"></i>'), admins_classification_path(leaf), method: :delete, data: { confirm: "是否删除分类【#{leaf.name}】？删除后不可恢复!", disable_with: '提交中...'} %>
+                <%= link_to sanitize('<i class="fa fa-pencil-square-o"></i>'), edit_admins_classification_path(leaf), remote: true %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to '创建一级分类', new_admins_classification_path, class: 'btn btn-primary', remote: true %>

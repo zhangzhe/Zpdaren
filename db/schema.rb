@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128070908) do
+ActiveRecord::Schema.define(version: 20160225070300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20160128070908) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "classifications", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "classifications", ["parent_id"], name: "index_classifications_on_parent_id", using: :btree
 
   create_table "comment_hierarchies", id: false, force: :cascade do |t|
     t.integer "ancestor_id",   null: false
@@ -96,18 +105,20 @@ ActiveRecord::Schema.define(version: 20160128070908) do
   create_table "jobs", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "user_id"
     t.integer  "bonus"
     t.integer  "deposit"
     t.string   "state"
-    t.integer  "salary_min",  default: 0
-    t.integer  "salary_max",  default: 0
+    t.integer  "salary_min",        default: 0
+    t.integer  "salary_max",        default: 0
     t.datetime "deleted_at"
     t.integer  "priority"
+    t.integer  "classification_id"
   end
 
+  add_index "jobs", ["classification_id"], name: "index_jobs_on_classification_id", using: :btree
   add_index "jobs", ["user_id"], name: "index_jobs_on_user_id", using: :btree
 
   create_table "money_transfers", force: :cascade do |t|
