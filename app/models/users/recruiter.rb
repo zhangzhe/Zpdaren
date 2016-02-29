@@ -11,7 +11,7 @@ class Recruiter < User
   after_create :init_blank_comapny
   before_destroy :destroy_all_association_entities
 
-  DELIVERY_STATE_WHITE_LIST = ['unprocess', 'viewed', 'final_paid', 'refused', 'outdated']
+  DELIVERY_STATE_WHITE_LIST = ['available', 'viewed', 'final_paid', 'refused', 'outdated']
 
   JOB_STATE_WHITE_LIST = ['submitted', 'deposit_paid', 'deposit_paid_confirmed', 'final_payment_paid', 'finished']
 
@@ -32,6 +32,10 @@ class Recruiter < User
     else
       self.deliveries.approved
     end
+  end
+
+  def available_deliveries
+    unprocess_deliveries.joins(:resume).where("resumes.available = ?", true)
   end
 
   def outdated_deliveries
@@ -64,12 +68,14 @@ class Recruiter < User
     end
   end
 
-  def find_deliveries_by_state(state)
-    self.send("#{state}_deliveries")
+  def find_deliveries_by_state(state, job_id=nil)
+    deliveries = self.send("#{state}_deliveries")
+    deliveries = deliveries.where(job_id: job_id) if job_id.present?
+    deliveries
   end
 
-  def find_deliveries_count_by_state(state)
-    find_deliveries_by_state(state).count
+  def find_deliveries_count_by_state(state, job_id=nil)
+    find_deliveries_by_state(state, job_id).count
   end
 
   def delivery_state_is_legal?(state)

@@ -1,6 +1,6 @@
 class Recruiters::DeliveriesController < Recruiters::BaseController
   def index
-    params[:state] = 'unprocess' unless current_recruiter.delivery_state_is_legal?(params[:state])
+    params[:state] = 'available' unless current_recruiter.delivery_state_is_legal?(params[:state])
     @q = current_recruiter.find_deliveries_by_state(params[:state]).ransack(params[:q])
     @deliveries = @q.result
     if params[:job_id].present?
@@ -8,7 +8,7 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
       @deliveries = @deliveries.where("job_id = ?", params[:job_id])
     end
     @deliveries = @deliveries.joins(:job, :resume)
-    @deliveries = @deliveries.where('resumes.available = ?', true)  if params[:state] == 'unprocess'
+    @deliveries = @deliveries.where('resumes.available = ?', true)  if params[:state] == 'available'
     @deliveries = @deliveries.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
