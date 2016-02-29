@@ -19,4 +19,8 @@ module Recruiters::DeliveriesHelper
   def badge_for_recruiter_deliveries(recruiter)
     " <span class=\"badge\">#{recruiter.find_deliveries_count_by_state('unprocess')}/#{recruiter.recruiter_watchable_deliveries_count}</span>" if (recruiter.recruiter_watchable_deliveries_count > 0)
   end
+
+  def outdated?
+    (params[:state] == 'available') and (current_recruiter.find_deliveries_count_by_state('outdated', params[:job_id]) > 0)
+  end
 end
