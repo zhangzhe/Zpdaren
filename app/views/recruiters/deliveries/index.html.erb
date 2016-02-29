@@ -15,9 +15,9 @@
     <%= render '/shared/search', title: '推荐给我的简历', url: recruiters_deliveries_path, placeholder: '被推荐人、投递职位', search_fields: 'resume_candidate_name_or_job_title_cont', q: @q %>
   <% end %>
   <%= render 'nav_tabs', deliveries: @deliveries %>
-  <% if params[:state] == 'unprocess' %>
+  <% if params[:state] == 'available' %>
     <div class="alert alert-info" role="alert">
-      尊敬的用户您好，众聘达人将过时的推荐归类到<%= link_to '「过时推荐箱」', '', target: '_blank' %>
+      尊敬的用户您好，众聘达人将【<%= current_recruiter.find_deliveries_count_by_state('outdated', params[:job_id]) %>】个过时的推荐归类到<%= link_to '「过时推荐箱」', recruiters_deliveries_path(:state => 'outdated', job_id: params[:job_id])%>
     </div>
   <% end %>
   <table class="table table-striped">
