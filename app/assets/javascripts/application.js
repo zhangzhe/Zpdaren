@@ -4,3 +4,4 @@
 //= require twitter/bootstrap
 //= require bootstrap_support
 //= require turbolinks
+//= require bootbox.min

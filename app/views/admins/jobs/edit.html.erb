@@ -16,6 +16,11 @@
     <%= f.text_field :title, class: "form-control" %>
   </p>
   <p>
+    <%= f.label :classification_id, '职位分类' %>
+    <span class='red-star'>*</span>
+    <%= f.select :classification_id, Classification.all.collect { |c| [ c.name, c.id ] }, {include_blank: true}, {class: "form-control"} %>
+  </p>
+  <p>
     <%= f.label :description, '职位描述' %>
     <span class='red-star'>*</span>
     <%= link_to "《职位描述规范》", good_job_description_path, target: '_blank' %>

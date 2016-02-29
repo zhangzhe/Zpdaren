@@ -304,6 +304,8 @@ zh-CN:
       partner:
         name: '合作伙伴名称'
         logo: '合作伙伴logo'
+      classification:
+        name: '分类名'
     errors:
       models:
         user:
@@ -401,9 +403,15 @@ zh-CN:
           attributes:
             name:
               blank: '不能为空'
-              too_long: 不能超过%{count}个字符
+              too_long: 不能超过%{count}个字
             logo:
               blank: '不能为空'
+        classification:
+          attributes:
+            name:
+              blank: '不能为空'
+              too_long: 不能超过%{count}个字
+              taken: '已存在'
 
       messages:
         record_invalid: "数据无效"

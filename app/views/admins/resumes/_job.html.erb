@@ -1,0 +1,48 @@
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="headingOne">
+    <h4 class="panel-title">
+      <a role="button" data-toggle="collapse" data-parent="#accordion" href="#matched_jobs_<%= job.id %>" aria-expanded="true" aria-controls="collapseOne">
+        <%= job.title %>
+      </a>
+    </h4>
+  </div>
+  <div id="matched_jobs_<%= job.id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+    <div class="panel-body">
+      <p>
+        <% job.tag_list.each do |tag| %>
+          <i class="fa fa-tags"></i>
+          <span class='gray-light'><%= tag %></span>
+        <% end %>
+      </p>
+      <p>
+        <strong>公司：</strong>
+         <span class='gray-light'>
+          <%= link_to job.company_name, admins_company_path(job.company), target: '_blank' %>
+        </span>
+        <%= image_tag 'company_certificate_24.png' if job.company.service_protocol? %>
+      </p>
+      <p>
+        <%= render 'shared/salary_show', job: job %>
+      </p>
+      <p>
+        <strong>职位佣金：</strong>
+        <span class='gray-light'>
+          <%= job.bonus %>元
+        </span>
+      </p>
+      <p class='blockquote14'>
+        <strong>
+          职位描述
+        </strong>
+      </p>
+      <div class="markdown">
+        <%= markdown job.description %>
+      </div>
+      <%= form_for Delivery.new, url: admins_deliveries_path do |f| %>
+        <%= f.hidden_field :resume_id, value: @resume.id %>
+        <%= f.hidden_field :job_id, value: job.id %>
+        <%= f.submit '推荐', class: 'btn btn-primary btn-sm', data: { disable_with: '提交中...' } %>
+      <% end %>
+    </div>
+  </div>
+</div>

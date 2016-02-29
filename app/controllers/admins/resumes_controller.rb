@@ -23,7 +23,7 @@ class Admins::ResumesController < Admins::BaseController
 
   def update
     @resume = Resume.find(params[:id])
-    unless has_problem?
+    unless has_problem? || @resume.pdf_attachment?
       if @resume.is_pdf?
         if !is_reuse? && !is_pdf?
           flash.now[:error] = '请上传pdf格式的简历。'
@@ -53,6 +53,11 @@ class Admins::ResumesController < Admins::BaseController
   def pdf_download
     resume = Resume.find(params[:id])
     send_file resume.pdf_attachment.current_path
+  end
+
+  def matched_jobs
+    @resume = Resume.find(params[:id])
+    @matched_jobs = @resume.matched_jobs
   end
 
   private

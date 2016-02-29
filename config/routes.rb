@@ -71,6 +71,7 @@ Rails.application.routes.draw do
       member do
         get :download
         get :pdf_download
+        get :matched_jobs
       end
     end
     resources :jobs, only: [:index, :show, :edit, :update, :destroy] do
@@ -82,7 +83,8 @@ Rails.application.routes.draw do
         get :export
       end
     end
-    match 'deliveries' => 'deliveries#index', :via => :get, :as => "deliveries"
+    resources :deliveries, only: [:index, :create]
+    # match 'deliveries' => 'deliveries#index', :via => :get, :as => "deliveries"
 
     resources :money_transfers, only: [:update] do
       collection do
@@ -110,6 +112,7 @@ Rails.application.routes.draw do
     resources :rejections, only: [:new, :create]
     resources :blogs, except: [:show]
     resources :partners, except: [:show]
+    resources :classifications
   end
 
   namespace :recruiters do

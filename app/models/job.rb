@@ -1,5 +1,6 @@
 class Job < ActiveRecord::Base
   belongs_to :recruiter, :foreign_key => :user_id
+  belongs_to :classification
   has_one :company, through: :recruiter
   has_many :resumes, through: :deliveries
   has_many :deliveries do
@@ -21,6 +22,7 @@ class Job < ActiveRecord::Base
   validates_numericality_of :bonus, greater_than_or_equal_to: 1000, only_integer: true
 
   delegate :name, :id, :address, :mobile, :description, to: :company, prefix: true
+  delegate :name, to: :classification, prefix: true
 
   scope :submitted, -> { where('state' => 'submitted')}
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
@@ -180,20 +182,6 @@ class Job < ActiveRecord::Base
     suppliers.include?(supplier)
   end
 
-  # def may_refund?
-  #   (self.deposit_paid? || self.deposit_paid_confirmed?) && refund_requests.find_by_state(:submitted).nil?
-  # end
-
-  def deliver_matching_resumes
-    matching_resumes.each do |resume|
-      self.delivery!(resume) if resume.auto_delivery?
-    end
-  end
-
-  def matching_resumes
-    similar_entity(Resume)
-  end
-
   def similar_jobs
     similar_entity(Job)
   end
@@ -234,10 +222,19 @@ class Job < ActiveRecord::Base
     find_deliveries_by_state(state).count
   end
 
+  def classification_breadcrumb
+    names = []
+    current = self.classification
+    while(current.present?)
+      names << current.name
+      current = current.parent
+    end
+    names.reverse.each {}.join('->')
+  end
+
   private
   def notify_recruiter_and_deliver_matching_resumes
     RecruiterMailer.job_approved(id).deliver_later
-    deliver_matching_resumes
   end
 
   def destroy_all_association_entities

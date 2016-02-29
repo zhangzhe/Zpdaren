@@ -8,8 +8,7 @@
         <span class='gray-light'><%= tag %></span>
       <% end %>
     </p>
-  </div>
-  <div class="panel-body">
+    <%= sanitize("<p><strong>分类：</strong><span class='gray-light'>#{job.classification_breadcrumb}</span></p>") if job.classification_breadcrumb.present? %>
     <p>
       <%= render 'shared/salary_show', job: job %>
     </p>
@@ -19,6 +18,8 @@
         <%= job.bonus %>元
       </span>
     </p>
+  </div>
+  <div class="panel-body">
     <H3>
       职位描述
     </H3>
