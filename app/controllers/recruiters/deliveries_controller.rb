@@ -7,7 +7,9 @@ class Recruiters::DeliveriesController < Recruiters::BaseController
       @job = current_recruiter.jobs.find(params[:job_id])
       @deliveries = @deliveries.where("job_id = ?", params[:job_id])
     end
-    @deliveries = @deliveries.joins(:job).paginate(page: params[:page], per_page: Settings.pagination.page_size)
+    @deliveries = @deliveries.joins(:job, :resume)
+    @deliveries = @deliveries.where('resumes.available = ?', true)  if params[:state] == 'unprocess'
+    @deliveries = @deliveries.paginate(page: params[:page], per_page: Settings.pagination.page_size)
   end
 
   def show
