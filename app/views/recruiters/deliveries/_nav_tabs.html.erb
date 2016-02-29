@@ -15,5 +15,9 @@
   <li role="presentation" class="<%= active %>">
     <%= link_to "已拒绝<span class='badge'>#{active.present? ? deliveries.count : current_recruiter.find_deliveries_count_by_state('refused')}</span>".html_safe, recruiters_deliveries_path(:state => 'refused', job_id: params[:job_id]) %>
   </li>
+  <% active = (params[:state] == "outdated") ? "active" : "" %>
+  <li role="presentation" class="<%= active %>">
+    <%= link_to "过时推荐箱<span class='badge'>#{active.present? ? deliveries.count : current_recruiter.find_deliveries_count_by_state('outdated')}</span>".html_safe, recruiters_deliveries_path(:state => 'outdated', job_id: params[:job_id]) %>
+  </li>
 </ul>
 <br>

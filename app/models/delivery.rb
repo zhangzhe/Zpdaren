@@ -170,6 +170,10 @@ class Delivery < ActiveRecord::Base
     RecruiterMailer.resume_recommended(id).deliver_later
   end
 
+  def outdated?
+    !self.resume.available?
+  end
+
   private
   def sync_job
     job.state = self.state

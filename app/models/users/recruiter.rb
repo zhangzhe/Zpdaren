@@ -11,7 +11,7 @@ class Recruiter < User
   after_create :init_blank_comapny
   before_destroy :destroy_all_association_entities
 
-  DELIVERY_STATE_WHITE_LIST = ['unprocess', 'viewed', 'final_paid', 'refused']
+  DELIVERY_STATE_WHITE_LIST = ['unprocess', 'viewed', 'final_paid', 'refused', 'outdated']
 
   JOB_STATE_WHITE_LIST = ['submitted', 'deposit_paid', 'deposit_paid_confirmed', 'final_payment_paid', 'finished']
 
@@ -32,6 +32,10 @@ class Recruiter < User
     else
       self.deliveries.approved
     end
+  end
+
+  def outdated_deliveries
+    unprocess_deliveries.joins(:resume).where("resumes.available = ?", false)
   end
 
   def viewed_deliveries
