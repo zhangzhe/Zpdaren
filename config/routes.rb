@@ -96,6 +96,9 @@ Rails.application.routes.draw do
       member do
         get :service_protocol
       end
+      collection do
+        get :export
+      end
     end
     resources :suppliers, only: [:show]
     resources :refund_requests, only: [:index, :show] do
