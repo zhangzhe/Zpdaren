@@ -5,7 +5,7 @@ class Resume < ActiveRecord::Base
   has_many :jobs, through: :deliveries
   belongs_to :supplier
   validates_presence_of :candidate_name, :mobile, :tag_list
-  validates_presence_of :attachment, message: '不能为空', no: :create
+  validates_presence_of :attachment, message: '不能为空', on: :create
   validates_length_of :candidate_name, maximum: 10
   validates_uniqueness_of :mobile, message: '系统中已经存在，请您选择其他候选人', conditions: -> { where("deleted_at is null") }
   after_create :auto_deliver
@@ -20,6 +20,7 @@ class Resume < ActiveRecord::Base
   accepts_nested_attributes_for :deliveries
   include SimilarEntity
   include DataRecoverer
+  include MatchedJobs
   acts_as_taggable
   acts_as_taggable_on :skills, :interests
   mount_uploader :attachment, ResumeUploader
@@ -90,6 +91,10 @@ class Resume < ActiveRecord::Base
 
   def problematic?
     self.problem?
+  end
+
+  def may_delivery?(job)
+    self.pdf_attachment? && self.available? && self.problem.blank? && !deliveried?(job)
   end
 
   private

@@ -20,6 +20,23 @@ class Admins::DeliveriesController < Admins::BaseController
     @job = @delivery.job
   end
 
+  def create
+    @resume = Resume.find(create_delivery_params[:resume_id])
+    job = Job.find(create_delivery_params[:job_id])
+    @delivery = Delivery.new(create_delivery_params)
+    if @resume.may_delivery?(job)
+      @delivery.state = 'approved'
+      if @delivery.save
+        @delivery.notify_recruiter
+        redirect_to matched_jobs_admins_resume_path(id: create_delivery_params[:resume_id]), notice: '推荐成功。'
+      else
+        redirect_to matched_jobs_admins_resume_path(id: create_delivery_params[:resume_id]), error: '程序异常，推荐失败。'
+      end
+    else
+      redirect_to matched_jobs_admins_resume_path(id: create_delivery_params[:resume_id]), notice: '不能推荐该简历。'
+    end
+  end
+
   def edit
     @job = Job.find(params[:job_id])
     @company = @job.company
@@ -33,7 +50,7 @@ class Admins::DeliveriesController < Admins::BaseController
       flash.now[:error] = "简历信息不完整，先去简历列表完善简历吧。"
       render 'edit' and return
     end
-    if @delivery.check(delivery_params)
+    if @delivery.check(update_delivery_params)
       flash[:success] = "审核完成。"
     else
       flash[:error] = '程序异常，审核失败。'
@@ -42,7 +59,11 @@ class Admins::DeliveriesController < Admins::BaseController
   end
 
   private
-  def delivery_params
+  def update_delivery_params
     params.require(:delivery).permit(:message, :reason)
+  end
+
+  def create_delivery_params
+    params.require(:delivery).permit(:resume_id, :job_id)
   end
 end

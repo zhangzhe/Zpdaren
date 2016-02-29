@@ -1,5 +1,6 @@
 class Job < ActiveRecord::Base
   belongs_to :recruiter, :foreign_key => :user_id
+  belongs_to :classification
   has_one :company, through: :recruiter
   has_many :resumes, through: :deliveries
   has_many :deliveries do
@@ -21,6 +22,7 @@ class Job < ActiveRecord::Base
   validates_numericality_of :bonus, greater_than_or_equal_to: 1000, only_integer: true
 
   delegate :name, :id, :address, :mobile, :description, to: :company, prefix: true
+  delegate :name, to: :classification, prefix: true
 
   scope :submitted, -> { where('state' => 'submitted')}
   scope :deposit_paid, -> { where('state' => 'deposit_paid')}
@@ -218,6 +220,16 @@ class Job < ActiveRecord::Base
 
   def find_deliveries_count_by_state(state)
     find_deliveries_by_state(state).count
+  end
+
+  def classification_breadcrumb
+    names = []
+    current = self.classification
+    while(current.present?)
+      names << current.name
+      current = current.parent
+    end
+    names.reverse.each {}.join('->')
   end
 
   private

@@ -8,7 +8,7 @@
         <%= sanitize("<th>已推荐</th>") unless params[:state] == 'problemed' %>
         <%= sanitize("<th>原因</th>") if params[:state] == 'problemed' %>
         <th>推荐时间</th>
-        <%= sanitize("<th>操作</th>") if params[:state] == "uncompleted" %>
+        <th>操作</th>
       </tr>
     </thead>
     <tbody>
@@ -29,9 +29,8 @@
           </td>
           <td><%= resume.created_at.localtime.to_date.to_s(:db) %></td>
           <td>
-            <% if resume.may_improve? %>
-              <%= link_to '完善简历', edit_admins_resume_path(resume), class: 'btn btn-primary btn-sm' %>
-            <% end %>
+            <%= link_to '完善简历', edit_admins_resume_path(resume), class: 'btn btn-primary btn-sm' %>
+            <%= link_to '推荐', matched_jobs_admins_resume_path(resume), class: 'btn btn-primary btn-sm', target: '_blank' if params[:state] == 'available' and resume.auto_delivery? and resume.matched_jobs.present? %>
           </td>
         </tr>
       <% end %>

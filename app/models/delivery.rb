@@ -166,6 +166,10 @@ class Delivery < ActiveRecord::Base
     self.unread? && self.ever_paid_or_final_payment_paid_or_finished?
   end
 
+  def notify_recruiter
+    RecruiterMailer.resume_recommended(id).deliver_later
+  end
+
   private
   def sync_job
     job.state = self.state
@@ -211,7 +215,7 @@ class Delivery < ActiveRecord::Base
   end
 
   def notify_recruiter_and_supplier
-    RecruiterMailer.resume_recommended(id).deliver_later
+    notify_recruiter
     WeixinsJob.perform_later({:event => 'delivery_approved', :id => self.id}) if self.resume.supplier.weixin
   end
 
